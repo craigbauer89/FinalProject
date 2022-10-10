@@ -1,0 +1,43 @@
+<body>
+    <div class="box row row-cols-3">
+            <h1>Squadre</h1>
+             
+          </div>
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                  </ng-container>
+
+      
+            <ng-container matColumnDef="squadra1.nome">
+              <th mat-header-cell *matHeaderCellDef> Home </th>
+              <td mat-cell *matCellDef="let element"> {{element.squadra1.nome}} </td>
+            </ng-container>
+          
+      
+            <ng-container matColumnDef="puntisquadra1">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
+            </ng-container>
+          
+       
+            <ng-container matColumnDef="puntisquadra2">
+              <th mat-header-cell *matHeaderCellDef>  </th>
+              <td mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
+            </ng-container>
+          
+          
+            <ng-container matColumnDef="squadra2.nome">
+              <th mat-header-cell *matHeaderCellDef> Away </th>
+              <td mat-cell *matCellDef="let element"> {{element.squadra2.nome}} </td>
+            </ng-container>
+
+           
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          
+  </body>
+

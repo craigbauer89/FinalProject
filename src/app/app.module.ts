@@ -14,13 +14,15 @@ import { FormRegisterSquadreComponent } from './Components/form-register-squadre
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FormRegisterPartiteComponent } from './Components/form-register-partite/form-register-partite.component';
+import { PartitePage } from './Pages/partite/partite.page';
 
 @NgModule({
   declarations: [
     AppComponent,
     SquadrePage,
     FormRegisterSquadreComponent,
-    FormRegisterPartiteComponent
+    FormRegisterPartiteComponent,
+    PartitePage
   ],
   imports: [
     BrowserModule,

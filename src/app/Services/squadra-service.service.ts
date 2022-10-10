@@ -14,6 +14,7 @@ export class SquadraServiceService {
 
   constructor(private http: HttpClient, private router: Router) { 
     this.squadreUrl = 'http://localhost:8080/squadre';
+    
   }
 
 

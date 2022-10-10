@@ -1,12 +1,22 @@
 <body>
     
-    <form [formGroup]="SquadreRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="PartiteRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="onSubmit()">
         <h1>Register Partite</h1>
         <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Date</mat-label>
+                <input matInput type="date" formControlName="date" class="form-control" placeholder=" Date" required>
+                <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['date'].dirty && PartiteRegisterFormGroup.hasError('required', 'date')">*Il Score e obbligatorio!</span>
+              </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Score</mat-label>
-        <input matInput type="number" formControlName="nome" class="form-control" placeholder=" Score" required>
-        <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['nome'].dirty && SquadreRegisterFormGroup.hasError('required', 'nome')">*Il Score e obbligatorio!</span>
+        <input matInput type="number" formControlName="puntisquadra1" class="form-control" placeholder=" Score" required>
+        <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['puntisquadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'puntisquadra1')">*Il Score e obbligatorio!</span>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Mete</mat-label>
+        <input matInput type="number" formControlName="meteSquadra1" class="form-control" placeholder=" Mete" required>
+        <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['meteSquadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'meteSquadra1')">*Le Mete e obbligatorio!</span>
       </mat-form-field>
       <!-- <mat-form-field appearance="fill">
         <mat-label>Squadra</mat-label>
@@ -18,34 +28,42 @@
     <mat-form-field appearance="fill">
         <mat-label>Squadra 1</mat-label>
         <!-- <mat-select [dataSource]="dataSource"> -->
-        <mat-select >
+        <mat-select formControlName="squadra1" class="form-control">
+            <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['squadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'squadra1')">*Il Squadra e obbligatorio!</span>
       <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
-        <mat-option *ngFor="let p of squadre">
+        <mat-option *ngFor="let p of squadre" [value]="p">
         {{ p.nome }}
       </mat-option>
     </mat-select>
 </mat-form-field>
+
     <mat-form-field appearance="fill">
         <mat-label>Squadra 2</mat-label>
         <!-- <mat-select [dataSource]="dataSource"> -->
-        <mat-select >
+            <mat-select formControlName="squadra2" class="form-control">
+                <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['squadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'squadra2')">*Il Squadra e obbligatorio!</span>
       <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
-        <mat-option *ngFor="let p of squadre">
+        <mat-option *ngFor="let p of squadre" [value]="p">
         {{ p.nome }}
       </mat-option>
     </mat-select>
 </mat-form-field>
 <mat-form-field appearance="fill">
     <mat-label>Score</mat-label>
-    <input matInput type="number" formControlName="nome" class="form-control" placeholder=" Score" required>
-    <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['nome'].dirty && SquadreRegisterFormGroup.hasError('required', 'nome')">*Il Score e obbligatorio!</span>
+    <input matInput type="number" formControlName="puntisquadra2" class="form-control" placeholder=" Score" required>
+    <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['puntisquadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'puntisquadra2')">*Il Score e obbligatorio!</span>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Mete</mat-label>
+    <input matInput type="number" formControlName="meteSquadra2" class="form-control" placeholder=" Mete" required>
+    <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['meteSquadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'meteSquadra2')">*Le Mete e obbligatorio!</span>
   </mat-form-field>
       <!-- <mat-form-field appearance="fill">
         <mat-label>Location</mat-label>
         <input matInput type="text" formControlName="location" class="form-control" placeholder="Location" required>
         <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['location'].dirty && SquadreRegisterFormGroup.hasError('required', 'location')">*Il Location e obbligatoria!</span>
       </mat-form-field> -->
-      <button mat-button color="accent" [disabled]="!SquadreRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
+      <button mat-button color="accent" [disabled]="!PartiteRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
     </div>
     <div class="alert alert-danger" role="alert" *ngIf="error">
       {{error}}

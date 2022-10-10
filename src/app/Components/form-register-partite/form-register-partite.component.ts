@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Partite } from 'src/app/Interfaces/partite';
 import { Squadre } from 'src/app/Interfaces/squadre';
+import { PartiteService } from 'src/app/Services/partite.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 
 @Component({
@@ -19,17 +21,24 @@ export class FormRegisterPartiteComponent implements OnInit {
   disabled = false;
   error = undefined;
   
+
+  partite: Partite[] = [];
   squadre: Squadre[] = [];
   dataSource = this.squadre ;
 
-  SquadreRegisterFormGroup = this._form.group({
-    nome: ['', Validators.required],
-    // location: ['', Validators.required],
+ PartiteRegisterFormGroup = this._form.group({
+  date: ['', Validators.required],
+  squadra1: ['', Validators.required],
+  squadra2: ['', Validators.required],
+  puntisquadra1: ['', Validators.required],
+  puntisquadra2: ['', Validators.required],
+  meteSquadra1: ['', Validators.required],
+  meteSquadra2: ['', Validators.required],
     
 
   });
 
-  constructor(private route: ActivatedRoute, private SquadreServiceservice: SquadraServiceService,private router: Router,
+  constructor(private route: ActivatedRoute,private Partitaservice: PartiteService, private SquadreServiceservice: SquadraServiceService,private router: Router,
     private _form: FormBuilder) { 
 
       // this.squadra = new Squadre();
@@ -52,12 +61,12 @@ export class FormRegisterPartiteComponent implements OnInit {
   onSubmit() {
 
     
-    this.SquadreServiceservice.signclient(this.form.value).subscribe(
+    this.Partitaservice.addPartita(this.form.value).subscribe(
       resp => {
         console.log(resp);
-        window.alert("Squadra aggiunta");
+        window.alert("Partita aggiunta");
         this.error = undefined;
-        this.router.navigate(['/squadre'])
+        this.router.navigate(['/partite'])
       },
       err  => {
         console.log(err.error);
