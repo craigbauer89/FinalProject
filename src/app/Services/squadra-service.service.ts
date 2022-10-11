@@ -32,5 +32,9 @@ export class SquadraServiceService {
     return this.http.post<Squadre>(this.squadreUrl, squadra);
   }
 
+  modifySquadra(id:number, squandra:any){
+    return this.http.put<Squadre>(this.squadreUrl + '/' + id, squandra);
+  }
+
 
 }

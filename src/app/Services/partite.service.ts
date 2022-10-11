@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Partite } from '../Interfaces/partite';
+import { Squadre } from '../Interfaces/squadre';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,12 @@ import { Partite } from '../Interfaces/partite';
 export class PartiteService {
 
   private partiteUrl: string;
+  private squadreUrl: string;
   // private Server = 'http://localhost:8080';
 
   constructor(private http: HttpClient, private router: Router) { 
     this.partiteUrl = 'http://localhost:8080/partite';
+    this.squadreUrl = 'http://localhost:8080/squadre';
     
   }
 
@@ -32,6 +35,9 @@ export class PartiteService {
     return this.http.post<Partite>(this.partiteUrl, partita);
   }
 
+  modifySquadra(id:number, squandra:any){
+    return this.http.put<Squadre>(this.squadreUrl + '/'+ id, squandra);
+  }
 
 }
 

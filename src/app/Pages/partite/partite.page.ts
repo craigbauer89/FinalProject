@@ -31,11 +31,11 @@ displayedColumns: string[] = ['squadra1.nome', 'puntisquadra1', 'puntisquadra2',
       // for(let cat in this.squadre) {
         // console.log(this.squadre);
         this.dataSource = this.partite ;
-        console.log(this.dataSource);
-        console.log(this.dataSource[0]);
-        console.log(this.dataSource[0].squadra1.nome);
-        for(let i in this.dataSource)
-        console.log(this.dataSource[i].squadra1.nome);
+        // console.log(this.dataSource);
+        // console.log(this.dataSource[0]);
+        // console.log(this.dataSource[0].squadra1.nome);
+        // for(let i in this.dataSource)
+        // console.log(this.dataSource[i].squadra1.nome);
         
       // }
     });

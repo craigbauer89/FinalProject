@@ -44,7 +44,16 @@ export class FormRegisterPartiteComponent implements OnInit {
       // this.squadra = new Squadre();
     }
 
+    test() {
+
+    }
+
     ngOnInit()  {
+
+      
+
+    //   this.SquadreServiceservice.modifySquadra(this.form.value.squadra1.id,this.squadre)
+    // .subscribe(data => console.log(data));
 
       this.SquadreServiceservice.findAll().subscribe(data => {
         this.squadre = data;
@@ -53,7 +62,10 @@ export class FormRegisterPartiteComponent implements OnInit {
         // for(let cat in this.squadre) {
           // console.log(this.squadre);
           this.dataSource = this.squadre ;
-          console.log(this.dataSource);
+          // console.log(this.dataSource);
+
+          
+
         // }
       });
     }
@@ -63,7 +75,7 @@ export class FormRegisterPartiteComponent implements OnInit {
     
     this.Partitaservice.addPartita(this.form.value).subscribe(
       resp => {
-        console.log(resp);
+        // console.log(resp);
         window.alert("Partita aggiunta");
         this.error = undefined;
         this.router.navigate(['/partite'])
@@ -74,6 +86,54 @@ export class FormRegisterPartiteComponent implements OnInit {
         this.error = err.error;
       }
     )
+
+    let squadra1 = this.form.value.squadra1;
+    squadra1.puntiFatti += this.form.value.puntisquadra1;
+    squadra1.puntiSubiti += this.form.value.puntisquadra2;
+    squadra1.meteFatti += this.form.value.meteSquadra1;
+    squadra1.meteSubiti += this.form.value.meteSquadra2;
+    squadra1.differenza += squadra1.puntiFatti-squadra1.puntiSubiti;
+    squadra1.giocate += 1;
+    if (squadra1.differenza > 0) {
+      squadra1.vittorie += 1; 
+    }
+    else if(squadra1.differenza < 0)  {
+      squadra1.sconfitte += 1; 
+    }
+    else {
+      squadra1.pareggi += 1; 
+    }
+    // console.log(this.form.value.squadra1.puntiFatti)
+    // console.log(this.form.value.squadra1.id)
+
+    this.SquadreServiceservice.modifySquadra(squadra1.id, squadra1)
+    .subscribe(data => console.log(data));
+
+    let squadra2 = this.form.value.squadra2;
+    squadra2.puntiFatti += this.form.value.puntisquadra2;
+    squadra2.puntiSubiti += this.form.value.puntisquadra1;
+    squadra2.meteFatti += this.form.value.meteSquadra2;
+    squadra2.meteSubiti += this.form.value.meteSquadra1;
+    squadra2.differenza += squadra2.puntiFatti-squadra2.puntiSubiti;
+    squadra2.giocate += 1;
+    if (squadra2.differenza > 0) {
+      squadra2.vittorie += 1; 
+    }
+    else if(squadra2.differenza < 0)  {
+      squadra2.sconfitte += 1; 
+    }
+    else {
+      squadra2.pareggi += 1; 
+    }
+    // console.log(this.form.value.squadra1.puntiFatti)
+    // console.log(this.form.value.squadra1.id)
+
+    this.SquadreServiceservice.modifySquadra(squadra2.id, squadra2)
+    .subscribe(data => console.log(data));
+
+
   }
 
 }
+
+
