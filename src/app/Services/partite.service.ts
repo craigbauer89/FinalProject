@@ -39,5 +39,13 @@ export class PartiteService {
     return this.http.put<Squadre>(this.squadreUrl + '/'+ id, squandra);
   }
 
+  modifyPartita(id:number, partita:any){
+    return this.http.put<Partite>(this.partiteUrl + '/'+ id, partita);
+  }
+
+  cancellaPartita(id:number): Observable<any>{
+    return this.http.delete(this.partiteUrl + '/'+ id, {responseType: 'text'});
+  }
+
 }
 

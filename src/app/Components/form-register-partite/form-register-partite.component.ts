@@ -96,12 +96,15 @@ export class FormRegisterPartiteComponent implements OnInit {
     squadra1.giocate += 1;
     if (squadra1.differenza > 0) {
       squadra1.vittorie += 1; 
+      squadra1.punti += 4; 
     }
     else if(squadra1.differenza < 0)  {
       squadra1.sconfitte += 1; 
+      
     }
     else {
       squadra1.pareggi += 1; 
+      squadra1.punti += 2; 
     }
     // console.log(this.form.value.squadra1.puntiFatti)
     // console.log(this.form.value.squadra1.id)
@@ -118,12 +121,14 @@ export class FormRegisterPartiteComponent implements OnInit {
     squadra2.giocate += 1;
     if (squadra2.differenza > 0) {
       squadra2.vittorie += 1; 
+      squadra2.punti += 4; 
     }
     else if(squadra2.differenza < 0)  {
       squadra2.sconfitte += 1; 
     }
     else {
       squadra2.pareggi += 1; 
+      squadra2.punti += 2; 
     }
     // console.log(this.form.value.squadra1.puntiFatti)
     // console.log(this.form.value.squadra1.id)
