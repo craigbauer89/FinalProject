@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Squadre } from 'src/app/Interfaces/squadre';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 
@@ -34,7 +36,8 @@ import { SquadraServiceService } from 'src/app/Services/squadra-service.service'
 
 export class SquadrePage implements OnInit {
 
-  
+  @ViewChild(MatSort)
+  sort!: MatSort;
 
   // squadre: Squadre[];
   squadre: Squadre[] = [];
@@ -44,10 +47,15 @@ export class SquadrePage implements OnInit {
     // squadra = JSON.stringify(this.squadre);
 // };
 displayedColumns: string[] = ['id', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'meteFatti', 'meteSubiti','puntiSubiti','puntiFatti','differenza' ];
-  dataSource = this.squadre ;
+  dataSource = new MatTableDataSource(this.squadre) ;
+
+
+  
+  
 
   constructor(private squadraServiceService: SquadraServiceService) { }
-
+ 
+  
   ngOnInit()  {
 
     this.squadraServiceService.findAll().subscribe(data => {
@@ -56,14 +64,21 @@ displayedColumns: string[] = ['id', 'nome', 'vittorie', 'pareggi', 'sconfitte', 
       // console.log(this.squadre[1]);
       // for(let cat in this.squadre) {
         // console.log(this.squadre);
-        this.dataSource = this.squadre ;
+        this.dataSource = new MatTableDataSource(this.squadre) ;
+        this.dataSource.sort = this.sort;
         console.log(this.dataSource);
       // }
     });
   }
 
-  
-  
+  // ngAfterViewInit() {
+
+   
+
+  // }
+ 
 
 }
+
+
 

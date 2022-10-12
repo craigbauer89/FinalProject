@@ -5,6 +5,7 @@ import { FormRegisterSquadreComponent } from './Components/form-register-squadre
 import { PartitePage } from './Pages/partite/partite.page';
 import { SquadrePage } from './Pages/squadre/squadre.page';
 
+
 const routes: Routes = [
 
   {

@@ -36,7 +36,7 @@
 
             <ng-container matColumnDef="modifica">
                 <th mat-header-cell *matHeaderCellDef>  </th>
-                <td mat-cell *matCellDef="let element"> <button mat-button (click)="modifyPartita()" color="accent" >Modifica</button></td>
+                <td mat-cell *matCellDef="let element"> <button mat-button (click)="modifyPartita(element.id)" color="accent" >Modifica</button></td>
               </ng-container>
 
               
@@ -54,8 +54,8 @@
           <div *ngIf="modifybox === true">
 
             <div class="modify">
-                <h1>Mofifche Partita</h1>
-                <!-- <form [formGroup]="PartiteRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="onSubmit()">
+               
+                <form [formGroup]="PartiteRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="modify()">
                     <h1>Mofifche Partita</h1>
                     <div>
                         <mat-form-field appearance="fill">
@@ -111,7 +111,7 @@
                 <div class="alert alert-danger" role="alert" *ngIf="error">
                   {{error}}
                 </div>
-                </form> -->
+                </form>
                 
             </div>
         </div>

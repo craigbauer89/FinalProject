@@ -33,13 +33,13 @@
                   {{error}}
               </section> -->
           </div>
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="punti" matSortDirection="desc">  <!--- -->
 
             <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
                  
                   <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef> number </th>
+                    <th mat-header-cell *matHeaderCellDef > number </th>
                     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
                     
                   </ng-container>
@@ -58,48 +58,48 @@
           
             <!-- Weight Column -->
             <ng-container matColumnDef="pareggi">
-              <th mat-header-cell *matHeaderCellDef> Pareggi </th>
+              <th mat-header-cell *matHeaderCellDef > Pareggi </th>
               <td mat-cell *matCellDef="let element"> {{element.pareggi}} </td>
             </ng-container>
           
             <!-- Symbol Column -->
             <ng-container matColumnDef="sconfitte">
-              <th mat-header-cell *matHeaderCellDef> Sconfitte </th>
+              <th mat-header-cell *matHeaderCellDef > Sconfitte </th>
               <td mat-cell *matCellDef="let element"> {{element.sconfitte}} </td>
             </ng-container>
 
             <ng-container matColumnDef="punti">
-                <th mat-header-cell *matHeaderCellDef> Punti </th>
+                <th mat-header-cell *matHeaderCellDef > Punti </th>
                 <td mat-cell *matCellDef="let element"> {{element.punti}} </td>
               </ng-container>
 
               <ng-container matColumnDef="giocate">
-                <th mat-header-cell *matHeaderCellDef> giocate </th>
+                <th mat-header-cell *matHeaderCellDef > giocate </th>
                 <td mat-cell *matCellDef="let element"> {{element.giocate}} </td>
               </ng-container>
 
               <ng-container matColumnDef="meteFatti">
-                <th mat-header-cell *matHeaderCellDef> meteFatti </th>
+                <th mat-header-cell *matHeaderCellDef > meteFatti </th>
                 <td mat-cell *matCellDef="let element"> {{element.meteFatti}} </td>
               </ng-container>
 
-              <ng-container matColumnDef="meteSubiti">
-                <th mat-header-cell *matHeaderCellDef> meteSubiti </th>
+              <ng-container matColumnDef="meteSubiti" >
+                <th mat-header-cell *matHeaderCellDef > meteSubiti </th>
                 <td mat-cell *matCellDef="let element"> {{element.meteSubiti}} </td>
               </ng-container>
 
               <ng-container matColumnDef="puntiSubiti">
-                <th mat-header-cell *matHeaderCellDef> puntiSubiti </th>
+                <th mat-header-cell *matHeaderCellDef > puntiSubiti </th>
                 <td mat-cell *matCellDef="let element"> {{element.puntiSubiti}} </td>
               </ng-container>
 
               <ng-container matColumnDef="puntiFatti">
-                <th mat-header-cell *matHeaderCellDef> puntiFatti </th>
+                <th mat-header-cell *matHeaderCellDef > puntiFatti </th>
                 <td mat-cell *matCellDef="let element"> {{element.puntiFatti}} </td>
               </ng-container>
 
               <ng-container matColumnDef="differenza">
-                <th mat-header-cell *matHeaderCellDef> differenza </th>
+                <th mat-header-cell *matHeaderCellDef > differenza </th>
                 <td mat-cell *matCellDef="let element"> {{element.differenza}} </td>
               </ng-container>
           

@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FormRegisterPartiteComponent } from './Components/form-register-partite/form-register-partite.component';
 import { PartitePage } from './Pages/partite/partite.page';
+import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,8 @@ import { PartitePage } from './Pages/partite/partite.page';
     MatCardModule,
     MatTableModule,
     MatSelectModule,
+    MatSortModule,
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
