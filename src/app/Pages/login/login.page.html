@@ -1,0 +1,25 @@
+<div>
+
+
+    <form #f="ngForm" (ngSubmit)="invia()">
+      <h1>Login</h1>
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input style="display:block ;" type="text" ngModel name="username" for="username" matInput placeholder="Username">
+        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input style="display:block ;" [type]="hide ? 'password' : 'text'" ngModel name="password" for="password" matInput placeholder="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+        </button>
+      </mat-form-field>
+      <button class="enter" type="submit" mat-raised-button color="primary">entra</button>
+    </form>
+
+    </div>
+
+

@@ -12,10 +12,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SquadrePage } from './Pages/squadre/squadre.page';
 import { FormRegisterSquadreComponent } from './Components/form-register-squadre/form-register-squadre.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormRegisterPartiteComponent } from './Components/form-register-partite/form-register-partite.component';
 import { PartitePage } from './Pages/partite/partite.page';
 import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
+import { LoginPage } from './Pages/login/login.page';
+import { BasicAuthInterceptorServiceService } from './Services/basic-auth-interceptor-service.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
     SquadrePage,
     FormRegisterSquadreComponent,
     FormRegisterPartiteComponent,
-    PartitePage
+    PartitePage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,14 @@ import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
     MatSortModule,
   
   ],
-  providers: [],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: BasicAuthInterceptorServiceService ,
+    multi: true
+  }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
