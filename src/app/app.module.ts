@@ -18,6 +18,13 @@ import { PartitePage } from './Pages/partite/partite.page';
 import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
 import { LoginPage } from './Pages/login/login.page';
 import { BasicAuthInterceptorServiceService } from './Services/basic-auth-interceptor-service.service';
+import { RouterModule } from '@angular/router';
+import { HeaderComponent } from './Components/header/header.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { UserService } from './Services/user.service';
+import { AuthGuard } from './auth/auth.guard';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { RegisterPage } from './Pages/register/register.page';
 
 @NgModule({
   declarations: [
@@ -26,7 +33,10 @@ import { BasicAuthInterceptorServiceService } from './Services/basic-auth-interc
     FormRegisterSquadreComponent,
     FormRegisterPartiteComponent,
     PartitePage,
-    LoginPage
+    LoginPage,
+    HeaderComponent,
+    ForbiddenComponent,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -42,14 +52,17 @@ import { BasicAuthInterceptorServiceService } from './Services/basic-auth-interc
     MatTableModule,
     MatSelectModule,
     MatSortModule,
+    RouterModule,
   
   ],
   providers: [
+    AuthGuard,
     {
+    
     provide: HTTP_INTERCEPTORS,
-    useClass: BasicAuthInterceptorServiceService ,
+    useClass: AuthInterceptor ,
     multi: true
-  }
+  }, UserService
 
   ],
   bootstrap: [AppComponent]

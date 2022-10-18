@@ -1,29 +1,22 @@
-import { Token } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Register } from 'src/app/Interfaces/register';
 import { AuthService } from 'src/app/Services/auth.service';
 import { UserService } from 'src/app/Services/user.service';
 
 @Component({
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss']
+  templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss']
 })
-export class LoginPage implements OnInit {
+export class RegisterPage implements OnInit {
 
-  hide = true;
-  user:Register[] = []
-  token!: Token;
   @ViewChild('f') form!: NgForm;
-  // error: string = '';
-  error: undefined;
+  hide = true;
 
-  constructor(private userService: UserService, private router: Router, private authService: AuthService) { }
+  constructor(private userService: UserService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
-
 
 
   invia() {
@@ -47,7 +40,7 @@ export class LoginPage implements OnInit {
 
 
       else {
-        this.router.navigate(['squadre']);
+        this.router.navigate(['login']);
       }
           
         },
@@ -59,5 +52,6 @@ export class LoginPage implements OnInit {
       );
   } 
 }
+
 
 

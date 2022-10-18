@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
 import { Register } from '../Interfaces/register';
 import { User } from '../Interfaces/user';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class UserService {
   private loginUrl: string;
   currentUser = {};
 
-  constructor(private http: HttpClient, private router: Router) { 
+  constructor(private http: HttpClient, private router: Router, private Authservice: AuthService) { 
   this.userUrl = 'http://localhost:8080/users';
   this.loginUrl = 'http://localhost:8080/auth/login';
   }
@@ -43,6 +44,29 @@ export class UserService {
     return this.http.post<any>(this.loginUrl, obj)
       
   }
+
+  public roleMatch(allowedRoles:any[]): boolean {
+    let isMatch = false;
+    const userRoles: any = this.Authservice.getRoles();
+
+    if (userRoles != null && userRoles) {
+      for (let i = 0; i < userRoles.length; i++) {
+        for (let j = 0; j < allowedRoles.length; j++) {
+          if (userRoles[i].roleName === allowedRoles[j]) {
+            isMatch = true;
+            return isMatch;
+          } else {
+            return isMatch;
+          }
+        }
+      }
+    }
+  
+      return isMatch;
+    
+  }
+
+
 
 
       
@@ -91,9 +115,9 @@ export class UserService {
   //   );
   // }
 
-  getToken() {
-    return localStorage.getItem('token');
-  }
+  // getToken() {
+  //   return localStorage.getItem('token');
+  // }
 
 }
 
