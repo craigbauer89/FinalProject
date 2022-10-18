@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
+import { UserGuard } from './auth/user.guard';
 import { FormRegisterPartiteComponent } from './Components/form-register-partite/form-register-partite.component';
 import { FormRegisterSquadreComponent } from './Components/form-register-squadre/form-register-squadre.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
@@ -23,13 +24,14 @@ const routes: Routes = [
   {
     path: 'partite',
     component: PartitePage,
-    canActivate:[AuthGuard]
+    canActivate:[UserGuard] //, data:{roles:['ROLE_USER','ROLE_ADMIN']}
+    
   },
   
   {
     path: 'squadre',
     component: SquadrePage,
-    canActivate:[AuthGuard]
+    canActivate:[UserGuard] //, data:{roles:['ROLE_USER','ROLE_ADMIN']}
   },
 
   {

@@ -22,22 +22,20 @@ export class UserService {
   authSubject = new BehaviorSubject<Register | null>(null);
   private userUrl: string;
   private loginUrl: string;
+  private registerUrl: string;
   currentUser = {};
 
   constructor(private http: HttpClient, private router: Router, private Authservice: AuthService) { 
   this.userUrl = 'http://localhost:8080/users';
   this.loginUrl = 'http://localhost:8080/auth/login';
+  this.registerUrl = 'http://localhost:8080/users';
   }
 
 
-  // login(obj: Register) {
-  //   return this.http.post<Register>(this.loginUrl, obj).pipe(
-  //     tap((data) => {
-  //       this.authSubject.next(data);
-  //       localStorage.setItem('isAuthenticated', JSON.stringify(data));
-  //     })
-  //   );
-  // }
+  register(obj: any) {
+    return this.http.post<any>(this.registerUrl, obj)
+   
+  }
 
   login(obj: any) {
     console.log(obj)

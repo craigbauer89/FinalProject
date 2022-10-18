@@ -22,26 +22,12 @@ export class RegisterPage implements OnInit {
   invia() {
     // console.log(this.local);
     console.log(this.form.value); 
-    this.userService.login(this.form.value)
-  .subscribe(
-        (resp) => {
-          console.log(resp.user);
-          console.log(resp.user.roles);
-          this.authService.setRoles(resp.user.roles);
-          localStorage.setItem('access_token', resp.jwtToken);
+    this.userService.register(this.form.value).subscribe(
+      (resp) => {
+        console.log(resp);
 
-          const role = resp.user.roles[0].id;
-          if (role === 1) {
-            this.router.navigate(['registerpartite']);
-          }
-
-          // this.token = resp;
-          // this.error = undefined;
-
-
-      else {
         this.router.navigate(['login']);
-      }
+      
           
         },
         (err) => {
