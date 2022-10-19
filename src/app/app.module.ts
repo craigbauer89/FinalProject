@@ -27,6 +27,7 @@ import { UserService } from './Services/user.service';
 import { AuthGuard } from './auth/auth.guard';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { RegisterPage } from './Pages/register/register.page';
+import { HomePage } from './Pages/home/home.page';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { RegisterPage } from './Pages/register/register.page';
     LoginPage,
     HeaderComponent,
     ForbiddenComponent,
-    RegisterPage
+    RegisterPage,
+    HomePage
   ],
   imports: [
     BrowserModule,

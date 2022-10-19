@@ -24,7 +24,8 @@ div {
 //   }
 
 
-mat-label{
+input{
+  
     color: white;
 }
 
@@ -32,13 +33,15 @@ mat-label{
   mat-form-field{
     border-radius: 5px;
     margin-top: 1%;
+    margin-right: 1%;
     background-color:rgb(168, 184, 207);
     color: white;
-    height: 50px;
+    height: 55px;
+    
     
     // display: flex;
     // flex-direction: column;
-    width: 50%;
+    width: 90%;
   }
 
   mat-label{
@@ -62,3 +65,8 @@ mat-label{
   
 //   }
   
+
+body {
+    background-image: url(../../../assets/team-g50249347d_1920.jpg);
+    background-position: 40% 40%;
+}

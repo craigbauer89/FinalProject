@@ -5,6 +5,7 @@ import { UserGuard } from './auth/user.guard';
 import { FormRegisterPartiteComponent } from './Components/form-register-partite/form-register-partite.component';
 import { FormRegisterSquadreComponent } from './Components/form-register-squadre/form-register-squadre.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { HomePage } from './Pages/home/home.page';
 import { LoginPage } from './Pages/login/login.page';
 import { PartitePage } from './Pages/partite/partite.page';
 import { RegisterPage } from './Pages/register/register.page';
@@ -13,6 +14,15 @@ import { SquadrePage } from './Pages/squadre/squadre.page';
 
 const routes: Routes = [
 
+  {
+    path: 'home',
+    component: HomePage,
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'home',
+  },
   {
     path: 'login',
     component: LoginPage,

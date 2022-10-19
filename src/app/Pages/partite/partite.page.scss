@@ -1,6 +1,7 @@
 table {
-    background-color: white;
+    background-color:  rgba(240, 248, 255, 0.95);
     margin: auto;
+    opacity: 0.8;
 
 }
 
@@ -17,7 +18,8 @@ table {
 
 
 th {
-    background-color: black;
+    background-color:rgb(12, 105, 244);
+    color: white;
     width: 90px;
     font-size: .8rem;
 
@@ -26,4 +28,9 @@ th {
 td{
     
     color: black;
+}
+
+body {
+    background-image: url(../../../assets/rugby-gedab47da2_1920.jpg);
+    background-position: 40% 40%;
 }
