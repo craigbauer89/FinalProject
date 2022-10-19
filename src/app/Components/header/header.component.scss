@@ -1,0 +1,29 @@
+mat-toolbar {
+    background-color:rgb(32, 114, 229)
+}
+
+li {
+    list-style-type: none;
+    margin-right: 5%;
+}
+
+a {
+    text-decoration: none;
+    color: white
+}
+
+.logo{
+    
+    margin-right: 1%;
+    width: 140px;
+    height: 80%;
+    background-color: white;
+    background-image: url("../../../assets/Unknown.png");
+    background-size: cover;
+    
+
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }

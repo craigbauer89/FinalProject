@@ -1,7 +1,21 @@
-<li><a  href="#" routerLink="registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])">RegisterSquadre</a></li>
-<li><a  href="#" routerLink="registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])">RegisterPartite</a></li>
-<li *ngIf= "isLoggedIn() "><a  href="#" routerLink="partite">Partite</a></li>
-<li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadre">Squadre</a></li>
-<li *ngIf="!isLoggedIn() "><a   href="#" routerLink="login">Login</a></li>
-<li *ngIf= "isLoggedIn() "><a   href="#" (click)="Logout()">Logout</a></li>
-<li *ngIf="!isLoggedIn() "><a   href="#" routerLink="register">Register</a></li>
+
+
+
+    <mat-toolbar>
+        <mat-toolbar-row>
+        <li><a  href="#" routerLink="registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])">RegisterSquadre</a></li>
+        <li><a  href="#" routerLink="registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])">RegisterPartite</a></li>
+        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="partite">Partite</a></li>
+        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadre">Squadre</a></li>
+        <li *ngIf="!isLoggedIn() "><a   href="#" routerLink="login">Login</a></li>
+        
+        <span><li *ngIf="!isLoggedIn() "><a   href="#" routerLink="register">Register</a></li></span> 
+        <span class="example-spacer"></span>
+        <li *ngIf= "isLoggedIn() "><a   href="#" (click)="Logout()">Logout</a></li>
+        <div class="logo"></div>
+    </mat-toolbar-row>
+    </mat-toolbar>
+
+
+ 
+

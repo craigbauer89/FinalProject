@@ -38,6 +38,7 @@ export class SquadrePage implements OnInit {
 
   @ViewChild(MatSort)
   sort!: MatSort;
+  element: any;
 
   // squadre: Squadre[];
   squadre: Squadre[] = [];
@@ -79,6 +80,8 @@ displayedColumns: string[] = ['id', 'nome', 'vittorie', 'pareggi', 'sconfitte', 
  
 
 }
+
+
 
 
 

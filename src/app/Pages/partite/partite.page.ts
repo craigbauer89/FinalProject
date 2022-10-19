@@ -18,6 +18,7 @@ export class PartitePage implements OnInit {
   currentId = 0;
   partite: Partite[] = [];
   
+  
   modifybox = false;
   error = undefined;
 //   squadra:any = {
@@ -25,7 +26,7 @@ export class PartitePage implements OnInit {
 
     // squadra = JSON.stringify(this.squadre);
 // };
-displayedColumns: string[] = ['squadra1.nome', 'puntisquadra1', 'puntisquadra2', 'squadra2.nome', 'modifica', 'cancellare' ];
+displayedColumns: string[] = ['date', 'squadra1.nome', 'puntisquadra1', 'puntisquadra2', 'squadra2.nome', 'modifica', 'cancellare' ];
   dataSource: Partite[] = [];
   squadre: Squadre[] = [];
   // dataSource2 = this.squadre ;
@@ -48,7 +49,7 @@ displayedColumns: string[] = ['squadra1.nome', 'puntisquadra1', 'puntisquadra2',
 
   ngOnInit()  {
     
-
+    this.modifybox = false;
     this.SquadreServiceservice.findAll().subscribe(data => {
       this.squadre = data;
      
@@ -292,6 +293,7 @@ this.SquadreServiceservice.modifySquadra(squadra2.id, squadra2)
 // )
 
   window.alert("Cancellato")
+  
   this.ngOnInit()
 })
 

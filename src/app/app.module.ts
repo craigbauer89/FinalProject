@@ -4,6 +4,7 @@ import { MatSliderModule, } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +17,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormRegisterPartiteComponent } from './Components/form-register-partite/form-register-partite.component';
 import { PartitePage } from './Pages/partite/partite.page';
 import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
+import {MatButtonModule} from '@angular/material/button';
 import { LoginPage } from './Pages/login/login.page';
 import { BasicAuthInterceptorServiceService } from './Services/basic-auth-interceptor-service.service';
 import { RouterModule } from '@angular/router';
@@ -53,6 +55,11 @@ import { RegisterPage } from './Pages/register/register.page';
     MatSelectModule,
     MatSortModule,
     RouterModule,
+    MatToolbarModule,
+    MatButtonModule,
+
+    
+    
   
   ],
   providers: [
