@@ -19,7 +19,7 @@ export class PartitePage implements OnInit {
   currentId = 0;
   partite: Partite[] = [];
   
-  
+  areYouSure = false;
   modifybox = false;
   error = undefined;
 //   squadra:any = {
@@ -27,7 +27,7 @@ export class PartitePage implements OnInit {
 
     // squadra = JSON.stringify(this.squadre);
 // };
-displayedColumns: string[] = ['date', 'squadra1.nome', 'puntisquadra1', 'puntisquadra2', 'squadra2.nome', 'modifica', 'cancellare' ];
+displayedColumns: string[] = ['date', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'modifica', 'cancellare' ];
   dataSource: Partite[] = [];
   squadre: Squadre[] = [];
   // dataSource2 = this.squadre ;
@@ -100,6 +100,9 @@ displayedColumns: string[] = ['date', 'squadra1.nome', 'puntisquadra1', 'puntisq
 
   modify() {
 
+    this.partiteService.modifyPartita(this.currentId, this.form.value)
+    .subscribe(data => console.log(data));
+
     let squadra1:Squadre;
     let squadra2:Squadre;
     let modifyedPartita:Partite;
@@ -133,13 +136,14 @@ displayedColumns: string[] = ['date', 'squadra1.nome', 'puntisquadra1', 'puntisq
     squadra1.puntiSubiti += this.form.value.puntisquadra2;
     squadra1.meteFatti += this.form.value.meteSquadra1;
     squadra1.meteSubiti += this.form.value.meteSquadra2;
-    squadra1.differenza += squadra1.puntiFatti-squadra1.puntiSubiti;
+    let differenza1a = squadra1.puntiFatti-squadra1.puntiSubiti;
+    squadra1.differenza += differenza1a;
     squadra1.giocate += 1;
-    if (squadra1.differenza > 0) {
+    if (differenza1a > 0) {
       squadra1.vittorie += 1; 
       squadra1.punti += 4; 
     }
-    else if(squadra1.differenza < 0)  {
+    else if(differenza1a < 0)  {
       squadra1.sconfitte += 1; 
       
     }
@@ -177,13 +181,14 @@ displayedColumns: string[] = ['date', 'squadra1.nome', 'puntisquadra1', 'puntisq
     squadra2.puntiSubiti += this.form.value.puntisquadra1;
     squadra2.meteFatti += this.form.value.meteSquadra2;
     squadra2.meteSubiti += this.form.value.meteSquadra1;
-    squadra2.differenza += squadra2.puntiFatti-squadra2.puntiSubiti;
+    let differenza2a = squadra2.puntiFatti-squadra2.puntiSubiti;
+    squadra2.differenza += differenza2a;
     squadra2.giocate += 1;
-    if (squadra2.differenza > 0) {
+    if (differenza2a > 0) {
       squadra2.vittorie += 1; 
       squadra2.punti += 4; 
     }
-    else if(squadra2.differenza < 0)  {
+    else if(differenza2a < 0)  {
       squadra2.sconfitte += 1; 
     }
     else {
@@ -200,10 +205,7 @@ displayedColumns: string[] = ['date', 'squadra1.nome', 'puntisquadra1', 'puntisq
 
 
   
-    this.partiteService.modifyPartita(this.currentId, this.form.value)
-    .subscribe(data => console.log(data));
-
-
+   
 
 
     this.modifybox = false;
@@ -216,18 +218,19 @@ displayedColumns: string[] = ['date', 'squadra1.nome', 'puntisquadra1', 'puntisq
 
   }
 
-  // cancellaPartita() {
-  //   window.alert("Cancellato")
-  // }
+cancella(id:number) {
+  this.currentId = id;
+  this.areYouSure = true;
+}
 
 
-  cancellaPartita(id:number) {
+  cancellaPartita() {
 
   let squadra1:Squadre;
   let squadra2:Squadre;
   let deletedPartita:Partite;
   this.partite.forEach(element => {
-    if(element.id == id) {
+    if(element.id == this.currentId) {
        deletedPartita= element;
        squadra1 = element.squadra1;
        squadra2 = element.squadra2;
@@ -288,7 +291,7 @@ this.SquadreServiceservice.modifySquadra(squadra2.id, squadra2)
 
 
 
-  this.partiteService.cancellaPartita(id)
+  this.partiteService.cancellaPartita(this.currentId)
   .subscribe(
     data => {
       console.log('deleted response', data);
@@ -300,7 +303,7 @@ this.SquadreServiceservice.modifySquadra(squadra2.id, squadra2)
 // )
 
   window.alert("Cancellato")
-  
+  this.areYouSure = false;
   this.ngOnInit()
 })
 
@@ -332,5 +335,11 @@ isAdmin() {
 // showColumn(): string {
 //   return this.someService.hasAccess() ? null : 'hidden-row';
 // }
+
+close() {
+  this.modifybox = false;
+  this.areYouSure = false;
+
+}
 
 }

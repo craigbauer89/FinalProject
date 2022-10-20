@@ -18,15 +18,25 @@
           
       
             <ng-container matColumnDef="puntisquadra1">
-              <th mat-header-cell *matHeaderCellDef> </th>
+              <th mat-header-cell *matHeaderCellDef> Punti</th>
               <td mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
             </ng-container>
+
+            <ng-container matColumnDef="metesquadra1">
+                <th mat-header-cell *matHeaderCellDef> (Mete) </th>
+                <td mat-cell *matCellDef="let element" > ({{element.meteSquadra1}}) </td>
+              </ng-container>
           
        
             <ng-container matColumnDef="puntisquadra2">
-              <th mat-header-cell *matHeaderCellDef>  </th>
+              <th mat-header-cell *matHeaderCellDef> Punti </th>
               <td mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
             </ng-container>
+
+            <ng-container matColumnDef="metesquadra2">
+                <th mat-header-cell *matHeaderCellDef> (Mete) </th>
+                <td mat-cell *matCellDef="let element" >  ({{element.meteSquadra2}})  </td>
+              </ng-container>
           
           
             <ng-container matColumnDef="squadra2.nome">
@@ -43,7 +53,7 @@
 
               <ng-container matColumnDef="cancellare">
                 <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
-                <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button mat-button (click)="cancellaPartita(element.id)" color="cancel" >Cancella</button></td>
+                <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button mat-button (click)="cancella(element.id)" color="cancel" >Cancella</button></td>
               </ng-container>
            
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -53,11 +63,21 @@
 
           <div *ngIf="modifybox === true">
 
-            <div class="modify">
-               
+            <div >
+                <h1>Mofifche Partita</h1>
                 <form [formGroup]="PartiteRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="modify()">
-                    <h1>Mofifche Partita</h1>
-                    <div>
+                    
+                    <div class="modify">
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Squadra 1</mat-label>
+                            <mat-select formControlName="squadra1" class="form-control">
+                                <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['squadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'squadra1')">*Il Squadra e obbligatorio!</span>
+                            <mat-option *ngFor="let p of squadre" [value]="p">
+                            {{ p.nome }}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
                         <mat-form-field appearance="fill">
                             <mat-label>Date</mat-label>
                             <input matInput type="date" formControlName="date" class="form-control" placeholder=" Date" required>
@@ -74,15 +94,7 @@
                     <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['meteSquadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'meteSquadra1')">*Le Mete e obbligatorio!</span>
                   </mat-form-field>
         
-                <mat-form-field appearance="fill">
-                    <mat-label>Squadra 1</mat-label>
-                    <mat-select formControlName="squadra1" class="form-control">
-                        <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['squadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'squadra1')">*Il Squadra e obbligatorio!</span>
-                    <mat-option *ngFor="let p of squadre" [value]="p">
-                    {{ p.nome }}
-                  </mat-option>
-                </mat-select>
-            </mat-form-field>
+             
             
                 <mat-form-field appearance="fill">
                     <mat-label>Squadra 2</mat-label>
@@ -107,11 +119,29 @@
               </mat-form-field>
         
                   <button mat-button color="accent" [disabled]="!PartiteRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
+               
+                  <button mat-button class="enter" (click)="close()" style="width : 10em; height: 3em;" >Close</button>
                 </div>
                 <div class="alert alert-danger" role="alert" *ngIf="error">
                   {{error}}
                 </div>
                 </form>
+                
+            </div>
+        </div>
+
+
+
+
+        <div *ngIf="areYouSure === true">
+
+            <div class="modify">
+                <h2>Sei sicuro?</h2>
+                
+                  <button mat-button   (click)="cancellaPartita()" style="width : 10em; height: 3em;">Cancella</button>
+               <br>
+                  <button mat-button class="enter" (click)="close()" style="width : 10em; height: 3em;" >Close</button>
+               
                 
             </div>
         </div>
