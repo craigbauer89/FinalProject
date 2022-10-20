@@ -11,6 +11,9 @@ public setRoles(roles: []) {
   localStorage.setItem('roles', JSON.stringify(roles));
 }
 
+
+
+
 public getRoles(): [] {
   return  JSON.parse(localStorage.getItem('roles')!);
 }

@@ -1,8 +1,7 @@
 <body>
-    
+  <div>
     <form [formGroup]="SquadreRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="onSubmit()">
         <h1>Register Squadra</h1>
-        <div>
       <mat-form-field appearance="fill">
         <mat-label style="color: white">Nome</mat-label>
         <input matInput type="text" formControlName="nome" class="form-control" placeholder=" Nome" required>
@@ -14,13 +13,12 @@
         <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['location'].dirty && SquadreRegisterFormGroup.hasError('required', 'location')">*Il Location e obbligatoria!</span>
       </mat-form-field> -->
       <button mat-button  [disabled]="!SquadreRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
-    </div>
-    <div class="alert alert-danger" role="alert" *ngIf="error">
-      {{error}}
-    </div>
     </form>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="error">
+    {{error}}
+  </div>
     
-    
-    </body>
+</body>
 
 

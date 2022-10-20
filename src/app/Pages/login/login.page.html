@@ -3,24 +3,26 @@
 <div>
 
 
-    <form #f="ngForm" (ngSubmit)="invia()">
+    <form [formGroup]="LoginFormGroup" #f="ngForm" (ngSubmit)="invia()">
       <h1>Login</h1>
-      <mat-form-field >
-        <mat-label>Username</mat-label>
-        <input style="display:block ;" type="text" ngModel name="username" for="username" matInput placeholder="Username">
+      <mat-form-field appearance="fill">
+        <mat-label style="color: white">Username</mat-label>
+        <input style="display:block ;" type="text" formControlName="username"ngModel name="username" for="username" matInput placeholder="Username">
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
       </mat-form-field>
 
-      <mat-form-field >
-        <mat-label>Password</mat-label>
-        <input style="display:block ;" [type]="hide ? 'password' : 'text'" ngModel name="password" for="password" matInput placeholder="password">
+      <mat-form-field appearance="fill">
+        <mat-label style="color: white">Password</mat-label>
+        <input style="display:block ;" [type]="hide ? 'password' : 'text'" formControlName="password" ngModel name="password" for="password" matInput placeholder="password">
         <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide"> -->
           <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
         <!-- </button> -->
       </mat-form-field>
       <br>
-      <button class="enter" type="submit" mat-raised-button >Entra</button>
+      <button mat-button [disabled]="!LoginFormGroup.valid" class="enter" type="submit" style="width : 10em; height: 3em;" >Entra</button>
+      <br>
+      <button mat-button class="enter" (click)="Register()" style="width : 10em; height: 3em;" >Registra</button>
     </form>
 
     </div>

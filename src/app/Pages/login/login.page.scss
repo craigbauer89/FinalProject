@@ -36,7 +36,7 @@ input{
     margin-right: 1%;
     background-color:rgb(168, 184, 207);
     color: white;
-    height: 55px;
+    height: 50px;
     
     
     // display: flex;
@@ -53,9 +53,11 @@ input{
   }
 
   button {
+    margin: 0 25%;
     margin-top: 1%;
     background-color: rgb(109, 159, 230);
     color: white;
+    
   }
   
 //   .enter {
@@ -69,4 +71,9 @@ input{
 body {
     background-image: url(../../../assets/team-g50249347d_1920.jpg);
     background-position: 40% 40%;
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }

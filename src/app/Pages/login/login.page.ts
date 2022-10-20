@@ -1,6 +1,6 @@
 import { Token } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Register } from 'src/app/Interfaces/register';
 import { AuthService } from 'src/app/Services/auth.service';
@@ -19,7 +19,14 @@ export class LoginPage implements OnInit {
   // error: string = '';
   error: undefined;
 
-  constructor(private userService: UserService, private router: Router, private authService: AuthService) { }
+  LoginFormGroup = this._form.group({
+    username: ['', Validators.required],
+    password: ['', Validators.required],
+    
+
+  });
+
+  constructor(private userService: UserService, private router: Router, private authService: AuthService, private _form: FormBuilder) { }
 
   ngOnInit(): void {
   }
@@ -52,12 +59,16 @@ export class LoginPage implements OnInit {
           
         },
         (err) => {
-          window.alert("error")
+          window.alert("Dato sbagliati!")
           console.log(err.error);
           // this.error = err.error;
         }
       );
   } 
+
+  Register() {
+    this.router.navigate(['register']);
+  }
 }
 
 

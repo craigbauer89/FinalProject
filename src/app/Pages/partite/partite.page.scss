@@ -15,7 +15,9 @@ table {
     color: #fff;
 }
 
-
+h1 {
+    color: transparent;
+}
 
 th {
     background-color:rgb(12, 105, 244);
@@ -34,3 +36,17 @@ body {
     background-image: url(../../../assets/rugby-gedab47da2_1920.jpg);
     background-position: 40% 40%;
 }
+
+.mat-row:nth-child(2n)  {
+    background-color: darkgray;
+}
+
+.mat-row:hover {
+    background-color: rgb(64, 62, 62);
+    color: white;
+
+}
+
+.hidden-row {
+    display: none;
+  }

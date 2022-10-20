@@ -3,6 +3,7 @@ import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Partite } from 'src/app/Interfaces/partite';
 import { Squadre } from 'src/app/Interfaces/squadre';
+import { AuthService } from 'src/app/Services/auth.service';
 import { PartiteService } from 'src/app/Services/partite.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 
@@ -45,7 +46,7 @@ displayedColumns: string[] = ['date', 'squadra1.nome', 'puntisquadra1', 'puntisq
     });
 
 
-  constructor(private partiteService: PartiteService, private SquadreServiceservice: SquadraServiceService, private _form: FormBuilder, private router: Router) { }
+  constructor(private partiteService: PartiteService, private SquadreServiceservice: SquadraServiceService, private _form: FormBuilder, private router: Router, private authService: AuthService) { }
 
   ngOnInit()  {
     
@@ -55,7 +56,13 @@ displayedColumns: string[] = ['date', 'squadra1.nome', 'puntisquadra1', 'puntisq
      
         // this.dataSource2 = this.squadre ;
       
+      // let roles: any[] = JSON.parse(localStorage.getItem('roles')!);
+      // for (let role in roles) {
+      //   console.log(roles[role].roleName);
+        
+      // }
 
+      console.log(this.isAdmin() );
         
 
       // }
@@ -298,4 +305,32 @@ this.SquadreServiceservice.modifySquadra(squadra2.id, squadra2)
 })
 
 }
+
+// let roles: any[] = JSON.parse(localStorage.getItem('roles')!);
+// for (let role in roles) {
+//   console.log(roles[role].roleName);
+
+isAdmin() {
+  
+  let isAdmin = null;
+  let roles: any[] = this.authService.getRoles();
+  for (let role in roles) {
+    if (((roles[role].roleName)) === 'ROLE_USER'){
+      isAdmin = 'hidden-row';
+      
+      
+    }
+    // else {
+    //   isAdmin  = 'hidden-row'
+    // }
+    
+  }
+  return isAdmin;
+  
+}
+
+// showColumn(): string {
+//   return this.someService.hasAccess() ? null : 'hidden-row';
+// }
+
 }
