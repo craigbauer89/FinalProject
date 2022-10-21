@@ -28,6 +28,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { RegisterPage } from './Pages/register/register.page';
 import { HomePage } from './Pages/home/home.page';
+import { SquadreInfoPage } from './Pages/squadre-info/squadre-info.page';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { HomePage } from './Pages/home/home.page';
     HeaderComponent,
     ForbiddenComponent,
     RegisterPage,
-    HomePage
+    HomePage,
+    SquadreInfoPage
   ],
   imports: [
     BrowserModule,

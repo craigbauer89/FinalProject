@@ -36,5 +36,9 @@ export class SquadraServiceService {
     return this.http.put<Squadre>(this.squadreUrl + '/' + id, squandra);
   }
 
+  cancellaSquadraa(id:number): Observable<any>{
+    return this.http.delete(this.squadreUrl + '/'+ id, {responseType: 'text'});
+  }
+
 
 }

@@ -9,6 +9,7 @@ import { HomePage } from './Pages/home/home.page';
 import { LoginPage } from './Pages/login/login.page';
 import { PartitePage } from './Pages/partite/partite.page';
 import { RegisterPage } from './Pages/register/register.page';
+import { SquadreInfoPage } from './Pages/squadre-info/squadre-info.page';
 import { SquadrePage } from './Pages/squadre/squadre.page';
 
 
@@ -41,6 +42,12 @@ const routes: Routes = [
   {
     path: 'squadre',
     component: SquadrePage,
+    canActivate:[UserGuard] //, data:{roles:['ROLE_USER','ROLE_ADMIN']}
+  },
+
+  {
+    path: 'squadreinfo',
+    component: SquadreInfoPage,
     canActivate:[UserGuard] //, data:{roles:['ROLE_USER','ROLE_ADMIN']}
   },
 

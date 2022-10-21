@@ -118,7 +118,7 @@
                 <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['meteSquadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'meteSquadra2')">*Le Mete e obbligatorio!</span>
               </mat-form-field>
         
-                  <button mat-button color="accent" [disabled]="!PartiteRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
+                  <button mat-button  [disabled]="!PartiteRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
                
                   <button mat-button class="enter" (click)="close()" style="width : 10em; height: 3em;" >Close</button>
                 </div>
