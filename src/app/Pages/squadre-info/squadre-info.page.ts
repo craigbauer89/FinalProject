@@ -9,6 +9,7 @@ import { SquadraServiceService } from 'src/app/Services/squadra-service.service'
 })
 export class SquadreInfoPage implements OnInit {
 
+  searchText: any;
   @ViewChild('f') form!: NgForm;
   currentId = 0;
   areYouSure = false;
@@ -78,5 +79,9 @@ modifySquadra(id:number) {
     this.modifybox = false;
     this.ngOnInit();
 }
+
+// searchUser() {
+//   window.alert(search)
+// }
 
 }

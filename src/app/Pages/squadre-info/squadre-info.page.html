@@ -1,8 +1,12 @@
 <body>
-     <h1>Search</h1>
+   
+    <div class="search-hero">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Cerca Una Squadra....">
+      </div>
+   
     <div class="box row row-cols-3">
             <!-- <h1>Squadre</h1> -->
-              <mat-card *ngFor="let item of squadre" class="example-card" >
+              <mat-card *ngFor="let item of squadre | filter:searchText" class="example-card" >
                   
                 <mat-card-title-group>
                   <mat-card-title>{{item.nome}}</mat-card-title>

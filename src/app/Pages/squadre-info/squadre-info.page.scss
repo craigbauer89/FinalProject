@@ -130,3 +130,19 @@ mat-label{
 h2 {
     font-size: 3rem;
 }
+
+
+  
+  .form-control {
+    box-shadow: 0 10px 40px 0 #B0C1D9;
+    width: 30%;
+    height: 20px;
+    margin-left: 5%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+  }
+  .form-control::placeholder  {
+    font-size: 1rem;
+    
+
+  }

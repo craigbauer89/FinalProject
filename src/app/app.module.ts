@@ -29,6 +29,8 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { RegisterPage } from './Pages/register/register.page';
 import { HomePage } from './Pages/home/home.page';
 import { SquadreInfoPage } from './Pages/squadre-info/squadre-info.page';
+// import { FilterPipe } from './filter.pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { SquadreInfoPage } from './Pages/squadre-info/squadre-info.page';
     ForbiddenComponent,
     RegisterPage,
     HomePage,
-    SquadreInfoPage
+    SquadreInfoPage,
+    // FilterPipe,
+   
   ],
   imports: [
     BrowserModule,
@@ -61,6 +65,7 @@ import { SquadreInfoPage } from './Pages/squadre-info/squadre-info.page';
     RouterModule,
     MatToolbarModule,
     MatButtonModule,
+    Ng2SearchPipeModule
 
     
     
