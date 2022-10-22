@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Squadre } from 'src/app/Interfaces/squadre';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 
@@ -9,6 +10,8 @@ import { SquadraServiceService } from 'src/app/Services/squadra-service.service'
 })
 export class SquadreInfoPage implements OnInit {
 
+  latitude = 45.6478998820815;
+  longitude = 9.351554226855578;
   searchText: any;
   @ViewChild('f') form!: NgForm;
   currentId = 0;
@@ -22,19 +25,23 @@ export class SquadreInfoPage implements OnInit {
   tableSize: number = 6;
   tableSizes: any = [3, 6, 9, 12];
 
-
-
+cat1 = "https://www.w3schools.com";
 
   squadre: Squadre[] = [];
 
   SquadreRegisterFormGroup = this._form.group({
     nome: ['', Validators.required],
+    allenatore: ['', Validators.required],
+    sito: ['', Validators.required],
+    indirizzo: ['', Validators.required],
+    latitude: ['', Validators.required],
+    longitude: ['', Validators.required],
     
       
   
     });
 
-  constructor(private squadraServiceService: SquadraServiceService, private _form: FormBuilder) { }
+  constructor(public sanitizer:DomSanitizer, private squadraServiceService: SquadraServiceService, private _form: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -47,6 +54,19 @@ export class SquadreInfoPage implements OnInit {
 
 getPath(name: String): String {
 return "../../../assets/" + name + ".jpg";
+
+}
+
+geturl(latitude: number, longitude: number) {
+  
+  return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.bing.com/maps/embed?h=150&w=300&cp=" + latitude + "~" + longitude + "&lvl=13&typ=d&sty=r&src=SHELL&FORM=MBEDV8");
+  
+  }
+geturl1() {
+
+
+  return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.bing.com/maps/embed?h=130&w=300&cp=" + this.latitude + "~" + this.longitude + "&lvl=14&typ=d&sty=r&src=SHELL&FORM=MBEDV8");
+  
 
 }
 

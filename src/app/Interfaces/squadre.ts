@@ -2,7 +2,11 @@ export interface Squadre {
 
 id:any;
 nome: string;
-// location: string;
+allenatore: string;
+sito: string;
+indirizzo: string;
+latitude: string;
+longitude: string;
 punti: number;
 vittorie: number;
 pareggi: number;

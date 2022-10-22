@@ -8,11 +8,31 @@
         <input matInput type="text" formControlName="nome" class="form-control" placeholder=" Nome" required>
         <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['nome'].dirty && SquadreRegisterFormGroup.hasError('required', 'nome')">*Il Nome e obbligatorio!</span>
       </mat-form-field>
-      <!-- <mat-form-field appearance="fill">
-        <mat-label>Location</mat-label>
-        <input matInput type="text" formControlName="location" class="form-control" placeholder="Location" required>
-        <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['location'].dirty && SquadreRegisterFormGroup.hasError('required', 'location')">*Il Location e obbligatoria!</span>
-      </mat-form-field> -->
+      <mat-form-field appearance="fill">
+        <mat-label>Allenatore</mat-label>
+        <input matInput type="text" formControlName="allenatore" class="form-control" placeholder="Allenatore" required>
+        <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['allenatore'].dirty && SquadreRegisterFormGroup.hasError('required', 'allenatore')">*Il allenatore e obbligatoria!</span>
+      </mat-form-field>
+          <mat-form-field appearance="fill">
+        <mat-label>Sito</mat-label>
+        <input matInput type="text" formControlName="sito" class="form-control" placeholder="Sito" required>
+        <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['sito'].dirty && SquadreRegisterFormGroup.hasError('required', 'sito')">*Il sito e obbligatoria!</span>
+      </mat-form-field>
+          <mat-form-field appearance="fill">
+        <mat-label>Indirizzo</mat-label>
+        <input matInput type="text" formControlName="indirizzo" class="form-control" placeholder="Indirizzo" required>
+        <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['indirizzo'].dirty && SquadreRegisterFormGroup.hasError('required', 'indirizzo')">*Il indirizzo e obbligatoria!</span>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Latitude</mat-label>
+        <input matInput type="text" formControlName="latitude" class="form-control" placeholder="latitude" required>
+        <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['latitude'].dirty && SquadreRegisterFormGroup.hasError('required', 'latitude')">*Il indirizzo e obbligatoria!</span>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Longitude</mat-label>
+        <input matInput type="text" formControlName="longitude" class="form-control" placeholder="Longitude" required>
+        <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['longitude'].dirty && SquadreRegisterFormGroup.hasError('required', 'longitude')">*Il indirizzo e obbligatoria!</span>
+      </mat-form-field>
       <button mat-button  [disabled]="!SquadreRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
     </div>
    </form>

@@ -1,5 +1,6 @@
 <body>
-   
+
+  
     <div class="search-hero">
         <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Cerca Una Squadra....">
       </div>
@@ -15,12 +16,12 @@
                   
                 <mat-card-title-group>
                   <mat-card-title>{{item.nome}}</mat-card-title>
-                  <mat-card-subtitle>Website:</mat-card-subtitle>
-                  <mat-card-subtitle>Indirrizo:</mat-card-subtitle>
+                  <mat-card-subtitle>Website: {{item.sito}}</mat-card-subtitle>
+                  <mat-card-subtitle>Allenatore: {{item.allenatore}}</mat-card-subtitle>
                   
                   <img mat-card-sm-image src="{{getPath(item.nome)}}">
                 </mat-card-title-group>
-                <mat-card-subtitle>Address: Via 9, carnate , MB xxxxxxxxxx</mat-card-subtitle>
+                <mat-card-subtitle>Indirizzo: {{item.indirizzo}}</mat-card-subtitle>
                   <mat-card-content>
                   <!-- <p>
                       Contatto Aziendale: {{item.nomeContatto}} {{item.cognomeContatto}}
@@ -35,8 +36,18 @@
                   </p> -->
                  
                 <div class="map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2789.7843269964787!2d9.300853615235527!3d45.63506877910328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786ba5bff6ee483%3A0x52d64ce9e47073cf!2sVilla%20Mattioli!5e0!3m2!1sen!2sit!4v1661626455096!5m2!1sen!2sit" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
+                    <!-- <iframe src="https://www.bing.com/maps/embed?h=400&w=500&cp=152515.98777653987~-6.386130094896429&lvl=11&typ=d&sty=r&src=SHELL&FORM=MBEDV8" ></iframe> -->
+                   
+     <!-- <iframe  src="https://www.bing.com/maps/embed?h=400&w=500&cp=53.3481521732424~-6.248121227893989&lvl=15&typ=d&sty=r&src=SHELL&FORM=MBEDV8"></iframe> -->
+                 
+     <!-- <iframe  src="https://www.bing.com/maps/embed?h=200&w=300&cp=45.6478998820815~9.351554226855578&lvl=15&typ=d&sty=r&src=SHELL&FORM=MBEDV8"></iframe>
+                  
+     <iframe src="{{getPath(item.longitude,item.latitude)}}"></iframe> -->
+
+     <iframe [src]="geturl(item.latitude, item.longitude)"></iframe>
+    
+    </div>
+                 
                   </mat-card-content>
                   <mat-card-actions>
                       <!-- <button mat-button (click)="modifyClient(item.id)">Modify</button>
@@ -78,12 +89,31 @@
                     <input matInput type="text" formControlName="nome" class="form-control" placeholder=" Nome" required>
                     <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['nome'].dirty && SquadreRegisterFormGroup.hasError('required', 'nome')">*Il Nome e obbligatorio!</span>
                   </mat-form-field>
-                  <!-- <mat-form-field appearance="fill">
-                    <mat-label>Mete</mat-label>
-                    <input matInput type="number" formControlName="meteSquadra1" class="form-control" placeholder=" Mete" required>
-                    <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['meteSquadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'meteSquadra1')">*Le Mete e obbligatorio!</span>
-                  </mat-form-field> -->
-        
+                  <mat-form-field appearance="fill">
+                  <mat-label>Allenatore</mat-label>
+                  <input matInput type="text" formControlName="allenatore" class="form-control" placeholder="Allenatore" required>
+                  <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['allenatore'].dirty && SquadreRegisterFormGroup.hasError('required', 'allenatore')">*Il allenatore e obbligatoria!</span>
+                </mat-form-field>
+                    <mat-form-field appearance="fill">
+                  <mat-label>Sito</mat-label>
+                  <input matInput type="text" formControlName="sito" class="form-control" placeholder="Sito" required>
+                  <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['sito'].dirty && SquadreRegisterFormGroup.hasError('required', 'sito')">*Il sito e obbligatoria!</span>
+                </mat-form-field>
+                    <mat-form-field appearance="fill">
+                  <mat-label>Indirizzo</mat-label>
+                  <input matInput type="text" formControlName="indirizzo" class="form-control" placeholder="Indirizzo" required>
+                  <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['indirizzo'].dirty && SquadreRegisterFormGroup.hasError('required', 'indirizzo')">*Il indirizzo e obbligatoria!</span>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Latitude</mat-label>
+                  <input matInput type="text" formControlName="latitude" class="form-control" placeholder="latitude" required>
+                  <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['latitude'].dirty && SquadreRegisterFormGroup.hasError('required', 'latitude')">*Il indirizzo e obbligatoria!</span>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Longitude</mat-label>
+                  <input matInput type="text" formControlName="longitude" class="form-control" placeholder="Longitude" required>
+                  <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['longitude'].dirty && SquadreRegisterFormGroup.hasError('required', 'longitude')">*Il indirizzo e obbligatoria!</span>
+                </mat-form-field>
              
                   <div class="buttons">
                   <button mat-button  [disabled]="!SquadreRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
