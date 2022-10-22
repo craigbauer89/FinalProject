@@ -17,6 +17,13 @@ export class SquadreInfoPage implements OnInit {
   error = undefined;
   path = " ";
   cat =  "../../../assets/Velate.jpg";
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 6;
+  tableSizes: any = [3, 6, 9, 12];
+
+
+
 
   squadre: Squadre[] = [];
 
@@ -83,5 +90,15 @@ modifySquadra(id:number) {
 // searchUser() {
 //   window.alert(search)
 // }
+
+onTableDataChange(event: any) {
+  this.page = event;
+  this.ngOnInit();
+}
+onTableSizeChange(event: any): void {
+  this.tableSize = event.target.value;
+  this.page = 1;
+  this.ngOnInit();
+}
 
 }

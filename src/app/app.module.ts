@@ -16,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormRegisterPartiteComponent } from './Components/form-register-partite/form-register-partite.component';
 import { PartitePage } from './Pages/partite/partite.page';
-import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
+import { MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
 import { LoginPage } from './Pages/login/login.page';
 import { BasicAuthInterceptorServiceService } from './Services/basic-auth-interceptor-service.service';
@@ -31,6 +32,7 @@ import { HomePage } from './Pages/home/home.page';
 import { SquadreInfoPage } from './Pages/squadre-info/squadre-info.page';
 // import { FilterPipe } from './filter.pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     RouterModule,
     MatToolbarModule,
     MatButtonModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    MatPaginatorModule,
+    NgxPaginationModule
 
     
     
