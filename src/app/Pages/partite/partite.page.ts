@@ -27,7 +27,7 @@ export class PartitePage implements OnInit {
 
     // squadra = JSON.stringify(this.squadre);
 // };
-displayedColumns: string[] = ['date', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'modifica', 'cancellare' ];
+displayedColumns: string[] = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
   dataSource: Partite[] = [];
   squadre: Squadre[] = [];
   // dataSource2 = this.squadre ;
@@ -341,5 +341,10 @@ close() {
   this.areYouSure = false;
 
 }
+
+getPath(name: String): String {
+  return "../../../assets/" + name + ".jpg";
+  
+  }
 
 }

@@ -16,10 +16,12 @@ mat-card {
 
     
     
-    background-color:rgb(234, 231, 231);
+    background-color:white;
     border: 2px solid rgb(32, 114, 229);
+    border-radius: 15px;
+    opacity: .8;
    
-    height: 340px;
+    height: 400px;
     color: rgb(32, 114, 229);
 }
 
@@ -145,6 +147,16 @@ h2 {
     font-size: 1rem;
     
 
+  }
+
+  .search-hero input {
+    border-radius: 5px;
+    border: 2px solid rgb(32, 114, 229);
+    
+  }
+
+  iframe {
+    opacity: 1;
   }
 
   

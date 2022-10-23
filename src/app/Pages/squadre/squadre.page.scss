@@ -1,7 +1,7 @@
 table {
-    background-color:  rgba(240, 248, 255, 0.95);
+    background-color:  rgba(208, 227, 244, 0.95);
     margin: auto;
-    opacity: 0.8;
+    opacity: 0.9;
    
 
 }
@@ -29,7 +29,8 @@ body {
 }
 
 .mat-row:nth-child(2n)  {
-    background-color: darkgray;
+    // background-color: darkgray;
+     background-color: white;
 }
 
 .mat-row:hover {
@@ -37,3 +38,10 @@ body {
     color: white;
 
 }
+
+img {
+    width: 50px;
+    height: 40px;
+    background-color: rgba(0,0,0,0);
+   
+  }

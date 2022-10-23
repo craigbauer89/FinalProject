@@ -47,7 +47,7 @@ export class SquadrePage implements OnInit {
 
     // squadra = JSON.stringify(this.squadre);
 // };
-displayedColumns: string[] = ['id', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'meteFatti', 'meteSubiti','puntiSubiti','puntiFatti','differenza' ];
+displayedColumns: string[] = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'meteFatti', 'meteSubiti','puntiSubiti','puntiFatti','differenza' ];
   dataSource = new MatTableDataSource(this.squadre) ;
 
 
@@ -74,7 +74,10 @@ displayedColumns: string[] = ['id', 'nome', 'vittorie', 'pareggi', 'sconfitte', 
 
   // ngAfterViewInit() {
 
-   
+    getPath(name: String): String {
+      return "../../../assets/" + name + ".jpg";
+      
+      }
 
   // }
  
