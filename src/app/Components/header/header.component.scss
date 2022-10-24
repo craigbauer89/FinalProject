@@ -2,6 +2,20 @@ mat-toolbar {
     background-color:rgb(32, 114, 229)
 }
 
+input#menuButton {
+    display: none;
+   
+}
+
+
+ input#menuButton:checked ~ .desktop2 {
+  
+   height: 200px;
+ 
+  
+    
+} 
+
 li {
     list-style-type: none;
     margin-right: 5%;
@@ -15,8 +29,8 @@ a {
 .logo{
     
     margin-right: 1%;
-    width: 90px;
-    height: 80%;
+    width: 70px;
+    height: 50px;
     background-color: white;
     background-image: url("../../../assets/logo3.jpg");
     background-size: 100% 100%;
@@ -29,3 +43,118 @@ a {
 .example-spacer {
     flex: 1 1 auto;
   }
+
+
+
+
+
+
+  @media only screen and (max-width: 950px) {
+    
+    mat-toolbar {
+        font-size: 1rem;
+    }
+
+   
+
+  }
+
+  @media only screen and (max-width:800px) {
+    
+
+    mat-toolbar-row {
+        height: 150px;
+    }
+
+    mat-icon {
+
+        width: 50px;
+        height: 50px;
+        font-size: 3.5rem;
+        padding: 1%;
+        
+    }
+ 
+   
+   .desktop2{
+   
+        display: inline-block;
+        height:0;
+        overflow: hidden;
+        position: relative;
+        width: 80%;
+        transition: height 0.5s ease-out;
+        
+    }
+
+    li {
+        background-color:rgb(32, 114, 229);
+    }
+  
+
+    .desktop1 {
+        display: none;
+       
+    }
+
+    .logoMobile {
+        display: flex;
+        flex-wrap: wrap;
+    }
+      
+    .header {
+        padding: 1%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+    .logo1 {
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        z-index: 0;
+       
+        width: 60px;
+        height: 50px;
+        background-color: white;
+        background-image: url("../../../assets/logo3.jpg");
+        background-size: 100% 100%;
+        border-radius: 5px;
+        border: 1px solid black;
+    }
+}
+
+
+@media only screen and (min-width:800px) {
+    
+    .header {
+        
+        display: none;
+    }
+
+    .logo1 {
+        
+        display: none;
+    }
+
+
+   #menuMobile {
+    display: none;
+}
+
+
+nav {
+    display: none;
+   
+}
+
+.desktop2 {
+    display: none;
+   
+}
+  
+   
+   
+
+}

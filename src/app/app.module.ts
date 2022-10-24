@@ -33,6 +33,7 @@ import { SquadreInfoPage } from './Pages/squadre-info/squadre-info.page';
 // import { FilterPipe } from './filter.pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatButtonModule,
     Ng2SearchPipeModule,
     MatPaginatorModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatIconModule
 
     
     
