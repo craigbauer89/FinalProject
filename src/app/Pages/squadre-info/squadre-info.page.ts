@@ -1,7 +1,9 @@
+import { BreakpointObserver,Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Squadre } from 'src/app/Interfaces/squadre';
+import { AuthService } from 'src/app/Services/auth.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 
 @Component({
@@ -24,6 +26,7 @@ export class SquadreInfoPage implements OnInit {
   count: number = 0;
   tableSize: number = 6;
   tableSizes: any = [3, 6, 9, 12];
+  hideForResponsive = false;
 
 cat1 = "https://www.w3schools.com";
 
@@ -41,14 +44,30 @@ cat1 = "https://www.w3schools.com";
   
     });
 
-  constructor(public sanitizer:DomSanitizer, private squadraServiceService: SquadraServiceService, private _form: FormBuilder) { }
+  constructor(public sanitizer:DomSanitizer,private authService: AuthService,private squadraServiceService: SquadraServiceService, private _form: FormBuilder,private responsive: BreakpointObserver) { }
 
   ngOnInit(): void {
 
 
     this.squadraServiceService.findAll().subscribe(data => {
       this.squadre = data;
+
   });
+
+  this.responsive.observe([
+    Breakpoints.TabletPortrait,
+    Breakpoints.HandsetLandscape])
+    .subscribe(result => {
+
+      this.hideForResponsive = false;
+  
+      const breakpoints = result.breakpoints;
+  
+      if (result.matches) {
+        this.hideForResponsive = true;
+      }
+  
+    });
 
 }
 
@@ -72,6 +91,7 @@ geturl1() {
 
 
 cancella(id:number) {
+  this.topFunction();
   this.currentId = id;
   this.areYouSure = true;
 }
@@ -86,12 +106,14 @@ this.ngOnInit();
 }
 
 close() {
+  
   this.modifybox = false;
   this.areYouSure = false;
 
 }
 
 modifySquadra(id:number) {
+  this.topFunction();
   this.modifybox = true;
   this.currentId = id;
 
@@ -119,6 +141,30 @@ onTableSizeChange(event: any): void {
   this.tableSize = event.target.value;
   this.page = 1;
   this.ngOnInit();
+}
+
+topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
+isAdmin() {
+  
+  let isAdmin = null;
+  let roles: any[] = this.authService.getRoles();
+  for (let role in roles) {
+    if (((roles[role].roleName)) === 'ROLE_USER'){
+      isAdmin = 'hidden-row';
+      
+      
+    }
+    // else {
+    //   isAdmin  = 'hidden-row'
+    // }
+    
+  }
+  return isAdmin;
+  
 }
 
 }

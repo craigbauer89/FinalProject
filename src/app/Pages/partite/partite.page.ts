@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -22,6 +23,9 @@ export class PartitePage implements OnInit {
   areYouSure = false;
   modifybox = false;
   error = undefined;
+
+  hideForResponsive = false;
+  hideForResponsivePhone = false;
 //   squadra:any = {
 //     nome: '',
 
@@ -46,7 +50,7 @@ displayedColumns: string[] = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','
     });
 
 
-  constructor(private partiteService: PartiteService, private SquadreServiceservice: SquadraServiceService, private _form: FormBuilder, private router: Router, private authService: AuthService) { }
+  constructor(private partiteService: PartiteService, private SquadreServiceservice: SquadraServiceService, private _form: FormBuilder, private router: Router, private authService: AuthService, private responsive: BreakpointObserver) { }
 
   ngOnInit()  {
     
@@ -83,6 +87,46 @@ displayedColumns: string[] = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','
         
       // }
     });
+
+
+    this.responsive.observe([
+      Breakpoints.TabletPortrait,
+      Breakpoints.TabletLandscape,
+      Breakpoints.HandsetLandscape,
+      Breakpoints.HandsetPortrait])
+      .subscribe(result => {
+  
+        this.hideForResponsive = false;
+        this.hideForResponsivePhone = false;
+    
+        const breakpoints = result.breakpoints;
+    
+        // if (result.matches) {
+         
+        // }
+
+        if (breakpoints[Breakpoints.HandsetPortrait]) {
+          this.hideForResponsivePhone = true;
+          this.hideForResponsive = true;
+          this.displayedColumns = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','puntisquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
+        }
+        
+        else if (breakpoints[Breakpoints.HandsetLandscape]) {
+          this.hideForResponsivePhone = false;
+          this.hideForResponsive = true;
+          this.displayedColumns = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
+        }
+        else if (breakpoints[Breakpoints.TabletLandscape]) {
+          this.hideForResponsive = false;
+          this.hideForResponsivePhone = false;
+          this.displayedColumns = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
+          
+        }
+    
+      });
+      
+
+
   }
 
   // modifyPartita(partita:Partite) {

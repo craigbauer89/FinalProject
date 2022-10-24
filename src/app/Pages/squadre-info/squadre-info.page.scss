@@ -19,7 +19,7 @@ mat-card {
     background-color:white;
     border: 2px solid rgb(32, 114, 229);
     border-radius: 15px;
-    opacity: .8;
+    opacity: .9;
    
     height: 400px;
     color: rgb(32, 114, 229);
@@ -159,4 +159,7 @@ h2 {
     opacity: 1;
   }
 
+  .hidden-row {
+    display: none;
+  }
   

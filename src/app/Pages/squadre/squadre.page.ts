@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -39,6 +40,8 @@ export class SquadrePage implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
   element: any;
+  hideForResponsive = false;
+  hideForResponsivePhone = false;
 
   // squadre: Squadre[];
   squadre: Squadre[] = [];
@@ -47,14 +50,14 @@ export class SquadrePage implements OnInit {
 
     // squadra = JSON.stringify(this.squadre);
 // };
-displayedColumns: string[] = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'meteFatti', 'meteSubiti','puntiSubiti','puntiFatti','differenza' ];
+displayedColumns: string[] = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'meteFatti'!, 'meteSubiti','puntiSubiti','puntiFatti','differenza' ];
   dataSource = new MatTableDataSource(this.squadre) ;
 
 
   
   
 
-  constructor(private squadraServiceService: SquadraServiceService) { }
+  constructor(private squadraServiceService: SquadraServiceService,private responsive: BreakpointObserver) { }
  
   
   ngOnInit()  {
@@ -70,6 +73,42 @@ displayedColumns: string[] = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte'
         console.log(this.dataSource);
       // }
     });
+
+    this.responsive.observe([
+      Breakpoints.TabletPortrait,
+      Breakpoints.TabletLandscape,
+      Breakpoints.HandsetLandscape,
+      Breakpoints.HandsetPortrait])
+      .subscribe(result => {
+  
+        this.hideForResponsive = false;
+        this.hideForResponsivePhone = false;
+    
+        const breakpoints = result.breakpoints;
+    
+        // if (result.matches) {
+         
+        // }
+
+        if (breakpoints[Breakpoints.HandsetPortrait]) {
+          this.hideForResponsivePhone = true;
+          this.hideForResponsive = true;
+          this.displayedColumns = [ 'img', 'nome', 'punti', 'giocate', 'differenza' ];
+        }
+        
+        else if (breakpoints[Breakpoints.HandsetLandscape]) {
+          this.hideForResponsivePhone = false;
+          this.hideForResponsive = true;
+          this.displayedColumns = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'differenza' ];
+        }
+        else if (breakpoints[Breakpoints.TabletLandscape]) {
+          this.hideForResponsive = false;
+          this.hideForResponsivePhone = false;
+          this.displayedColumns = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'meteFatti'!, 'meteSubiti','puntiSubiti','puntiFatti','differenza' ];
+          
+        }
+    
+      });
   }
 
   // ngAfterViewInit() {

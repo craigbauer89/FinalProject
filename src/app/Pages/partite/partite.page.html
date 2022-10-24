@@ -28,7 +28,7 @@
               <td mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="metesquadra1">
+            <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
                 <th mat-header-cell *matHeaderCellDef> (Mete) </th>
                 <td mat-cell *matCellDef="let element" > ({{element.meteSquadra1}}) </td>
               </ng-container>
@@ -39,7 +39,7 @@
               <td mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="metesquadra2">
+            <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
                 <th mat-header-cell *matHeaderCellDef> (Mete) </th>
                 <td mat-cell *matCellDef="let element" >  ({{element.meteSquadra2}})  </td>
               </ng-container>
