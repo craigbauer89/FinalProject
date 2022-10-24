@@ -37,9 +37,15 @@ export class HeaderComponent implements OnInit {
     
   }
 
-//   showLogout() {
-//     this.showlogin = false;
-//     this.showlogout = true;
+  closeMenu(): void {
+    //
+    const checkbox = document.getElementById(
+      'menuButton',
+    ) as HTMLInputElement | null;
     
-// }
+    // window.alert('anchor tag is Clicked');
+    if (checkbox != null) {
+      checkbox.checked = false;
+    }
+    }
 }

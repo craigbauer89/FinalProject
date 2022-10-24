@@ -15,7 +15,7 @@
             <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="partite">Calendario</a></li>
             <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadre">Classifica</a></li>
             <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadreinfo">Squadre</a></li>
-            <li *ngIf="!isLoggedIn() "><a   href="#" routerLink="login">Login</a></li>
+            <li *ngIf="!isLoggedIn() "><a   href="#" routerLink="login"  >Login</a></li>
             
             <span><li *ngIf="!isLoggedIn() "><a   href="#" routerLink="register">Register</a></li></span> 
             <span class="example-spacer"></span>
@@ -28,14 +28,14 @@
     <input type="checkbox" id="menuButton">
 
     <mat-toolbar-row class="desktop2">
-        <li><a  href="#" routerLink="registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])">Add Squadre</a></li>
-        <li><a  href="#" routerLink="registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])">Add Partite</a></li>
-        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="partite">Calendario</a></li>
-        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadre">Classifica</a></li>
-        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadreinfo">Squadre</a></li>
-        <li *ngIf="!isLoggedIn() "><a   href="#" routerLink="login">Login</a></li>
+        <li><a  href="#" routerLink="registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"(click)="closeMenu()">Add Squadre</a></li>
+        <li><a  href="#" routerLink="registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"(click)="closeMenu()">Add Partite</a></li>
+        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="partite"(click)="closeMenu()">Calendario</a></li>
+        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadre"(click)="closeMenu()">Classifica</a></li>
+        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadreinfo"(click)="closeMenu()">Squadre</a></li>
+        <li *ngIf="!isLoggedIn() "><a   href="#" routerLink="login" (click)="closeMenu()">Login</a></li>
         
-        <span><li *ngIf="!isLoggedIn() "><a   href="#" routerLink="register">Register</a></li></span> 
+        <span><li *ngIf="!isLoggedIn() "><a   href="#" routerLink="register" (click)="closeMenu()">Register</a></li></span> 
         <span class="example-spacer"></span>
         <li *ngIf= "isLoggedIn() "><a   href="#" (click)="Logout()">Logout</a></li>
         

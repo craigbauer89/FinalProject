@@ -1,5 +1,7 @@
 mat-toolbar {
-    background-color:rgb(32, 114, 229)
+    background-color:rgb(32, 114, 229);
+    position:fixed;
+    z-index: 1;
 }
 
 input#menuButton {
@@ -32,7 +34,7 @@ a {
     width: 70px;
     height: 50px;
     background-color: white;
-    background-image: url("../../../assets/logo3.jpg");
+    background-image: url("../../../assets/logo4.jpg");
     background-size: 100% 100%;
     border-radius: 5px;
     border: 1px solid black;
@@ -118,7 +120,7 @@ a {
         width: 60px;
         height: 50px;
         background-color: white;
-        background-image: url("../../../assets/logo3.jpg");
+        background-image: url("../../../assets/logo4.jpg");
         background-size: 100% 100%;
         border-radius: 5px;
         border: 1px solid black;

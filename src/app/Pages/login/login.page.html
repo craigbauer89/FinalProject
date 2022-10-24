@@ -1,5 +1,6 @@
 
 <body>
+  <h1></h1>
 <div>
 
 
@@ -19,10 +20,12 @@
           <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
         <!-- </button> -->
       </mat-form-field>
+  
       <br>
-      <button mat-button [disabled]="!LoginFormGroup.valid" class="enter" type="submit" style="width : 10em; height: 3em;" >Entra</button>
+      <button mat-button [disabled]="!LoginFormGroup.valid" class="enter" type="submit" >Entra</button>
       <br>
-      <button mat-button class="enter" (click)="Register()" style="width : 10em; height: 3em;" >Registra</button>
+      <button mat-button class="enter" (click)="Register()"  >Registra</button>
+   
     </form>
 
     </div>

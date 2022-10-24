@@ -3,11 +3,24 @@ body {
     background-position: 40% 40%;
 }
 
+.photo {
+    width: 200px;
+    height: 250px;
+    margin: 0 35% ;
+    background-color: white;
+    border: 5px solid black;
+    border-radius: 200px;
+    margin-bottom: 5%;
+    background-image: url(../../../assets/logo4.jpg);
+
+    background-size:contain;
+    background-repeat: no-repeat;
+}
 
 
 .content {
     background-color: transparent;
-     padding-top: 20%;
+     padding-top: 10%;
     
      text-align: center;
    
