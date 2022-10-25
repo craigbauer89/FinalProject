@@ -108,7 +108,7 @@ displayedColumns: string[] = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','
         if (breakpoints[Breakpoints.HandsetPortrait]) {
           this.hideForResponsivePhone = true;
           this.hideForResponsive = true;
-          this.displayedColumns = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','puntisquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
+          this.displayedColumns = ['date','img1', 'squadra1.nome', 'puntisquadra1','puntisquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
         }
         
         else if (breakpoints[Breakpoints.HandsetLandscape]) {

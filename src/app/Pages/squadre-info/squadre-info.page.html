@@ -5,7 +5,7 @@
         <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Cerca Una Squadra....">
       </div>
    
-    <div class="box row row-cols-3">
+    <div class="box">
             <!-- <h1>Squadre</h1> -->
               <mat-card *ngFor="let item of squadre | filter:searchText | paginate
               : {
@@ -23,26 +23,10 @@
                 </mat-card-title-group>
                 <mat-card-subtitle>Indirizzo: {{item.indirizzo}}</mat-card-subtitle>
                   <mat-card-content>
-                  <!-- <p>
-                      Contatto Aziendale: {{item.nomeContatto}} {{item.cognomeContatto}}
-                      <br>
-                      Email Contatto:// {{item.emailContatto}}
-                      <br>
-                      Telefono Aziendale: {{item.telefono}}
-                      <br>
-                      Email: {{item.emailAziendale}}
-                      <br>
-                      Tel: {{item.telefono}}
-                  </p> -->
+              
                  
                 <div class="map">
-                    <!-- <iframe src="https://www.bing.com/maps/embed?h=400&w=500&cp=152515.98777653987~-6.386130094896429&lvl=11&typ=d&sty=r&src=SHELL&FORM=MBEDV8" ></iframe> -->
-                   
-     <!-- <iframe  src="https://www.bing.com/maps/embed?h=400&w=500&cp=53.3481521732424~-6.248121227893989&lvl=15&typ=d&sty=r&src=SHELL&FORM=MBEDV8"></iframe> -->
-                 
-     <!-- <iframe  src="https://www.bing.com/maps/embed?h=200&w=300&cp=45.6478998820815~9.351554226855578&lvl=15&typ=d&sty=r&src=SHELL&FORM=MBEDV8"></iframe>
-                  
-     <iframe src="{{getPath(item.longitude,item.latitude)}}"></iframe> -->
+              
 
      <iframe [src]="geturl(item.latitude, item.longitude)"></iframe>
     
@@ -53,7 +37,7 @@
                       <!-- <button mat-button (click)="modifyClient(item.id)">Modify</button>
                       <button mat-button (click)="checkremove(item.id)">Remove</button> -->
                       <button  color="success" mat-raised-button (click)="modifySquadra(item.id)">Modify</button>
-                      <button  color="warn" mat-raised-button (click)="cancella(item.id)">Remove</button>
+                      <button [ngClass]="isAdmin()" color="warn" mat-raised-button (click)="cancella(item.id)">Remove</button>
                       <!-- <button mat-button (click)="removeClient(item.id)">Remove</button> -->
                     </mat-card-actions>
               </mat-card>

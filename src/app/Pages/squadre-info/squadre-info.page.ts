@@ -78,13 +78,13 @@ return "../../../assets/" + name + ".jpg";
 
 geturl(latitude: number, longitude: number) {
   
-  return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.bing.com/maps/embed?h=150&w=300&cp=" + latitude + "~" + longitude + "&lvl=13&typ=d&sty=r&src=SHELL&FORM=MBEDV8");
+  return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.bing.com/maps/embed?h=150&w=350&cp=" + latitude + "~" + longitude + "&lvl=13&typ=d&sty=r&src=SHELL&FORM=MBEDV8");
   
   }
 geturl1() {
 
 
-  return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.bing.com/maps/embed?h=130&w=300&cp=" + this.latitude + "~" + this.longitude + "&lvl=14&typ=d&sty=r&src=SHELL&FORM=MBEDV8");
+  return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.bing.com/maps/embed?h=130&w=370&cp=" + this.latitude + "~" + this.longitude + "&lvl=14&typ=d&sty=r&src=SHELL&FORM=MBEDV8");
   
 
 }

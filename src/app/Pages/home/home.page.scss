@@ -20,7 +20,7 @@ body {
 
 .content {
     background-color: transparent;
-     padding-top: 10%;
+     padding-top: 20%;
     
      text-align: center;
    
@@ -61,6 +61,29 @@ h2 {
       
     }
 
+    .content {
+       
+         padding-top: 30%;
+        
+       
+    
+     
+    }
+   
+
+  }
+
+  @media only screen and (max-width: 800px) {
+    
+   
+    .content {
+       
+         padding-top: 40%;
+        
+       
+    
+     
+    }
    
 
   }
@@ -79,7 +102,14 @@ h2 {
       
     }
 
+    .content {
+       
+        padding-top: 60%;
+       
+      
    
+    
+   }
 
   }
 

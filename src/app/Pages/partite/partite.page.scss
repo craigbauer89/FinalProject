@@ -2,8 +2,20 @@ table {
     position: relative;
     background-color:  rgba(240, 248, 255, 0.95);
     margin: auto;
+    margin-top: 7.5%;
     opacity: 0.8;
 
+
+}
+
+.left{
+   
+  text-align: left;
+}
+
+.right{
+   
+  text-align: right;
 }
 
 .mat-success {
@@ -25,12 +37,13 @@ th {
     color: white;
     width: 90px;
     font-size: .8rem;
-
+    text-align: left;
 }
 
 td{
-    
+    text-align: left;
     color: black;
+    
 }
 
 body {
@@ -132,3 +145,49 @@ img {
  
 }
 
+@media only screen and (max-width:1200px) {
+    
+
+
+  table {
+   
+    margin-top: 10%;
+    width: 80%;
+
+} 
+}
+
+
+
+@media only screen and (max-width:500px) {
+  
+table {
+ 
+  margin-top: 25%;
+  width: 90%;
+
+
+
+.left{
+ 
+  text-align: left;
+}
+
+img {
+  width: 25px;
+  height: 20px;
+
+
+}
+
+
+td {
+  font-size: .53rem;
+}
+
+.right {
+  text-align: right;
+}
+  
+} 
+}

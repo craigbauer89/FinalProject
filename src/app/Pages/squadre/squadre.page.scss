@@ -2,9 +2,18 @@ table {
     background-color:  rgba(208, 227, 244, 0.95);
     margin: auto;
     opacity: 0.9;
-   
+    margin-top: 7.5%;
+    text-align: center;
+    
 
 }
+
+.left{
+   
+    text-align: left;
+}
+
+
 
 h1 {
     color: transparent;
@@ -15,11 +24,12 @@ th {
     background-color:rgb(12, 105, 244);
     width: 80px;
     font-size: .8rem;
+    color: white;
 
 }
 
 td{
-    
+    text-align: center;
     color: black;
 }
 
@@ -35,9 +45,10 @@ body {
 
 .mat-row:hover {
     background-color: rgb(64, 62, 62);
-    color: white;
+   td {color: white;}
 
 }
+
 
 img {
     width: 50px;
@@ -45,3 +56,52 @@ img {
     background-color: rgba(0,0,0,0);
    
   }
+
+
+  @media only screen and (max-width:1200px) {
+    
+
+
+    table {
+     
+      margin-top: 10%;
+      width: 80%;
+  
+  } 
+  }
+
+ 
+
+  @media only screen and (max-width:500px) {
+    
+  table {
+   
+    margin-top: 25%;
+    width: 80%;
+
+
+th {
+    font-size: .7rem;
+    text-align: right;
+}
+
+td {
+    font-size: .8rem;
+    text-align: right;
+  
+}
+
+.left{
+   
+    text-align: left;
+}
+
+img {
+    width: 25px;
+    height: 20px;
+
+  
+  }
+    
+} 
+}
