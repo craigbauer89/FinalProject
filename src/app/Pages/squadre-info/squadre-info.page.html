@@ -99,12 +99,12 @@
                   <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['longitude'].dirty && SquadreRegisterFormGroup.hasError('required', 'longitude')">*Il indirizzo e obbligatoria!</span>
                 </mat-form-field>
              
-                  <div class="buttons">
-                  <button mat-button  [disabled]="!SquadreRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
+                  <!-- <div class="buttons"> -->
+                  <button mat-button  [disabled]="!SquadreRegisterFormGroup.valid" type="submit">Submit</button>
                
-                  <button mat-button class="enter" (click)="close()" style="width : 10em; height: 3em;" >Close</button>
+                  <button mat-button class="enter" (click)="close()">Close</button>
                 </div>
-                </div>
+                <!-- </div> -->
                 <div class="alert alert-danger" role="alert" *ngIf="error">
                   {{error}}
                 </div>
@@ -118,9 +118,9 @@
             <div class="modify">
                 <h2>Sei sicuro?</h2>
                 <div class="buttons">
-                  <button mat-button   (click)="cancellaSquadra()" style="width : 10em; height: 3em;">Remove</button>
+                  <button mat-button   (click)="cancellaSquadra()" >Remove</button>
                <br>
-                  <button mat-button class="enter" (click)="close()" style="width : 10em; height: 3em;" >Close</button>
+                  <button mat-button class="enter" (click)="close()" >Close</button>
                 </div>
                 
             </div>

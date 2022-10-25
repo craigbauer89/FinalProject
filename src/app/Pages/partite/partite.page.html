@@ -58,14 +58,14 @@
 
             <ng-container  matColumnDef="modifica">
                 <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
-                <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button mat-button (click)="modifyPartita(element.id)" color="success" >Modifica</button></td>
+                <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="modifyPartita(element.id)" color="success" >Modifica</button></td>
               </ng-container>
 
               
 
               <ng-container matColumnDef="cancellare">
                 <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
-                <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button mat-button (click)="cancella(element.id)" color="cancel" >Cancella</button></td>
+                <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="cancella(element.id)" color="cancel" >Cancella</button></td>
               </ng-container>
            
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

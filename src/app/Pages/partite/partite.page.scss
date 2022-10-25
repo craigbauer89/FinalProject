@@ -158,6 +158,35 @@ img {
 }
 
 
+@media only screen and (max-width:680px) {
+    
+  .box button {
+    width: 40px;
+    height: 25px;
+    font-size: .4rem;
+  }
+
+ 
+  .modify {
+
+    margin: 1% 5%;
+    width: 90%;
+  }
+  .modify mat-form-field {
+
+    width: 90%;
+  }
+  
+
+  body {
+    height: 1000px;
+  }
+
+}
+
+
+
+
 
 @media only screen and (max-width:500px) {
   
@@ -179,6 +208,10 @@ img {
 
 
 }
+
+
+
+
 
 
 td {
