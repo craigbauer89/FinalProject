@@ -3,24 +3,35 @@ body {
     background-position: 40% 40%;
 }
 
-.photo {
-    width: 200px;
-    height: 250px;
-    margin: 0 35% ;
+.homeLogo {
+
+    width: 26%;
+    margin: 0 37%;
+    height: 500px;
     background-color: white;
     border: 5px solid black;
-    border-radius: 200px;
-    margin-bottom: 5%;
-    background-image: url(../../../assets/logo4.jpg);
 
+  
+    
+
+}
+
+.photo {
+    width: 80%;
+    margin: 0 10%;
+    height: 100%;
+    background-image: url(../../../assets/logo5.jpg);
     background-size:contain;
     background-repeat: no-repeat;
+ 
+
+ 
 }
 
 
 .content {
     background-color: transparent;
-     padding-top: 20%;
+     padding-top: 15%;
     
      text-align: center;
    
@@ -47,6 +58,84 @@ h2 {
     
 }
 
+@media only screen and (min-width: 2000px) {
+
+  
+
+.homeLogo {
+
+    width: 20%;
+    margin: 0 40%;
+
+}
+
+}
+
+@media only screen and (max-width: 1800px) {
+
+    .homeLogo {
+    
+      height: 450px;
+    
+    }
+    
+    }
+
+
+    @media only screen and (max-width: 1700px) {
+
+        .homeLogo {
+        
+          height: 400px;
+        
+        }
+
+        .content {
+       
+            padding-top: 20%;
+    
+       }
+
+        
+        }
+
+
+        @media only screen and (max-width: 1400px) {
+
+            .homeLogo {
+            
+              height: 350px;
+            
+            }
+
+            .content {
+       
+                padding-top: 25%;
+        
+           }
+    
+            
+            }
+
+
+            @media only screen and (max-width: 1200px) {
+
+                .homeLogo {
+                
+                  height: 300px;
+                
+                }
+                
+                
+
+                .content {
+       
+                    padding-top: 25%;
+            
+               }
+        
+
+            }
 
 @media only screen and (max-width: 1024px) {
     
@@ -65,13 +154,21 @@ h2 {
        
          padding-top: 30%;
         
-       
-    
-     
+
     }
+
+    .homeLogo {
+                
+        width: 40%;
+        margin: 0 30%;
+        height: 400px;
+      
+      }
+
    
 
   }
+
 
   @media only screen and (max-width: 800px) {
     
@@ -79,11 +176,16 @@ h2 {
     .content {
        
          padding-top: 40%;
-        
-       
     
      
     }
+
+    .homeLogo {
+                
+       
+        height: 300px;
+      
+      }
    
 
   }
@@ -106,13 +208,27 @@ h2 {
        
         padding-top: 60%;
        
-      
-   
     
    }
 
+   .homeLogo {
+                
+    height: 250px;
+  
   }
 
+
+  }
+
+  @media only screen and (max-width: 570px) {
+
+  .homeLogo {
+                
+    height: 200px;
+  
+  }
+
+  }
 
   @media only screen and (max-width: 500px) {
     
@@ -128,5 +244,47 @@ h2 {
     }
 
     
+  
+
+  }
+
+
+  @media only screen and (max-width: 400px) {
+    
+    h1 {
+       
+        font-size: 3rem;
+        -webkit-text-stroke:1.5px white;
+    }
+
+    h2 {
+        font-size: 2rem;
+      
+    }
+
+    
+    .homeLogo {
+                
+        height: 160px;
+      
+      }
+    
+
+
+      .photo {
+      
+        margin-top: 10%;
+       
+     
+    
+     
+    }
+
+    .content {
+       
+        padding-top: 70%;
+       
+
+   }
 
   }

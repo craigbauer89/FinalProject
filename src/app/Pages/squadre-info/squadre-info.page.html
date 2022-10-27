@@ -16,12 +16,12 @@
                   
                 <mat-card-title-group>
                   <mat-card-title>{{item.nome}}</mat-card-title>
-                  <mat-card-subtitle>Website: {{item.sito}}</mat-card-subtitle>
-                  <mat-card-subtitle>Allenatore: {{item.allenatore}}</mat-card-subtitle>
+                  <mat-card-subtitle><mat-icon> mail_outline</mat-icon> {{item.sito}}</mat-card-subtitle>
+                  <mat-card-subtitle><mat-icon> person_outline</mat-icon> {{item.allenatore}}</mat-card-subtitle>
                   
                   <img mat-card-sm-image src="{{getPath(item.nome)}}">
                 </mat-card-title-group>
-                <mat-card-subtitle>Indirizzo: {{item.indirizzo}}</mat-card-subtitle>
+                <mat-card-subtitle><mat-icon> location_on</mat-icon>{{item.indirizzo}}</mat-card-subtitle>
                   <mat-card-content>
               
                  
@@ -99,12 +99,12 @@
                   <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['longitude'].dirty && SquadreRegisterFormGroup.hasError('required', 'longitude')">*Il indirizzo e obbligatoria!</span>
                 </mat-form-field>
              
-                  <!-- <div class="buttons"> -->
+                  <div class="buttons">
                   <button mat-button  [disabled]="!SquadreRegisterFormGroup.valid" type="submit">Submit</button>
                
                   <button mat-button class="enter" (click)="close()">Close</button>
                 </div>
-                <!-- </div> -->
+                </div>
                 <div class="alert alert-danger" role="alert" *ngIf="error">
                   {{error}}
                 </div>
