@@ -22,6 +22,9 @@ export class SquadraServiceService {
   // signclient(obj: Squadre) {
   //   return this.http.post(this.Server + '/squadre', obj);
   // }
+  public findById(id: number): Observable<Squadre[]> {
+    return this.http.get<Squadre[]>(this.squadreUrl + '/' + id);
+  }
 
 
   public findAll(): Observable<Squadre[]> {

@@ -25,6 +25,18 @@ export class PartitePage implements OnInit {
   modifybox = false;
   error = undefined;
 
+  partitaData:any ={
+    id: '',
+    date: '',
+    squadra1: '',
+    squadra2: '',
+    puntisquadra1: '',
+    puntisquadra2: '',
+    meteSquadra1: '',
+    meteSquadra2: '',
+
+  }
+
   hideForResponsive = false;
   hideForResponsivePhone = false;
 //   squadra:any = {
@@ -140,6 +152,11 @@ displayedColumns: string[] = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','
   modifyPartita(id:number) {
    this.modifybox = true;
    this.currentId = id;
+
+   this.partiteService.findById(this.currentId).subscribe(data => 
+    this.partitaData = data
+    );
+
 
   }
 

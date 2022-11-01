@@ -19,7 +19,7 @@ meteSubiti: number;
 puntiSubiti: number;
 puntiFatti: number;
 differenza: number;
-color: Jersey;
+jersey: Jersey;
 
 
 }

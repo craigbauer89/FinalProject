@@ -2,8 +2,10 @@ import { BreakpointObserver,Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Jersey } from 'src/app/Interfaces/jersey';
 import { Squadre } from 'src/app/Interfaces/squadre';
 import { AuthService } from 'src/app/Services/auth.service';
+import { JerseyService } from 'src/app/Services/jersey.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 
 @Component({
@@ -27,6 +29,38 @@ export class SquadreInfoPage implements OnInit {
   tableSize: number = 6;
   tableSizes: any = [3, 6, 9, 12];
   hideForResponsive = false;
+  jersey: Jersey[] = [];
+
+  squadraData:any ={
+    id: '',
+nome: '',
+allenatore: '',
+sito: '',
+indirizzo: '',
+latitude: '',
+longitude: '',
+punti: '',
+vittorie: '',
+pareggi: '',
+sconfitte: '',
+giocate: '',
+meteFatti:'',
+meteSubiti: '',
+puntiSubiti: '',
+puntiFatti: '',
+differenza: '',
+jersey: '',
+  }
+
+  client:any = {
+    ragioneSociale: '',
+    telefono: '',
+    emailAziendale: '',
+    nomeContatto: '',
+    
+};
+
+
 
 cat1 = "https://www.w3schools.com";
 
@@ -37,6 +71,7 @@ cat1 = "https://www.w3schools.com";
     allenatore: ['', Validators.required],
     sito: ['', Validators.required],
     indirizzo: ['', Validators.required],
+    jersey: ['', Validators.required],
     latitude: ['', Validators.required],
     longitude: ['', Validators.required],
     
@@ -44,13 +79,19 @@ cat1 = "https://www.w3schools.com";
   
     });
 
-  constructor(public sanitizer:DomSanitizer,private authService: AuthService,private squadraServiceService: SquadraServiceService, private _form: FormBuilder,private responsive: BreakpointObserver) { }
+  constructor(public sanitizer:DomSanitizer,private authService: AuthService,private squadraServiceService: SquadraServiceService, private _form: FormBuilder,private responsive: BreakpointObserver,private jerseyService: JerseyService) { }
 
   ngOnInit(): void {
 
 
     this.squadraServiceService.findAll().subscribe(data => {
       this.squadre = data;
+
+      this.jerseyService.findAll().subscribe(data => {
+        this.jersey = data;
+       
+  
+      });
 
   });
 
@@ -99,6 +140,9 @@ cancella(id:number) {
 
 cancellaSquadra() {
 
+  
+  
+
 this.squadraServiceService.cancellaSquadraa(this.currentId)
 .subscribe(data => console.log(data));
 this.areYouSure = false;
@@ -118,11 +162,23 @@ modifySquadra(id:number) {
   this.modifybox = true;
   this.currentId = id;
 
+  this.squadraServiceService.findById(this.currentId).subscribe(data => 
+    this.squadraData = data
+    );
+
+ 
  }
 
  modify() {
 
-  this.squadraServiceService.modifySquadra(this.currentId, this.form.value)
+  this.squadraData.nome = this.form.value.nome;
+  this.squadraData.allenatore = this.form.value.allenatore;
+  this.squadraData.sito = this.form.value.sito;
+  this.squadraData.jersey = this.form.value.jersey;
+  this.squadraData.latitude = this.form.value.latitude;
+  this.squadraData.longitude = this.form.value.longitude;
+
+  this.squadraServiceService.modifySquadra(this.currentId, this.squadraData)
     .subscribe(data => console.log(data));
 
     window.alert("Item Modifyed")

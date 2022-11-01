@@ -26,6 +26,9 @@ export class PartiteService {
   //   return this.http.post(this.Server + '/squadre', obj);
   // }
 
+  public findById(id: number): Observable<Partite[]> {
+    return this.http.get<Partite[]>(this.partiteUrl + '/' + id);
+  }
 
   public findAll(): Observable<Partite[]> {
     return this.http.get<Partite[]>(this.partiteUrl);
