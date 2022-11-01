@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Squadre } from 'src/app/Interfaces/squadre';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import { Jersey } from 'src/app/Interfaces/jersey';
+import { JerseyService } from 'src/app/Services/jersey.service';
 
 @Component({
   selector: 'app-form-register-squadre',
@@ -22,6 +24,9 @@ export class FormRegisterSquadreComponent implements OnInit {
   disabled = false;
   error = undefined;
   hideForResponsive = false;
+  jersey: Jersey[] = [];
+  squadre: Squadre[] = [];
+  dataSource = this.jersey ;
   
 
   SquadreRegisterFormGroup = this._form.group({
@@ -29,6 +34,7 @@ export class FormRegisterSquadreComponent implements OnInit {
     allenatore: ['', Validators.required],
     sito: ['', Validators.required],
     indirizzo: ['', Validators.required],
+    jersey: ['', Validators.required],
     latitude: ['', Validators.required],
     longitude: ['', Validators.required],
     // location: ['', Validators.required],
@@ -37,12 +43,18 @@ export class FormRegisterSquadreComponent implements OnInit {
   });
 
   constructor(private route: ActivatedRoute, private SquadreServiceservice: SquadraServiceService,private router: Router,
-    private _form: FormBuilder, private responsive: BreakpointObserver) { 
+    private _form: FormBuilder, private responsive: BreakpointObserver, private jerseyService: JerseyService) { 
 
       // this.squadra = new Squadre();
     }
 
   ngOnInit(): void {
+
+    this.jerseyService.findAll().subscribe(data => {
+      this.jersey = data;
+      this.dataSource = this.jersey ;
+
+    });
 
     this.responsive.observe([
       Breakpoints.TabletPortrait,
@@ -74,7 +86,7 @@ export class FormRegisterSquadreComponent implements OnInit {
       },
       err  => {
         console.log(err.error);
-        window.alert("Errore");
+        window.alert("Errore champ");
         this.error = err.error;
       }
     )

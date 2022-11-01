@@ -6,6 +6,7 @@ import { FormRegisterPartiteComponent } from './Components/form-register-partite
 import { FormRegisterSquadreComponent } from './Components/form-register-squadre/form-register-squadre.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { HomePage } from './Pages/home/home.page';
+import { LandingPage } from './Pages/landing/landing.page';
 import { LoginPage } from './Pages/login/login.page';
 import { PartitePage } from './Pages/partite/partite.page';
 import { RegisterPage } from './Pages/register/register.page';
@@ -15,6 +16,10 @@ import { SquadrePage } from './Pages/squadre/squadre.page';
 
 const routes: Routes = [
 
+  {
+    path: 'landing',
+    component: LandingPage,
+  },
   {
     path: 'home',
     component: HomePage,

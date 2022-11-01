@@ -10,6 +10,7 @@ import { SquadraServiceService } from 'src/app/Services/squadra-service.service'
 
 
 @Component({
+  selector: 'app-partite',
   templateUrl: './partite.page.html',
   styleUrls: ['./partite.page.scss']
 })

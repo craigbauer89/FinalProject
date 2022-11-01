@@ -1,3 +1,5 @@
+import { Jersey } from "./jersey";
+
 export interface Squadre {
 
 id:any;
@@ -17,5 +19,7 @@ meteSubiti: number;
 puntiSubiti: number;
 puntiFatti: number;
 differenza: number;
+color: Jersey;
+
 
 }

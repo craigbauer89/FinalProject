@@ -34,6 +34,7 @@ import { SquadreInfoPage } from './Pages/squadre-info/squadre-info.page';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {MatIconModule} from '@angular/material/icon';
+import { LandingPage } from './Pages/landing/landing.page';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {MatIconModule} from '@angular/material/icon';
     RegisterPage,
     HomePage,
     SquadreInfoPage,
+    LandingPage,
     // FilterPipe,
    
   ],

@@ -1,0 +1,276 @@
+p{
+    padding-top: 5%;
+ }
+
+.flex {
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+
+
+.table {
+    margin-left: 2%;
+    height: 1000px;
+    width: 25%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+
+}
+
+.middle {
+    margin-left: 2%;
+    height: 700px;
+    width: 34%;
+  
+   display:flex;
+   flex-direction: column;
+   display: inline-block;
+    
+}
+
+.results {
+    margin-bottom: 2%;
+  overflow: hidden;
+    height: 380px;
+    width: 100%;
+//     background-color: rgb(238, 239, 240);
+//    border-radius: 5px;
+    
+}
+
+.updates {
+    margin-top: 3%;
+    height: 600px;
+    width: 100%;
+
+   display: inline-block;
+   background-color: rgb(238, 239, 240);
+    border-radius: 5px;
+}
+
+.news {
+    margin-left: 2%;
+    height: 1000px;
+    width: 32%;
+    background-color: rgb(238, 239, 240);
+    border-radius: 5px;
+}
+
+.video {
+    margin: 3%;
+    height: 300px;
+    width: 95%;
+    background-color: rgb(238, 239, 240);
+    
+}
+iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.player {
+    margin: 3%;
+    height: 240px;
+    width: 90%;
+   
+    
+}
+
+.text {
+    margin: 3%;
+    height: 30px;
+    width: 90%;
+ 
+    
+}
+
+.sponsors {
+    margin: 3%;
+
+    height: 200px;
+    width: 95%;
+    background-color: rgb(238, 239, 240);
+    border-radius: 5px;
+    display:flex;
+    flex-direction: row;
+}
+
+.sponsor {
+    margin: 3%;
+background-color: white;
+    height: 100px;
+    width: 25%;
+    border: 1px solid black;
+    
+}
+
+.sponsor img {
+    width: 50%;
+    height: 90%;
+    margin: 0 25%;
+}
+
+h2 {
+    
+   width:20%;
+    margin:0 40%;
+    font-size: 3rem;
+    color: white;
+}
+
+h1 {
+
+    margin: 2%;
+    }
+
+h3 {
+
+margin: 2%;
+}
+
+h5 {
+    margin: 2%;
+}
+
+p {
+    color: white;
+}
+
+body {
+    background-image: url(../../../assets/baseball-field-g9820c46dc_1920.jpg);
+    background-repeat: repeat;
+    // filter: grayscale(100%);
+    background-position: 1% 10%;
+    height: 1400px;
+   
+}
+
+table {
+    background-color:  rgba(205, 211, 216, 0.95);
+    margin: auto;
+    opacity: 0.9;
+    margin-top: 7.5%;
+    text-align: center;
+    
+
+}
+
+.left{
+   
+    text-align: left;
+}
+
+.center{
+   
+    text-align: center;
+  }
+
+p {
+    color: transparent;
+}
+
+.resultsHeader {
+    color: white;
+    margin-left: 3%;
+}
+
+
+th {
+    background-color:rgb(136, 138, 142);
+    width: 80px;
+    font-size: .8rem;
+    color: white;
+
+}
+
+td{
+    text-align: center;
+    color: black;
+}
+
+
+
+.mat-row:nth-child(2n)  {
+ 
+     background-color: white;
+}
+
+// .mat-row:hover {
+//     background-color: rgb(64, 62, 62);
+//    td {color: white;}
+
+// }
+
+
+img {
+    width: 25px;
+    height: 20px;
+    background-color: rgba(0,0,0,0);
+   
+  }
+
+
+  @media only screen and (max-width:1000px) {
+    
+.table {
+
+    display: none;
+}
+
+.middle {
+    width: 40%;
+    margin-left: 8%;
+}
+
+.news {
+    width: 40%;
+    
+}
+
+.sponsors {
+    height: 150px;
+}
+
+  }
+
+
+  @media only screen and (max-width:700px) {
+    
+    p {
+        height: 100px;
+    }
+
+.results {
+    display: none;
+}
+
+    .flex {
+    
+        flex-direction: column;
+    }
+    
+    .middle {
+        width: 95%;
+        margin-left: 3%;
+        margin-bottom: 1%;
+    }
+    
+    .news {
+        margin-top: 1%;
+        width: 95%;
+        margin-left: 3%;
+    }
+    
+    .sponsors {
+        height: 550px;
+        flex-direction: column;
+    }
+
+    .sponsor {
+        width: 50%;
+        margin:  2.5% 25%;
+    }
+    
+      }

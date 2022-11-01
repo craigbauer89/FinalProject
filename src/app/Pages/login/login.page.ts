@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
 
 
       else {
-        this.router.navigate(['squadre']);
+        this.router.navigate(['landing']);
       }
           
         },

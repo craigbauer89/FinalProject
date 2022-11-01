@@ -18,6 +18,19 @@
         <input matInput type="text" formControlName="sito" class="form-control" placeholder="Sito" required>
         <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['sito'].dirty && SquadreRegisterFormGroup.hasError('required', 'sito')">*Il sito e obbligatoria!</span>
       </mat-form-field>
+     
+  <mat-form-field appearance="fill">
+    <mat-label  style="color: white">Jersey</mat-label>
+    <!-- <mat-select [dataSource]="dataSource"> -->
+        <mat-select formControlName="jersey" class="form-control">
+            <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['jersey'].dirty && SquadreRegisterFormGroup.hasError('required', 'jersey')">*Il Jersey e obbligatorio!</span>
+  <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
+    <mat-option *ngFor="let p of jersey" [value]="p">
+    {{ p.color }}
+  </mat-option>
+</mat-select>
+</mat-form-field>
+
           <mat-form-field  appearance="fill">
         <mat-label style="color: white">Indirizzo</mat-label>
         <input matInput type="text" formControlName="indirizzo" class="form-control" placeholder="Indirizzo" required>

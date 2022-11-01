@@ -12,6 +12,7 @@
     <mat-toolbar-row class="desktop1">
             <li><a  href="#" routerLink="registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])">Add Squadre</a></li>
             <li><a  href="#" routerLink="registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])">Add Partite</a></li>
+            <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="landing">Home</a></li>
             <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="partite">Calendario</a></li>
             <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadre">Classifica</a></li>
             <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadreinfo">Squadre</a></li>
@@ -30,7 +31,8 @@
     <mat-toolbar-row class="desktop2">
         <li><a  href="#" routerLink="registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"(click)="closeMenu()">Add Squadre</a></li>
         <li><a  href="#" routerLink="registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"(click)="closeMenu()">Add Partite</a></li>
-        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="partite"(click)="closeMenu()">Calendario</a></li>
+        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="landing">Home</a></li>
+         <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="partite"(click)="closeMenu()">Calendario</a></li>
         <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadre"(click)="closeMenu()">Classifica</a></li>
         <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadreinfo"(click)="closeMenu()">Squadre</a></li>
         <li *ngIf="!isLoggedIn() "><a   href="#" routerLink="login" (click)="closeMenu()">Login</a></li>
