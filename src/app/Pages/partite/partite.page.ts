@@ -165,6 +165,8 @@ displayedColumns: string[] = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','
     this.partiteService.modifyPartita(this.currentId, this.form.value)
     .subscribe(data => console.log(data));
 
+    // this.ngOnInit();
+
     let squadra1:Squadre;
     let squadra2:Squadre;
     let modifyedPartita:Partite;

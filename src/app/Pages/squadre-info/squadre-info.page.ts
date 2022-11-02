@@ -7,6 +7,7 @@ import { Squadre } from 'src/app/Interfaces/squadre';
 import { AuthService } from 'src/app/Services/auth.service';
 import { JerseyService } from 'src/app/Services/jersey.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
+import { ErrorHandler } from '@angular/core';
 
 @Component({
   templateUrl: './squadre-info.page.html',
@@ -136,18 +137,29 @@ cancella(id:number) {
   this.topFunction();
   this.currentId = id;
   this.areYouSure = true;
+
+  this.squadraServiceService.findById(this.currentId).subscribe(data => 
+    this.squadraData = data
+    );
 }
 
 cancellaSquadra() {
 
-  
-  
 
-this.squadraServiceService.cancellaSquadraa(this.currentId)
+
+if (this.squadraData.giocate > 0) {
+  
+  window.alert("Prima Rimouve tuttle la partita di questa Squadra");
+}
+else  {
+  this.squadraServiceService.cancellaSquadraa(this.currentId)
 .subscribe(data => console.log(data));
+  window.alert("Squadre Cancellato");
+}
+
 this.areYouSure = false;
-window.alert("Item Removed")
 this.ngOnInit();
+
 }
 
 close() {
@@ -181,7 +193,7 @@ modifySquadra(id:number) {
   this.squadraServiceService.modifySquadra(this.currentId, this.squadraData)
     .subscribe(data => console.log(data));
 
-    window.alert("Item Modifyed")
+    window.alert("Squadra Modificato")
     this.modifybox = false;
     this.ngOnInit();
 }
