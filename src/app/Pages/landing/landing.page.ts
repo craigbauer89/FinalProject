@@ -28,7 +28,7 @@ displayedColumns: string[] = [ 'img', 'nome', 'punti', 'differenza' ];
 
 
   // displayedColumns2: string[] = ['date', 'img1', 'squadra1.nome', 'puntisquadra1', 'puntisquadra2', 'squadra2.nome', 'img2' ];
-  displayedColumns2: string[] = ['img1', 'puntisquadra1', 'puntisquadra2', 'img2' ];
+  displayedColumns2: string[] = ['img1', 'puntisquadra1', 'dash',  'puntisquadra2', 'img2' ];
   dataSource2: Partite[] = [];
   
 

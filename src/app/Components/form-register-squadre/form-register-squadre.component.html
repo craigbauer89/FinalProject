@@ -3,6 +3,7 @@
   
     <form [formGroup]="SquadreRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="onSubmit()">
       <div>
+        <h2>Inserisci Squadra</h2>
       <mat-form-field appearance="fill">
         <mat-label style="color: white">Nome</mat-label>
         <input matInput type="text" formControlName="nome" class="form-control" placeholder=" Nome" required>

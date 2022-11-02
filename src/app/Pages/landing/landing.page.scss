@@ -1,3 +1,4 @@
+
 p{
     padding-top: 5%;
  }
@@ -8,20 +9,43 @@ p{
     flex-direction: row;
 }
 
-
+.boxy {
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
+    height: 30px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    text-align: center;
+    padding-top: 15%;
+    border-radius: 5px;
+}
 
 .table {
-    margin-left: 2%;
-    height: 1300px;
+    margin-left: 1%;
+    height: 1400px;
     width: 25%;
-    background-color: rgb(255, 255, 255);
+    
+
+}
+
+
+
+.tablepart2 {
+    text-align: center;
+    margin-top: 5%;
+    background-color: rgb(238, 239, 240);
     border-radius: 5px;
+    height: 800px;
+ 
 
 }
 
 .middle {
-    margin-left: 2%;
-    height: 700px;
+    text-align: center;
+    margin-left: 1%;
+    height: 900px;
     width: 34%;
   
    display:flex;
@@ -31,18 +55,19 @@ p{
 }
 
 .results {
-    margin-bottom: 2%;
+    margin-bottom: 1%;
   overflow: hidden;
-    height: 380px;
+    height: 500px;
     width: 100%;
-//     background-color: rgb(238, 239, 240);
-//    border-radius: 5px;
+    background-color: rgb(238, 239, 240);
+   border-radius: 5px;
+   
     
 }
 
 .updates {
-    margin-top: 3%;
-    height: 900px;
+    margin-top: 1%;
+    height: 850px;
     width: 100%;
 
    display: inline-block;
@@ -51,9 +76,9 @@ p{
 }
 
 .news {
-    margin-left: 2%;
+    margin-left: 1%;
     height: 1300px;
-    width: 32%;
+    width: 36%;
     background-color: rgb(238, 239, 240);
     border-radius: 5px;
 }
@@ -87,10 +112,10 @@ iframe {
 }
 
 .sponsors {
-    margin: 3%;
+   
 
     height: 200px;
-    width: 95%;
+    width: 100%;
     background-color: rgb(238, 239, 240);
     border-radius: 5px;
     display:flex;
@@ -120,10 +145,17 @@ h2 {
     color: white;
 }
 
-h1 {
 
-    margin: 2%;
+ h1 {
+
+    margin: 1%;
     }
+.results h1 {
+
+    height: 5px;
+    }
+
+
 
 h3 {
 
@@ -145,6 +177,7 @@ body {
     background-position: 1% 10%;
     height: 1700px;
    
+   
 }
 
 table {
@@ -153,7 +186,8 @@ table {
     opacity: 0.9;
     margin-top: 7.5%;
     text-align: center;
-    
+    width: 100%;
+    height: 100%;
 
 }
 
@@ -194,7 +228,18 @@ td{
 
 .mat-row:nth-child(2n)  {
  
-     background-color: white;
+    //  background-color: white;
+}
+
+.results td{
+    font-size: 1.5rem;
+    height: 100px;
+}
+
+.results td img {
+ 
+    height: 50px;
+    width: 60px;
 }
 
 // .mat-row:hover {
@@ -255,16 +300,18 @@ table img {
 }
 
 .middle {
-    width: 40%;
-    margin-left: 8%;
+    width: 45%;
+    margin-left: 5%;
 }
 
 .news {
-    width: 40%;
+    width: 45%;
+   
     
 }
 
 .sponsors {
+    margin-top: 10%;
     height: 150px;
 }
 
@@ -287,15 +334,15 @@ table img {
     }
     
     .middle {
-        width: 95%;
-        margin-left: 3%;
+        width: 80%;
+        margin-left: 10%;
         margin-bottom: 1%;
     }
     
     .news {
         margin-top: 1%;
-        width: 95%;
-        margin-left: 3%;
+        width: 80%;
+        margin-left: 10%;
     }
     
     .sponsors {
@@ -306,6 +353,11 @@ table img {
     .sponsor {
         width: 50%;
         margin:  2.5% 25%;
+    }
+
+    body {
+    height: 2500px;
+
     }
     
       }

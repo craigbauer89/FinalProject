@@ -1,42 +1,45 @@
-<body><p>landing works!</p>
+<body>
+    <div class="body2"><p>landing works!</p>
 <div class="flex">
     <div class="table">
 
-
+      <div class="tablepart">
         <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="punti" matSortActive="differenza" matSortDirection="desc">  <!--- -->
 
     
                   <ng-container matColumnDef="img">
-                    <th style="background-color: rgb(255, 255, 255); color:rgb(0,0,0)" mat-header-cell *matHeaderCellDef > Pos. </th>
-                    <td style="background-color: rgb(255, 255, 255);" class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.jersey.color)"> </td>
+                    <th style=" width: 10px;" mat-header-cell *matHeaderCellDef > Pos. </th>
+                    <td  class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.jersey.color)"> </td>
                     
                   </ng-container>
                
 
             <!-- Position Column -->
             <ng-container matColumnDef="nome">
-              <th style="background-color: rgb(255, 255, 255); color:rgb(0,0,0)"mat-header-cell *matHeaderCellDef> Club </th>
-              <td style="background-color: rgb(255, 255, 255);"class="left" mat-cell *matCellDef="let element"> {{element.nome}} </td>
+              <th style="width: 70px;"mat-header-cell *matHeaderCellDef> Club </th>
+              <td class="left" mat-cell *matCellDef="let element"> {{element.nome}} </td>
             </ng-container>
           
          
 
             <ng-container matColumnDef="punti">
-                <th style="background-color: rgb(255, 255, 255); color:rgb(0,0,0)"mat-header-cell *matHeaderCellDef > Punti </th>
-                <td style="background-color: rgb(255, 255, 255);"mat-cell *matCellDef="let element"> {{element.punti}} </td>
+                <th style=" width: 10px;"mat-header-cell *matHeaderCellDef > Punti </th>
+                <td mat-cell *matCellDef="let element"> {{element.punti}} </td>
               </ng-container>
 
               <ng-container matColumnDef="differenza">
-                <th style="background-color: rgb(255, 255, 255); color:rgb(0,0,0)"mat-header-cell *matHeaderCellDef > Differenza </th>
-                <td style="background-color: rgb(255, 255, 255);"mat-cell *matCellDef="let element"> {{element.differenza}} </td>
+                <th style="width: 10px;"mat-header-cell *matHeaderCellDef > Differenza </th>
+                <td class="right"mat-cell *matCellDef="let element"> {{element.differenza}} </td>
               </ng-container>
 
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
+        </div>
+          <div class="tablepart2">
           <br>
-          <h1>Club News</h1>
+          <h1>Condivisione Social</h1>
           <aside class="photo">
             <img src="../../../assets/rugby-g1d8010854_1920.jpg">
           </aside>
@@ -48,13 +51,13 @@
           </aside>
           <h3>Seregno Rugby</h3>
           <h4>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam expedita quasi voluptate. Omnis accusantium quam quos dolore recusandae velit itaque sit odio quaerat placeat quis maiores neque expedita, atque quibusdam.</h4>
-          
+        </div>
 
     </div>
     <div class="middle">
         <aside class="results">
             
-         
+         <h1>Ultime Partite</h1>
             <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
 
                 <!-- <ng-container  matColumnDef="date">
@@ -63,8 +66,8 @@
                 </ng-container> -->
 
                 <ng-container matColumnDef="img1">
-                  <th mat-header-cell *matHeaderCellDef > 26.10.2022 </th>
-                  <td class="center"mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
+                  <th style="background-color: rgb(255, 255, 255); color:rgb(0, 0, 0); height: 1px;" mat-header-cell *matHeaderCellDef > 26.10.2022 </th>
+                  <td style="background-color: rgb(255, 255, 255);" class="center"mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
                   
                 </ng-container>
 
@@ -76,16 +79,19 @@
         
     
           <ng-container matColumnDef="puntisquadra1">
-            <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
+            <th style="background-color: rgb(255, 255, 255); height: 1px;"mat-header-cell *matHeaderCellDef> </th>
+            <td style="background-color: rgb(255, 255, 255);"mat-cell *matCellDef="let element"> <div class="boxy">{{element.puntisquadra1}}</div> </td>
           </ng-container>
 
-
+          <ng-container matColumnDef="dash">
+            <th style="background-color: rgb(255, 255, 255); width: 10px; height: 1px;"mat-header-cell *matHeaderCellDef>  </th>
+            <td style="background-color: rgb(255, 255, 255);"mat-cell *matCellDef="let element"> -</td>
+          </ng-container>
         
      
           <ng-container matColumnDef="puntisquadra2">
-            <th mat-header-cell *matHeaderCellDef>  </th>
-            <td mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
+            <th style="background-color: rgb(255, 255, 255); height: 1px;"mat-header-cell *matHeaderCellDef>  </th>
+            <td style="background-color: rgb(255, 255, 255); "mat-cell *matCellDef="let element" > <div class="boxy">{{element.puntisquadra2}}</div>  </td>
           </ng-container>
 
        
@@ -96,8 +102,8 @@
           </ng-container> -->
 
           <ng-container matColumnDef="img2">
-            <th mat-header-cell *matHeaderCellDef >  </th>
-            <td mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra2.jersey.color)"> </td>
+            <th style="background-color: rgb(255, 255, 255);"mat-header-cell *matHeaderCellDef >  </th>
+            <td style="background-color: rgb(255, 255, 255);"mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra2.jersey.color)"> </td>
             
           </ng-container>
 
@@ -113,22 +119,22 @@
 
         </aside>
         <aside class="updates">
-            <h1>Upcoming Events</h1>
+            <h1>Ultime Notizie</h1>
             <aside class="photo">
                 <img src="../../../assets/rugby-ga49ab06f6_1920.jpg">
             </aside>
             <h3>04.11.2022</h3>
-            <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam expedita quasi voluptate. Omnis accusantium quam quos dolore recusandae velit itaque sit odio quaerat placeat quis maiores neque expedita, atque quibusdam.</h5>
+            <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam expedita quasi voluptate. Omnis accusantium quam quos dolore recusandae velit itaque sit odio.</h5>
             <aside class="photo">
                 <img src="../../../assets/rugby-gedab47da2_1920.jpg">
             </aside>
             <h3>07.11.2022</h3>
-            <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam expedita quasi voluptate. Omnis accusantium quam quos dolore recusandae velit itaque sit odio quaerat placeat quis maiores neque expedita, atque quibusdam.</h5>
+            <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam expedita quasi voluptate. Omnis accusantium quam quos dolore recusandae velit itaque sit odio.</h5>
             <aside class="photo">
                 <img src="../../../assets//team-g50249347d_1920.jpg">
             </aside>
             <h3>07.11.2022</h3>
-            <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam expedita quasi voluptate. Omnis accusantium quam quos dolore recusandae velit itaque sit odio quaerat placeat quis maiores neque expedita, atque quibusdam.</h5>
+            <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam expedita quasi voluptate. Omnis accusantium quam quos dolore recusandae velit itaque sit odio.</h5>
          
         </aside>
     </div>
@@ -193,5 +199,6 @@ src="https://www.youtube.com/embed/J_QL9dTLUMM">
         </aside>
    
     </div>
+</div>
 </div>
 </body>

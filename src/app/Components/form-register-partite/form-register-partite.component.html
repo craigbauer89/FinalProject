@@ -3,6 +3,7 @@
     <form [formGroup]="PartiteRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="onSubmit()">
         
         <div>
+          <h2>Inserisci Partita</h2>
             <mat-form-field appearance="fill">
                 <mat-label  style="color: white">Date</mat-label>
                 <input matInput type="date" formControlName="date" class="form-control" placeholder=" Date" required>

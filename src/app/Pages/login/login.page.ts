@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
 
           const role = resp.user.roles[0].id;
           if (role === 1) {
-            this.router.navigate(['registerpartite']);
+            this.router.navigate(['landing']);
           }
 
           // this.token = resp;
