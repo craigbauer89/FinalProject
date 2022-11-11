@@ -45,13 +45,14 @@ export class SquadrePage implements OnInit {
 
   // squadre: Squadre[];
   squadre: Squadre[] = [];
+  gironeSquadre: Squadre[] = [];
 //   squadra:any = {
 //     nome: '',
 
     // squadra = JSON.stringify(this.squadre);
 // };
 displayedColumns: string[] = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'meteFatti'!, 'meteSubiti','puntiSubiti','puntiFatti','differenza' ];
-  dataSource = new MatTableDataSource(this.squadre) ;
+  dataSource = new MatTableDataSource(this.gironeSquadre) ;
 
 
   
@@ -64,11 +65,19 @@ displayedColumns: string[] = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte'
 
     this.squadraServiceService.findAll().subscribe(data => {
       this.squadre = data;
+
+      this.squadre.forEach(element => {
+        if(element.girone == 1) {
+  
+          this.gironeSquadre.push(element)
+  
+        }
+      });
       // console.log(JSON.stringify(data));
       // console.log(this.squadre[1]);
       // for(let cat in this.squadre) {
         // console.log(this.squadre);
-        this.dataSource = new MatTableDataSource(this.squadre) ;
+        this.dataSource = new MatTableDataSource(this.gironeSquadre) ;
         this.dataSource.sort = this.sort;
         console.log(this.dataSource);
       // }
@@ -120,6 +129,34 @@ displayedColumns: string[] = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte'
 
   // }
  
+
+  girone(girone:number) {
+    
+    this.squadraServiceService.findAll().subscribe(data => {
+      this.squadre = data;
+
+      this.gironeSquadre.splice(0,this.gironeSquadre.length);
+
+      this.squadre.forEach(element => {
+        if(element.girone == girone) {
+  
+          this.gironeSquadre.push(element)
+  
+        }
+      });
+      // console.log(JSON.stringify(data));
+      // console.log(this.squadre[1]);
+      // for(let cat in this.squadre) {
+        // console.log(this.squadre);
+        this.dataSource = new MatTableDataSource(this.gironeSquadre) ;
+        this.dataSource.sort = this.sort;
+        console.log(this.dataSource);
+      // }
+    });
+
+   
+
+  }
 
 }
 

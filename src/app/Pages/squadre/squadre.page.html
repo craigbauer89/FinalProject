@@ -33,6 +33,12 @@
                   {{error}}
               </section> -->
           </div>
+          <div class="tables">
+            <button  (click)="girone(1)">Girone 1</button>
+            <button (click)="girone(2)">Girone 2</button>
+            <button (click)="girone(3)">Girone 3</button>
+            <button (click)="girone(4)">Girone 4</button>
+          </div>
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="punti" matSortActive="differenza" matSortDirection="desc">  <!--- -->
 
             <!--- Note that these columns can be defined in any order.

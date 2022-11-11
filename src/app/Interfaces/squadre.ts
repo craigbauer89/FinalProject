@@ -20,6 +20,7 @@ puntiSubiti: number;
 puntiFatti: number;
 differenza: number;
 jersey: Jersey;
+girone: number;
 
 
 }

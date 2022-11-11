@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Partite } from 'src/app/Interfaces/partite';
 import { Squadre } from 'src/app/Interfaces/squadre';
@@ -20,7 +21,9 @@ export class PartitePage implements OnInit {
   // squadre: Squadre[];
   currentId = 0;
   partite: Partite[] = [];
-  
+  dataPartite: Partite[] = [];
+  convert = new Date(2022, 9, 10).toISOString();
+  newDate = this.convert.slice(0,10);
   areYouSure = false;
   modifybox = false;
   error = undefined;
@@ -45,7 +48,7 @@ export class PartitePage implements OnInit {
     // squadra = JSON.stringify(this.squadre);
 // };
 displayedColumns: string[] = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
-  dataSource: Partite[] = [];
+  dataSource = new MatTableDataSource(this.dataPartite) ;
   squadre: Squadre[] = [];
   // dataSource2 = this.squadre ;
   // dataSource2 = this.squadre ;
@@ -84,14 +87,34 @@ displayedColumns: string[] = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','
 
       // }
     });
+
+    
    
     this.partiteService.findAll().subscribe(data => {
       this.partite = data;
+
+      this.dataPartite.splice(0,this.dataPartite.length);
+
+      this.partite.forEach(element => {
+
+        let date1 =  new Date(element.date).toISOString();
+        let newDate1 = date1.slice(0,10);
+        if(newDate1 ==  this.newDate) {
+  
+          this.dataPartite.push(element)
+          console.log("yes sir")
+  
+        }
+        // else {
+        //   console.log(newDate1)
+        //   console.log(this.newDate)
+        // }
+      });
       // console.log(JSON.stringify(data));
       // console.log(this.squadre[1]);
       // for(let cat in this.squadre) {
         // console.log(this.squadre);
-        this.dataSource = this.partite ;
+        this.dataSource = new MatTableDataSource(this.dataPartite) ;
         // console.log(this.dataSource);
         // console.log(this.dataSource[0]);
         // console.log(this.dataSource[0].squadra1.nome);
@@ -276,7 +299,7 @@ displayedColumns: string[] = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','
     
     window.alert("Partita Modifichato")
     this.partiteService.findAll().subscribe(data => {
-      this.dataSource = data;
+      this.partitaData = data;
 
     });
 
@@ -409,6 +432,53 @@ close() {
 getPath(name: String): String {
   return "../../../assets/" + name + ".jpg";
   
+  }
+
+
+  girone(date: string) {
+
+    let convert = new Date(date).toISOString();
+  let convertedDate = convert.slice(0,10);
+
+
+    
+    this.partiteService.findAll().subscribe(data => {
+      this.partite = data;
+
+      this.dataPartite.splice(0,this.dataPartite.length);
+
+      this.partite.forEach(element => {
+
+        let date1 =  new Date(element.date).toISOString();
+        let newDate1 = date1.slice(0,10);
+        // console.log(newDate1)
+        // console.log(convertedDate)
+        if(newDate1 == convertedDate) {
+  
+          this.dataPartite.push(element)
+          console.log("yes sir")
+  
+        }
+        // else {
+          
+        //   console.log(newDate1)
+        //   console.log(convertedDate)
+        // }
+      });
+      this.dataSource = new MatTableDataSource(this.dataPartite) ;
+ 
+      // console.log(JSON.stringify(data));
+      // console.log(this.squadre[1]);
+      // for(let cat in this.squadre) {
+        // console.log(this.squadre);
+        // this.dataSource = new MatTableDataSource(this.dataPartite) ;
+        // this.dataSource.sort = this.sort;
+        // console.log(this.dataSource);
+      // }
+    });
+
+   
+
   }
 
 }

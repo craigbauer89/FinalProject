@@ -1,10 +1,38 @@
 table {
     position: relative;
     background-color:  rgba(240, 248, 255, 0.95);
-    margin: auto;
-    margin-top: 7.5%;
-    opacity: 0.9;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  
+    // opacity: 0.9;
 
+
+}
+
+.tables {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+margin-top: 100px;
+  display: flex;
+  flex-direction: row;
+  color: grey;
+  background-color: rgb(235, 233, 233);
+  height: 50px;
+}
+
+.tables  button{
+  width: 25%;
+border: none;
+background-color: rgb(235, 233, 233);
+font-size: 1rem;
+color: grey;
+
+}
+
+.tables  button:hover{
+  border-bottom: 5px solid grey;
 
 }
 
@@ -63,7 +91,7 @@ body {
 }
 
 .mat-row:nth-child(2n)  {
-    background-color: darkgray;
+    background-color: rgb(223, 220, 220);
 }
 
 .mat-row:hover {
@@ -152,7 +180,8 @@ img {
   width: 25px;
   height: 20px;
   background-color: rgba(0,0,0,0);
-  
+  border-radius: 200px;
+    border: 1px solid black;
  
 }
 
@@ -162,7 +191,7 @@ img {
 
   table {
    
-    margin-top: 10%;
+   
     width: 80%;
 
 } 

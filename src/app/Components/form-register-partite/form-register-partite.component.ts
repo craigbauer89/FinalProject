@@ -88,47 +88,47 @@ export class FormRegisterPartiteComponent implements OnInit {
     )
 
     let squadra1 = this.form.value.squadra1;  // velate
-    squadra1.puntiFatti += this.form.value.puntisquadra1;  // 10
-    squadra1.puntiSubiti += this.form.value.puntisquadra2; // 20
-    squadra1.meteFatti += this.form.value.meteSquadra1; // 1
-    squadra1.meteSubiti += this.form.value.meteSquadra2; // 2
-    let currentGameSq1Diff= this.form.value.puntisquadra1-this.form.value.puntisquadra2
-    squadra1.differenza += currentGameSq1Diff; // -10
-    squadra1.giocate += 1; // 1
-    if (currentGameSq1Diff > 0) { 
-      squadra1.vittorie += 1; // 0
-      squadra1.punti += 4; // 0
+    squadra1.puntiFatti += this.form.value.puntisquadra1;  // 10 (+10 ) 20
+    squadra1.puntiSubiti += this.form.value.puntisquadra2; // 20 (+10) 30
+    squadra1.meteFatti += this.form.value.meteSquadra1; // 1  (+2 ) 3
+    squadra1.meteSubiti += this.form.value.meteSquadra2; // 2 (+2 ) 4
+    let currentGameSq1Diff= this.form.value.puntisquadra1-this.form.value.puntisquadra2 // 0
+    squadra1.differenza += currentGameSq1Diff; // -10  (+0) -10
+    squadra1.giocate += 1; // 1 (+1) 2
+    if (currentGameSq1Diff > 0) {  // no  no
+      squadra1.vittorie += 1; // (+0) 0
+      squadra1.punti += 4; // (+0) 0 
     }
-    else if(currentGameSq1Diff < 0)  {
-      squadra1.sconfitte += 1;  // 1
+    else if(currentGameSq1Diff < 0)  { 
+      squadra1.sconfitte += 1;  // 1  (+0) 0
       
     }
     else {
-      squadra1.pareggi += 1; // 0
-      squadra1.punti += 2; // 0
+      squadra1.pareggi += 1; // 0  (+1) 1
+      squadra1.punti += 2; // 0 (+2) 2
     }
 
     this.SquadreServiceservice.modifySquadra(squadra1.id, squadra1)
     .subscribe(data => console.log(data));
 
     let squadra2 = this.form.value.squadra2;  // serengo
-    squadra2.puntiFatti += this.form.value.puntisquadra2; // 20
-    squadra2.puntiSubiti += this.form.value.puntisquadra1; // 10
-    squadra2.meteFatti += this.form.value.meteSquadra2; // 2
-    squadra2.meteSubiti += this.form.value.meteSquadra1; //1
-    let currentGameSq2Diff= this.form.value.puntisquadra2-this.form.value.puntisquadra1
-    squadra2.differenza += currentGameSq2Diff; // 10
-    squadra2.giocate += 1; // 1
-    if (currentGameSq2Diff > 0) {
-      squadra2.vittorie += 1;  //1
-      squadra2.punti += 4; // 4
+    squadra2.puntiFatti += this.form.value.puntisquadra2; // 20 (+10 ) 30
+    squadra2.puntiSubiti += this.form.value.puntisquadra1; // 10 (+10) 20
+    squadra2.meteFatti += this.form.value.meteSquadra2; // 2  (+2 ) 4
+    squadra2.meteSubiti += this.form.value.meteSquadra1; //1  (+2 ) 3
+    let currentGameSq2Diff= this.form.value.puntisquadra2-this.form.value.puntisquadra1 // 0
+    squadra2.differenza += currentGameSq2Diff; // 10 (+0) 10
+    squadra2.giocate += 1; // 1 (+1) 2
+    if (currentGameSq2Diff > 0) { // yes  no
+      squadra2.vittorie += 1;  //1   (+0) 1
+      squadra2.punti += 4; // 4 (+0) 4
     }
-    else if(currentGameSq2Diff < 0)  {
-      squadra2.sconfitte += 1; // 0
+    else if(currentGameSq2Diff < 0)  { // no  no
+      squadra2.sconfitte += 1; // 0 (+0) 0
     }
     else {
-      squadra2.pareggi += 1; // 0
-      squadra2.punti += 2; // 0
+      squadra2.pareggi += 1; // 0  (+1) 1
+      squadra2.punti += 2; // 0 (+2) 1
     }
     // console.log(this.form.value.squadra1.puntiFatti)
     // console.log(this.form.value.squadra1.id)

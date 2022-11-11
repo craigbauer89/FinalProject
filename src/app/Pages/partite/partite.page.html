@@ -3,6 +3,12 @@
             <h1>Fixtures/Risultati</h1>
              
           </div>
+          <div class="tables">
+            <button  (click)="girone('2022-10-09')">2022-10-09</button>
+            <button (click)="girone('2022-05-09')">2022-05-09</button>
+            <button (click)="girone('2022-04-09')">2022-04-09</button>
+            <button (click)="girone('2022-03-09')">2022-03-09</button>
+          </div>
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
                   <ng-container  matColumnDef="date">
