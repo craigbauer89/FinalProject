@@ -47,7 +47,7 @@ export class PartitePage implements OnInit {
 
     // squadra = JSON.stringify(this.squadre);
 // };
-displayedColumns: string[] = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
+displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
   dataSource = new MatTableDataSource(this.dataPartite) ;
   squadre: Squadre[] = [];
   // dataSource2 = this.squadre ;
@@ -144,18 +144,18 @@ displayedColumns: string[] = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','
         if (breakpoints[Breakpoints.HandsetPortrait]) {
           this.hideForResponsivePhone = true;
           this.hideForResponsive = true;
-          this.displayedColumns = ['date','img1', 'squadra1.nome', 'puntisquadra1','puntisquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
+          this.displayedColumns = ['img1', 'squadra1.nome', 'puntisquadra1','puntisquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
         }
         
         else if (breakpoints[Breakpoints.HandsetLandscape]) {
           this.hideForResponsivePhone = false;
           this.hideForResponsive = true;
-          this.displayedColumns = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
+          this.displayedColumns = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
         }
         else if (breakpoints[Breakpoints.TabletLandscape]) {
           this.hideForResponsive = false;
           this.hideForResponsivePhone = false;
-          this.displayedColumns = ['date', 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
+          this.displayedColumns = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
           
         }
     
@@ -480,5 +480,37 @@ getPath(name: String): String {
    
 
   }
+
+  scrollleft() {
+
+    const slidesContainer = document.getElementById("slides-container");
+const slide = document.querySelector(".slide");
+const prevButton = document.getElementById("slide-arrow-prev");
+const nextButton = document.getElementById("slide-arrow-next");
+
+if (slide != null && slidesContainer != null) {
+  const slideWidth = slide.clientWidth;
+  slidesContainer.scrollLeft -= slideWidth;
+}
+
+}
+
+  
+
+  scrollright() {
+
+    const slidesContainer = document.getElementById("slides-container");
+const slide = document.querySelector(".slide");
+const prevButton = document.getElementById("slide-arrow-prev");
+const nextButton = document.getElementById("slide-arrow-next");
+
+if (slide != null && slidesContainer != null) {
+  const slideWidth = slide.clientWidth;
+  slidesContainer.scrollLeft += slideWidth;
+
+    
+  }
+
+}
 
 }
