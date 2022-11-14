@@ -11,6 +11,7 @@ puntisquadra1: number;
 puntisquadra2: number;
 meteSquadra1: number;
 meteSquadra2: number;
+girone:number;
 
 
 }

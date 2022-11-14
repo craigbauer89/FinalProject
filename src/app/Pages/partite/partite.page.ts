@@ -22,6 +22,13 @@ export class PartitePage implements OnInit {
   currentId = 0;
   partite: Partite[] = [];
   dataPartite: Partite[] = [];
+  dataPartite1: Partite[] = [];
+  dataPartite6: Partite[] = [];
+  dataPartite2: Partite[] = [];
+  dataPartite3: Partite[] = [];
+  dataPartite4: Partite[] = [];
+  dataPartite5: Partite[] = [];
+
   convert = new Date(2022, 9, 10).toISOString();
   newDate = this.convert.slice(0,10);
   areYouSure = false;
@@ -37,6 +44,7 @@ export class PartitePage implements OnInit {
     puntisquadra2: '',
     meteSquadra1: '',
     meteSquadra2: '',
+    girone: '',
 
   }
 
@@ -49,6 +57,13 @@ export class PartitePage implements OnInit {
 // };
 displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
   dataSource = new MatTableDataSource(this.dataPartite) ;
+  dataSource1 = new MatTableDataSource(this.dataPartite2) ;
+  dataSource2 = new MatTableDataSource(this.dataPartite2) ;
+  dataSource3 = new MatTableDataSource(this.dataPartite3) ;
+  dataSource4 = new MatTableDataSource(this.dataPartite4) ;
+  dataSource5 = new MatTableDataSource(this.dataPartite5) ;
+  dataSource6 = new MatTableDataSource(this.dataPartite6) ;
+  
   squadre: Squadre[] = [];
   // dataSource2 = this.squadre ;
   // dataSource2 = this.squadre ;
@@ -61,7 +76,7 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
     puntisquadra2: ['', Validators.required],
     meteSquadra1: ['', Validators.required],
     meteSquadra2: ['', Validators.required],
-      
+    girone: ['', Validators.required],
   
     });
 
@@ -94,32 +109,74 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
       this.partite = data;
 
       this.dataPartite.splice(0,this.dataPartite.length);
+      this.dataPartite1.splice(0,this.dataPartite.length);
+      this.dataPartite2.splice(0,this.dataPartite.length);
+      this.dataPartite3.splice(0,this.dataPartite.length);
+      this.dataPartite4.splice(0,this.dataPartite.length);
+      this.dataPartite5.splice(0,this.dataPartite.length);
+      this.dataPartite6.splice(0,this.dataPartite.length);
 
       this.partite.forEach(element => {
-
         let date1 =  new Date(element.date).toISOString();
         let newDate1 = date1.slice(0,10);
         if(newDate1 ==  this.newDate) {
-  
           this.dataPartite.push(element)
-          console.log("yes sir")
-  
         }
-        // else {
-        //   console.log(newDate1)
-        //   console.log(this.newDate)
-        // }
       });
-      // console.log(JSON.stringify(data));
-      // console.log(this.squadre[1]);
-      // for(let cat in this.squadre) {
-        // console.log(this.squadre);
-        this.dataSource = new MatTableDataSource(this.dataPartite) ;
-        // console.log(this.dataSource);
-        // console.log(this.dataSource[0]);
-        // console.log(this.dataSource[0].squadra1.nome);
-        // for(let i in this.dataSource)
-        // console.log(this.dataSource[i].squadra1.nome);
+
+      this.dataPartite.forEach(element => {
+        let girone1 = 1;
+        if(girone1 ==  element.girone) {
+          this.dataPartite1.push(element)
+        }
+      });
+
+
+      this.dataPartite.forEach(element => {
+        let girone2 = 2;
+        if(girone2 ==  element.girone) {
+          this.dataPartite2.push(element)
+        }
+      });
+
+      this.dataPartite.forEach(element => {
+        let girone3 = 3;
+        if(girone3 ==  element.girone) {
+          this.dataPartite3.push(element)
+        }
+      });
+
+      this.dataPartite.forEach(element => {
+        let girone4 = 4;
+        if(girone4 ==  element.girone) {
+          this.dataPartite4.push(element)
+        }
+      });
+
+      this.dataPartite.forEach(element => {
+        let girone5 = 5;
+        if(girone5 ==  element.girone) {
+          this.dataPartite5.push(element)
+        }
+      });
+
+      this.dataPartite.forEach(element => {
+        let girone6 = 6;
+        if(girone6 ==  element.girone) {
+          this.dataPartite6.push(element)
+        }
+      });
+
+      
+  
+        // this.dataSource = new MatTableDataSource(this.dataPartite) ;
+        this.dataSource1 = new MatTableDataSource(this.dataPartite1) ;
+        this.dataSource2 = new MatTableDataSource(this.dataPartite2) ;
+        this.dataSource3 = new MatTableDataSource(this.dataPartite3) ;
+        this.dataSource4 = new MatTableDataSource(this.dataPartite4) ;
+        this.dataSource5 = new MatTableDataSource(this.dataPartite5) ;
+        this.dataSource6 = new MatTableDataSource(this.dataPartite6) ;
+
         
       // }
     });
@@ -440,32 +497,86 @@ getPath(name: String): String {
     let convert = new Date(date).toISOString();
   let convertedDate = convert.slice(0,10);
 
-
+ 
     
     this.partiteService.findAll().subscribe(data => {
       this.partite = data;
 
       this.dataPartite.splice(0,this.dataPartite.length);
-
+     
+      
       this.partite.forEach(element => {
-
+        
         let date1 =  new Date(element.date).toISOString();
         let newDate1 = date1.slice(0,10);
         // console.log(newDate1)
         // console.log(convertedDate)
         if(newDate1 == convertedDate) {
-  
+        
           this.dataPartite.push(element)
-          console.log("yes sir")
+       
   
         }
-        // else {
-          
-        //   console.log(newDate1)
-        //   console.log(convertedDate)
-        // }
       });
-      this.dataSource = new MatTableDataSource(this.dataPartite) ;
+
+      this.dataPartite1.splice(0,this.dataPartite.length);
+      this.dataPartite2.splice(0,this.dataPartite.length);
+      this.dataPartite3.splice(0,this.dataPartite.length);
+      this.dataPartite4.splice(0,this.dataPartite.length);
+      this.dataPartite5.splice(0,this.dataPartite.length);
+      this.dataPartite6.splice(0,this.dataPartite.length);
+
+        this.dataPartite.forEach(element => {
+          let girone1 = 1;
+          if(girone1 ==  element.girone) {
+            this.dataPartite1.push(element)
+          }
+        });
+  
+  
+        this.dataPartite.forEach(element => {
+          let girone2 = 2;
+          if(girone2 ==  element.girone) {
+            this.dataPartite2.push(element)
+          }
+        });
+  
+        this.dataPartite.forEach(element => {
+          let girone3 = 3;
+          if(girone3 ==  element.girone) {
+            this.dataPartite3.push(element)
+          }
+        });
+  
+        this.dataPartite.forEach(element => {
+          let girone4 = 4;
+          if(girone4 ==  element.girone) {
+            this.dataPartite4.push(element)
+          }
+        });
+  
+        this.dataPartite.forEach(element => {
+          let girone5 = 5;
+          if(girone5 ==  element.girone) {
+            this.dataPartite5.push(element)
+          }
+        });
+  
+        this.dataPartite.forEach(element => {
+          let girone6 = 6;
+          if(girone6 ==  element.girone) {
+            this.dataPartite6.push(element)
+          }
+        });
+     
+     
+      // this.dataSource = new MatTableDataSource(this.dataPartite) ;
+      this.dataSource1 = new MatTableDataSource(this.dataPartite1) ;
+        this.dataSource2 = new MatTableDataSource(this.dataPartite2) ;
+        this.dataSource3 = new MatTableDataSource(this.dataPartite3) ;
+        this.dataSource4 = new MatTableDataSource(this.dataPartite4) ;
+        this.dataSource5 = new MatTableDataSource(this.dataPartite5) ;
+        this.dataSource6 = new MatTableDataSource(this.dataPartite6) ;
  
       // console.log(JSON.stringify(data));
       // console.log(this.squadre[1]);
