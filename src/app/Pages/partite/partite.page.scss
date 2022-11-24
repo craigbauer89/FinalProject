@@ -22,7 +22,7 @@ body {
   
   position: absolute;
   display: flex;
-  top: 18%;
+  top: 20%;
 
   margin: auto;
   height:50px;
@@ -75,7 +75,6 @@ table {
     margin-right: 10%;
   
     // opacity: 0.9;
-
 
 }
 
@@ -139,19 +138,30 @@ h1 {
     color: transparent;
 }
 
+table td, table th {
+  padding: 2px 10px;
+}
+
+
 th {
-    background-color:rgb(12, 105, 244);
+    background-color:rgb(113, 140, 179);
     color: white;
-    width: 90px;
-    font-size: .8rem;
+    
+    font-size: 1rem;
     text-align: left;
+    height: 10%;
+ 
+
+    
  
 }
 
 td{
-    text-align: left;
+  
     color: black;
-    
+    // border:1px solid grey;
+  
+
 }
 
 .mat-row:hover {
@@ -253,89 +263,202 @@ h2 {
 
 img {
   width: 25px;
-  height: 20px;
+  height: 25px;
   background-color: rgba(0,0,0,0);
   border-radius: 200px;
     border: 1px solid black;
- 
 }
 
+
 @media only screen and (max-width:1200px) {
-    
 
 
   table {
-   
-   
-    width: 80%;
 
-} 
-}
-
-
-@media only screen and (max-width:680px) {
-    
-  .box button {
-    width: 40px;
-    height: 25px;
-    font-size: .4rem;
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+  
+ 
+  
+  }
+  
+  .tables {
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
   }
 
  
-  .modify {
 
-    margin: 1% 5%;
-    width: 90%;
+}
+
+@media only screen and (max-width:900px) {
+    
+  th {
+   
+    font-size: .8rem;
+    
+
+} 
+td {
+  font-size: .8rem;
+}
+
+}
+
+@media only screen and (max-width:750px) {
+    
+  th {
+   
+    font-size: .7rem;
+    
+
+} 
+td {
+  font-size: .7rem;
+}
+
+
+
   }
-  .modify mat-form-field {
 
-    width: 90%;
+
+  @media only screen and (max-width:450px) {
+
+    img {
+      width: 20px;
+      height: 15px;
+   
+    }
+    
+    th {
+     
+      font-size: .7rem;
+      
+  
+  } 
+  td {
+    font-size: .7rem;
   }
   
+  table {
+  
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+  
+    // opacity: 0.9;
+  
+  }
+  .tables {
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    
+  }
+
+  .slide {
+    font-size: .2rem;
+  }
+  
+  .slide-arrow {
+  
+  
+    top: 10%;
+
+
+   
+  
+  }
 
   body {
-    height: 1000px;
+    height: 1300px;
   }
 
-}
+    }
 
 
-
-
-
-@media only screen and (max-width:500px) {
+    @media only screen and (max-width:400px) {
   
-table {
- 
-  margin-top: 25%;
-  width: 90%;
-
-
-
-.left{
- 
-  text-align: left;
-}
-
-img {
-  width: 25px;
-  height: 20px;
-
-
-}
-
-
-
-
-
-
-td {
-  font-size: .53rem;
-}
-
-.right {
-  text-align: right;
-}
+    
+    .slide-arrow {
+    
+      top: 12%;
+    }
   
-} 
-}
+  
+      }
+
+// @media only screen and (max-width:800px) {
+// th {
+//   font-size: .7rem;
+// }
+// }
+
+// @media only screen and (max-width:680px) {
+    
+//   .box button {
+//     width: 40px;
+//     height: 25px;
+//     font-size: .4rem;
+//   }
+
+ 
+//   .modify {
+
+//     margin: 1% 5%;
+//     width: 90%;
+//   }
+//   .modify mat-form-field {
+
+//     width: 90%;
+//   }
+  
+
+//   body {
+//     height: 1000px;
+//   }
+
+// }
+
+
+
+
+
+// @media only screen and (max-width:500px) {
+  
+// table {
+ 
+//   margin-top: 25%;
+//   width: 90%;
+
+
+
+// .left{
+ 
+//   text-align: left;
+// }
+
+// img {
+//   width: 25px;
+//   height: 20px;
+
+
+// }
+
+
+
+
+
+
+// td {
+//   font-size: .53rem;
+// }
+
+// .right {
+//   text-align: right;
+// }
+  
+// } 
+// }

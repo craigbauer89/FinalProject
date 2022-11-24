@@ -12,12 +12,13 @@ import { PartitePage } from './Pages/partite/partite.page';
 import { RegisterPage } from './Pages/register/register.page';
 import { SquadreInfoPage } from './Pages/squadre-info/squadre-info.page';
 import { SquadrePage } from './Pages/squadre/squadre.page';
+import { StatistichePage } from './Pages/statistiche/statistiche.page';
 
 
 const routes: Routes = [
 
   {
-    path: 'landing',
+    path: 'main',
     component: LandingPage,
   },
   {
@@ -27,7 +28,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'home',
+    redirectTo: 'login',
   },
   {
     path: 'login',
@@ -38,14 +39,14 @@ const routes: Routes = [
     component: RegisterPage,
   },
   {
-    path: 'partite',
+    path: 'calendario',
     component: PartitePage,
     canActivate:[UserGuard] //, data:{roles:['ROLE_USER','ROLE_ADMIN']}
     
   },
   
   {
-    path: 'squadre',
+    path: 'classifica',
     component: SquadrePage,
     canActivate:[UserGuard] //, data:{roles:['ROLE_USER','ROLE_ADMIN']}
   },
@@ -53,6 +54,12 @@ const routes: Routes = [
   {
     path: 'squadreinfo',
     component: SquadreInfoPage,
+    canActivate:[UserGuard] //, data:{roles:['ROLE_USER','ROLE_ADMIN']}
+  },
+
+  {
+    path: 'statistiche',
+    component: StatistichePage,
     canActivate:[UserGuard] //, data:{roles:['ROLE_USER','ROLE_ADMIN']}
   },
 

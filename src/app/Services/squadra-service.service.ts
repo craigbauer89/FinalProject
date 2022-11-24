@@ -13,8 +13,8 @@ export class SquadraServiceService {
   // private Server = 'http://localhost:8080';
 
   constructor(private http: HttpClient, private router: Router) { 
-    this.squadreUrl = 'http://localhost:8080/squadre';
-    
+    this.squadreUrl = '/squadre';
+    // this.squadreUrl = 'http://localhost:8080/squadre';
   }
 
 

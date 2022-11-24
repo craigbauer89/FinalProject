@@ -35,6 +35,11 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {MatIconModule} from '@angular/material/icon';
 import { LandingPage } from './Pages/landing/landing.page';
+import { JerseyService } from './Services/jersey.service';
+import { PartiteService } from './Services/partite.service';
+import { SquadraServiceService } from './Services/squadra-service.service';
+import { StatistichePage } from './Pages/statistiche/statistiche.page';
+
 
 @NgModule({
   declarations: [
@@ -50,6 +55,7 @@ import { LandingPage } from './Pages/landing/landing.page';
     HomePage,
     SquadreInfoPage,
     LandingPage,
+    StatistichePage,
     // FilterPipe,
    
   ],
@@ -86,7 +92,7 @@ import { LandingPage } from './Pages/landing/landing.page';
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor ,
     multi: true
-  }, UserService
+  }, UserService,JerseyService,PartiteService,SquadraServiceService
 
   ],
   bootstrap: [AppComponent]

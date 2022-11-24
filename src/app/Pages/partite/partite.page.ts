@@ -45,6 +45,7 @@ export class PartitePage implements OnInit {
     meteSquadra1: '',
     meteSquadra2: '',
     girone: '',
+   
 
   }
 
@@ -55,7 +56,7 @@ export class PartitePage implements OnInit {
 
     // squadra = JSON.stringify(this.squadre);
 // };
-displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
+displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'seperator', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
   dataSource = new MatTableDataSource(this.dataPartite) ;
   dataSource1 = new MatTableDataSource(this.dataPartite2) ;
   dataSource2 = new MatTableDataSource(this.dataPartite2) ;
@@ -194,27 +195,27 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
     
         const breakpoints = result.breakpoints;
     
-        // if (result.matches) {
+        if (result.matches) {
          
-        // }
+        }
 
         if (breakpoints[Breakpoints.HandsetPortrait]) {
           this.hideForResponsivePhone = true;
           this.hideForResponsive = true;
-          this.displayedColumns = ['img1', 'squadra1.nome', 'puntisquadra1','puntisquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
+          this.displayedColumns = [ 'squadra1.nome', 'puntisquadra1', 'seperator','puntisquadra2', 'squadra2.nome',  'modifica', 'cancellare' ];
         }
         
-        else if (breakpoints[Breakpoints.HandsetLandscape]) {
-          this.hideForResponsivePhone = false;
-          this.hideForResponsive = true;
-          this.displayedColumns = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
-        }
-        else if (breakpoints[Breakpoints.TabletLandscape]) {
-          this.hideForResponsive = false;
-          this.hideForResponsivePhone = false;
-          this.displayedColumns = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
+        // else if (breakpoints[Breakpoints.HandsetLandscape]) {
+        //   this.hideForResponsivePhone = true;
+        //   this.hideForResponsive = true;
+        //   this.displayedColumns = [ 'img1', 'squadra1.nome', 'puntisquadra1', 'seperator', 'puntisquadra2',  'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
+        // }
+        // else if (breakpoints[Breakpoints.TabletLandscape]) {
+        //   this.hideForResponsive = false;
+        //   this.hideForResponsivePhone = false;
+        //   this.displayedColumns = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'seperator', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
           
-        }
+        // }
     
       });
       

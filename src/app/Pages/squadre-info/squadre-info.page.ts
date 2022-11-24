@@ -27,7 +27,7 @@ export class SquadreInfoPage implements OnInit {
   cat =  "../../../assets/Velate.jpg";
   page: number = 1;
   count: number = 0;
-  tableSize: number = 6;
+  tableSize: number = 8;
   tableSizes: any = [3, 6, 9, 12];
   hideForResponsive = false;
   jersey: Jersey[] = [];
@@ -121,7 +121,7 @@ return "../../../assets/" + name + ".jpg";
 
 geturl(latitude: number, longitude: number) {
   
-  return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.bing.com/maps/embed?h=150&w=350&cp=" + latitude + "~" + longitude + "&lvl=13&typ=d&sty=r&src=SHELL&FORM=MBEDV8");
+  return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.bing.com/maps/embed?h=160&w=265&cp=" + latitude + "~" + longitude + "&lvl=12&typ=d&sty=r&src=SHELL&FORM=MBEDV8");
   
   }
 geturl1() {

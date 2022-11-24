@@ -51,7 +51,7 @@ export class SquadrePage implements OnInit {
 
     // squadra = JSON.stringify(this.squadre);
 // };
-displayedColumns: string[] = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'meteFatti'!, 'meteSubiti','puntiSubiti','puntiFatti','differenza' ];
+displayedColumns: string[] = [ 'img', 'nome', 'giocate', 'vittorie', 'pareggi', 'sconfitte',  'meteFatti'!, 'puntiFatti', 'puntiSubiti','differenza' ,'punti' ];
   dataSource = new MatTableDataSource(this.gironeSquadre) ;
 
 
@@ -105,17 +105,17 @@ displayedColumns: string[] = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte'
           this.displayedColumns = [ 'img', 'nome', 'punti', 'giocate', 'differenza' ];
         }
         
-        else if (breakpoints[Breakpoints.HandsetLandscape]) {
-          this.hideForResponsivePhone = false;
-          this.hideForResponsive = true;
-          this.displayedColumns = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'differenza' ];
-        }
-        else if (breakpoints[Breakpoints.TabletLandscape]) {
-          this.hideForResponsive = false;
-          this.hideForResponsivePhone = false;
-          this.displayedColumns = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'meteFatti'!, 'meteSubiti','puntiSubiti','puntiFatti','differenza' ];
+        // else if (breakpoints[Breakpoints.HandsetLandscape]) {
+        //   this.hideForResponsivePhone = true;
+        //   this.hideForResponsive = false;
+        //   this.displayedColumns = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'differenza' ];
+        // }
+        // else if (breakpoints[Breakpoints.TabletLandscape]) {
+        //   this.hideForResponsive = false;
+        //   this.hideForResponsivePhone = false;
+        //   this.displayedColumns = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'meteFatti'!, 'puntiSubiti','puntiFatti','differenza' ];
           
-        }
+        // }
     
       });
   }

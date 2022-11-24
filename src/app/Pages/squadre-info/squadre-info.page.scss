@@ -1,14 +1,8 @@
-.map {
 
-  width: 80%;
-  
-  margin-left: 10%;
-  margin-right: 10%;
-}
 
 .box{
-    width: 90%;
-    margin: 1% 5%;
+    width: 95%;
+    margin: 2% 2.5%;
     color: black;
     display: flex;
     flex-wrap: wrap;
@@ -16,30 +10,46 @@
 }
 
 mat-card {
-    width: 15%;
-    margin-left: 3%; 
-    margin-bottom: 2%;
+    width: 87%;
+    margin-bottom: 5%;
     background-color: rgb(113, 163, 234);
     border: 5px solid white;
     border-radius: 15px;
     opacity: .9;
    
-    height: 450px;
+    height: 380px;
     color: rgb(32, 114, 229);
 }
 
 mat-card-content, mat-card-title, mat-card-subtitle{
     color:black;
+    
+    margin-top: 1%;
+    margin-bottom: 0;
   
 }
+
+mat-icon {
+
+  font-size: 1rem;
+}
+
+mat-card-subtitle{
+
+  font-size: .7rem;
+
+}
+
+
 
 mat-card-title {
   height: 50px;
   color: white;
+  font-size: 1.2rem;
 }
 
 mat-card-subtitle {
-  height: 40px;
+  height: 30px;
   color: white;
 }
 
@@ -53,14 +63,15 @@ body {
     background-repeat: repeat;
     // filter: grayscale(100%);
     background-position: 1% 10%;
-    height: 1276px;
+    height: 4000px;
    
 }
 
 mat-card-actions{
     text-align: center;
-    height: 20px;
+    height: 40px;
   
+
     
 }
 
@@ -68,6 +79,7 @@ mat-card-actions{
 
     height: 65px;
     border-radius: 200px;
+    width: 70px;
     border: 1px solid black;
 }
 
@@ -118,7 +130,7 @@ mat-label{
 // }
 
   button {
-    margin-top: 1%;
+   height: 35px;
     margin-left: 15%;
     margin-right:15%;
     background-color: rgb(109, 159, 230);
@@ -153,198 +165,313 @@ h2 {
   }
 
   .search-hero input {
-    margin-top: 5%;
+    margin-top: 25%;
     border-radius: 5px;
     border: 2px solid rgb(32, 114, 229);
+    width: 50%;
     
   }
 
-  iframe {
-  width: 100%;
+  mat-card-content {
+  width: 20%;
+  height: 160px;
   
+  }
+
+  iframe {
+
+    height: 160px;
+    width: 265px;
+
   }
 
   .hidden-row {
     display: none;
   }
 
+  pagination-controls {
 
-
-  @media only screen and (max-width:2150px) {
-
-    mat-card {
-      width: 20%;
-  
-    }
-
-  }
-
-  @media only screen and (max-width:1900px) {
-
-    mat-card {
-      width: 25%;
-      margin-right: 2.5%;
-  
-    }
-
+    font-size: .6rem;
+   
   }
 
 
-  @media only screen and (max-width:1700px) {
 
-    mat-card {
-      width: 25%;
-      margin-right: 1.5%;
-  
+
+
+@media only screen and (min-width:321px) {
+  mat-card-content {
+    margin-left: 5%;
+    }
+}
+
+@media only screen and (min-width:400px) {
+  mat-card-content {
+    margin-left: 11%;
     }
 
-  }
-
-  @media only screen and (max-width:1350px) {
-  
     mat-card {
-
-      margin-right: 1.5%;
-    }
-
-    .box{
-      width: 95%;
-      margin: 1% 2.5%;
      
+      margin-left: 2%;
+      
   }
 
-  body {
-    height: 1800px;
+  .search-hero input {
+    margin-top: 20%;
   }
 
-  }
+}
 
-  @media only screen and (max-width:1280px) {
-  
-    mat-card {
+@media only screen and (min-width:450px) {
+  mat-card-content {
+    margin-left: 16.5%;
+    }
+}
 
-      width: 38%;
-      margin-right: 2.5%;
-      margin-left: 5%;
+@media only screen and (min-width:500px) {
+  mat-card-content {
+    margin-left: 17.5%;
+    }
+}
+
+@media only screen and (min-width:550px) {
+  mat-card-content {
+    margin-left: 22.5%;
     }
 
     .search-hero input {
-      margin-top: 10%;
+      margin-top: 15%;
+      width: 40%;
+    }
+}
+
+@media only screen and (min-width:600px) {
+  mat-card-content {
+    margin-left: 24%;
+    }
+}
+
+@media only screen and (min-width:650px) {
+  mat-card {
+    width: 41%;
+   
+    
+}
+
+body {
+  height: 2200px;
+}
+
+mat-card-content {
+  margin-left: 0;
+  }
+}
+
+@media only screen and (min-width:1100px) {
+  mat-card {
+    width: 25%;
+    margin-left: 3%;
+    
+}
+.search-hero input {
+  margin-top: 10%;
+  width: 35%;
+}
+
+body {
+  height: 1800px;
+}
+
+}
+
+@media only screen and (min-width:1445px) {
+  mat-card {
+    width: 19%;
+    margin-left: 3%;
+    
+}
+
+.search-hero input {
+  margin-top: 5%;
+  width: 30%;
+}
+
+body {
+  height: 1400px;
+}
+}
+
+@media only screen and (min-width:1800px) {
+  mat-card {
+    width: 15%;
+    margin-left: 1%;
+}
+
+
+
+}
+
+@media only screen and (min-width:2400px) {
+  mat-card {
+    width: 12%;
+    
+}
+
+
+}
+
+
+
+
+ 
+
+  // @media only screen and (max-width:2150px) {
+
+  //   mat-card {
+  //     width: 20%;
+  
+  //   }
+
+  // }
+
+  // @media only screen and (max-width:1900px) {
+
+  //   mat-card {
+  //     width: 25%;
+  //     margin-right: 2.5%;
+  
+  //   }
+
+  // }
+
+
+  // @media only screen and (max-width:1700px) {
+
+  //   mat-card {
+  //     width: 25%;
+  //     margin-right: 1.5%;
+  
+  //   }
+
+  // }
+
+  // @media only screen and (max-width:1350px) {
+  
+  //   mat-card {
+
+  //     margin-right: 1.5%;
+  //   }
+
+  //   .box{
+  //     width: 95%;
+  //     margin: 1% 2.5%;
+     
+  // }
+
+  // body {
+  //   height: 1800px;
+  // }
+
+  // }
+
+  // @media only screen and (max-width:1280px) {
+  
+  //   mat-card {
+
+  //     width: 38%;
+  //     margin-right: 2.5%;
+  //     margin-left: 5%;
+  //   }
+
+  //   .search-hero input {
+  //     margin-top: 10%;
     
       
-    }
+  //   }
 
-  }
+  // }
 
 
-  @media only screen and (max-width:810px) {
+  // @media only screen and (max-width:810px) {
     
 
-    mat-card {
-
-      width: 60%;
-      margin-right: 10%;
-      margin-left: 15%;
-    }
-
-    .box {
-     
-      margin-top: 5%;
-     
-  
-  } 
-
-  .search-hero input {
-    margin-top: 15%;
-  
-    
-  }
-  body {
-    height: 2800px;
-  }
-
-  }
-
-
-
-  @media only screen and (max-width:600px) {
-    
-
-    mat-card {
-
-      width: 60%;
-      margin-right: 15%;
-      margin-left: 15%;
-    }
-
-    .box {
-     
-      margin-top: 5%;
-     
-  
-  } 
-
-  .search-hero input {
-    margin-top: 25%;
-    width: 50%;
-  
-    
-  }
-
-
-  }
-
-
-  @media only screen and (max-width:600px) {
-    
-    mat-card {
-
-      margin: 5%;
-      width: 90%;
-      height: 400px;
-  
-    }
-
- 
-
-    mat-card-title {
-     font-size: 1rem;
-    }
-    
-    mat-card-subtitle {
-      font-size: .7rem;
-    }
-
-    iframe {
-      height: 100px;
-    }
-
-
-  }
-
-  @media only screen and (max-width:700px) {
    
-.modify {
-
+  // //   .box {
+     
+  // //     margin-top: 5%;
+     
   
-  margin: 1% 10%;
-  height: 520px;
-  width:80%;
+  // // } 
+
+  // // .search-hero input {
+  // //   margin-top: 15%;
+  
+    
+  // // }
+  // // body {
+  // //   height: 2800px;
+  // // }
+
+  // }
+
+
+  // @media only screen and (max-width:800px) {
+
+  //   mat-card {
+
+  //     width: 60%;
+  //     margin-right: 10%;
+  //     margin-left: 15%;
+  //   }
+
+   
+  //   .modify {
+    
+  //    margin: 1% 10%;
+  //     height: 520px;
+  //     width:80%;
+  //   }
+    
+  //   .modify mat-form-field{
+  //     margin-left: 15%;
+  //     margin-right: 15%;
+  //     width: 70%;
+  //   }
+    
+  //     }
+
+  // @media only screen and (max-width:600px) {
+    
+  //   mat-card {
+  //     width: 60%;
+  //     margin-right: 15%;
+  //     margin-left: 15%;
+  //     margin: 5%;
+  //     width: 90%;
+  //     height: 400px;
+  //   }
+
+  //   mat-card-title {
+  //     font-size: 1rem;
+  //    }
+     
+  //    mat-card-subtitle {
+  //      font-size: .7rem;
+  //    }
  
+  //    iframe {
+  //      height: 100px;
+  //    }
 
-}
+  //   .box {
+  //     margin-top: 5%;
+    
+  // } 
 
-.modify mat-form-field{
-  margin-left: 15%;
-  margin-right: 15%;
-  width: 70%;
-  
-}
+  // .search-hero input {
+  //   margin-top: 25%;
+  //   width: 50%;
+  // }
 
+  // }
 
-
-
-
-
-
-  }
