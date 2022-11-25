@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'login',
+    redirectTo: 'home',
   },
   {
     path: 'login',
@@ -74,6 +74,11 @@ const routes: Routes = [
     component: FormRegisterPartiteComponent,
     canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}
   },
+
+  // {
+  //   path: '**',
+  //   component: NotFoundComponent
+  // }
 
   { path: 'forbidden', component: ForbiddenComponent }
 

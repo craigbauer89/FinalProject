@@ -116,8 +116,14 @@ cat1 = "https://www.w3schools.com";
 getPath(name: String): String {
 return "../../../assets/" + name + ".jpg";
 
-
 }
+
+getSite(name: String): String {
+  
+  return  name;
+  
+  
+  }
 
 geturl(latitude: number, longitude: number) {
   

@@ -3,29 +3,44 @@ body {
     background-position: 40% 40%;
 }
 
-.homeLogo {
+// .homeLogo {
 
-    width: 28%;
-    margin: 0 36%;
-    height: 700px;
-    background-color: white;
-    border: 5px solid black;
+//     width: 80%;
+//     margin: 100px 10%;
+//     height: 300px;
+//     background-color: white;
+//     border: 5px solid black;
 
-  
+// }
+
+// .photo {
+//     width: 100%;
+   
+//     height: 100%;
+   
+//     background-image: url(../../../assets/logo5.jpg);
+//     width: 100%;
+//   max-width: 400px;
+//   height: auto;
     
 
+ 
+// }
+
+.responsive {
+  margin-top: 30%;
+  height: auto;
+  border: 5px solid black;
 }
 
-.photo {
-    width: 80%;
-    margin: 0 10%;
-    height: 100%;
-    background-image: url(../../../assets/logo5.jpg);
-    background-size:contain;
-    background-repeat: no-repeat;
- 
-
- 
+button {
+  margin-top: 1%;
+  height: 40px;
+  background-color: rgb(32, 114, 229);
+  color: white;
+  width: 30%;
+  
+  
 }
 
 
@@ -55,90 +70,131 @@ h2 {
     
 }
 
-@media only screen and (max-width: 2400px) {
-.homeLogo {
-  height: 600px;
-}
+
+@media only screen and (min-width: 700px) {
+  button {
+
+    width: 20%;
+    
+    
+  }
+
 }
 
-@media only screen and (max-width: 2200px) {
-    .homeLogo {
-      height: 550px;
-    }
-    }
+@media only screen and (min-width: 800px) {
+  .responsive {
+    margin-top: 10%;
+  
+  }
 
-@media only screen and (max-width: 2000px) {
-    .homeLogo {
-      height: 500px;
-    }
+  button {
+
+    width: 10%;
+    
+    
+  }
+
+}
+
+
+@media only screen and (min-width: 1000px) {
+  .responsive {
+    margin-top: 5%;
+  
+  }
+
+
+
+}
+
+// .homeLogo {
+
+
+//   height: 400px;
+ 
+
+// }
+
+// }
+
+// @media only screen and (max-width: 2200px) {
+//     .homeLogo {
+//       height: 550px;
+//     }
+//     }
+
+// @media only screen and (max-width: 2000px) {
+//     .homeLogo {
+//       height: 500px;
+//     }
 
   
-    }
+//     }
     
-@media only screen and (max-width: 1800px) {
-.homeLogo {
-  height: 450px;
-}
-}
+// @media only screen and (max-width: 1800px) {
+// .homeLogo {
+//   height: 450px;
+// }
+// }
 
-@media only screen and (max-width: 1600px) {
-    .homeLogo {
-      height: 400px;
-    }
+// @media only screen and (max-width: 1600px) {
+//     .homeLogo {
+//       height: 400px;
+//     }
   
-    }
+//     }
 
-@media only screen and (max-width: 1400px) {
-    .homeLogo {
-      height: 350px;
-    }
+// @media only screen and (max-width: 1400px) {
+//     .homeLogo {
+//       height: 350px;
+//     }
     
-    .content {
-        padding-top: 20%;
-    }
-   }
+//     .content {
+//         padding-top: 20%;
+//     }
+//    }
     
 
-@media only screen and (max-width: 1200px) {
-.homeLogo {
-  height: 300px;
-}
-}
+// @media only screen and (max-width: 1200px) {
+// .homeLogo {
+//   height: 300px;
+// }
+// }
 
-@media only screen and (max-width: 1000px) {
-    .homeLogo {
-      height: 250px;
-    }
-    .content {
-        padding-top: 25%;
-   }
-    }
+// @media only screen and (max-width: 1000px) {
+//     .homeLogo {
+//       height: 250px;
+//     }
+//     .content {
+//         padding-top: 25%;
+//    }
+//     }
 
-@media only screen and (max-width: 800px) {
-    .homeLogo {
-      height: 200px;
-    }
-    }
+// @media only screen and (max-width: 800px) {
+//     .homeLogo {
+//       height: 200px;
+//     }
+//     }
 
-    @media only screen and (max-width: 600px) {
-        .homeLogo {
-          height: 150px;
-        }
-        .content {
-            padding-top: 40%;
-       }
-        }
-     @media only screen and (max-width: 400px) {
-        .homeLogo {
-          height: 100px;
-        }
-        .content {
-            padding-top: 60%;
-       }
+//     @media only screen and (max-width: 600px) {
+//         .homeLogo {
+//           height: 150px;
+//         }
+//         .content {
+//             padding-top: 40%;
+//        }
+//         }
+//      @media only screen and (max-width: 400px) {
+//         .homeLogo {
+//           height: 100px;
+//         }
+//         .content {
+//             padding-top: 60%;
+//        }
 
-        }
-   @media only screen and (max-width: 200px) {
-        .homeLogo {
-          height: 50px;
-        }
-        }
+//         }
+//    @media only screen and (max-width: 200px) {
+//         .homeLogo {
+//           height: 50px;
+//         }
+//         }

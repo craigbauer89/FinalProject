@@ -9,6 +9,16 @@
    
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: white;
+}
+
 mat-card {
     width: 87%;
     margin-bottom: 5%;

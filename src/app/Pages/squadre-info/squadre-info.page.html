@@ -19,8 +19,8 @@
                  
                   <img mat-card-sm-image src="{{getPath(item.jersey.color)}}">
                 </mat-card-title-group>
-                <mat-card-subtitle><mat-icon> language</mat-icon> {{item.sito}}</mat-card-subtitle>
-                <mat-card-subtitle><mat-icon> mail</mat-icon> {{item.allenatore}}</mat-card-subtitle>
+                <mat-card-subtitle><mat-icon> language</mat-icon> <a href="{{getSite(item.sito)}}" target=”_blank”>{{item.sito}}</a></mat-card-subtitle>
+                <mat-card-subtitle><mat-icon> mail</mat-icon> <a [href]="'mailto:' + item.allenatore">{{item.allenatore}}</a></mat-card-subtitle>
                 
                 <mat-card-subtitle style="height:50px;"><mat-icon> location_on</mat-icon>{{item.indirizzo}}</mat-card-subtitle>
                 

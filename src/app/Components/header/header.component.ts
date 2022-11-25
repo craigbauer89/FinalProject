@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
     // this.showlogin = true;
     // this.showlogout = false;
     this.authService.clear();
-    this.router.navigate(['registerpartite']);
+    this.router.navigate(['home']);
    
     
   }
