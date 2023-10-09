@@ -10,11 +10,11 @@ import { Jersey } from '../Interfaces/jersey';
 export class JerseyService {
 
   private jerseyUrl: string;
-  // private Server = 'http://localhost:8080';
+   private Server = 'http://localhost:8080';
 
   constructor(private http: HttpClient, private router: Router) { 
-    // this.jerseyUrl = 'http://localhost:8080/jersey';
-    this.jerseyUrl = '/jersey';
+     this.jerseyUrl = 'http://localhost:8080/jersey';
+  //  this.jerseyUrl = '/jersey';
     
   }
 
