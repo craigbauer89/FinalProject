@@ -85,7 +85,7 @@ cat1 = "https://www.w3schools.com";
   ngOnInit(): void {
 
 
-    this.squadraServiceService.findAllSorted().subscribe(data => {
+    this.squadraServiceService.findAll().subscribe(data => {
       this.squadre = data;
 
       this.jerseyService.findAll().subscribe(data => {
