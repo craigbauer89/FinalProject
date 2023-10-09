@@ -39,14 +39,14 @@ mat-card-content, mat-card-title, mat-card-subtitle{
   
 }
 
-mat-icon {
 
-  font-size: 1rem;
-}
+
+
 
 mat-card-subtitle{
 
   font-size: .7rem;
+
 
 }
 
@@ -61,6 +61,14 @@ mat-card-title {
 mat-card-subtitle {
   height: 30px;
   color: white;
+}
+.icon-link {
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Vertically center align items (icons and links) */
+}
+
+.icon-link mat-icon {
+  margin-right: 5px; /* Add some spacing between the icon and the link */
 }
 
 .mat-success {
@@ -122,7 +130,7 @@ mat-label{
     background-color:rgb(168, 184, 207);
     color: white;
     height: 50px;
-    width: 50%;
+    width: 20%;
     
   }
 
@@ -162,7 +170,6 @@ h2 {
   
   .form-control {
     box-shadow: 0 10px 40px 0 #B0C1D9;
-    width: 30%;
     height: 20px;
     margin-left: 5%;
     margin-top: 1%;
@@ -178,20 +185,18 @@ h2 {
     margin-top: 25%;
     border-radius: 5px;
     border: 2px solid rgb(32, 114, 229);
-    width: 50%;
+    height: 40px;
     
   }
 
-  mat-card-content {
-  width: 20%;
-  height: 160px;
   
-  }
 
   iframe {
 
+
     height: 160px;
     width: 265px;
+    border: 1px solid black;
 
   }
 
@@ -199,12 +204,24 @@ h2 {
     display: none;
   }
 
-  pagination-controls {
-
-    font-size: .6rem;
-   
+  .paginate {
+    text-align: center; /* Center the child element horizontally */
   }
-
+  
+  .paginate pagination-controls {
+    margin-top: none;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding-right: 50px;
+   
+    border-radius: 5px;
+    display: inline-block; /* Display as inline-block to limit width */
+    margin-left: auto; /* Auto margin on the left */
+    margin-right: auto; /* Auto margin on the right */
+    max-width: 80%; /* Adjust the max-width as needed */
+    margin-right: 5px; /* Adjust the right margin as needed */
+    height: 50px;
+  }
+  
 
 
 

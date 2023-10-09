@@ -20,7 +20,7 @@
     
     position: absolute;
     display: flex;
-    top: 20%;
+    top: 17.5%; 
 
     margin: auto;
     height:50px;
@@ -40,22 +40,28 @@
   #slide-arrow-prev {
 
     background-color: transparent;
-    left: 12%;
+
+    left: 11%;
     // padding-left: 0.25rem;
     // border-radius: 0 2rem 2rem 0;
   }
   
   #slide-arrow-next {
     background-color: transparent;
-    right: 12%;
+    right: 10%;
+  
+    width: 2.5%;
+    height: 8%;
     // padding-left: 0.75rem;
     // border-radius: 2rem 0 0 2rem;
   }
   
   .slide {
-
     height: 50px;
     flex: 1 0 25%;
+    font-weight: bold;
+  
+
   }
 
 
@@ -69,7 +75,7 @@ table {
     margin-left: 10%;
     margin-right: 10%;
     text-align: center;
-    
+    border-radius: 5px;
 
 }
 

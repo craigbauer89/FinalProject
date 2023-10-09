@@ -40,7 +40,7 @@
               &#8250;
             </button>
           </div>
-          <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
+          <table mat-table style="margin-top: 1.5%;"[dataSource]="dataSource1" class="mat-elevation-z8">
 
             <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
               <th  style="width:3%" mat-header-cell *matHeaderCellDef> </th>
@@ -108,15 +108,16 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
 
-          <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
+          <table mat-table style="margin-top: 1.5%;" [dataSource]="dataSource2" class="mat-elevation-z8">
 
             <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
               <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>
               <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
             </ng-container>
+
       
             <ng-container matColumnDef="squadra1.nome">
-              <th style="width:25%" mat-header-cell *matHeaderCellDef>Girone 2   </th>
+              <th style="width:25%"  mat-header-cell *matHeaderCellDef>Girone 2   </th>
               <td class="center" mat-cell *matCellDef="let element"> {{element.squadra1.nome}} </td>
             </ng-container>
 
@@ -178,7 +179,7 @@
           </table>
 
 
-    <table mat-table [dataSource]="dataSource3" class="mat-elevation-z8">
+    <table mat-table style="margin-top: 1.5%;" [dataSource]="dataSource3" class="mat-elevation-z8">
 
       <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
         <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>
@@ -248,7 +249,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-<table mat-table [dataSource]="dataSource4" class="mat-elevation-z8">
+<table mat-table  style="margin-top: 1.5%;"[dataSource]="dataSource4" class="mat-elevation-z8">
 
   <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
     <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>
@@ -316,7 +317,7 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<table mat-table [dataSource]="dataSource5" class="mat-elevation-z8">
+<table mat-table  style="margin-top: 1.5%;" [dataSource]="dataSource5" class="mat-elevation-z8">
 
   <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
     <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>
@@ -386,7 +387,7 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<table mat-table [dataSource]="dataSource6" class="mat-elevation-z8">
+<table mat-table  style="margin-top: 1.5%;" [dataSource]="dataSource6" class="mat-elevation-z8">
 
   <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
     <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>

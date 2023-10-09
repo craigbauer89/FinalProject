@@ -10,11 +10,14 @@ import { Observable } from 'rxjs';
 export class SquadraServiceService {
 
   private squadreUrl: string;
-  // private Server = 'http://localhost:8080';
+  private squadreUrlSorted: string;
+   private Server = 'http://localhost:8080';
 
   constructor(private http: HttpClient, private router: Router) { 
-    this.squadreUrl = '/squadre';
-    // this.squadreUrl = 'http://localhost:8080/squadre';
+    //this.squadreUrl = '/squadre';
+     this.squadreUrl = 'http://localhost:8080/squadre';
+    //this.squadreUrlSorted = '/squadre/sorted';
+    this.squadreUrlSorted = 'http://localhost:8080/squadre/sorted';
   }
 
 
@@ -29,6 +32,10 @@ export class SquadraServiceService {
 
   public findAll(): Observable<Squadre[]> {
     return this.http.get<Squadre[]>(this.squadreUrl);
+  }
+
+  public findAllSorted(): Observable<Squadre[]> {
+    return this.http.get<Squadre[]>(this.squadreUrlSorted);
   }
 
   public signclient(squadra: Squadre) {

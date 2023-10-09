@@ -66,22 +66,24 @@ displayedColumns: string[] = [ 'img', 'nome', 'giocate', 'vittorie', 'pareggi', 
     this.squadraServiceService.findAll().subscribe(data => {
       this.squadre = data;
 
-      this.squadre.forEach(element => {
-        if(element.girone == 1) {
-  
-          this.gironeSquadre.push(element)
-  
+      this.gironeSquadre = this.squadre
+      .filter((element) => element.girone === 1)
+      .sort((a, b) => {
+        const puntiA = a.punti;
+        const puntiB = b.punti;
+        const diffA = a.differenza;
+        const diffB = b.differenza;
+
+        if (puntiA !== puntiB) {
+          return puntiB - puntiA; // Sort by punti in descending order
         }
+
+        return diffA - diffB; // If punti are equal, sort by differenza in ascending order
       });
-      // console.log(JSON.stringify(data));
-      // console.log(this.squadre[1]);
-      // for(let cat in this.squadre) {
-        // console.log(this.squadre);
-        this.dataSource = new MatTableDataSource(this.gironeSquadre) ;
-        this.dataSource.sort = this.sort;
-        console.log(this.dataSource);
-      // }
-    });
+
+    this.dataSource = new MatTableDataSource<Squadre>(this.gironeSquadre);
+    this.dataSource.sort = this.sort;
+  });
 
     this.responsive.observe([
       Breakpoints.TabletPortrait,

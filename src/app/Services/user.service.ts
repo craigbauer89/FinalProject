@@ -26,12 +26,12 @@ export class UserService {
   currentUser = {};
 
   constructor(private http: HttpClient, private router: Router, private Authservice: AuthService) { 
-  // this.userUrl = 'http://localhost:8080/users';
-  // this.loginUrl = 'http://localhost:8080/auth/login';
-  // this.registerUrl = 'http://localhost:8080/users';
-  this.userUrl = '/users';
-  this.loginUrl = '/auth/login';
-  this.registerUrl = '/users';
+   this.userUrl = 'http://localhost:8080/users';
+   this.loginUrl = 'http://localhost:8080/auth/login';
+   this.registerUrl = 'http://localhost:8080/users';
+  //this.userUrl = '/users';
+  //this.loginUrl = '/auth/login';
+  //this.registerUrl = '/users';
   }
 
 

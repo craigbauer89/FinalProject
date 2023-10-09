@@ -12,13 +12,13 @@ export class PartiteService {
 
   private partiteUrl: string;
   private squadreUrl: string;
-  // private Server = 'http://localhost:8080';
+   private Server = 'http://localhost:8080';
 
   constructor(private http: HttpClient, private router: Router) { 
-    // this.partiteUrl = 'http://localhost:8080/partite';
-    // this.squadreUrl = 'http://localhost:8080/squadre';
-    this.partiteUrl = '/partite';
-    this.squadreUrl = '/squadre';
+     this.partiteUrl = 'http://localhost:8080/partite';
+    this.squadreUrl = 'http://localhost:8080/squadre';
+  //  this.partiteUrl = '/partite';
+  //  this.squadreUrl = '/squadre';
   }
 
 
