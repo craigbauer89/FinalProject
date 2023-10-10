@@ -5,31 +5,30 @@ body {
   // margin: 1rem;
   // position: relative;
   overflow: hidden;
+  display: flex;
+
 
 }
 
 .slides-container {
-  height: calc(100vh - 2rem);
-  width: 100%;
+  height: 100%;
+  width: 90%;
   display: flex;
   overflow: scroll;
   scroll-behavior: smooth;
   list-style: none;
   margin: 0;
   padding: 0;
-  
+  overflow-x: hidden;
+  overflow-y: hidden;
+
 }
 
 .slide-arrow {
-  
-  position: absolute;
   display: flex;
-  top: 17.5%;
- 
-
+  top: 15%;
   margin: auto;
   height:50px;
-
   color: grey;
   border: none;
   width: 10px;
@@ -45,23 +44,22 @@ body {
 #slide-arrow-prev {
 
   background-color: transparent;
-  left: 12%;
+  left: 10.5%;
   // padding-left: 0.25rem;
   // border-radius: 0 2rem 2rem 0;
- 
+
 }
 
 #slide-arrow-next {
   background-color: transparent;
-  right: 12%;
+  right: 10.5%;
   // padding-left: 0.75rem;
   // border-radius: 2rem 0 0 2rem;
 }
 
 .slide {
 
-  height: 40px;
-  flex: 1 0 25%;
+  flex: 1 0 12.5%;
 }
 
 
@@ -77,7 +75,7 @@ table {
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
-  
+
     // opacity: 0.9;
 
 }
@@ -86,45 +84,51 @@ table {
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;
-margin-top: 100px;
+  margin-top: 100px;
   display: flex;
   flex-direction: row;
   color: grey;
   background-color: rgb(235, 233, 233);
-  height: 50px;
+  height: 75px;
+  flex: 1 0 10%;
+
 }
 
 .tables  .slide{
   width: 25%;
 border: none;
 background-color: rgb(235, 233, 233);
-font-size: 1rem;
 color: grey;
-
+  height: 100%;
+  font-size: 1.2rem;
 }
 
-.tables  button:hover{
+.tables  .slides-container button:hover{
   border-bottom: 5px solid grey;
+  border-top: 5px solid transparent;
+  font-weight: bold;
 
 }
 
-.tables  button:active{
-    border-bottom: 5px solid black;
- 
+.tables  .slides-container .bold{
+  border-bottom: 5px solid grey;
+  border-top: 5px solid transparent;
+  font-weight: bold;
+
  }
 
 .center{
-   
+
   text-align: center;
 }
 
 .left{
-   
+
   text-align: left;
 }
 
 .right{
-   
+
   text-align: right;
 }
 
@@ -150,21 +154,21 @@ table td, table th {
 th {
     background-color:rgb(113, 140, 179);
     color: white;
-    
+
     font-size: 1rem;
     text-align: left;
     height: 10%;
- 
 
-    
- 
+
+
+
 }
 
 td{
-  
+
     color: black;
     // border:1px solid grey;
-  
+
 
 }
 
@@ -196,12 +200,12 @@ body {
 
 
   .modify {
-   
+
 
     position: absolute;
     top: 100px;
-    
-    
+
+
     margin: 1% 20%;
     width: 90%;
     display: flex;
@@ -210,9 +214,9 @@ body {
    align-items: center;
    width:60%;
 //    margin: 10rem auto;
-  
+
     justify-content: center;
-  
+
     background-color: rgba(240, 248, 255, 0.95);
     border-radius: 20px;
     // float: left;
@@ -231,21 +235,21 @@ mat-label{
     color: white;
 }
 
-  
+
   mat-form-field{
     border-radius: 5px;
     margin-top: 1%;
     background-color:rgb(168, 184, 207);
     color: white;
     height: 50px;
-    
+
     // display: flex;
     // flex-direction: column;
     width: 50%;
   }
 
   mat-label{
-    
+
     color: black;
     display: flex;
     flex-wrap: wrap;
@@ -253,16 +257,16 @@ mat-label{
   }
 
   button {
-    margin-top: 1%;
     background-color: rgb(109, 159, 230);
     color: white;
+
   }
-  
+
 //   .enter {
 //     width: 5rem;
 //     height: 3.5rem;
 //     margin-left: 1.3rem;
-  
+
 //   }
 
 h2 {
@@ -277,9 +281,18 @@ img {
     border: 1px solid black;
 }
 
+@media only screen and (max-width:1500px) {
+
+  .slide {
+    flex: 1 0 20%;
+  }
+
+}
 
 
 @media only screen and (max-width:1200px) {
+
+
 
 
   table {
@@ -287,29 +300,29 @@ img {
     width: 95%;
     margin-left: 2.5%;
     margin-right: 2.5%;
-  
- 
-  
+
+
+
   }
-  
+
   .tables {
     width: 95%;
     margin-left: 2.5%;
     margin-right: 2.5%;
   }
 
- 
+
 
 }
 
 @media only screen and (max-width:900px) {
-    
-  th {
-   
-    font-size: .8rem;
-    
 
-} 
+  th {
+
+    font-size: .8rem;
+
+
+}
 td {
   font-size: .8rem;
 }
@@ -317,13 +330,17 @@ td {
 }
 
 @media only screen and (max-width:750px) {
-    
-  th {
-   
-    font-size: .7rem;
-    
 
-} 
+  .slide {
+    flex: 1 0 25%;
+  }
+
+  th {
+
+    font-size: .7rem;
+
+
+}
 td {
   font-size: .7rem;
 }
@@ -335,50 +352,51 @@ td {
 
   @media only screen and (max-width:450px) {
 
+
     img {
       width: 20px;
       height: 15px;
-   
+
     }
-    
+
     th {
-     
+
       font-size: .7rem;
-      
-  
-  } 
+
+
+  }
   td {
     font-size: .7rem;
   }
-  
+
   table {
-  
+
     width: 95%;
     margin-left: 2.5%;
     margin-right: 2.5%;
-  
+
     // opacity: 0.9;
-  
+
   }
   .tables {
     width: 95%;
     margin-left: 2.5%;
     margin-right: 2.5%;
-    
+
   }
 
   .slide {
     font-size: .2rem;
   }
-  
+
   .slide-arrow {
-  
-  
+
+
     top: 10%;
 
 
-   
-  
+
+
   }
 
   body {
@@ -389,87 +407,14 @@ td {
 
 
     @media only screen and (max-width:400px) {
-  
-    
+
+
     .slide-arrow {
-    
+
       top: 12%;
     }
-  
-  
+
+
       }
 
 
-
-// @media only screen and (max-width:800px) {
-// th {
-//   font-size: .7rem;
-// }
-// }
-
-// @media only screen and (max-width:680px) {
-    
-//   .box button {
-//     width: 40px;
-//     height: 25px;
-//     font-size: .4rem;
-//   }
-
- 
-//   .modify {
-
-//     margin: 1% 5%;
-//     width: 90%;
-//   }
-//   .modify mat-form-field {
-
-//     width: 90%;
-//   }
-  
-
-//   body {
-//     height: 1000px;
-//   }
-
-// }
-
-
-
-
-
-// @media only screen and (max-width:500px) {
-  
-// table {
- 
-//   margin-top: 25%;
-//   width: 90%;
-
-
-
-// .left{
- 
-//   text-align: left;
-// }
-
-// img {
-//   width: 25px;
-//   height: 20px;
-
-
-// }
-
-
-
-
-
-
-// td {
-//   font-size: .53rem;
-// }
-
-// .right {
-//   text-align: right;
-// }
-  
-// } 
-// }

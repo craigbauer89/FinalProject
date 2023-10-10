@@ -19,16 +19,16 @@ export class UserGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (this.AuthService.isLoggedIn()) {
-      
+   //   if (this.AuthService.isLoggedIn()) {
+
         return true;
-      } else {
-        this.router.navigate(['/forbidden']);
-        return false;
-      }
+  //    } else {
+   //     this.router.navigate(['/forbidden']);
+    //    return false;
+     // }
     }
   }
 
 
-  
+
 

@@ -12,6 +12,7 @@ import { SquadraServiceService } from 'src/app/Services/squadra-service.service'
 })
 export class StatistichePage implements OnInit {
 
+  isBold: boolean[] = [false,false,false];
 
   @ViewChild(MatSort)
   sort!: MatSort;
@@ -41,35 +42,35 @@ export class StatistichePage implements OnInit {
 
   ngOnInit(): void {
 
-   
+
     this.showPunti = true;
-   
+
 
 
       this.squadraServiceService.findAll().subscribe(data => {
         this.squadre = data;
         console.log(this.squadre)
-        
+
         this.dataSource1 = new MatTableDataSource(this.squadre) ;
         this.dataSource1.sort = this.sort;
-        
 
-  
+
+
     });
-  
-   
-  
+
+
+
   }
 
 
   getPath(name: String): String {
     return "../../../assets/" + name + ".jpg";
-    
-    
+
+
     }
 
 
-    
+
 //   scrollleft() {
 
 //     const slidesContainer = document.getElementById("slides-container");
@@ -84,7 +85,7 @@ export class StatistichePage implements OnInit {
 
 // }
 
-  
+
 
 //   scrollright() {
 
@@ -97,7 +98,7 @@ export class StatistichePage implements OnInit {
 //   const slideWidth = slide.clientWidth;
 //   slidesContainer.scrollLeft += slideWidth;
 
-    
+
 //   }
 
 // }
@@ -111,10 +112,10 @@ gialli() {
   this.squadraServiceService.findAll().subscribe(data => {
     this.squadre = data;
     console.log(this.squadre)
-    
+
     this.dataSource = new MatTableDataSource(this.squadre) ;
     this.dataSource.sort = this.sort;
-    
+
 
 
 });
@@ -130,14 +131,14 @@ punti() {
   this.squadraServiceService.findAll().subscribe(data => {
     this.squadre1 = data;
     console.log(this.squadre)
-    
+
     this.dataSource1 = new MatTableDataSource(this.squadre1) ;
     this.dataSource1.sort = this.sort;
-    
+
 
 
 });
-  
+
 }
 
 mete() {
@@ -149,15 +150,27 @@ mete() {
   this.squadraServiceService.findAll().subscribe(data => {
     this.squadre2 = data;
     console.log(this.squadre)
-    
+
     this.dataSource2 = new MatTableDataSource(this.squadre2) ;
     this.dataSource2.sort = this.sort;
-    
+
 
 
 });
-  
+
 }
+  active0() {
+    this.isBold = [false,false,false];
+    this.isBold[0] = true;
+  }
+  active1() {
+    this.isBold = [false,false,false];
+    this.isBold[1] = true;
+  }
+  active2() {
+    this.isBold = [false,false,false];
+    this.isBold[2] = true;
+  }
 
 }
 

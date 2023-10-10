@@ -37,6 +37,8 @@ import { SquadraServiceService } from 'src/app/Services/squadra-service.service'
 
 export class SquadrePage implements OnInit {
 
+  isBold: boolean[] = [false,false,false,false,false,false];
+
   @ViewChild(MatSort)
   sort!: MatSort;
   element: any;
@@ -55,12 +57,12 @@ displayedColumns: string[] = [ 'img', 'nome', 'giocate', 'vittorie', 'pareggi', 
   dataSource = new MatTableDataSource(this.gironeSquadre) ;
 
 
-  
-  
+
+
 
   constructor(private squadraServiceService: SquadraServiceService,private responsive: BreakpointObserver) { }
- 
-  
+
+
   ngOnInit()  {
 
     this.squadraServiceService.findAll().subscribe(data => {
@@ -91,14 +93,14 @@ displayedColumns: string[] = [ 'img', 'nome', 'giocate', 'vittorie', 'pareggi', 
       Breakpoints.HandsetLandscape,
       Breakpoints.HandsetPortrait])
       .subscribe(result => {
-  
+
         this.hideForResponsive = false;
         this.hideForResponsivePhone = false;
-    
+
         const breakpoints = result.breakpoints;
-    
+
         // if (result.matches) {
-         
+
         // }
 
         if (breakpoints[Breakpoints.HandsetPortrait]) {
@@ -106,7 +108,7 @@ displayedColumns: string[] = [ 'img', 'nome', 'giocate', 'vittorie', 'pareggi', 
           this.hideForResponsive = true;
           this.displayedColumns = [ 'img', 'nome', 'punti', 'giocate', 'differenza' ];
         }
-        
+
         // else if (breakpoints[Breakpoints.HandsetLandscape]) {
         //   this.hideForResponsivePhone = true;
         //   this.hideForResponsive = false;
@@ -116,9 +118,9 @@ displayedColumns: string[] = [ 'img', 'nome', 'giocate', 'vittorie', 'pareggi', 
         //   this.hideForResponsive = false;
         //   this.hideForResponsivePhone = false;
         //   this.displayedColumns = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'meteFatti'!, 'puntiSubiti','puntiFatti','differenza' ];
-          
+
         // }
-    
+
       });
   }
 
@@ -126,14 +128,14 @@ displayedColumns: string[] = [ 'img', 'nome', 'giocate', 'vittorie', 'pareggi', 
 
     getPath(name: String): String {
       return "../../../assets/" + name + ".jpg";
-      
+
       }
 
   // }
- 
+
 
   girone(girone:number) {
-    
+
     this.squadraServiceService.findAll().subscribe(data => {
       this.squadre = data;
 
@@ -141,9 +143,9 @@ displayedColumns: string[] = [ 'img', 'nome', 'giocate', 'vittorie', 'pareggi', 
 
       this.squadre.forEach(element => {
         if(element.girone == girone) {
-  
+
           this.gironeSquadre.push(element)
-  
+
         }
       });
       // console.log(JSON.stringify(data));
@@ -156,12 +158,12 @@ displayedColumns: string[] = [ 'img', 'nome', 'giocate', 'vittorie', 'pareggi', 
       // }
     });
 
-   
+
 
   }
 
 
-  
+
 
 
 
@@ -182,7 +184,7 @@ if (slide != null && slidesContainer != null) {
 
 }
 
-  
+
 
   scrollright() {
 
@@ -195,10 +197,35 @@ if (slide != null && slidesContainer != null) {
   const slideWidth = slide.clientWidth;
   slidesContainer.scrollLeft += slideWidth;
 
-    
+
   }
 
 }
+
+  active0() {
+    this.isBold = [false,false,false,false,false,false];
+    this.isBold[0] = true;
+  }
+  active1() {
+    this.isBold = [false,false,false,false,false,false];
+    this.isBold[1] = true;
+  }
+  active2() {
+    this.isBold = [false,false,false,false,false,false];
+    this.isBold[2] = true;
+  }
+  active3() {
+    this.isBold = [false,false,false,false,false,false];
+    this.isBold[3] = true;
+  }
+  active4() {
+    this.isBold = [false,false,false,false,false,false];
+    this.isBold[4] = true;
+  }
+  active5() {
+    this.isBold = [false,false,false,false,false,false];
+    this.isBold[5] = true;
+  }
 
 }
 

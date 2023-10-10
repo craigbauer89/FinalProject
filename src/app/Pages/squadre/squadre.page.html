@@ -2,14 +2,14 @@
     <div class="box row row-cols-3">
             <h1>Classifica</h1>
               <!-- <mat-card *ngFor="let item of squadre" class="example-card" >
-              
+
                   <mat-card-title>Squadre</mat-card-title> -->
 
-                 
-                  
+
+
                   <!-- <mat-card-content> -->
                     <!-- <div *ngFor="let item of squadre ">
-                        
+
                   <p>
                       Club nome:{{item.nome}}
                       punti:{{item.punti}}
@@ -22,7 +22,7 @@
                       puntiSubiti:  {{item.puntiSubiti}}
                       puntiFatti: {{item.puntiFatti}}
                       differenza: {{item.differenza}}
-                       
+
                       <br>
 
                   </p>
@@ -38,13 +38,13 @@
               &#8249;
             </button>
             <div class="slides-container" id="slides-container">
-            <button class="slide" (click)="girone(1)">Girone 1</button>
-            <button class="slide" (click)="girone(2)">Girone 2</button>
-            <button class="slide" (click)="girone(3)">Girone 3</button>
-            <button class="slide" (click)="girone(4)">Girone 4</button>
-            <button class="slide" (click)="girone(5)">Girone 5</button>
-            <button class="slide" (click)="girone(6)">Girone 6</button>
-          
+            <button class="slide" [class.bold]="isBold[0]" (click)="girone(1)" (click)="active0()">Girone 1</button>
+            <button class="slide" [class.bold]="isBold[1]" (click)="girone(2)" (click)="active1()">Girone 2</button>
+            <button class="slide" [class.bold]="isBold[2]" (click)="girone(3)" (click)="active2()">Girone 3</button>
+            <button class="slide" [class.bold]="isBold[3]" (click)="girone(4)" (click)="active3()" >Girone 4</button>
+            <button class="slide" [class.bold]="isBold[4]" (click)="girone(5)" (click)="active4()">Girone 5</button>
+            <button class="slide" [class.bold]="isBold[5]" (click)="girone(6)"(click)="active5()" >Girone 6</button>
+
           </div>
             <button class="slide-arrow" id="slide-arrow-next" (click)="scrollright()">
               &#8250;
@@ -54,18 +54,18 @@
 
             <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
-                 
+
                   <!-- <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef >  </th>
                     <td mat-cell *matCellDef="let element"> </td>
-                    
+
                   </ng-container> -->
                   <ng-container matColumnDef="img">
                     <th mat-header-cell *matHeaderCellDef >  </th>
                     <td  class="left" mat-cell *matCellDef="let element"> <img [src]="getPath(element.jersey.color)"> </td>
-                    
+
                   </ng-container>
-               
+
 
             <!-- Position Column -->
             <ng-container matColumnDef="nome">
@@ -77,28 +77,28 @@
               <th class="center"mat-header-cell *matHeaderCellDef > Giocate </th>
               <td mat-cell *matCellDef="let element"> {{element.giocate}} </td>
             </ng-container>
-          
+
             <!-- Name Column -->
             <ng-container  *ngIf="!hideForResponsivePhone" matColumnDef="vittorie">
               <th class="center" mat-header-cell *matHeaderCellDef> Vittorie </th>
               <td mat-cell *matCellDef="let element"> {{element.vittorie}} </td>
             </ng-container>
-          
+
             <!-- Weight Column -->
             <ng-container  *ngIf="!hideForResponsivePhone" matColumnDef="pareggi">
               <th class="center"mat-header-cell *matHeaderCellDef > Pareggi </th>
               <td mat-cell *matCellDef="let element"> {{element.pareggi}} </td>
             </ng-container>
-          
+
             <!-- Symbol Column -->
             <ng-container  *ngIf="!hideForResponsivePhone" matColumnDef="sconfitte">
               <th class="center"mat-header-cell *matHeaderCellDef > Sconfitte </th>
               <td mat-cell *matCellDef="let element"> {{element.sconfitte}} </td>
             </ng-container>
 
-          
 
-             
+
+
 
               <ng-container  *ngIf="!hideForResponsive" matColumnDef="meteFatti">
                 <th class="center"mat-header-cell *matHeaderCellDef > Mete</th>
@@ -115,7 +115,7 @@
                 <td mat-cell *matCellDef="let element"> {{element.puntiSubiti}} </td>
               </ng-container>
 
-            
+
 
               <ng-container matColumnDef="differenza">
                 <th class="center"mat-header-cell *matHeaderCellDef > Diff </th>
@@ -126,9 +126,9 @@
                 <th class="center"mat-header-cell *matHeaderCellDef > Punti </th>
                 <td mat-cell *matCellDef="let element"> {{element.punti}} </td>
               </ng-container>
-          
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-          
+
   </body>

@@ -17,6 +17,9 @@ import { SquadraServiceService } from 'src/app/Services/squadra-service.service'
 })
 export class PartitePage implements OnInit {
 
+  isBold: boolean[] = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+
+
   @ViewChild('f') form!: NgForm;
   // squadre: Squadre[];
   currentId = 0;
@@ -45,7 +48,7 @@ export class PartitePage implements OnInit {
     meteSquadra1: '',
     meteSquadra2: '',
     girone: '',
-   
+
 
   }
 
@@ -64,11 +67,11 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
   dataSource4 = new MatTableDataSource(this.dataPartite4) ;
   dataSource5 = new MatTableDataSource(this.dataPartite5) ;
   dataSource6 = new MatTableDataSource(this.dataPartite6) ;
-  
+
   squadre: Squadre[] = [];
   // dataSource2 = this.squadre ;
   // dataSource2 = this.squadre ;
-  
+
   PartiteRegisterFormGroup = this._form.group({
     date: ['', Validators.required],
     squadra1: ['', Validators.required],
@@ -78,34 +81,35 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
     meteSquadra1: ['', Validators.required],
     meteSquadra2: ['', Validators.required],
     girone: ['', Validators.required],
-  
+
     });
 
 
   constructor(private partiteService: PartiteService, private SquadreServiceservice: SquadraServiceService, private _form: FormBuilder, private router: Router, private authService: AuthService, private responsive: BreakpointObserver) { }
 
   ngOnInit()  {
-    
+
+    this.isBold[0] = true;
     this.modifybox = false;
     this.SquadreServiceservice.findAll().subscribe(data => {
       this.squadre = data;
-     
+
         // this.dataSource2 = this.squadre ;
-      
+
       // let roles: any[] = JSON.parse(localStorage.getItem('roles')!);
       // for (let role in roles) {
       //   console.log(roles[role].roleName);
-        
+
       // }
 
       console.log(this.isAdmin() );
-        
+
 
       // }
     });
 
-    
-   
+
+
     this.partiteService.findAll().subscribe(data => {
       this.partite = data;
 
@@ -168,8 +172,8 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
         }
       });
 
-      
-  
+
+
         // this.dataSource = new MatTableDataSource(this.dataPartite) ;
         this.dataSource1 = new MatTableDataSource(this.dataPartite1) ;
         this.dataSource2 = new MatTableDataSource(this.dataPartite2) ;
@@ -178,7 +182,7 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
         this.dataSource5 = new MatTableDataSource(this.dataPartite5) ;
         this.dataSource6 = new MatTableDataSource(this.dataPartite6) ;
 
-        
+
       // }
     });
 
@@ -189,14 +193,14 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
       Breakpoints.HandsetLandscape,
       Breakpoints.HandsetPortrait])
       .subscribe(result => {
-  
+
         this.hideForResponsive = false;
         this.hideForResponsivePhone = false;
-    
+
         const breakpoints = result.breakpoints;
-    
+
         if (result.matches) {
-         
+
         }
 
         if (breakpoints[Breakpoints.HandsetPortrait]) {
@@ -204,7 +208,7 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
           this.hideForResponsive = true;
           this.displayedColumns = [ 'squadra1.nome', 'puntisquadra1', 'seperator','puntisquadra2', 'squadra2.nome',  'modifica', 'cancellare' ];
         }
-        
+
         // else if (breakpoints[Breakpoints.HandsetLandscape]) {
         //   this.hideForResponsivePhone = true;
         //   this.hideForResponsive = true;
@@ -214,17 +218,17 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
         //   this.hideForResponsive = false;
         //   this.hideForResponsivePhone = false;
         //   this.displayedColumns = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'seperator', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
-          
+
         // }
-    
+
       });
-      
+
 
 
   }
 
   // modifyPartita(partita:Partite) {
-  
+
   //   this.partiteService.modifyPartita(partita.id, partita)
   //   .subscribe(data => console.log(data));
 
@@ -234,7 +238,7 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
    this.modifybox = true;
    this.currentId = id;
 
-   this.partiteService.findById(this.currentId).subscribe(data => 
+   this.partiteService.findById(this.currentId).subscribe(data =>
     this.partitaData = data
     );
 
@@ -256,7 +260,7 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
         modifyedPartita= element;
          squadra1 = element.squadra1;
          squadra2 = element.squadra2;
-  
+
          squadra1.puntiFatti -= modifyedPartita.puntisquadra1;
          squadra1.puntiSubiti -= modifyedPartita.puntisquadra2;
     squadra1.meteFatti-= modifyedPartita.meteSquadra1;
@@ -265,16 +269,16 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
     squadra1.differenza -= differenza;
     squadra1.giocate -= 1;
     if (differenza > 0) {
-      squadra1.vittorie -= 1; 
-      squadra1.punti -= 4; 
+      squadra1.vittorie -= 1;
+      squadra1.punti -= 4;
     }
     else if(differenza < 0)  {
-      squadra1.sconfitte -= 1; 
-      
+      squadra1.sconfitte -= 1;
+
     }
     else {
-      squadra1.pareggi -= 1; 
-      squadra1.punti -= 2; 
+      squadra1.pareggi -= 1;
+      squadra1.punti -= 2;
     }
 
     squadra1.puntiFatti += this.form.value.puntisquadra1;
@@ -285,23 +289,23 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
     squadra1.differenza += differenza1a;
     squadra1.giocate += 1;
     if (differenza1a > 0) {
-      squadra1.vittorie += 1; 
-      squadra1.punti += 4; 
+      squadra1.vittorie += 1;
+      squadra1.punti += 4;
     }
     else if(differenza1a < 0)  {
-      squadra1.sconfitte += 1; 
-      
+      squadra1.sconfitte += 1;
+
     }
     else {
-      squadra1.pareggi += 1; 
-      squadra1.punti += 2; 
+      squadra1.pareggi += 1;
+      squadra1.punti += 2;
     }
 
-  
+
     this.SquadreServiceservice.modifySquadra(squadra1.id, squadra1)
     .subscribe(data => console.log(data));
-  
-  
+
+
     squadra2.puntiFatti -= modifyedPartita.puntisquadra2;
     squadra2.puntiSubiti -= modifyedPartita.puntisquadra1;
   squadra2.meteFatti-= modifyedPartita.meteSquadra2;
@@ -310,16 +314,16 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
   squadra2.differenza -= differenza2;
   squadra2.giocate -= 1;
   if (differenza2 > 0) {
-  squadra2.vittorie -= 1; 
-  squadra2.punti -= 4; 
+  squadra2.vittorie -= 1;
+  squadra2.punti -= 4;
   }
   else if(differenza2 < 0)  {
-  squadra2.sconfitte -= 1; 
-  
+  squadra2.sconfitte -= 1;
+
   }
   else {
-  squadra2.pareggi -= 1; 
-  squadra2.punti -= 2; 
+  squadra2.pareggi -= 1;
+  squadra2.punti -= 2;
   }
 
   squadra2.puntiFatti += this.form.value.puntisquadra2;
@@ -330,31 +334,31 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
     squadra2.differenza += differenza2a;
     squadra2.giocate += 1;
     if (differenza2a > 0) {
-      squadra2.vittorie += 1; 
-      squadra2.punti += 4; 
+      squadra2.vittorie += 1;
+      squadra2.punti += 4;
     }
     else if(differenza2a < 0)  {
-      squadra2.sconfitte += 1; 
+      squadra2.sconfitte += 1;
     }
     else {
-      squadra2.pareggi += 1; 
-      squadra2.punti += 2; 
+      squadra2.pareggi += 1;
+      squadra2.punti += 2;
     }
-  
+
   this.SquadreServiceservice.modifySquadra(squadra2.id, squadra2)
   .subscribe(data => console.log(data));
-  
+
       }}
       );
 
 
 
-  
-   
+
+
 
 
     this.modifybox = false;
-    
+
     window.alert("Partita Modifichato")
     this.partiteService.findAll().subscribe(data => {
       this.partitaData = data;
@@ -388,16 +392,16 @@ cancella(id:number) {
   squadra1.differenza -= differenza;
   squadra1.giocate -= 1;
   if (differenza > 0) {
-    squadra1.vittorie -= 1; 
-    squadra1.punti -= 4; 
+    squadra1.vittorie -= 1;
+    squadra1.punti -= 4;
   }
   else if(differenza < 0)  {
-    squadra1.sconfitte -= 1; 
-    
+    squadra1.sconfitte -= 1;
+
   }
   else {
-    squadra1.pareggi -= 1; 
-    squadra1.punti -= 2; 
+    squadra1.pareggi -= 1;
+    squadra1.punti -= 2;
   }
 
   this.SquadreServiceservice.modifySquadra(squadra1.id, squadra1)
@@ -412,16 +416,16 @@ let differenza2 = deletedPartita.puntisquadra2-deletedPartita.puntisquadra1;
 squadra2.differenza -= differenza2;
 squadra2.giocate -= 1;
 if (differenza2 > 0) {
-squadra2.vittorie -= 1; 
-squadra2.punti -= 4; 
+squadra2.vittorie -= 1;
+squadra2.punti -= 4;
 }
 else if(differenza2 < 0)  {
-squadra2.sconfitte -= 1; 
+squadra2.sconfitte -= 1;
 
 }
 else {
-squadra2.pareggi -= 1; 
-squadra2.punti -= 2; 
+squadra2.pareggi -= 1;
+squadra2.punti -= 2;
 }
 
 this.SquadreServiceservice.modifySquadra(squadra2.id, squadra2)
@@ -429,9 +433,9 @@ this.SquadreServiceservice.modifySquadra(squadra2.id, squadra2)
 
     }}
     );
-  
 
- 
+
+
 
 
 
@@ -459,22 +463,22 @@ this.SquadreServiceservice.modifySquadra(squadra2.id, squadra2)
 //   console.log(roles[role].roleName);
 
 isAdmin() {
-  
+
   let isAdmin = null;
   let roles: any[] = this.authService.getRoles();
   for (let role in roles) {
     if (((roles[role].roleName)) === 'ROLE_USER'){
       isAdmin = 'hidden-row';
-      
-      
+
+
     }
     // else {
     //   isAdmin  = 'hidden-row'
     // }
-    
+
   }
   return isAdmin;
-  
+
 }
 
 // showColumn(): string {
@@ -489,34 +493,36 @@ close() {
 
 getPath(name: String): String {
   return "../../../assets/" + name + ".jpg";
-  
+
   }
 
 
   girone(date: string) {
 
+
+
     let convert = new Date(date).toISOString();
   let convertedDate = convert.slice(0,10);
 
- 
-    
+
+
     this.partiteService.findAll().subscribe(data => {
       this.partite = data;
 
       this.dataPartite.splice(0,this.dataPartite.length);
-     
-      
+
+
       this.partite.forEach(element => {
-        
+
         let date1 =  new Date(element.date).toISOString();
         let newDate1 = date1.slice(0,10);
         // console.log(newDate1)
         // console.log(convertedDate)
         if(newDate1 == convertedDate) {
-        
+
           this.dataPartite.push(element)
-       
-  
+
+
         }
       });
 
@@ -533,44 +539,44 @@ getPath(name: String): String {
             this.dataPartite1.push(element)
           }
         });
-  
-  
+
+
         this.dataPartite.forEach(element => {
           let girone2 = 2;
           if(girone2 ==  element.girone) {
             this.dataPartite2.push(element)
           }
         });
-  
+
         this.dataPartite.forEach(element => {
           let girone3 = 3;
           if(girone3 ==  element.girone) {
             this.dataPartite3.push(element)
           }
         });
-  
+
         this.dataPartite.forEach(element => {
           let girone4 = 4;
           if(girone4 ==  element.girone) {
             this.dataPartite4.push(element)
           }
         });
-  
+
         this.dataPartite.forEach(element => {
           let girone5 = 5;
           if(girone5 ==  element.girone) {
             this.dataPartite5.push(element)
           }
         });
-  
+
         this.dataPartite.forEach(element => {
           let girone6 = 6;
           if(girone6 ==  element.girone) {
             this.dataPartite6.push(element)
           }
         });
-     
-     
+
+
       // this.dataSource = new MatTableDataSource(this.dataPartite) ;
       this.dataSource1 = new MatTableDataSource(this.dataPartite1) ;
         this.dataSource2 = new MatTableDataSource(this.dataPartite2) ;
@@ -578,7 +584,7 @@ getPath(name: String): String {
         this.dataSource4 = new MatTableDataSource(this.dataPartite4) ;
         this.dataSource5 = new MatTableDataSource(this.dataPartite5) ;
         this.dataSource6 = new MatTableDataSource(this.dataPartite6) ;
- 
+
       // console.log(JSON.stringify(data));
       // console.log(this.squadre[1]);
       // for(let cat in this.squadre) {
@@ -589,9 +595,71 @@ getPath(name: String): String {
       // }
     });
 
-   
+
 
   }
+
+  active0() {
+    this.isBold = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[0] = true;
+  }
+  active1() {
+    this.isBold = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[1] = true;
+  }
+  active2() {
+    this.isBold = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[2] = true;
+  }
+  active3() {
+    this.isBold = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[3] = true;
+  }
+  active4() {
+    this.isBold = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[4] = true;
+  }
+  active5() {
+    this.isBold = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[5] = true;
+  }
+  active6() {
+    this.isBold = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[6] = true;
+  }
+  active7() {
+    this.isBold = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[7] = true;
+  }
+  active8() {
+    this.isBold = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[8] = true;
+  }
+  active9() {
+    this.isBold = [true,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[9] = true;
+  }
+  active10() {
+    this.isBold = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[10] = true;
+  }
+  active11() {
+    this.isBold = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[11] = true;
+  }
+  active12() {
+    this.isBold = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[12] = true;
+  }
+  active13() {
+    this.isBold = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[13] = true;
+  }
+  active14() {
+    this.isBold = [false,false,false,false,false,false,false,false,false,false,false,false,false];
+    this.isBold[14] = true;
+  }
+
 
   scrollleft() {
 
@@ -607,7 +675,7 @@ if (slide != null && slidesContainer != null) {
 
 }
 
-  
+
 
   scrollright() {
 
@@ -620,9 +688,10 @@ if (slide != null && slidesContainer != null) {
   const slideWidth = slide.clientWidth;
   slidesContainer.scrollLeft += slideWidth;
 
-    
+
   }
 
 }
+
 
 }

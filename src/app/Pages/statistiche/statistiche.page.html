@@ -1,37 +1,37 @@
 <body>
     <div class="box row row-cols-3">
             <h1>Classifica</h1>
-           
+
           </div>
           <div class="slider-wrapper" class="tables">
             <!-- <button class="slide-arrow" id="slide-arrow-prev" (click)="scrollleft()">
               &#8249;
             </button> -->
             <div class="slides-container" id="slides-container">
-            <button class="slide" (click)="punti()">Punti </button>
-            <button class="slide" (click)="mete()">Mete </button>
-            <button class="slide" (click)="gialli()">Cartellini </button>
-           
-          
+            <button class="slide" [class.bold]="isBold[0]"(click)="punti()" (click)="active0()">Punti </button>
+            <button class="slide" [class.bold]="isBold[1]"(click)="mete()" (click)="active1()">Mete </button>
+            <button class="slide" [class.bold]="isBold[2]"(click)="gialli()" (click)="active2()">Cartellini </button>
+
+
           </div>
             <!-- <button class="slide-arrow" id="slide-arrow-next" (click)="scrollright()">
               &#8250;
             </button> -->
           </div>
-          <table *ngIf="showGialli === true" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="meteSubiti" matSortDirection="desc">  <!--- -->
+          <table *ngIf="showGialli === true" mat-table style="margin-top: 1.5%;"[dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="meteSubiti" matSortDirection="desc">  <!--- -->
 
                   <ng-container matColumnDef="numero">
                     <th mat-header-cell *matHeaderCellDef >  </th>
                     <td  class="left" mat-cell *matCellDef="let element;let indexOfelement=index;"> {{indexOfelement + 1}}</td>
-                    
+
                   </ng-container>
 
                   <ng-container matColumnDef="img">
                     <th mat-header-cell *matHeaderCellDef >  </th>
                     <td  class="left" mat-cell *matCellDef="let element"> <img [src]="getPath(element.jersey.color)"> </td>
-                    
+
                   </ng-container>
-               
+
             <ng-container matColumnDef="nome">
               <th style="width:55%" class="left"mat-header-cell *matHeaderCellDef> Squadra </th>
               <td class="left" mat-cell *matCellDef="let element"> {{element.nome}} </td>
@@ -46,20 +46,20 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
 
-          <table *ngIf="showPunti === true"mat-table [dataSource]="dataSource1" class="mat-elevation-z8" matSort matSortActive="puntiFatti" matSortDirection="desc">  <!--- -->
+          <table *ngIf="showPunti === true"mat-table style="margin-top: 1.5%;" [dataSource]="dataSource1" class="mat-elevation-z8" matSort matSortActive="puntiFatti" matSortDirection="desc">  <!--- -->
 
             <ng-container matColumnDef="numero">
               <th mat-header-cell *matHeaderCellDef >  </th>
               <td  class="left" mat-cell *matCellDef="let element;let indexOfelement=index;"> {{indexOfelement + 1}}</td>
-              
+
             </ng-container>
 
             <ng-container matColumnDef="img">
               <th mat-header-cell *matHeaderCellDef >  </th>
               <td  class="left" mat-cell *matCellDef="let element"> <img [src]="getPath(element.jersey.color)"> </td>
-              
+
             </ng-container>
-         
+
       <ng-container matColumnDef="nome">
         <th style="width:55%" class="left"mat-header-cell *matHeaderCellDef> Squadra </th>
         <td class="left" mat-cell *matCellDef="let element"> {{element.nome}} </td>
@@ -73,21 +73,21 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
     </table>
-    
-    <table *ngIf="showMete === true" mat-table [dataSource]="dataSource2" class="mat-elevation-z8" matSort matSortActive="meteFatti" matSortDirection="desc">  <!--- -->
+
+    <table *ngIf="showMete === true" mat-table style="margin-top: 1.5%;" [dataSource]="dataSource2" class="mat-elevation-z8" matSort matSortActive="meteFatti" matSortDirection="desc">  <!--- -->
 
         <ng-container matColumnDef="numero">
           <th mat-header-cell *matHeaderCellDef >  </th>
           <td  class="left" mat-cell *matCellDef="let element;let indexOfelement=index;"> {{indexOfelement + 1}}</td>
-          
+
         </ng-container>
 
         <ng-container matColumnDef="img">
           <th mat-header-cell *matHeaderCellDef >  </th>
           <td  class="left" mat-cell *matCellDef="let element"> <img [src]="getPath(element.jersey.color)"> </td>
-          
+
         </ng-container>
-     
+
   <ng-container matColumnDef="nome">
     <th style="width:55%" class="left"mat-header-cell *matHeaderCellDef> Squadra </th>
     <td class="left" mat-cell *matCellDef="let element"> {{element.nome}} </td>
@@ -104,7 +104,7 @@
 
 
 
-          
+
   </body>
 
 

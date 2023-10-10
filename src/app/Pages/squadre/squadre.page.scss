@@ -3,28 +3,27 @@
     // margin: 1rem;
     // position: relative;
     overflow: hidden;
+  display: flex;
   }
-  
+
   .slides-container {
-    height: calc(100vh - 2rem);
-    width: 100%;
+    height: 100%;
+    width: 90%;
     display: flex;
     overflow: scroll;
     scroll-behavior: smooth;
     list-style: none;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
   }
-  
-  .slide-arrow {
-    
-    position: absolute;
-    display: flex;
-    top: 17.5%; 
 
+  .slide-arrow {
+    display: flex;
+    top: 15%;
     margin: auto;
     height:50px;
- 
     color: grey;
     border: none;
     width: 10px;
@@ -34,34 +33,27 @@
     // opacity: 0.8;
     transition: opacity 100ms;
   }
-  
-  
-  
+
+
+
   #slide-arrow-prev {
 
     background-color: transparent;
 
-    left: 11%;
+    left: 10.5%;
     // padding-left: 0.25rem;
     // border-radius: 0 2rem 2rem 0;
   }
-  
+
   #slide-arrow-next {
     background-color: transparent;
-    right: 10%;
-  
-    width: 2.5%;
-    height: 8%;
+    right: 10.5%;
     // padding-left: 0.75rem;
     // border-radius: 2rem 0 0 2rem;
   }
-  
-  .slide {
-    height: 50px;
-    flex: 1 0 25%;
-    font-weight: bold;
-  
 
+  .slide {
+    flex: 1 0 20%;
   }
 
 
@@ -69,7 +61,7 @@
 
 table {
     background-color:  rgba(208, 227, 244, 0.95);
- 
+
     // opacity: 0.9;
     width: 80%;
     margin-left: 10%;
@@ -88,41 +80,47 @@ margin-top: 100px;
     flex-direction: row;
     color: grey;
     background-color: rgb(235, 233, 233);
-    height: 50px;
+  height: 75px;
+  flex: 1 0 10%;
 }
 
 .tables  .slide{
     width: 25%;
  border: none;
  background-color: rgb(235, 233, 233);
- font-size: 1rem;
- color: grey;
+  color: grey;
+  height: 100%;
+  font-size: 1.2rem;
 
 }
 
 
 
-.tables  button:hover{
-   border-bottom: 5px solid grey;
+.tables .slides-container button:hover{
+  border-bottom: 5px solid grey;
+  border-top: 5px solid transparent;
+  font-weight: bold;
 
 }
 
-.tables  button:active{
-    border-bottom: 5px solid black;
- 
- }
+.tables  .slides-container .bold{
+  border-bottom: 5px solid grey;
+  border-top: 5px solid transparent;
+  font-weight: bold;
+
+}
 
  :target {
     color: red;
   }
 
 .left{
-   
+
     text-align: left;
 }
 
 .center{
-   
+
     text-align: center;
   }
 
@@ -137,13 +135,13 @@ th {
     font-size: .8rem;
     color: white;
     text-align: center;
-    
+
 }
 
 td{
     text-align: center;
     color: black;
-    
+
 }
 
 .bigger {
@@ -173,30 +171,30 @@ img {
     background-color: rgba(0,0,0,0);
     border-radius: 200px;
     border: 1px solid black;
-   
+
   }
 
 
   @media only screen and (max-width:1024px) {
-    
+
     table, .tables {
       width: 90%;
       margin-left: 5%;
     margin-right: 5%;
-  
-  } 
+
+  }
 
 
   }
 
   @media only screen and (max-width:915px) {
-    
+
     table, .tables {
       width: 95%;
       margin-left: 2.5%;
     margin-right: 2.5%;
-  
-  } 
+
+  }
 
 
   }
@@ -204,29 +202,29 @@ img {
   @media only screen and (max-width:915px) {
 
     .slide-arrow {
-   
+
         top: 10%;
         color: white;
       }
-    
+
    th {
 font-size: .7rem;
 
    }
-  
+
    td {
     font-size: .7rem;
    }
 
-  } 
+  }
 
 
-  
+
   @media only screen and (max-width:450px) {
 
-  
+
   .slide-arrow {
-   
+
     top: 10%;
     color: white;
   }
@@ -241,24 +239,24 @@ font-size: .7rem;
 
 
     @media only screen and (max-width:400px) {
-  
-    
+
+
     .slide-arrow {
-    
+
       top: 12%;
       color: white;
     }
-  
-  
+
+
       }
 
 
- 
+
 
 //   @media only screen and (max-width:500px) {
-    
+
 //   table {
-   
+
 //     margin-top: 25%;
 //     width: 80%;
 
@@ -271,11 +269,11 @@ font-size: .7rem;
 // td {
 //     font-size: .8rem;
 //     text-align: right;
-  
+
 // }
 
 // .left{
-   
+
 //     text-align: left;
 // }
 
@@ -283,8 +281,8 @@ font-size: .7rem;
 //     width: 25px;
 //     height: 20px;
 
-  
+
 //   }
-    
-// } 
+
+// }
 // }
