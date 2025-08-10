@@ -39,7 +39,21 @@ import { JerseyService } from './Services/jersey.service';
 import { PartiteService } from './Services/partite.service';
 import { SquadraServiceService } from './Services/squadra-service.service';
 import { StatistichePage } from './Pages/statistiche/statistiche.page';
+import { TeamsComponent } from './teams/teams.component';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import { FormRegisterChampionshipComponent } from './form-register-championship/form-register-championship.component';
+import { FormRegisterClassificaComponent } from './form-register-classifica/form-register-classifica.component';
+import { FormRegisterJerseyComponent } from './form-register-jersey/form-register-jersey.component';
+import { FormRegisterSeasonComponent } from './form-register-season/form-register-season.component';
+import { StandingDetailsComponent } from './Components/standing-details/standing-details.component';
+import { StandingDetails2Component } from './Components/standing-details2/standing-details2.component';
+import { StandingDetails3Component } from './Components/standing-details3/standing-details3.component';
+import localeIt from '@angular/common/locales/it';
+import { PartiteDetailsComponent } from './Components/partite-details/partite-details.component';
+import { PartiteDetails2Component } from './Components/partite-details2/partite-details2.component';
+import { PartiteDetails3Component } from './Components/partite-details3/partite-details3.component'; // Import the Italian locale
 
+registerLocaleData(localeIt, 'it');  // Register the Italian locale
 
 @NgModule({
   declarations: [
@@ -56,6 +70,17 @@ import { StatistichePage } from './Pages/statistiche/statistiche.page';
     SquadreInfoPage,
     LandingPage,
     StatistichePage,
+    TeamsComponent,
+    FormRegisterChampionshipComponent,
+    FormRegisterClassificaComponent,
+    FormRegisterJerseyComponent,
+    FormRegisterSeasonComponent,
+    StandingDetailsComponent,
+    StandingDetails2Component,
+    StandingDetails3Component,
+    PartiteDetailsComponent,
+    PartiteDetails2Component,
+    PartiteDetails3Component,
     // FilterPipe,
    
   ],
@@ -79,7 +104,8 @@ import { StatistichePage } from './Pages/statistiche/statistiche.page';
     Ng2SearchPipeModule,
     MatPaginatorModule,
     NgxPaginationModule,
-    MatIconModule
+    MatIconModule,
+    CommonModule
 
     
     

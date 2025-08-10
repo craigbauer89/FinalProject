@@ -1,4 +1,11 @@
 <body>
+  <li><a  href="#" routerLink="/registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Squadre</a></li>
+    <li><a  href="#" routerLink="/registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Partite</a></li>
+    <li><a  href="#" routerLink="/registerClassifica" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Classifica</a></li>
+    <li><a  href="#" routerLink="/registerJersey" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Jersey</a></li>
+    <li><a  href="#" routerLink="/registerSeason" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Season</a></li>
+    <li><a  href="#" routerLink="/registerChampionship" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Championship</a></li>
+    
   <h1>Register Squadra</h1>
   
     <form [formGroup]="SquadreRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="onSubmit()">

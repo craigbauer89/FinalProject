@@ -6,11 +6,15 @@ import { Partite } from 'src/app/Interfaces/partite';
 import { Squadre } from 'src/app/Interfaces/squadre';
 import { PartiteService } from 'src/app/Services/partite.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
+import { ApiService } from 'src/app/api.service';
+
 
 @Component({
   templateUrl: './landing.page.html',
   styleUrls: ['./landing.page.scss']
 })
+
+
 export class LandingPage implements OnInit {
 
   @ViewChild(MatSort)
@@ -30,9 +34,14 @@ displayedColumns: string[] = [ 'img', 'nome', 'punti', 'differenza' ];
   // displayedColumns2: string[] = ['date', 'img1', 'squadra1.nome', 'puntisquadra1', 'puntisquadra2', 'squadra2.nome', 'img2' ];
   displayedColumns2: string[] = ['img1', 'puntisquadra1', 'dash',  'puntisquadra2', 'img2' ];
   dataSource2: Partite[] = [];
-  
+  standingsData: any; 
 
-  constructor(private squadraServiceService: SquadraServiceService,private partiteService: PartiteService) { }
+  teamData: any = null;
+  errorMessage: string = '';
+
+  competitions: any;
+
+  constructor(private apiService: ApiService, private squadraServiceService: SquadraServiceService,private partiteService: PartiteService) { }
  
   
   ngOnInit()  {
@@ -53,17 +62,61 @@ displayedColumns: string[] = [ 'img', 'nome', 'punti', 'differenza' ];
      
     });
 
+    this.apiService.getStandingsNRL().subscribe(
+      (response) => {
+        
+        console.log('API Response:', response);
+        let cleanData = response.replace(/^\{|\}$/g, '').trim();
+        this.standingsData = cleanData.split(','); 
+      },
+      (error) => {
+        
+        console.error('Error:', error);
+      }
+    );
+    // this.fetchData();
+
+    
+    this.apiService.findAll().subscribe( (response) => {
+      let cleanData = response.replace(/^\{|\}$/g, '').trim();
+        this.standingsData = cleanData.split(','); 
+      this.competitions = response;
+     
+        // this.dataSource2 = this.squadre ;
+      
+      // let roles: any[] = JSON.parse(localStorage.getItem('roles')!);
+      // for (let role in roles) {
+      //   console.log(roles[role].roleName);
+        
+      // }
+
+    
+        
+
+      // }
+    });
+    
   }
 
-  // ngAfterViewInit() {
+
 
     getPath(name: String): String {
       return "../../../assets/" + name + ".jpg";
       
       }
 
+  // fetchData() {
+  //   this.apiService.fetchTeamData().subscribe(
+  //     (data) => {
+  //       this.teamData = data; // Assign the fetched data to the component variable
+  //       console.log('API Response:', data); // Optional: log the data to console
+  //     },
+  //     (error) => {
+  //       this.errorMessage = error; // If an error occurs, show it
+  //       console.error('Error:', error);
+  //     }
+  //   );
   // }
- 
 
 }
 

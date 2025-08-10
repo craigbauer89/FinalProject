@@ -1,5 +1,5 @@
 import { BreakpointObserver,Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Jersey } from 'src/app/Interfaces/jersey';
@@ -15,6 +15,12 @@ import { ErrorHandler } from '@angular/core';
 })
 export class SquadreInfoPage implements OnInit {
 
+  isScreenSmall: boolean = false;
+  isScreenMed: boolean = false;
+  isScreenBig: boolean = false;
+  isScreenXLarge: boolean = false;
+  isScreenLarge: boolean = false;
+
   latitude = 45.6478998820815;
   longitude = 9.351554226855578;
   searchText: any;
@@ -27,7 +33,7 @@ export class SquadreInfoPage implements OnInit {
   cat =  "../../../assets/Velate.jpg";
   page: number = 1;
   count: number = 0;
-  tableSize: number = 8;
+  tableSize: number = 9;
   tableSizes: any = [3, 6, 9, 12];
   hideForResponsive = false;
   jersey: Jersey[] = [];
@@ -61,6 +67,35 @@ jersey: '',
     
 };
 
+@HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.checkScreenSize();
+    
+  }
+
+  private checkScreenSize(): void {
+    this.isScreenSmall = window.innerWidth < 1100; 
+    this.isScreenMed = window.innerWidth > 1100 && window.innerWidth < 1445; 
+  this. isScreenBig = window.innerWidth > 1445 && window.innerWidth < 1800; 
+  this. isScreenLarge = window.innerWidth > 1800 && window.innerWidth < 2400;  
+  this. isScreenXLarge= window.innerWidth > 2400;
+  if (this.isScreenSmall )
+  {
+    this.tableSize = 8;
+  }
+  else if (this.isScreenMed ){
+    this.tableSize = 9;
+  }
+  else if (this.isScreenBig ){
+    this.tableSize = 8;
+  }
+  else if (this.isScreenLarge ){
+    this.tableSize = 10;
+  }
+  else if (this.isScreenXLarge ){
+    this.tableSize = 12;
+  }
+  }
 
 
 cat1 = "https://www.w3schools.com";
@@ -84,6 +119,7 @@ cat1 = "https://www.w3schools.com";
 
   ngOnInit(): void {
 
+    this.checkScreenSize();
 
     this.squadraServiceService.findAllSorted().subscribe(data => {
       this.squadre = data;

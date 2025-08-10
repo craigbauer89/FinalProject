@@ -1,548 +1,528 @@
 <body>
-    <div class="box row row-cols-3">
-            <h1>Fixtures/Risultati</h1>
-             
-          </div>
-          <!-- <div class="tables">
-            <button  (click)="girone('2022-10-09')">2022-10-09</button>
-            <button (click)="girone('2022-05-09')">2022-05-09</button>
-            <button (click)="girone('2022-04-09')">2022-04-09</button>
-            <button (click)="girone('2022-03-09')">2022-03-09</button>
-          </div> -->
-          <div class="slider-wrapper" class="tables">
-            <button class="slide-arrow" id="slide-arrow-prev" (click)="scrollleft()">
-              &#8249;
-            </button>
-            <div class="slides-container" id="slides-container">
-            <button class="slide"  (click)="girone('2022-10-09')">09/10/22</button>
-            <button class="slide"  (click)="girone('2022-10-16')">16/10/22</button>
-            <button class="slide"  (click)="girone('2022-10-23')">23/10/22</button>
-            <button class="slide"  (click)="girone('2022-11-06')">06/11/22</button>
-            <button class="slide"  (click)="girone('2022-11-13')">13/11/22</button>
-            <button class="slide"  (click)="girone('2022-12-04')">04/12/22</button>
-            <button class="slide"  (click)="girone('2022-12-11')">11/12/22</button>
-            <button class="slide"  (click)="girone('2022-12-18')">18/12/22</button>
-            <button class="slide"  (click)="girone('2023-01-22')">22/01/23</button>
-            <button class="slide"  (click)="girone('2023-01-29')">29/01/23</button>
-            <button class="slide"  (click)="girone('2023-02-19')">19/02/23</button>
-            <button class="slide"  (click)="girone('2023-02-26')">26/02/23</button>
-            <button class="slide"  (click)="girone('2023-03-05')">05/03/23</button>
-            <button class="slide"  (click)="girone('2023-03-19')">19/03/23</button>
-            <button class="slide"  (click)="girone('2023-03-26')">26/03/23</button>
-            <!-- <button class="slide"  (click)="girone('2022-11-20')">2022-11-20</button>
-            <button class="slide"  (click)="girone('2022-11-27')">2022-11-27</button>
-            <button class="slide"  (click)="girone('2022-12-03')">2022-12-03</button>
-            <button class="slide"  (click)="girone('2022-12-10')">2022-12-10</button>
-            <button class="slide"  (click)="girone('2022-12-17')">2022-12-17</button> -->
+  <div class="slider-wrapper calender">
+    <div class="slide-arrow" >
+      <button id="slide-arrow-prev" (click)="scrollleft()">&#8249;</button>
+    </div>
+    <div class="slides-container" id="slides-container">
+      <button 
+        class="slide" 
+        *ngFor="let season of seasons"
+        [ngClass]="{'active-slide': isActiveSeason(season.id)}"
+        (click)="selectSeason(season.id)">
+        {{ season.year }}
+      </button>
+    </div>
+    <div class="slide-arrow" >
+      <button id="slide-arrow-next" (click)="scrollright()">&#8250;</button>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+  <!-- <div class="slider-wrapper calender">
+    <div class="slide-arrow" >
+      <button id="slide-arrow-prev" (click)="scrollleft()">&#8249;</button>
+    </div>
+    <div class="slides-container" id="slides-container">
+      <button 
+        class="slide" 
+        *ngFor="let date of partite_3"
+        [ngClass]="{'active-slide': isActiveDate(date)}"
+        (click)="selectDate(date)">
+        {{ date | date: 'EEE d/MM' : 'it' }}
+      </button>
+    </div>
+    <div class="slide-arrow" >
+      <button id="slide-arrow-next" (click)="scrollright()">&#8250;</button>
+    </div>
+  </div>
+  <div class="slider-wrapper calender">
+    <div class="slide-arrow" >
+      <button id="slide-arrow-prev" (click)="scrollleft()">&#8249;</button>
+    </div>
+    <div class="slides-container" id="slides-container">
+      <button 
+        class="slide" 
+        *ngFor="let championship of championships"
+        [ngClass]="{'active-slide': isActiveChampionship(championship.id)}"
+        (click)="selectChampionship(championship.id)">
+        {{ championship.name }}
+      </button>
+  </div>
+    <div class="slide-arrow" >
+      <button id="slide-arrow-next" (click)="scrollright()">&#8250;</button>
+    </div>
+  </div>
+  <div *ngIf="partite_2.length > 0" class="filtered-matches">
+    <h3>Matches on {{ activeDate | date: 'EEE d/MM' : 'it' }}:</h3> -->
+ <!--    <ul>
+      <li *ngFor="let partita of partite_2">
+        {{ partita.squadra1.nome }} v {{ partita.squadra2.nome }}
+        <span>{{ partita.date | date: 'd/MM/yyyy' : 'it' }}</span>
+      </li>
+    </ul> -->
+    <!-- <div *ngFor="let classificaName of groupedPartite | keyvalue">
+      <h4>{{ classificaName.key }}</h4>
  
-          </div>
-            <button class="slide-arrow" id="slide-arrow-next" (click)="scrollright()">
-              &#8250;
-            </button>
-          </div>
-1          <table mat-table style="margin-top: 1.5%;"[dataSource]="dataSource1" class="mat-elevation-z8">
-
-            <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
-              <th  style="width:3%" mat-header-cell *matHeaderCellDef> </th>
-              <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
-            </ng-container>
-      
-            <ng-container matColumnDef="squadra1.nome">
-              <th  style="width:25%" mat-header-cell *matHeaderCellDef>Girone 1   </th>
-              <td class="center" mat-cell *matCellDef="let element"> {{element.squadra1.nome}} </td>
-            </ng-container>
-
-
-      
-            <ng-container matColumnDef="puntisquadra1">
-              <th style="width:6%"mat-header-cell *matHeaderCellDef> </th>
-              <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
-            </ng-container>
-
-            <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
-                <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-                <td class="left" mat-cell *matCellDef="let element" > ({{element.meteSquadra1}}) </td>
-              </ng-container>
-
-              <ng-container  matColumnDef="seperator">
-                <th style="width:1%"mat-header-cell *matHeaderCellDef>  </th>
-                <td class="center" mat-cell *matCellDef="let element" > : </td>
-              </ng-container>
-          
-       
-            <ng-container matColumnDef="puntisquadra2">
-              <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-              <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
-            </ng-container>
-
-            <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
-                <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-                <td class="left" mat-cell *matCellDef="let element" >  ({{element.meteSquadra2}})  </td>
-              </ng-container>
-          
-          
-            <ng-container matColumnDef="squadra2.nome">
-              <th style="width:25%"mat-header-cell *matHeaderCellDef>  </th>
-              <td class="center" mat-cell *matCellDef="let element"> {{element.squadra2.nome}} </td>
-            </ng-container>
-
-            <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img2">
-              <th style="width:3%"mat-header-cell *matHeaderCellDef >  </th>
-              <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra2.jersey.color)"> </td>
-              
-            </ng-container>
-
-            <ng-container  matColumnDef="modifica">
-                <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
-                <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="modifyPartita(element.id)" color="success" >Modifica</button></td>
-              </ng-container>
-
-              
-
-              <ng-container matColumnDef="cancellare">
-                <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
-                <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="cancella(element.id)" color="cancel" >Cancella</button></td>
-              </ng-container>
-           
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-
-          <table mat-table style="margin-top: 1.5%;" [dataSource]="dataSource2" class="mat-elevation-z8">
-
-            <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
-              <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>
-              <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
-            </ng-container>
-
-      
-            <ng-container matColumnDef="squadra1.nome">
-              <th style="width:25%"  mat-header-cell *matHeaderCellDef>Girone 2   </th>
-              <td class="center" mat-cell *matCellDef="let element"> {{element.squadra1.nome}} </td>
-            </ng-container>
-
-
-      
-            <ng-container matColumnDef="puntisquadra1">
-              <th style="width:6%"mat-header-cell *matHeaderCellDef> </th>
-              <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
-            </ng-container>
-
-            <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
-                <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-                <td class="left" mat-cell *matCellDef="let element" > ({{element.meteSquadra1}}) </td>
-              </ng-container>
-
-              <ng-container  matColumnDef="seperator">
-                <th style="width:1%"mat-header-cell *matHeaderCellDef>  </th>
-                <td class="center" mat-cell *matCellDef="let element" > : </td>
-              </ng-container>
-          
-       
-            <ng-container matColumnDef="puntisquadra2">
-              <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-              <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
-            </ng-container>
-
-            <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
-                <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-                <td class="left" mat-cell *matCellDef="let element" >  ({{element.meteSquadra2}})  </td>
-              </ng-container>
-          
-          
-            <ng-container matColumnDef="squadra2.nome">
-              <th style="width:25%"mat-header-cell *matHeaderCellDef>  </th>
-              <td class="center" mat-cell *matCellDef="let element"> {{element.squadra2.nome}} </td>
-            </ng-container>
-
-            <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img2">
-              <th style="width:3%"mat-header-cell *matHeaderCellDef >  </th>
-              <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra2.jersey.color)"> </td>
-              
-            </ng-container>
-
-
-            <ng-container  matColumnDef="modifica">
-                <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
-                <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="modifyPartita(element.id)" color="success" >Modifica</button></td>
-              </ng-container>
-
-              
-
-              <ng-container matColumnDef="cancellare">
-                <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
-                <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="cancella(element.id)" color="cancel" >Cancella</button></td>
-              </ng-container>
-           
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-
-
-    <table mat-table style="margin-top: 1.5%;" [dataSource]="dataSource3" class="mat-elevation-z8">
-
-      <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
-        <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>
-        <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
+    <table mat-table [dataSource]="classificaName.value" class="mat-elevation-z8" style="margin-top: 1.5%;">
+    
+      <ng-container matColumnDef="groupHeader">
+        <th mat-header-cell *matHeaderCellDef [attr.colspan]="displayedColumns.length" class="group-header">
+          {{ classificaName.key }}
+        </th>
       </ng-container>
 
+      <tr mat-header-row *matHeaderRowDef="['groupHeader']; sticky: false"></tr>
+      <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="img1">
+        <th style="width:3%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="center" mat-cell *matCellDef="let partita">
+          <img [src]="getPath(partita.squadra1.jersey.color)">
+        </td>
+      </ng-container>
+  
       <ng-container matColumnDef="squadra1.nome">
-        <th style="width:25%" mat-header-cell *matHeaderCellDef>Girone 3   </th>
-        <td class="center" mat-cell *matCellDef="let element"> {{element.squadra1.nome}} </td>
+        <th style="width:25%" mat-header-cell *matHeaderCellDef></th>
+        <td class="center" mat-cell *matCellDef="let partita"> {{ partita.squadra1.nome }} </td>
       </ng-container>
-
-
-
+  
       <ng-container matColumnDef="puntisquadra1">
-        <th style="width:6%"mat-header-cell *matHeaderCellDef> </th>
-        <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
+        <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="right" style="font-weight: bolder" mat-cell *matCellDef="let partita"> {{ partita.puntisquadra1 }} </td>
       </ng-container>
-
+  
       <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
-          <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-          <td class="left" mat-cell *matCellDef="let element" > ({{element.meteSquadra1}}) </td>
-        </ng-container>
-
-        <ng-container  matColumnDef="seperator">
-          <th style="width:1%"mat-header-cell *matHeaderCellDef>  </th>
-          <td class="center" mat-cell *matCellDef="let element" > : </td>
-        </ng-container>
-    
- 
+        <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="left" mat-cell *matCellDef="let partita"> ({{ partita.meteSquadra1 }}) </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="seperator">
+        <th style="width:1%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="center" mat-cell *matCellDef="let partita"> : </td>
+      </ng-container>
+  
       <ng-container matColumnDef="puntisquadra2">
-        <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-        <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
+        <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="right" style="font-weight: bolder" mat-cell *matCellDef="let partita"> {{ partita.puntisquadra2 }} </td>
       </ng-container>
-
+  
       <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
-          <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-          <td class="left" mat-cell *matCellDef="let element" >  ({{element.meteSquadra2}})  </td>
-        </ng-container>
-    
-    
+        <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="left" mat-cell *matCellDef="let partita"> ({{ partita.meteSquadra2 }}) </td>
+      </ng-container>
+  
       <ng-container matColumnDef="squadra2.nome">
-        <th style="width:25%"mat-header-cell *matHeaderCellDef>  </th>
-        <td class="center" mat-cell *matCellDef="let element"> {{element.squadra2.nome}} </td>
+        <th style="width:25%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="center" mat-cell *matCellDef="let partita"> {{ partita.squadra2.nome }} </td>
       </ng-container>
-
-      <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img2">
-        <th style="width:3%"mat-header-cell *matHeaderCellDef >  </th>
-        <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra2.jersey.color)"> </td>
-        
+  
+      <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="img2">
+        <th style="width:3%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="center" mat-cell *matCellDef="let partita">
+          <img [src]="getPath(partita.squadra2.jersey.color)">
+        </td>
       </ng-container>
-
-
-
-      <ng-container  matColumnDef="modifica">
-          <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
-          <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="modifyPartita(element.id)" color="success" >Modifica</button></td>
-        </ng-container>
-
-        
-
-        <ng-container matColumnDef="cancellare">
-          <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
-          <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="cancella(element.id)" color="cancel" >Cancella</button></td>
-        </ng-container>
-     
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  
+      <ng-container matColumnDef="modifica">
+        <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell [ngClass]="isAdmin()" *matCellDef="let partita">
+          <button (click)="modifyPartita(partita.id)" color="success">Modifica</button>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="cancellare">
+        <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell [ngClass]="isAdmin()" *matCellDef="let partita">
+          <button (click)="cancella(partita.id)" color="cancel">Cancella</button>
+        </td>
+      </ng-container>
+  
+  
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+  </div>
+</div> -->
+<!-- 
 
-<table mat-table  style="margin-top: 1.5%;"[dataSource]="dataSource4" class="mat-elevation-z8">
-
-  <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
-    <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>
-    <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
-  </ng-container>
-
-  <ng-container matColumnDef="squadra1.nome">
-    <th style="width:25%" mat-header-cell *matHeaderCellDef>Girone 4   </th>
-    <td class="center" mat-cell *matCellDef="let element"> {{element.squadra1.nome}} </td>
-  </ng-container>
-
-
-
-  <ng-container matColumnDef="puntisquadra1">
-    <th style="width:6%"mat-header-cell *matHeaderCellDef> </th>
-    <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
-  </ng-container>
-
-  <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
-      <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-      <td class="left" mat-cell *matCellDef="let element" > ({{element.meteSquadra1}}) </td>
+  <div class="slider-wrapper" class="tables">
+    <div class="slide-arrow" >
+      <button id="slide-arrow-prev" (click)="scrollleft()">&#8249;</button>
+    </div>
+    <div class="slides-container" id="slides-container">
+      <button class="slide" [ngClass]="{'active-slide': isActive('2022-10-09')}" (click)="girone('2022-10-09')">09/10/22</button>
+      <button class="slide" [ngClass]="{'active-slide': isActive('2022-10-16')}"  (click)="girone('2022-10-16')">23/10/16</button>
+      <button class="slide" [ngClass]="{'active-slide': isActive('2022-10-23')}"  (click)="girone('2022-10-23')">23/10/22</button>
+      <button class="slide" [ngClass]="{'active-slide': isActive('2022-11-06')}"  (click)="girone('2022-11-06')">06/11/22</button>
+      <button class="slide" [ngClass]="{'active-slide': isActive('2022-11-13')}"  (click)="girone('2022-11-13')">13/11/22</button>
+      <button class="slide" [ngClass]="{'active-slide': isActive('2022-12-04')}"  (click)="girone('2022-12-04')">04/12/22</button>
+      <button class="slide" [ngClass]="{'active-slide': isActive('2022-12-11')}" (click)="girone('2022-12-11')">11/12/22</button>
+      <button class="slide" [ngClass]="{'active-slide': isActive('2022-12-18')}"  (click)="girone('2022-12-18')">18/12/22</button>
+      <button class="slide" [ngClass]="{'active-slide': isActive('2023-01-22')}"  (click)="girone('2023-01-22')">22/01/23</button>
+      <button class="slide" [ngClass]="{'active-slide': isActive('2023-01-29')}"  (click)="girone('2023-01-29')">29/01/23</button>
+      <button class="slide" [ngClass]="{'active-slide': isActive('2023-02-19')}"  (click)="girone('2023-02-19')">19/02/23</button>
+      <button class="slide" [ngClass]="{'active-slide': isActive('2023-02-26')}"  (click)="girone('2023-02-26')">26/02/23</button>
+      <button class="slide" [ngClass]="{'active-slide': isActive('2023-03-05')}"  (click)="girone('2023-03-05')">05/03/23</button>
+      <button class="slide" [ngClass]="{'active-slide': isActive('2023-03-19')}"  (click)="girone('2023-03-19')">19/03/23</button>
+      <button class="slide" [ngClass]="{'active-slide': isActive('2023-03-26')}"  (click)="girone('2023-03-26')">26/03/23</button> 
+    </div>
+    <div class="slide-arrow" >
+      <button id="slide-arrow-next" (click)="scrollright()">&#8250;</button>
+    </div>
+  </div>
+  <table mat-table style="margin-top: 1.5%;"[dataSource]="dataSource1" class="mat-elevation-z8">
+    <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
+      <th  style="width:3%" mat-header-cell *matHeaderCellDef> </th>
+      <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
     </ng-container>
-
+    <ng-container matColumnDef="squadra1.nome">
+      <th  style="width:25%" mat-header-cell *matHeaderCellDef>Girone 1   </th>
+      <td class="center" mat-cell *matCellDef="let element"> {{element.squadra1.nome}} </td>
+    </ng-container>
+    <ng-container matColumnDef="puntisquadra1">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef> </th>
+      <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
+    </ng-container>
+    <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
+        <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
+        <td class="left" mat-cell *matCellDef="let element" > ({{element.meteSquadra1}}) </td>
+    </ng-container>
     <ng-container  matColumnDef="seperator">
       <th style="width:1%"mat-header-cell *matHeaderCellDef>  </th>
       <td class="center" mat-cell *matCellDef="let element" > : </td>
     </ng-container>
-
-
-  <ng-container matColumnDef="puntisquadra2">
-    <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-    <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
-  </ng-container>
-
-  <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
+    <ng-container matColumnDef="puntisquadra2">
       <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-      <td class="left" mat-cell *matCellDef="let element" >  ({{element.meteSquadra2}})  </td>
+      <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
     </ng-container>
-
-
-  <ng-container matColumnDef="squadra2.nome">
-    <th style="width:25%"mat-header-cell *matHeaderCellDef>  </th>
-    <td class="center" mat-cell *matCellDef="let element"> {{element.squadra2.nome}} </td>
-  </ng-container>
-
-  <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img2">
-    <th style="width:3%"mat-header-cell *matHeaderCellDef >  </th>
-    <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra2.jersey.color)"> </td>
-    
-  </ng-container>
-
-  <ng-container  matColumnDef="modifica">
-      <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
-      <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="modifyPartita(element.id)" color="success" >Modifica</button></td>
+    <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
+        <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
+        <td class="left" mat-cell *matCellDef="let element" >  ({{element.meteSquadra2}})  </td>
     </ng-container>
-
-    
-
+    <ng-container matColumnDef="squadra2.nome">
+      <th style="width:25%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="center" mat-cell *matCellDef="let element"> {{element.squadra2.nome}} </td>
+    </ng-container>
+    <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img2">
+      <th style="width:3%"mat-header-cell *matHeaderCellDef >  </th>
+      <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra2.jersey.color)"> </td>
+    </ng-container>
+    <ng-container  matColumnDef="modifica">
+        <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="modifyPartita(element.id)" color="success" >Modifica</button></td>
+    </ng-container>
     <ng-container matColumnDef="cancellare">
       <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
       <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="cancella(element.id)" color="cancel" >Cancella</button></td>
     </ng-container>
- 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
-<table mat-table  style="margin-top: 1.5%;" [dataSource]="dataSource5" class="mat-elevation-z8">
-
-  <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
-    <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>
-    <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
-  </ng-container>
-
-  <ng-container matColumnDef="squadra1.nome">
-    <th style="width:25%" mat-header-cell *matHeaderCellDef>Girone 5   </th>
-    <td class="center" mat-cell *matCellDef="let element"> {{element.squadra1.nome}} </td>
-  </ng-container>
-
-
-
-  <ng-container matColumnDef="puntisquadra1">
-    <th style="width:6%"mat-header-cell *matHeaderCellDef> </th>
-    <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
-  </ng-container>
-
-  <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  <table mat-table style="margin-top: 1.5%;" [dataSource]="dataSource2" class="mat-elevation-z8">
+    <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
+      <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>
+      <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
+    </ng-container>
+    <ng-container matColumnDef="squadra1.nome">
+      <th style="width:25%"  mat-header-cell *matHeaderCellDef>Girone 2   </th>
+      <td class="center" mat-cell *matCellDef="let element"> {{element.squadra1.nome}} </td>
+    </ng-container>
+    <ng-container matColumnDef="puntisquadra1">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef> </th>
+      <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
+    </ng-container>
+    <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
       <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
       <td class="left" mat-cell *matCellDef="let element" > ({{element.meteSquadra1}}) </td>
     </ng-container>
-
     <ng-container  matColumnDef="seperator">
       <th style="width:1%"mat-header-cell *matHeaderCellDef>  </th>
       <td class="center" mat-cell *matCellDef="let element" > : </td>
     </ng-container>
-
-
-  <ng-container matColumnDef="puntisquadra2">
-    <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-    <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
-  </ng-container>
-
-  <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
+    <ng-container matColumnDef="puntisquadra2">
       <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-      <td class="left" mat-cell *matCellDef="let element" >  ({{element.meteSquadra2}})  </td>
+      <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
     </ng-container>
-
-
-  <ng-container matColumnDef="squadra2.nome">
-    <th style="width:25%"mat-header-cell *matHeaderCellDef>  </th>
-    <td class="center" mat-cell *matCellDef="let element"> {{element.squadra2.nome}} </td>
-  </ng-container>
-
-  <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img2">
-    <th style="width:3%"mat-header-cell *matHeaderCellDef >  </th>
-    <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra2.jersey.color)"> </td>
-    
-  </ng-container>
-
-
-
-  <ng-container  matColumnDef="modifica">
-      <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
-      <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="modifyPartita(element.id)" color="success" >Modifica</button></td>
+    <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
+        <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
+        <td class="left" mat-cell *matCellDef="let element" >  ({{element.meteSquadra2}})  </td>
+      </ng-container>
+    <ng-container matColumnDef="squadra2.nome">
+      <th style="width:25%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="center" mat-cell *matCellDef="let element"> {{element.squadra2.nome}} </td>
     </ng-container>
-
-    
-
-    <ng-container matColumnDef="cancellare">
-      <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
-      <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="cancella(element.id)" color="cancel" >Cancella</button></td>
+    <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img2">
+      <th style="width:3%"mat-header-cell *matHeaderCellDef >  </th>
+      <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra2.jersey.color)"> </td>
     </ng-container>
- 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <ng-container  matColumnDef="modifica">
+        <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="modifyPartita(element.id)" color="success" >Modifica</button></td>
+      </ng-container>
+      <ng-container matColumnDef="cancellare">
+        <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="cancella(element.id)" color="cancel" >Cancella</button></td>
+      </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 
-<table mat-table  style="margin-top: 1.5%;" [dataSource]="dataSource6" class="mat-elevation-z8">
-
-  <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
-    <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>
-    <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
-  </ng-container>
-
-  <ng-container matColumnDef="squadra1.nome">
-    <th style="width:25%" mat-header-cell *matHeaderCellDef>Girone 6   </th>
-    <td class="center" mat-cell *matCellDef="let element"> {{element.squadra1.nome}} </td>
-  </ng-container>
-
-
-
-  <ng-container matColumnDef="puntisquadra1">
-    <th style="width:6%"mat-header-cell *matHeaderCellDef> </th>
-    <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
-  </ng-container>
-
-  <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
+  <table mat-table style="margin-top: 1.5%;" [dataSource]="dataSource3" class="mat-elevation-z8">
+    <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
+      <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>
+      <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
+    </ng-container>
+    <ng-container matColumnDef="squadra1.nome">
+      <th style="width:25%" mat-header-cell *matHeaderCellDef>Girone 3   </th>
+      <td class="center" mat-cell *matCellDef="let element"> {{element.squadra1.nome}} </td>
+    </ng-container>
+    <ng-container matColumnDef="puntisquadra1">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef> </th>
+      <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
+    </ng-container>
+    <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
       <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
       <td class="left" mat-cell *matCellDef="let element" > ({{element.meteSquadra1}}) </td>
     </ng-container>
-
     <ng-container  matColumnDef="seperator">
       <th style="width:1%"mat-header-cell *matHeaderCellDef>  </th>
       <td class="center" mat-cell *matCellDef="let element" > : </td>
     </ng-container>
-
-
-  <ng-container matColumnDef="puntisquadra2">
-    <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
-    <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
-  </ng-container>
-
-  <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
+    <ng-container matColumnDef="puntisquadra2">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
+      <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
+    </ng-container>
+    <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
       <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
       <td class="left" mat-cell *matCellDef="let element" >  ({{element.meteSquadra2}})  </td>
     </ng-container>
-
-
-  <ng-container matColumnDef="squadra2.nome">
-    <th style="width:25%"mat-header-cell *matHeaderCellDef>  </th>
-    <td class="center" mat-cell *matCellDef="let element"> {{element.squadra2.nome}} </td>
-  </ng-container>
-
-  <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img2">
-    <th style="width:3%"mat-header-cell *matHeaderCellDef >  </th>
-    <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra2.jersey.color)"> </td>
-    
-  </ng-container>
-
-
-  <ng-container  matColumnDef="modifica">
+    <ng-container matColumnDef="squadra2.nome">
+      <th style="width:25%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="center" mat-cell *matCellDef="let element"> {{element.squadra2.nome}} </td>
+    </ng-container>
+    <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img2">
+      <th style="width:3%"mat-header-cell *matHeaderCellDef >  </th>
+      <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra2.jersey.color)"> </td>
+    </ng-container>
+    <ng-container  matColumnDef="modifica">
       <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
       <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="modifyPartita(element.id)" color="success" >Modifica</button></td>
     </ng-container>
-
-    
-
     <ng-container matColumnDef="cancellare">
       <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
       <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="cancella(element.id)" color="cancel" >Cancella</button></td>
     </ng-container>
- 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <table mat-table  style="margin-top: 1.5%;"[dataSource]="dataSource4" class="mat-elevation-z8">
+    <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
+      <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>
+      <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
+    </ng-container>
+    <ng-container matColumnDef="squadra1.nome">
+      <th style="width:25%" mat-header-cell *matHeaderCellDef>Girone 4   </th>
+      <td class="center" mat-cell *matCellDef="let element"> {{element.squadra1.nome}} </td>
+    </ng-container>
+    <ng-container matColumnDef="puntisquadra1">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef> </th>
+      <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
+    </ng-container>
+    <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="left" mat-cell *matCellDef="let element" > ({{element.meteSquadra1}}) </td>
+    </ng-container>
+    <ng-container  matColumnDef="seperator">
+      <th style="width:1%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="center" mat-cell *matCellDef="let element" > : </td>
+    </ng-container>
+    <ng-container matColumnDef="puntisquadra2">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
+      <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
+    </ng-container>
+    <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="left" mat-cell *matCellDef="let element" >  ({{element.meteSquadra2}})  </td>
+    </ng-container>
+    <ng-container matColumnDef="squadra2.nome">
+      <th style="width:25%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="center" mat-cell *matCellDef="let element"> {{element.squadra2.nome}} </td>
+    </ng-container>
+    <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img2">
+      <th style="width:3%"mat-header-cell *matHeaderCellDef >  </th>
+      <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra2.jersey.color)"> </td>
+    </ng-container>
+    <ng-container  matColumnDef="modifica">
+        <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="modifyPartita(element.id)" color="success" >Modifica</button></td>
+      </ng-container>
+      <ng-container matColumnDef="cancellare">
+        <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="cancella(element.id)" color="cancel" >Cancella</button></td>
+      </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <table mat-table  style="margin-top: 1.5%;" [dataSource]="dataSource5" class="mat-elevation-z8">
+    <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
+      <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>
+      <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
+    </ng-container>
+    <ng-container matColumnDef="squadra1.nome">
+      <th style="width:25%" mat-header-cell *matHeaderCellDef>Girone 5   </th>
+      <td class="center" mat-cell *matCellDef="let element"> {{element.squadra1.nome}} </td>
+    </ng-container>
+    <ng-container matColumnDef="puntisquadra1">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef> </th>
+      <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
+    </ng-container>
+    <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="left" mat-cell *matCellDef="let element" > ({{element.meteSquadra1}}) </td>
+    </ng-container>
+    <ng-container  matColumnDef="seperator">
+      <th style="width:1%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="center" mat-cell *matCellDef="let element" > : </td>
+    </ng-container>
+    <ng-container matColumnDef="puntisquadra2">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
+      <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
+    </ng-container>
+    <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="left" mat-cell *matCellDef="let element" >  ({{element.meteSquadra2}})  </td>
+    </ng-container>
+    <ng-container matColumnDef="squadra2.nome">
+      <th style="width:25%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="center" mat-cell *matCellDef="let element"> {{element.squadra2.nome}} </td>
+    </ng-container>
+    <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img2">
+      <th style="width:3%"mat-header-cell *matHeaderCellDef >  </th>
+      <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra2.jersey.color)"> </td>
+    </ng-container>
+    <ng-container  matColumnDef="modifica">
+      <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
+      <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="modifyPartita(element.id)" color="success" >Modifica</button></td>
+    </ng-container>
+    <ng-container matColumnDef="cancellare">
+      <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
+      <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="cancella(element.id)" color="cancel" >Cancella</button></td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <table mat-table  style="margin-top: 1.5%;" [dataSource]="dataSource6" class="mat-elevation-z8">
+    <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img1">
+      <th   style="width:3%"mat-header-cell *matHeaderCellDef> </th>
+      <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra1.jersey.color)"> </td>
+    </ng-container>
+    <ng-container matColumnDef="squadra1.nome">
+      <th style="width:25%" mat-header-cell *matHeaderCellDef>Girone 6   </th>
+      <td class="center" mat-cell *matCellDef="let element"> {{element.squadra1.nome}} </td>
+    </ng-container>
+    <ng-container matColumnDef="puntisquadra1">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef> </th>
+      <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element"> {{element.puntisquadra1}} </td>
+    </ng-container>
+    <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="left" mat-cell *matCellDef="let element" > ({{element.meteSquadra1}}) </td>
+    </ng-container>
+    <ng-container  matColumnDef="seperator">
+      <th style="width:1%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="center" mat-cell *matCellDef="let element" > : </td>
+    </ng-container>
+    <ng-container matColumnDef="puntisquadra2">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
+      <td style="font-weight:bolder" class="right" mat-cell *matCellDef="let element" > {{element.puntisquadra2}} </td>
+    </ng-container>
+    <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
+      <th style="width:6%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="left" mat-cell *matCellDef="let element" >  ({{element.meteSquadra2}})  </td>
+    </ng-container>
+    <ng-container matColumnDef="squadra2.nome">
+      <th style="width:25%"mat-header-cell *matHeaderCellDef>  </th>
+      <td class="center" mat-cell *matCellDef="let element"> {{element.squadra2.nome}} </td>
+    </ng-container>
+    <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="img2">
+      <th style="width:3%"mat-header-cell *matHeaderCellDef >  </th>
+      <td class="center" mat-cell *matCellDef="let element"> <img [src]="getPath(element.squadra2.jersey.color)"> </td>
+    </ng-container>
+    <ng-container  matColumnDef="modifica">
+      <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
+      <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="modifyPartita(element.id)" color="success" >Modifica</button></td>
+    </ng-container>
+    <ng-container matColumnDef="cancellare">
+      <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef>  </th>
+      <td mat-cell [ngClass]="isAdmin()" *matCellDef="let element"> <button  (click)="cancella(element.id)" color="cancel" >Cancella</button></td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 
 
-          <div *ngIf="modifybox === true">
-
-            <div >
-                <h1>Mofifche Partita</h1>
-                <form [formGroup]="PartiteRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="modify()">
-                    
-                    <div class="modify">
-
-                      
-
-                        <mat-form-field appearance="fill">
-                            <mat-label>Squadra 1</mat-label>
-                            <mat-select formControlName="squadra1" class="form-control">
-                                <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['squadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'squadra1')">*Il Squadra e obbligatorio!</span>
-                            <mat-option *ngFor="let p of squadre" [value]="p">
-                            {{ p.nome }}
-                          </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Date</mat-label>
-                            <input [ngModel]= "partitaData.date"matInput type="date" formControlName="date" class="form-control" placeholder=" Date" required>
-                            <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['date'].dirty && PartiteRegisterFormGroup.hasError('required', 'date')">*Il Score e obbligatorio!</span>
-                          </mat-form-field>
-                  <mat-form-field appearance="fill">
-                    <mat-label>Score</mat-label>
-                    <input matInput [ngModel]= "partitaData.puntisquadra1"type="number" formControlName="puntisquadra1" class="form-control" placeholder=" Score" required>
-                    <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['puntisquadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'puntisquadra1')">*Il Score e obbligatorio!</span>
-                  </mat-form-field>
-                  <mat-form-field appearance="fill">
-                    <mat-label>Mete</mat-label>
-                    <input matInput [ngModel]= "partitaData.meteSquadra1"type="number" formControlName="meteSquadra1" class="form-control" placeholder=" Mete" required>
-                    <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['meteSquadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'meteSquadra1')">*Le Mete e obbligatorio!</span>
-                  </mat-form-field>
-        
-             
-            
-                <mat-form-field appearance="fill">
-                    <mat-label>Squadra 2</mat-label>
-       
-                        <mat-select formControlName="squadra2" class="form-control">
-                            <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['squadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'squadra2')">*Il Squadra e obbligatorio!</span>
-               
-                    <mat-option *ngFor="let p of squadre" [value]="p">
-                    {{ p.nome }}
-                  </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>Score</mat-label>
-                <input matInput [ngModel]= "partitaData.puntisquadra2"type="number" formControlName="puntisquadra2" class="form-control" placeholder=" Score" required>
-                <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['puntisquadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'puntisquadra2')">*Il Score e obbligatorio!</span>
-              </mat-form-field>
-              <mat-form-field appearance="fill">
-                <mat-label>Mete</mat-label>
-                <input matInput [ngModel]= "partitaData.meteSquadra2"type="number" formControlName="meteSquadra2" class="form-control" placeholder=" Mete" required>
-                <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['meteSquadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'meteSquadra2')">*Le Mete e obbligatorio!</span>
-              </mat-form-field>
-        
-                  <button mat-button  [disabled]="!PartiteRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
-               
-                  <button mat-button class="enter" (click)="close()" style="width : 10em; height: 3em;" >Close</button>
-                </div>
-                <div class="alert alert-danger" role="alert" *ngIf="error">
-                  {{error}}
-                </div>
-                </form>
-                
-            </div>
+  <div *ngIf="modifybox === true">
+    <div>
+      <h1>Mofifche Partita</h1>
+      <form [formGroup]="PartiteRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="modify()">
+        <div class="modify">
+          <mat-form-field appearance="fill">
+            <mat-select [(ngModel)]="partitaData.squadra1" [placeholder]="partitaData.squadra1.nome" formControlName="squadra1" class="form-control">
+                <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['squadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'squadra1')">*Il Squadra e obbligatorio!</span>
+                <mat-option *ngFor="let p of squadre" [value]="p">{{ p.nome }}</mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Date</mat-label>
+            <input [ngModel]= "partitaData.date"matInput type="date" formControlName="date" class="form-control" placeholder=" Date" required>
+            <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['date'].dirty && PartiteRegisterFormGroup.hasError('required', 'date')">*Il Score e obbligatorio!</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Girone</mat-label>
+            <input [ngModel]= "partitaData.girone"matInput type="text" formControlName="girone" class="form-control" placeholder=" Girone" required>
+            <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['girone'].dirty && PartiteRegisterFormGroup.hasError('required', 'girone')">*Il Score e obbligatorio!</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Score</mat-label>
+            <input matInput [ngModel]= "partitaData.puntisquadra1"type="number" formControlName="puntisquadra1" class="form-control" placeholder=" Score" required>
+            <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['puntisquadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'puntisquadra1')">*Il Score e obbligatorio!</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Mete</mat-label>
+            <input matInput [ngModel]= "partitaData.meteSquadra1"type="number" formControlName="meteSquadra1" class="form-control" placeholder=" Mete" required>
+            <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['meteSquadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'meteSquadra1')">*Le Mete e obbligatorio!</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+          <mat-select [(ngModel)]="partitaData.squadra2" [placeholder]="partitaData.squadra2.nome" formControlName="squadra2" class="form-control">
+            <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['squadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'squadra2')">*Il Squadra e obbligatorio!</span>
+            <mat-option *ngFor="let p of squadre" [value]="p">{{ p.nome }}</mat-option>
+          </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Score</mat-label>
+            <input matInput [ngModel]= "partitaData.puntisquadra2"type="number" formControlName="puntisquadra2" class="form-control" placeholder=" Score" required>
+            <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['puntisquadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'puntisquadra2')">*Il Score e obbligatorio!</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Mete</mat-label>
+            <input matInput [ngModel]= "partitaData.meteSquadra2"type="number" formControlName="meteSquadra2" class="form-control" placeholder=" Mete" required>
+            <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['meteSquadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'meteSquadra2')">*Le Mete e obbligatorio!</span>
+          </mat-form-field>
+          <button mat-button  [disabled]="!PartiteRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
+          <button mat-button class="enter" (click)="close()" style="width : 10em; height: 3em;" >Close</button>
         </div>
+        <div class="alert alert-danger" role="alert" *ngIf="error">{{error}}</div>
+      </form>
+    </div>
+  </div>
 
-
-
-
-        <div *ngIf="areYouSure === true">
-
-            <div class="modify">
-                <h2>Sei sicuro?</h2>
-                
-                  <button mat-button   (click)="cancellaPartita()" style="width : 10em; height: 3em;">Cancella</button>
-               <br>
-                  <button mat-button class="enter" (click)="close()" style="width : 10em; height: 3em;" >Close</button>
-               
-                
-            </div>
-        </div>
-          
-  </body>
+  <div *ngIf="areYouSure === true">
+    <div class="modify">
+        <h2>Sei sicuro?</h2>
+        <button mat-button   (click)="cancellaPartita()" style="width : 10em; height: 3em;">Cancella</button>
+        <br>
+        <button mat-button class="enter" (click)="close()" style="width : 10em; height: 3em;" >Close</button>
+    </div>
+  </div>    -->
+</body>
 

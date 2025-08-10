@@ -17,7 +17,7 @@ export class SquadraServiceService {
     //this.squadreUrl = '/squadre';
      this.squadreUrl = 'http://localhost:8080/squadre';
     //this.squadreUrlSorted = '/squadre/sorted';
-    this.squadreUrlSorted = 'http://localhost:8080/squadre/sorted';
+    this.squadreUrlSorted = 'http://localhost:8080/squadre/sortedbruv';
   }
 
 
@@ -25,10 +25,13 @@ export class SquadraServiceService {
   // signclient(obj: Squadre) {
   //   return this.http.post(this.Server + '/squadre', obj);
   // }
-  public findById(id: number): Observable<Squadre[]> {
-    return this.http.get<Squadre[]>(this.squadreUrl + '/' + id);
+  public findById(id: number): Observable<Squadre> {
+    return this.http.get<Squadre>(this.squadreUrl + '/' + id);
   }
 
+  public getByClassificaId(id: number): Observable<Squadre[]> {
+    return this.http.get<Squadre[]>(this.squadreUrl + '/' + 'by-classifica' + '/' + id);
+  }
 
   public findAll(): Observable<Squadre[]> {
     return this.http.get<Squadre[]>(this.squadreUrl);

@@ -1,8 +1,10 @@
+import { Classifica } from "./classifica";
 import { Jersey } from "./jersey";
+import { Partite } from "./partite";
 
 export interface Squadre {
 
-id:any;
+id:number;
 nome: string;
 allenatore: string;
 sito: string;
@@ -21,6 +23,9 @@ puntiFatti: number;
 differenza: number;
 jersey: Jersey;
 girone: number;
+classifica: Classifica;
+homegames: Partite [];
+awaygames: Partite [];
 
 
 }

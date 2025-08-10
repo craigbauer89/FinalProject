@@ -1,171 +1,161 @@
 
-.slider-wrapper {
-    // margin: 1rem;
-    // position: relative;
-    overflow: hidden;
-  }
-  
-  .slides-container {
-    height: calc(100vh - 2rem);
-    width: 100%;
-    display: flex;
-    overflow: scroll;
-    scroll-behavior: smooth;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .slide-arrow {
-    
-    position: absolute;
-    display: flex;
-    top: 17.5%; 
-
-    margin: auto;
-    height:50px;
- 
-    color: grey;
-    border: none;
-    width: 10px;
-    font-size: 3rem;
-    padding: 0;
-    cursor: pointer;
-    // opacity: 0.8;
-    transition: opacity 100ms;
-  }
-  
-  
-  
-  #slide-arrow-prev {
-
-    background-color: transparent;
-
-    left: 11%;
-    // padding-left: 0.25rem;
-    // border-radius: 0 2rem 2rem 0;
-  }
-  
-  #slide-arrow-next {
-    background-color: transparent;
-    right: 10%;
-  
-    width: 2.5%;
-    height: 8%;
-    // padding-left: 0.75rem;
-    // border-radius: 2rem 0 0 2rem;
-  }
-  
-  .slide {
-    height: 50px;
-    flex: 1 0 25%;
-    font-weight: bold;
-  
-
-  }
 
 
+.calender {
+  width: 95%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  padding-top: 100px;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  color: grey;
+  background-color: rgb(235, 233, 233);
+  height: 50px;
+  background-color: transparent;
+}
 
-
-table {
-    background-color:  rgba(208, 227, 244, 0.95);
- 
-    // opacity: 0.9;
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-    text-align: center;
-    border-radius: 5px;
+.slides-container {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  overflow:hidden;
+  scroll-behavior: smooth;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 
 }
 
-.tables {
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-margin-top: 100px;
-    display: flex;
-    flex-direction: row;
-    color: grey;
-    background-color: rgb(235, 233, 233);
-    height: 50px;
+.slide-arrow {
+  width: 10%;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 100ms;
+  height: 100%;
 }
 
-.tables  .slide{
-    width: 25%;
+.slide-arrow button{
+ padding: 0;
+ margin: 0;
  border: none;
  background-color: rgb(235, 233, 233);
- font-size: 1rem;
+ font-size: 1.5rem;
  color: grey;
+ font-weight: bold;
+ height: 100%;
+}
+
+.slide-arrow button:hover{
+  color: black;
+  cursor:pointer ;
+}
+
+#slide-arrow-prev {
+  width: 100%;
+  height: 100%;
 
 }
 
+#slide-arrow-next {
+  width: 100%;
+  height: 100%;
+}
+  
+
+.calender .slides-container  .slide{
+ width: 25%;
+ border: none;
+ background-color: rgb(235, 233, 233);
+ font-size: .7rem;
+ color: grey;
+ flex: 1 0 25%;
+ font-weight: bold;
+ border-bottom: 3px solid transparent;
+}
+
+.slider-wrapper {
+  overflow: hidden;
+}
+
+.active-slide {
+  /* Your styles for the active-slide class */
+  border-bottom: 4px solid black !important;
+  color: black !important;
+  font-size: .8rem !important;
+}
 
 
-.tables  button:hover{
-   border-bottom: 5px solid grey;
+.calender  .slides-container button:hover{
+  border-bottom: 3px solid grey;
 
 }
 
-.tables  button:active{
-    border-bottom: 5px solid black;
+.calender  .slides-container button:active{
+    border-bottom: 3px solid grey;
  
- }
+}
 
- :target {
-    color: red;
-  }
+:target {
+  color: red;
+}
 
 .left{
-   
-    text-align: left;
+  text-align: left;
 }
 
 .center{
-   
-    text-align: center;
+  text-align: center;
   }
 
-h1 {
-    color: transparent;
+.bold{
+  font-weight:900;
 }
 
+table {
+    background-color:  rgba(208, 227, 244, 0.95);
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    text-align: center;
+    border-radius: 5px;
+}
+
+h1 {
+  color: transparent;
+}
 
 th {
-    background-color:rgb(12, 105, 244);
-    width: 80px;
-    font-size: .8rem;
-    color: white;
-    text-align: center;
-    
+  background-color:rgb(12, 105, 244);
+  width: 80px;
+  font-size: .8rem;
+  color: white;
+  text-align: center;
 }
 
 td{
-    text-align: center;
-    color: black;
-    
+  text-align: center;
+  color: black;
+  font-size: .7rem;
+
+
 }
 
-.bigger {
-    width: 1000px;
-}
+
 
 body {
-    background-image: url(../../../assets/rugby-g1d8010854_1920.jpg);
-    background-position: 40% 40%;
+  background-image: url(../../../assets/rugby-g1d8010854_1920.jpg);
+  background-position: 40% 40%;
 }
 
 .mat-row:nth-child(2n)  {
-    // background-color: darkgray;
-     background-color: white;
+  background-color: white;
 }
 
 .mat-row:hover {
-    background-color: rgb(64, 62, 62);
-   td {color: white;}
-
+  background-color: rgb(64, 62, 62);
+  td {color: white;}
 }
-
 
 img {
     width: 25px;
@@ -173,118 +163,49 @@ img {
     background-color: rgba(0,0,0,0);
     border-radius: 200px;
     border: 1px solid black;
-   
-  }
-
-
-  @media only screen and (max-width:1024px) {
-    
-    table, .tables {
-      width: 90%;
-      margin-left: 5%;
-    margin-right: 5%;
-  
-  } 
-
-
-  }
-
-  @media only screen and (max-width:915px) {
-    
-    table, .tables {
-      width: 95%;
-      margin-left: 2.5%;
-    margin-right: 2.5%;
-  
-  } 
-
-
-  }
-
-  @media only screen and (max-width:915px) {
-
-    .slide-arrow {
-   
-        top: 10%;
-        color: white;
-      }
-    
-   th {
-font-size: .7rem;
-
-   }
-  
-   td {
-    font-size: .7rem;
-   }
-
-  } 
-
-
-  
-  @media only screen and (max-width:450px) {
-
-  
-  .slide-arrow {
-   
-    top: 10%;
-    color: white;
-  }
-
-
-  body {
-  height: 1000px;
 }
 
 
-    }
+@media only screen and (min-width:500px) {
+
+  .calender , table{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
 
 
-    @media only screen and (max-width:400px) {
-  
-    
-    .slide-arrow {
-    
-      top: 12%;
-      color: white;
-    }
-  
-  
-      }
+@media only screen and (min-width:700px) {
 
+  .calender , table{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
 
- 
+@media only screen and (min-width:1024px) {
 
-//   @media only screen and (max-width:500px) {
-    
-//   table {
+  body {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+
+@media only screen and (min-width:1700px) {
+
+  body {
+
+    margin-left: 20%;
+    margin-right: 20%;
+
    
-//     margin-top: 25%;
-//     width: 80%;
+  }
 
 
-// th {
-//     font-size: .7rem;
-//     text-align: right;
-// }
 
-// td {
-//     font-size: .8rem;
-//     text-align: right;
-  
-// }
+}
 
-// .left{
-   
-//     text-align: left;
-// }
+// only at 950 loooks good with all fields
 
-// img {
-//     width: 25px;
-//     height: 20px;
-
-  
-//   }
-    
-// } 
-// }

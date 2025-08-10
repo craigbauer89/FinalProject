@@ -1,0 +1,54 @@
+<!-- <h2 *ngFor="let squadra of squadre">{{ squadra.nome }}</h2> -->
+
+  <table mat-table style="margin-top: 1.5%;" [dataSource]="dataSource" class="mat-elevation-z8" matSort [matSortActive]="'punti'" [matSortDirection]="'desc'">
+    <!-- <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef >  </th>
+      <td mat-cell *matCellDef="let element"> </td>
+    </ng-container> -->
+    <ng-container matColumnDef="img">
+      <th mat-header-cell *matHeaderCellDef >  </th>
+      <td  class="left" mat-cell *matCellDef="let element"> <img [src]="getPath(element.jersey.color)"> </td>
+    </ng-container>
+    <ng-container matColumnDef="nome">
+      <th style="width:35%" class="left"mat-header-cell *matHeaderCellDef> Squadra </th>
+      <td class="left" mat-cell *matCellDef="let element"> {{element.nome}} </td>
+    </ng-container>
+    <ng-container matColumnDef="giocate">
+      <th class="center"mat-header-cell *matHeaderCellDef > G </th>
+      <td mat-cell *matCellDef="let element"> {{element.giocate}} </td>
+    </ng-container>
+    <ng-container  *ngIf="!hideForResponsivePhone" matColumnDef="vittorie">
+      <th class="center" mat-header-cell *matHeaderCellDef> V </th>
+      <td mat-cell *matCellDef="let element"> {{element.vittorie}} </td>
+    </ng-container>
+    <ng-container  *ngIf="!hideForResponsivePhone" matColumnDef="pareggi">
+      <th class="center"mat-header-cell *matHeaderCellDef > N </th>
+      <td mat-cell *matCellDef="let element"> {{element.pareggi}} </td>
+    </ng-container>
+    <ng-container  *ngIf="!hideForResponsivePhone" matColumnDef="sconfitte">
+      <th class="center"mat-header-cell *matHeaderCellDef > P </th>
+      <td mat-cell *matCellDef="let element"> {{element.sconfitte}} </td>
+    </ng-container>
+    <ng-container  *ngIf="!hideForResponsive" matColumnDef="meteFatti">
+      <th class="center"mat-header-cell *matHeaderCellDef > M</th>
+      <td mat-cell *matCellDef="let element"> {{element.meteFatti}} </td>
+    </ng-container>
+    <ng-container  *ngIf="!hideForResponsive" matColumnDef="puntiFatti">
+      <th class="center" mat-header-cell *matHeaderCellDef > PF </th>
+      <td mat-cell *matCellDef="let element"> {{element.puntiFatti}} </td>
+    </ng-container>
+    <ng-container  *ngIf="!hideForResponsive" matColumnDef="puntiSubiti">
+      <th class="center"mat-header-cell *matHeaderCellDef > PS </th>
+      <td mat-cell *matCellDef="let element"> {{element.puntiSubiti}} </td>
+    </ng-container>
+    <ng-container matColumnDef="differenza">
+      <th class="center"mat-header-cell *matHeaderCellDef > DR </th>
+      <td mat-cell *matCellDef="let element"> {{element.differenza}} </td>
+    </ng-container>
+    <ng-container matColumnDef="punti">
+      <th class="center"mat-header-cell *matHeaderCellDef > PT </th>
+      <td class="bold"mat-cell *matCellDef="let element"> {{element.punti}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

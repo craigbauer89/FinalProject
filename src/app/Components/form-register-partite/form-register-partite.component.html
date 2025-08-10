@@ -1,8 +1,38 @@
 <body>
+
+  <li><a  href="#" routerLink="/registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Squadre</a></li>
+  <li><a  href="#" routerLink="/registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Partite</a></li>
+  <li><a  href="#" routerLink="/registerClassifica" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Classifica</a></li>
+  <li><a  href="#" routerLink="/registerJersey" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Jersey</a></li>
+  <li><a  href="#" routerLink="/registerSeason" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Season</a></li>
+  <li><a  href="#" routerLink="/registerChampionship" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Championship</a></li>
+
     <h1>Register Partite</h1>
+    <h2>Select Season</h2>
+    <div class="buttons">
+      
+        <button 
+        class="slide" 
+        *ngFor="let season of seasons"
+        [ngClass]="{'active-slide': isActiveSeason(season.id)}"
+        (click)="selectSeason(season.id)">
+        {{ season.year }}
+        </button>
+    </div>
+    <h2>Select Championship</h2>
+    <div class="buttons">
+      
+      <button 
+      class="slide2" 
+    *ngFor="let championship of championships"
+    [ngClass]="{'active-slide': isActiveChampionship(championship.id)}"
+    (click)="selectChampionship(championship.id)">
+    {{ championship.name }}
+      </button>
+  </div>
     <form [formGroup]="PartiteRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="onSubmit()">
         
-        <div>
+        <div class="main">
           <h2>Inserisci Partita</h2>
             <mat-form-field appearance="fill">
                 <mat-label  style="color: white">Date</mat-label>
@@ -15,7 +45,7 @@
                 <mat-select formControlName="squadra1" class="form-control">
                     <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['squadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'squadra1')">*Il Squadra e obbligatorio!</span>
               <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
-                <mat-option *ngFor="let p of squadre" [value]="p">
+                <mat-option *ngFor="let p of squadre" [value]="p.id">
                 {{ p.nome }}
               </mat-option>
             </mat-select>
@@ -45,7 +75,7 @@
             <mat-select formControlName="squadra2" class="form-control">
                 <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['squadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'squadra2')">*Il Squadra e obbligatorio!</span>
       <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
-        <mat-option *ngFor="let p of squadre" [value]="p">
+        <mat-option *ngFor="let p of squadre" [value]="p.id">
         {{ p.nome }}
       </mat-option>
     </mat-select>
@@ -59,6 +89,20 @@
     <mat-label style="color: white">Mete</mat-label>
     <input matInput type="number" formControlName="meteSquadra2" class="form-control" placeholder=" Mete" required>
     <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['meteSquadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'meteSquadra2')">*Le Mete e obbligatorio!</span>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label style="color: white">Girone</mat-label>
+    <input matInput type="number" formControlName="girone" class="form-control" placeholder=" Girone" required>
+    <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['girone_id'].dirty && PartiteRegisterFormGroup.hasError('required', 'girone_id')">*Le Mete e obbligatorio!</span>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label style="color: white">Girone</mat-label>
+    <mat-select formControlName="girone" class="form-control" placeholder=" Girone" required>
+      <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['girone_id'].dirty && PartiteRegisterFormGroup.hasError('required', 'girone_id')">*Le Mete e obbligatorio!</span>
+      <mat-option *ngFor="let p of classificas" [value]="p.id">
+      {{ p.name }}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
       <!-- <mat-form-field appearance="fill">
         <mat-label>Location</mat-label>

@@ -1,0 +1,35 @@
+<body>
+    <li><a  href="#" routerLink="/registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Squadre</a></li>
+    <li><a  href="#" routerLink="/registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Partite</a></li>
+    <li><a  href="#" routerLink="/registerClassifica" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Classifica</a></li>
+    <li><a  href="#" routerLink="/registerJersey" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Jersey</a></li>
+    <li><a  href="#" routerLink="/registerSeason" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Season</a></li>
+    <li><a  href="#" routerLink="/registerChampionship" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Championship</a></li>
+    <h1>Register Season</h1>
+    <form [formGroup]="SeasonRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="onSubmit()">
+        <div>
+            <h2>Inserisci Season</h2>
+                <mat-form-field appearance="fill">
+                    <mat-label  style="color: white">Name</mat-label>
+                    <input matInput type="text" formControlName="year" class="form-control" placeholder=" Year" required>
+                    <span class="text-danger" *ngIf="SeasonRegisterFormGroup.controls['year'].dirty && SeasonRegisterFormGroup.hasError('required', 'year')">*Il Year e obbligatorio!</span>
+                </mat-form-field>
+                <!-- <mat-form-field appearance="fill">
+                    <mat-label style="color: white">Champsionship</mat-label>
+                    <mat-select formControlName="championships" class="form-control"placeholder=" Champsionship">
+                        <span class="text-danger" *ngIf="SeasonRegisterFormGroup.controls['championships'].dirty && SeasonRegisterFormGroup.hasError('required', 'championships')">*Il Championship e obbligatorio!</span>
+                        <mat-option *ngFor="let p of championships" [value]="p">
+                            {{ p.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+            <button mat-button [disabled]="!SeasonRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="error">
+            {{error}}
+        </div>
+    </form>
+</body>
+  
+  
+  

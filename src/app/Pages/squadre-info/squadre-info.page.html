@@ -1,61 +1,46 @@
 <body>
-
-  
-    <div class="search-hero">
-        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Cerca Una Squadra....">
-      </div>
-   
-    <div class="box">
-            <!-- <h1>Squadre</h1> -->
-              <mat-card *ngFor="let item of squadre | filter:searchText | paginate
-              : {
-                  itemsPerPage: tableSize,
-                  currentPage: page,
-                  totalItems: count
-                };" class="example-card" >
-                  
-                <mat-card-title-group>
-                  <mat-card-title>{{item.nome}}</mat-card-title>
-                 
-                  <img mat-card-sm-image src="{{getPath(item.jersey.color)}}">
-                </mat-card-title-group>
-                
-                <mat-card-subtitle>
-                  <div class="icon-link">
-                    <mat-icon>language</mat-icon>
-                    <a href="{{ getSite(item.sito) }}" target="_blank">{{ item.sito }}</a>
-                  </div>
-                </mat-card-subtitle>
-
-                <mat-card-subtitle>
-                  <div class="icon-link">
-                    <mat-icon>mail</mat-icon>
-                    <a [href]="'mailto:' + item.allenatore">{{ item.allenatore }}</a>
-                  </div>
-                </mat-card-subtitle>
-
-                <mat-card-subtitle>
-                  <div class="icon-link">
-                  
-                  <mat-icon>location_on</mat-icon>
-                 {{ item.indirizzo }}
-                </div>
-                </mat-card-subtitle>
-  <mat-card-content>
-     <iframe [src]="geturl(item.latitude, item.longitude)"></iframe>
-  </mat-card-content>
-                  <mat-card-actions [ngClass]="isAdmin()" >
-                      <!-- <button mat-button (click)="modifyClient(item.id)">Modify</button>
-                      <button mat-button (click)="checkremove(item.id)">Remove</button> -->
-                      <button  color="success" mat-raised-button (click)="modifySquadra(item.id)">Modifica</button>
-                      <button [ngClass]="isAdmin()" color="warn" mat-raised-button (click)="cancella(item.id)">Cancella</button>
-                      <!-- <button mat-button (click)="removeClient(item.id)">Remove</button> -->
-                    </mat-card-actions>
-              </mat-card>
-              <section>
-                  <!-- {{error}} -->
-              </section>
-          </div>
+  <div class="search-hero">
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Cerca Una Squadra....">
+  </div>
+  <div class="box">
+    <mat-card *ngFor="let item of squadre | filter:searchText | paginate: {itemsPerPage: tableSize,currentPage: page,totalItems: count};" class="example-card" >
+      <mat-card-title-group>
+        <mat-card-title>{{item.nome}}</mat-card-title>
+        <img mat-card-sm-image src="{{getPath(item.jersey.color)}}">
+      </mat-card-title-group>
+      <mat-card-subtitle>
+        <div class="icon-link">
+          <mat-icon>language</mat-icon>
+          <a href="{{ getSite(item.sito) }}" target="_blank">{{ item.sito }}</a>
+        </div>
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        <div class="icon-link">
+          <mat-icon>mail</mat-icon>
+          <a [href]="'mailto:' + item.allenatore">{{ item.allenatore }}</a>
+        </div>
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        <div class="icon-link">
+        <mat-icon>location_on</mat-icon>
+        {{ item.indirizzo }}
+        </div>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <iframe [src]="geturl(item.latitude, item.longitude)"></iframe>
+      </mat-card-content>
+      <mat-card-actions [ngClass]="isAdmin()" >
+        <!-- <button mat-button (click)="modifyClient(item.id)">Modify</button>
+        <button mat-button (click)="checkremove(item.id)">Remove</button> -->
+        <button  color="success" mat-raised-button (click)="modifySquadra(item.id)">Modifica</button>
+        <button [ngClass]="isAdmin()" color="warn" mat-raised-button (click)="cancella(item.id)">Cancella</button>
+        <!-- <button mat-button (click)="removeClient(item.id)">Remove</button> -->
+      </mat-card-actions>
+    </mat-card>
+    <section>
+        <!-- {{error}} -->
+    </section>
+  </div>
   
           <div *ngIf="modifybox === true">
 

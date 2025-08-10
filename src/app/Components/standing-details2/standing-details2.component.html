@@ -1,0 +1,19 @@
+<div class="slider-wrapper3 calender">
+    <div class="slide-arrow3" >
+      <button id="slide-arrow-prev3" (click)="scrollleft3()">&#8249;</button>
+    </div>
+    <div class="slides-container3" id="slides-container3">
+    <button 
+    class="slide3" 
+    *ngFor="let classifica of classifiche"
+    [ngClass]="{'active-slide': isActiveClassfica(classifica.id)}"
+    (click)="selectClassifica(classifica.id)">
+    {{ classifica.name }}
+  </button>
+</div>
+    <div class="slide-arrow3" >
+      <button id="slide-arrow-next3" (click)="scrollright3()">&#8250;</button>
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>

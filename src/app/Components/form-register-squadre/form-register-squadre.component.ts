@@ -6,6 +6,8 @@ import { SquadraServiceService } from 'src/app/Services/squadra-service.service'
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import { Jersey } from 'src/app/Interfaces/jersey';
 import { JerseyService } from 'src/app/Services/jersey.service';
+import { UserService } from 'src/app/Services/user.service';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-form-register-squadre',
@@ -43,7 +45,7 @@ export class FormRegisterSquadreComponent implements OnInit {
   });
 
   constructor(private route: ActivatedRoute, private SquadreServiceservice: SquadraServiceService,private router: Router,
-    private _form: FormBuilder, private responsive: BreakpointObserver, private jerseyService: JerseyService) { 
+    private _form: FormBuilder, private responsive: BreakpointObserver, private jerseyService: JerseyService, public userService: UserService) { 
 
       // this.squadra = new Squadre();
     }

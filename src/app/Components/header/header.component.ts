@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
 
-  // console.log(this.authService.isLoggedIn())
   console.log(this.authService.getRoles())
   console.log(this.authService.getToken())
   console.log(this.authService.isLoggedIn())
@@ -25,25 +24,22 @@ export class HeaderComponent implements OnInit {
   }
 
   public isLoggedIn() {
+
     return this.authService.isLoggedIn();
   }
 
   public Logout() {
-    // this.showlogin = true;
-    // this.showlogout = false;
+
     this.authService.clear();
     this.router.navigate(['home']);
-   
-    
   }
 
   closeMenu(): void {
-    //
+    
     const checkbox = document.getElementById(
       'menuButton',
     ) as HTMLInputElement | null;
     
-    // window.alert('anchor tag is Clicked');
     if (checkbox != null) {
       checkbox.checked = false;
     }

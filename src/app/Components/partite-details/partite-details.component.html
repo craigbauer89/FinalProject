@@ -1,0 +1,19 @@
+<div class="slider-wrapper calender">
+    <div class="slide-arrow2" >
+      <button id="slide-arrow-prev2" (click)="scrollleft2()">&#8249;</button>
+    </div>
+    <div class="slides-container2" id="slides-container2">
+      <button 
+        class="slide2" 
+        *ngFor="let date of partite_3"
+        [ngClass]="{'active-slide': isActiveDate(date)}"
+        (click)="selectDate(date)">
+        {{ date | date: 'EEE d/MM' : 'it' }}
+      </button>
+    </div>
+    <div class="slide-arrow2" >
+      <button id="slide-arrow-next2" (click)="scrollright2()">&#8250;</button>
+    </div>
+  </div>
+
+<router-outlet></router-outlet>

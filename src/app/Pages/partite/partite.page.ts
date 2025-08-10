@@ -3,10 +3,16 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Championship } from 'src/app/Interfaces/championship';
+import { Classifica } from 'src/app/Interfaces/classifica';
 import { Partite } from 'src/app/Interfaces/partite';
+import { Season } from 'src/app/Interfaces/season';
 import { Squadre } from 'src/app/Interfaces/squadre';
 import { AuthService } from 'src/app/Services/auth.service';
+import { ChampionshipService } from 'src/app/Services/championship.service';
+import { ClassificaService } from 'src/app/Services/classifica.service';
 import { PartiteService } from 'src/app/Services/partite.service';
+import { SeasonService } from 'src/app/Services/season.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 
 
@@ -17,10 +23,26 @@ import { SquadraServiceService } from 'src/app/Services/squadra-service.service'
 })
 export class PartitePage implements OnInit {
 
+  squadreforName: Squadre | undefined;
+  activeDate:any;
+  partita: Partite | undefined;
+  classifiche: Classifica[]| undefined;
+  championships: Championship[]| undefined;
+  seasons: Season[]| undefined;
+  currentYear = new Date().getFullYear(); 
+  partitaYear = new Date().getFullYear(); 
+  activeChampionshipId:any;
+  seasonid!: number;
+  championship!: Championship;
+  season: Season | undefined;
+  activeSeasonId:any;
+
   @ViewChild('f') form!: NgForm;
   // squadre: Squadre[];
   currentId = 0;
   partite: Partite[] = [];
+  partite_2: Partite[] = [];
+  partite_3: Date [] = [];
   dataPartite: Partite[] = [];
   dataPartite1: Partite[] = [];
   dataPartite6: Partite[] = [];
@@ -29,6 +51,7 @@ export class PartitePage implements OnInit {
   dataPartite4: Partite[] = [];
   dataPartite5: Partite[] = [];
 
+  activeButton: string | null = null;
   convert = new Date(2022, 9, 10).toISOString();
   newDate = this.convert.slice(0,10);
   areYouSure = false;
@@ -64,8 +87,11 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
   dataSource4 = new MatTableDataSource(this.dataPartite4) ;
   dataSource5 = new MatTableDataSource(this.dataPartite5) ;
   dataSource6 = new MatTableDataSource(this.dataPartite6) ;
+
+  dataSource_new = new MatTableDataSource(this.partite_2) ;
   
   squadre: Squadre[] = [];
+
   // dataSource2 = this.squadre ;
   // dataSource2 = this.squadre ;
   
@@ -81,10 +107,28 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
   
     });
 
+    groupedPartite: { [key: string]: any[] } = {};
 
-  constructor(private partiteService: PartiteService, private SquadreServiceservice: SquadraServiceService, private _form: FormBuilder, private router: Router, private authService: AuthService, private responsive: BreakpointObserver) { }
+  constructor(private seasonService: SeasonService, private championshipService: ChampionshipService,private classificaService: ClassificaService,private partiteService: PartiteService, private SquadreServiceservice: SquadraServiceService, private _form: FormBuilder, private router: Router, private authService: AuthService, private responsive: BreakpointObserver) { }
 
   ngOnInit()  {
+
+    this.classificaService.findAll().subscribe((classifiche: Classifica[]) => {
+      this.classifiche = classifiche; // Set the classifiche data
+      this.groupMatchesByClassifica(); // Now call the method after the data is fetched
+    });
+
+    this.seasonService.findAll().subscribe(data => {
+      this.seasons = data;
+    });
+
+    this.partiteService.findAll().subscribe(data => {
+      const uniqueDates = Array.from(
+        new Set(data.map(partita => partita.date))
+      ).map(date => new Date(date));  // Convert each unique date to a Date object
+    
+      this.partite_3 = uniqueDates;  // Now partite_3 is of type Date[]
+    });
     
     this.modifybox = false;
     this.SquadreServiceservice.findAll().subscribe(data => {
@@ -98,10 +142,12 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
         
       // }
 
-      console.log(this.isAdmin() );
+      console.log("this admin",this.isAdmin() );
         
 
       // }
+
+      
     });
 
     
@@ -127,50 +173,47 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
 
       this.dataPartite.forEach(element => {
         let girone1 = 1;
-        if(girone1 ==  element.girone) {
-          this.dataPartite1.push(element)
-        }
+        // if(girone1 ==  element.girone) {
+        //   this.dataPartite1.push(element)
+        // }
       });
 
 
       this.dataPartite.forEach(element => {
         let girone2 = 2;
-        if(girone2 ==  element.girone) {
-          this.dataPartite2.push(element)
-        }
+        // if(girone2 ==  element.girone) {
+        //   this.dataPartite2.push(element)
+        // }
       });
 
       this.dataPartite.forEach(element => {
         let girone3 = 3;
-        if(girone3 ==  element.girone) {
-          this.dataPartite3.push(element)
-        }
+        // if(girone3 ==  element.girone) {
+        //   this.dataPartite3.push(element)
+        // }
       });
 
       this.dataPartite.forEach(element => {
         let girone4 = 4;
-        if(girone4 ==  element.girone) {
-          this.dataPartite4.push(element)
-        }
+        // if(girone4 ==  element.girone) {
+        //   this.dataPartite4.push(element)
+        // }
       });
 
       this.dataPartite.forEach(element => {
         let girone5 = 5;
-        if(girone5 ==  element.girone) {
-          this.dataPartite5.push(element)
-        }
+        // if(girone5 ==  element.girone) {
+        //   this.dataPartite5.push(element)
+        // }
       });
 
       this.dataPartite.forEach(element => {
         let girone6 = 6;
-        if(girone6 ==  element.girone) {
-          this.dataPartite6.push(element)
-        }
+        // if(girone6 ==  element.girone) {
+        //   this.dataPartite6.push(element)
+        // }
       });
 
-      
-  
-        // this.dataSource = new MatTableDataSource(this.dataPartite) ;
         this.dataSource1 = new MatTableDataSource(this.dataPartite1) ;
         this.dataSource2 = new MatTableDataSource(this.dataPartite2) ;
         this.dataSource3 = new MatTableDataSource(this.dataPartite3) ;
@@ -178,8 +221,6 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
         this.dataSource5 = new MatTableDataSource(this.dataPartite5) ;
         this.dataSource6 = new MatTableDataSource(this.dataPartite6) ;
 
-        
-      // }
     });
 
 
@@ -241,118 +282,12 @@ displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesqu
 
   }
 
+
+
   modify() {
 
     this.partiteService.modifyPartita(this.currentId, this.form.value)
     .subscribe(data => console.log(data));
-
-    // this.ngOnInit();
-
-    let squadra1:Squadre;
-    let squadra2:Squadre;
-    let modifyedPartita:Partite;
-    this.partite.forEach(element => {
-      if(element.id == this.currentId) {
-        modifyedPartita= element;
-         squadra1 = element.squadra1;
-         squadra2 = element.squadra2;
-  
-         squadra1.puntiFatti -= modifyedPartita.puntisquadra1;
-         squadra1.puntiSubiti -= modifyedPartita.puntisquadra2;
-    squadra1.meteFatti-= modifyedPartita.meteSquadra1;
-    squadra1.meteSubiti -= modifyedPartita.meteSquadra2;
-    let differenza = modifyedPartita.puntisquadra1-modifyedPartita.puntisquadra2;
-    squadra1.differenza -= differenza;
-    squadra1.giocate -= 1;
-    if (differenza > 0) {
-      squadra1.vittorie -= 1; 
-      squadra1.punti -= 4; 
-    }
-    else if(differenza < 0)  {
-      squadra1.sconfitte -= 1; 
-      
-    }
-    else {
-      squadra1.pareggi -= 1; 
-      squadra1.punti -= 2; 
-    }
-
-    squadra1.puntiFatti += this.form.value.puntisquadra1;
-    squadra1.puntiSubiti += this.form.value.puntisquadra2;
-    squadra1.meteFatti += this.form.value.meteSquadra1;
-    squadra1.meteSubiti += this.form.value.meteSquadra2;
-    let differenza1a = squadra1.puntiFatti-squadra1.puntiSubiti;
-    squadra1.differenza += differenza1a;
-    squadra1.giocate += 1;
-    if (differenza1a > 0) {
-      squadra1.vittorie += 1; 
-      squadra1.punti += 4; 
-    }
-    else if(differenza1a < 0)  {
-      squadra1.sconfitte += 1; 
-      
-    }
-    else {
-      squadra1.pareggi += 1; 
-      squadra1.punti += 2; 
-    }
-
-  
-    this.SquadreServiceservice.modifySquadra(squadra1.id, squadra1)
-    .subscribe(data => console.log(data));
-  
-  
-    squadra2.puntiFatti -= modifyedPartita.puntisquadra2;
-    squadra2.puntiSubiti -= modifyedPartita.puntisquadra1;
-  squadra2.meteFatti-= modifyedPartita.meteSquadra2;
-  squadra2.meteSubiti -= modifyedPartita.meteSquadra1;
-  let differenza2 = modifyedPartita.puntisquadra2-modifyedPartita.puntisquadra1;
-  squadra2.differenza -= differenza2;
-  squadra2.giocate -= 1;
-  if (differenza2 > 0) {
-  squadra2.vittorie -= 1; 
-  squadra2.punti -= 4; 
-  }
-  else if(differenza2 < 0)  {
-  squadra2.sconfitte -= 1; 
-  
-  }
-  else {
-  squadra2.pareggi -= 1; 
-  squadra2.punti -= 2; 
-  }
-
-  squadra2.puntiFatti += this.form.value.puntisquadra2;
-    squadra2.puntiSubiti += this.form.value.puntisquadra1;
-    squadra2.meteFatti += this.form.value.meteSquadra2;
-    squadra2.meteSubiti += this.form.value.meteSquadra1;
-    let differenza2a = squadra2.puntiFatti-squadra2.puntiSubiti;
-    squadra2.differenza += differenza2a;
-    squadra2.giocate += 1;
-    if (differenza2a > 0) {
-      squadra2.vittorie += 1; 
-      squadra2.punti += 4; 
-    }
-    else if(differenza2a < 0)  {
-      squadra2.sconfitte += 1; 
-    }
-    else {
-      squadra2.pareggi += 1; 
-      squadra2.punti += 2; 
-    }
-  
-  this.SquadreServiceservice.modifySquadra(squadra2.id, squadra2)
-  .subscribe(data => console.log(data));
-  
-      }}
-      );
-
-
-
-  
-   
-
-
     this.modifybox = false;
     
     window.alert("Partita Modifichato")
@@ -370,71 +305,6 @@ cancella(id:number) {
 
 
   cancellaPartita() {
-
-  let squadra1:Squadre;
-  let squadra2:Squadre;
-  let deletedPartita:Partite;
-  this.partite.forEach(element => {
-    if(element.id == this.currentId) {
-       deletedPartita= element;
-       squadra1 = element.squadra1;
-       squadra2 = element.squadra2;
-
-       squadra1.puntiFatti -= deletedPartita.puntisquadra1;
-       squadra1.puntiSubiti -= deletedPartita.puntisquadra2;
-  squadra1.meteFatti-= deletedPartita.meteSquadra1;
-  squadra1.meteSubiti -= deletedPartita.meteSquadra2;
-  let differenza = deletedPartita.puntisquadra1-deletedPartita.puntisquadra2;
-  squadra1.differenza -= differenza;
-  squadra1.giocate -= 1;
-  if (differenza > 0) {
-    squadra1.vittorie -= 1; 
-    squadra1.punti -= 4; 
-  }
-  else if(differenza < 0)  {
-    squadra1.sconfitte -= 1; 
-    
-  }
-  else {
-    squadra1.pareggi -= 1; 
-    squadra1.punti -= 2; 
-  }
-
-  this.SquadreServiceservice.modifySquadra(squadra1.id, squadra1)
-  .subscribe(data => console.log(data));
-
-
-  squadra2.puntiFatti -= deletedPartita.puntisquadra2;
-  squadra2.puntiSubiti -= deletedPartita.puntisquadra1;
-squadra2.meteFatti-= deletedPartita.meteSquadra2;
-squadra2.meteSubiti -= deletedPartita.meteSquadra1;
-let differenza2 = deletedPartita.puntisquadra2-deletedPartita.puntisquadra1;
-squadra2.differenza -= differenza2;
-squadra2.giocate -= 1;
-if (differenza2 > 0) {
-squadra2.vittorie -= 1; 
-squadra2.punti -= 4; 
-}
-else if(differenza2 < 0)  {
-squadra2.sconfitte -= 1; 
-
-}
-else {
-squadra2.pareggi -= 1; 
-squadra2.punti -= 2; 
-}
-
-this.SquadreServiceservice.modifySquadra(squadra2.id, squadra2)
-.subscribe(data => console.log(data));
-
-    }}
-    );
-  
-
- 
-
-
-
 
   this.partiteService.cancellaPartita(this.currentId)
   .subscribe(
@@ -492,107 +362,108 @@ getPath(name: String): String {
   
   }
 
+  
 
-  girone(date: string) {
 
-    let convert = new Date(date).toISOString();
-  let convertedDate = convert.slice(0,10);
+  // girone(date: string) {
 
+   
+  //   let convert = new Date(date).toISOString();
+  // let convertedDate = convert.slice(0,10);
+  // this.activeButton = convert.slice(0, 10);
  
     
-    this.partiteService.findAll().subscribe(data => {
-      this.partite = data;
+  //   this.partiteService.findAll().subscribe(data => {
+  //     this.partite = data;
 
-      this.dataPartite.splice(0,this.dataPartite.length);
+  //     this.dataPartite.splice(0,this.dataPartite.length);
      
-      
-      this.partite.forEach(element => {
+  //     this.partite.forEach(element => {
         
-        let date1 =  new Date(element.date).toISOString();
-        let newDate1 = date1.slice(0,10);
-        // console.log(newDate1)
-        // console.log(convertedDate)
-        if(newDate1 == convertedDate) {
+  //       let date1 =  new Date(element.date).toISOString();
+  //       let newDate1 = date1.slice(0,10);
+  //       if(newDate1 == convertedDate) {
         
-          this.dataPartite.push(element)
+  //         this.dataPartite.push(element)
        
   
-        }
-      });
+  //       }
+  //     });
 
-      this.dataPartite1.splice(0,this.dataPartite.length);
-      this.dataPartite2.splice(0,this.dataPartite.length);
-      this.dataPartite3.splice(0,this.dataPartite.length);
-      this.dataPartite4.splice(0,this.dataPartite.length);
-      this.dataPartite5.splice(0,this.dataPartite.length);
-      this.dataPartite6.splice(0,this.dataPartite.length);
+  //     this.dataPartite1.splice(0,this.dataPartite.length);
+  //     this.dataPartite2.splice(0,this.dataPartite.length);
+  //     this.dataPartite3.splice(0,this.dataPartite.length);
+  //     this.dataPartite4.splice(0,this.dataPartite.length);
+  //     this.dataPartite5.splice(0,this.dataPartite.length);
+  //     this.dataPartite6.splice(0,this.dataPartite.length);
 
-        this.dataPartite.forEach(element => {
-          let girone1 = 1;
-          if(girone1 ==  element.girone) {
-            this.dataPartite1.push(element)
-          }
-        });
+  //       this.dataPartite.forEach(element => {
+  //         let girone1 = 1;
+  //         if(girone1 ==  element.girone) {
+  //           this.dataPartite1.push(element)
+  //         }
+  //       });
   
   
-        this.dataPartite.forEach(element => {
-          let girone2 = 2;
-          if(girone2 ==  element.girone) {
-            this.dataPartite2.push(element)
-          }
-        });
+  //       this.dataPartite.forEach(element => {
+  //         let girone2 = 2;
+  //         if(girone2 ==  element.girone) {
+  //           this.dataPartite2.push(element)
+  //         }
+  //       });
   
-        this.dataPartite.forEach(element => {
-          let girone3 = 3;
-          if(girone3 ==  element.girone) {
-            this.dataPartite3.push(element)
-          }
-        });
+  //       this.dataPartite.forEach(element => {
+  //         let girone3 = 3;
+  //         if(girone3 ==  element.girone) {
+  //           this.dataPartite3.push(element)
+  //         }
+  //       });
   
-        this.dataPartite.forEach(element => {
-          let girone4 = 4;
-          if(girone4 ==  element.girone) {
-            this.dataPartite4.push(element)
-          }
-        });
+  //       this.dataPartite.forEach(element => {
+  //         let girone4 = 4;
+  //         if(girone4 ==  element.girone) {
+  //           this.dataPartite4.push(element)
+  //         }
+  //       });
   
-        this.dataPartite.forEach(element => {
-          let girone5 = 5;
-          if(girone5 ==  element.girone) {
-            this.dataPartite5.push(element)
-          }
-        });
+  //       this.dataPartite.forEach(element => {
+  //         let girone5 = 5;
+  //         if(girone5 ==  element.girone) {
+  //           this.dataPartite5.push(element)
+  //         }
+  //       });
   
-        this.dataPartite.forEach(element => {
-          let girone6 = 6;
-          if(girone6 ==  element.girone) {
-            this.dataPartite6.push(element)
-          }
-        });
+  //       this.dataPartite.forEach(element => {
+  //         let girone6 = 6;
+  //         if(girone6 ==  element.girone) {
+  //           this.dataPartite6.push(element)
+  //         }
+  //       });
      
-     
-      // this.dataSource = new MatTableDataSource(this.dataPartite) ;
-      this.dataSource1 = new MatTableDataSource(this.dataPartite1) ;
-        this.dataSource2 = new MatTableDataSource(this.dataPartite2) ;
-        this.dataSource3 = new MatTableDataSource(this.dataPartite3) ;
-        this.dataSource4 = new MatTableDataSource(this.dataPartite4) ;
-        this.dataSource5 = new MatTableDataSource(this.dataPartite5) ;
-        this.dataSource6 = new MatTableDataSource(this.dataPartite6) ;
+  //     this.dataSource1 = new MatTableDataSource(this.dataPartite1) ;
+  //       this.dataSource2 = new MatTableDataSource(this.dataPartite2) ;
+  //       this.dataSource3 = new MatTableDataSource(this.dataPartite3) ;
+  //       this.dataSource4 = new MatTableDataSource(this.dataPartite4) ;
+  //       this.dataSource5 = new MatTableDataSource(this.dataPartite5) ;
+  //       this.dataSource6 = new MatTableDataSource(this.dataPartite6) ;
  
-      // console.log(JSON.stringify(data));
-      // console.log(this.squadre[1]);
-      // for(let cat in this.squadre) {
-        // console.log(this.squadre);
-        // this.dataSource = new MatTableDataSource(this.dataPartite) ;
-        // this.dataSource.sort = this.sort;
-        // console.log(this.dataSource);
-      // }
-    });
+
+  //   });
 
    
 
-  }
+  // }
 
+  isActive(date: string): boolean {
+    const convert = new Date(date).toISOString();
+    const convertedDate = convert.slice(0, 10);
+  
+    console.log('Converted Date:', convertedDate);
+    console.log('Active Button:', this.activeButton);
+  
+    return this.activeButton === convertedDate;
+  
+  }
   scrollleft() {
 
     const slidesContainer = document.getElementById("slides-container");
@@ -623,6 +494,166 @@ if (slide != null && slidesContainer != null) {
     
   }
 
+}
+
+
+
+selectDate(date: Date): void {
+  this.activeDate = date; 
+  console.log('currentyear again:', this.currentYear);
+  this.partiteService.findAll().subscribe(data => {
+    console.log('partite data:', data);
+    
+    // Filter the 'data' to only include partite with the same date
+    // this.partite_2 = data.filter(partita => {
+    //   return new Date(partita.date).toDateString() === new Date(this.activeDate).toDateString();
+    // });
+    this.partite_2 = data.filter(partita => {
+      const partitaDate = new Date(partita.date);
+      const isSameDate = partitaDate.toDateString() === new Date(this.activeDate).toDateString();
+      const isSameYear = partitaDate.getFullYear() === this.currentYear;
+    
+      return isSameDate && isSameYear;
+    });
+    
+    console.log('Filtered partite for current year:', this.partite_2);
+  });
+
+
+  let seasonYear = this.activeDate.getFullYear().toString();; 
+  let champSeasonId: number | undefined;
+
+
+  if(this.seasons) {
+  for (let season of this.seasons){
+
+    if (season.year === seasonYear.toString()) {
+      champSeasonId = season.id;
+    }
+  }
+
+  }
+
+  if (champSeasonId === undefined) {
+    throw new Error(`No season found for year ${seasonYear}`);
+  }
+
+  this.championshipService.findAllbySeason(champSeasonId).subscribe(data => {
+    this.championships = data;
+    console.log('Helllpoooooooo  Championships:', this.championships);
+    console.log('WELLLLLLLL  seaosnns:', this.seasons);
+    console.log('YEUPPPP  season year:', seasonYear);
+
+});
+}
+
+isActiveDate(date: Date): boolean {
+  return this.activeDate === date;
+}
+
+
+groupMatchesByClassifica() {
+  this.groupedPartite = {};
+
+  // this.classificaService.findAllbyChampionship(2).subscribe(data => {
+  //   this.classifiche = data;
+    
+//});
+
+
+  console.log('classifica fm', this.classifiche);
+  console.log('partite 2?', this.partite_2);
+
+  if (this.classifiche && this.classifiche.length > 0) {
+    for (let partita of this.partite_2) {
+      
+      let classificaName = 'no classificas found';
+      for (let classifica of this.classifiche) {
+      
+        const squadreList = classifica.squadre || [];
+
+        for (let squadra of squadreList) {
+
+          if (
+            Number(squadra.id) === Number(partita.squadra1_id) ||
+            Number(squadra.id) === Number(partita.squadra2_id)
+          ) {
+            console.log('MATCH FOUND:', squadra.id, '->', classifica.name);
+            classificaName = classifica.name;
+            break;
+          }
+        }
+
+        if (classificaName !== 'no classificas found') break;
+      }
+
+      if (!this.groupedPartite[classificaName]) {
+        this.groupedPartite[classificaName] = [];
+      }
+
+      this.groupedPartite[classificaName].push(partita);
+    }
+  } else {
+    console.error('Classifiche is not available or empty');
+  }
+
+  console.log('Grouped partite:', this.groupedPartite);
+}
+
+selectChampionship(id: number): void {
+  this.activeChampionshipId = id;
+ this.championshipService.findById(id).subscribe(data => {
+  this.championship = data;
+  console.log('all Championship data:', data);
+  console.log('Championship season id:', this.championship?.season.id);
+  console.log('Championship id:', this.championship?.id);
+  console.log('season id:', this.seasonid);
+  // need to pass in the same season id 
+ // this.router.navigate([this.championship?.id], { relativeTo: this.route });
+
+ });
+
+ this.classificaService.findAllbyChampionship(id).subscribe(data => {
+  this.classifiche = data;
+  console.log('Get all classisificas for this championship:', this.classifiche);
+
+  this.groupMatchesByClassifica();
+
+ });
+
+
+}
+
+isActiveChampionship(id: number): boolean {
+  return this.activeChampionshipId === id;
+}
+
+
+selectSeason(id: number): void {
+  sessionStorage.clear();
+  this.activeSeasonId = id;
+ this.seasonService.findById(id).subscribe(data => {
+  this.season = data;
+  console.log('Season data:', data);
+  //this.router.navigate(['classifica', this.season?.id]);
+  if (this.season?.year) {
+    this.currentYear = parseInt(this.season.year, 10);
+  }
+  console.log('Current Year:', this.currentYear);
+
+  if (this.season?.id != null) {
+    this.router.navigate(['calendario', this.season.id]);
+    
+  } else {
+    console.error('Errore: season.id è undefined');
+  }
+  });
+ 
+
+}
+
+isActiveSeason(id: number): boolean {
+  return this.activeSeasonId === id;
 }
 
 }

@@ -1,5 +1,36 @@
 <body>
     <div class="body2"><p>landing works!</p>
+      <div *ngIf="standingsData">
+        <h2>Seasons by Tournament</h2>
+        <ul>
+          <li *ngFor="let item of standingsData">
+            {{ competitions }}
+          </li>
+        </ul>
+      </div>
+      <!-- <div *ngIf="teamData; else loading">
+       
+        <h2>Team Information</h2>
+        <ul>
+          <li *ngFor="let team of teamData">
+            <strong>{{ team }}</strong>
+            
+        
+          </li>
+        </ul>
+      </div>
+      
+    
+      <ng-template #loading>
+        <p>Loading team data...</p>
+      </ng-template>
+      
+   
+      <div *ngIf="errorMessage">
+        <p style="color: red;">Error: {{ errorMessage }}</p>
+      </div> -->
+      
+
 <div class="flex">
     <div class="table">
 
@@ -138,7 +169,7 @@
          
         </aside>
     </div>
-    <div class="news">
+    <!-- <div class="news">
         <aside class="video">
             <aside class="player">
                 <iframe 
@@ -180,7 +211,7 @@ src="https://www.youtube.com/embed/J_QL9dTLUMM">
                 <h1>Bulls  v Sharks </h1>
             </aside>
         </aside>
-    </div> 
+    </div>  -->
 
   
     <div class="sponsors">

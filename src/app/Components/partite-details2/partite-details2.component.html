@@ -1,0 +1,100 @@
+<div class="slider-wrapper calender">
+    <div class="slide-arrow3" >
+      <button id="slide-arrow-prev3" (click)="scrollleft3()">&#8249;</button>
+    </div>
+    <div class="slides-container3" id="slides-container3">
+      <button 
+        class="slide3" 
+        *ngFor="let championship of championships"
+        [ngClass]="{'active-slide': isActiveChampionship(championship.id)}"
+        (click)="selectChampionship(championship.id)">
+        {{ championship.name }}
+      </button>
+  </div>
+    <div class="slide-arrow3" >
+      <button id="slide-arrow-next3" (click)="scrollright3()">&#8250;</button>
+    </div>
+  </div>
+
+  <div *ngIf="partite_2.length > 0" class="filtered-matches">
+    <!-- <h3>Matches on {{ activeDate | date: 'EEE d/MM' : 'it' }}:</h3>-->
+    <div *ngFor="let classificaName of groupedPartite | keyvalue">
+   <!--    <h4>{{ classificaName.key }}</h4> -->
+ 
+    <table mat-table [dataSource]="classificaName.value" class="mat-elevation-z8" style="margin-top: 1.5%;">
+    
+      <ng-container matColumnDef="groupHeader">
+        <th mat-header-cell *matHeaderCellDef [attr.colspan]="displayedColumns.length" class="group-header">
+          {{ classificaName.key }}
+        </th>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['groupHeader']; sticky: false"></tr>
+      <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="img1">
+        <th style="width:3%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="center" mat-cell *matCellDef="let partita">
+          <img [src]="getPath(partita.squadra1.jersey.color)">
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="squadra1.nome">
+        <th style="width:25%" mat-header-cell *matHeaderCellDef></th>
+        <td class="center" mat-cell *matCellDef="let partita"> {{ partita.squadra1.nome }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="puntisquadra1">
+        <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="right" style="font-weight: bolder" mat-cell *matCellDef="let partita"> {{ partita.puntisquadra1 }} </td>
+      </ng-container>
+  
+      <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
+        <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="left" mat-cell *matCellDef="let partita"> ({{ partita.meteSquadra1 }}) </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="seperator">
+        <th style="width:1%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="center" mat-cell *matCellDef="let partita"> : </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="puntisquadra2">
+        <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="right" style="font-weight: bolder" mat-cell *matCellDef="let partita"> {{ partita.puntisquadra2 }} </td>
+      </ng-container>
+  
+      <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
+        <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="left" mat-cell *matCellDef="let partita"> ({{ partita.meteSquadra2 }}) </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="squadra2.nome">
+        <th style="width:25%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="center" mat-cell *matCellDef="let partita"> {{ partita.squadra2.nome }} </td>
+      </ng-container>
+  
+      <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="img2">
+        <th style="width:3%" mat-header-cell *matHeaderCellDef> </th>
+        <td class="center" mat-cell *matCellDef="let partita">
+          <img [src]="getPath(partita.squadra2.jersey.color)">
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="modifica">
+        <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell [ngClass]="isAdmin()" *matCellDef="let partita">
+          <button (click)="modifyPartita(partita.id)" color="success">Modifica</button>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="cancellare">
+        <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell [ngClass]="isAdmin()" *matCellDef="let partita">
+          <button (click)="cancella(partita.id)" color="cancel">Cancella</button>
+        </td>
+      </ng-container>
+  
+  
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

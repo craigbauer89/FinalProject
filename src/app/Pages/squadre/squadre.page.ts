@@ -1,204 +1,177 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, Sort } from '@angular/material/sort';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Championship } from 'src/app/Interfaces/championship';
+import { Season } from 'src/app/Interfaces/season';
 import { Squadre } from 'src/app/Interfaces/squadre';
+import { ChampionshipService } from 'src/app/Services/championship.service';
+import { SeasonService } from 'src/app/Services/season.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 
-
-
-// export interface PeriodicElement {
-//   name: string;
-//   position: number;
-//   weight: number;
-//   symbol: string;
-//   punti: String;
-// }
-
-// const ELEMENT_DATA: PeriodicElement[] = [
-  // {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', punti: '0'},
-  // {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He', punti: '0'},
-  // {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li', punti: '0'},
-  // {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be', punti: '0'},
-  // {position: 5, name: 'Boron', weight: 10.811, symbol: 'B', punti: '0'},
-  // {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C', punti: '0'},
-  // {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N', punti: '0'},
-  // {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O', punti: '0'},
-  // {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F', punti: '0'},
-  // {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne', punti: '0'},
-// ];
 
 @Component({
   templateUrl: './squadre.page.html',
   styleUrls: ['./squadre.page.scss']
 })
 
-
-
 export class SquadrePage implements OnInit {
+
+  season: Season | undefined;
+  seasons: Season[] = [];
+  league: Championship | undefined;
+  activeSeasonId:any;
+  dataSourceSeason = this.seasons;
+  championships: Championship[] = [];
+  seasonChampionships: Championship[] = [];
+  dataSourceChampionship = new MatTableDataSource(this.seasonChampionships) ;
+  displayedColumnsSeason: string[] = [ 'img', 'nome', 'giocate', 'vittorie', 'pareggi', 'sconfitte',  'meteFatti'!, 'puntiFatti', 'puntiSubiti','differenza' ,'punti' ];
 
   @ViewChild(MatSort)
   sort!: MatSort;
   element: any;
   hideForResponsive = false;
   hideForResponsivePhone = false;
-
-  // squadre: Squadre[];
   squadre: Squadre[] = [];
   gironeSquadre: Squadre[] = [];
-//   squadra:any = {
-//     nome: '',
-
-    // squadra = JSON.stringify(this.squadre);
-// };
-displayedColumns: string[] = [ 'img', 'nome', 'giocate', 'vittorie', 'pareggi', 'sconfitte',  'meteFatti'!, 'puntiFatti', 'puntiSubiti','differenza' ,'punti' ];
+  displayedColumns: string[] = [ 'img', 'nome', 'giocate', 'vittorie', 'pareggi', 'sconfitte',  'meteFatti'!, 'puntiFatti', 'puntiSubiti','differenza' ,'punti' ];
   dataSource = new MatTableDataSource(this.gironeSquadre) ;
+  stored:any;
+  activeButton: string | null = null;
 
-
-  
-  
-
-  constructor(private squadraServiceService: SquadraServiceService,private responsive: BreakpointObserver) { }
+  constructor(private championshipService: ChampionshipService,private seasonService: SeasonService, private route: ActivatedRoute,private router: Router,private squadraServiceService: SquadraServiceService,private responsive: BreakpointObserver) { }
  
-  
   ngOnInit()  {
-
-    this.squadraServiceService.findAll().subscribe(data => {
-      this.squadre = data;
-
-      this.gironeSquadre = this.squadre
-      .filter((element) => element.girone === 1)
-      .sort((a, b) => {
-        const puntiA = a.punti;
-        const puntiB = b.punti;
-        const diffA = a.differenza;
-        const diffB = b.differenza;
-
-        if (puntiA !== puntiB) {
-          return puntiB - puntiA; // Sort by punti in descending order
-        }
-
-        return diffA - diffB; // If punti are equal, sort by differenza in ascending order
-      });
-
-    this.dataSource = new MatTableDataSource<Squadre>(this.gironeSquadre);
-    this.dataSource.sort = this.sort;
-  });
-
-    this.responsive.observe([
-      Breakpoints.TabletPortrait,
-      Breakpoints.TabletLandscape,
-      Breakpoints.HandsetLandscape,
-      Breakpoints.HandsetPortrait])
-      .subscribe(result => {
-  
-        this.hideForResponsive = false;
-        this.hideForResponsivePhone = false;
+    this.seasonService.findAll().subscribe(data => {
+      this.seasons = data;
+      this.dataSourceSeason = this.seasons ;
     
-        const breakpoints = result.breakpoints;
-    
-        // if (result.matches) {
-         
-        // }
-
-        if (breakpoints[Breakpoints.HandsetPortrait]) {
-          this.hideForResponsivePhone = true;
-          this.hideForResponsive = true;
-          this.displayedColumns = [ 'img', 'nome', 'punti', 'giocate', 'differenza' ];
-        }
-        
-        // else if (breakpoints[Breakpoints.HandsetLandscape]) {
-        //   this.hideForResponsivePhone = true;
-        //   this.hideForResponsive = false;
-        //   this.displayedColumns = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'differenza' ];
-        // }
-        // else if (breakpoints[Breakpoints.TabletLandscape]) {
-        //   this.hideForResponsive = false;
-        //   this.hideForResponsivePhone = false;
-        //   this.displayedColumns = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'meteFatti'!, 'puntiSubiti','puntiFatti','differenza' ];
-          
-        // }
-    
-      });
-  }
-
-  // ngAfterViewInit() {
-
-    getPath(name: String): String {
-      return "../../../assets/" + name + ".jpg";
-      
-      }
-
-  // }
+    });
+    this.stored = sessionStorage.getItem('seasonId');
+    if (this.stored) {
+      this.activeSeasonId = parseInt(this.stored, 10);
+    }
+    //AUTOMATICALLY LOAD LATEST TABLE
+  //  else {
+  //    this.activeSeasonId = this.seasons[0].id;
+   //   this.selectSeason(this.seasons[0].id);
+ //   }
  
 
-  girone(girone:number) {
-    
-    this.squadraServiceService.findAll().subscribe(data => {
-      this.squadre = data;
+  // this.squadraServiceService.findAll().subscribe(data => {
+  //   this.squadre = data;
+  //   this.gironeSquadre = this.squadre
+  //   .filter((element) => element.girone === 1)
+  //   .sort((a, b) => {
+  //     const puntiA = a.punti;
+  //     const puntiB = b.punti;
+  //     const diffA = a.differenza;
+  //     const diffB = b.differenza;
+  //     if (puntiA !== puntiB) {
+  //       return puntiB - puntiA; // Sort by punti in descending order
+  //     }
+  //     return diffA - diffB; // If punti are equal, sort by differenza in ascending order
+  //   });
+  //   this.dataSource = new MatTableDataSource<Squadre>(this.gironeSquadre);
+  //   this.dataSource.sort = this.sort;
+  // });
 
-      this.gironeSquadre.splice(0,this.gironeSquadre.length);
-
-      this.squadre.forEach(element => {
-        if(element.girone == girone) {
-  
-          this.gironeSquadre.push(element)
-  
-        }
-      });
-      // console.log(JSON.stringify(data));
-      // console.log(this.squadre[1]);
-      // for(let cat in this.squadre) {
-        // console.log(this.squadre);
-        this.dataSource = new MatTableDataSource(this.gironeSquadre) ;
-        this.dataSource.sort = this.sort;
-        console.log(this.dataSource);
+  this.responsive.observe([
+    Breakpoints.TabletPortrait,
+    Breakpoints.TabletLandscape,
+    Breakpoints.HandsetLandscape,
+    Breakpoints.HandsetPortrait])
+    .subscribe(result => {
+      this.hideForResponsive = false;
+      this.hideForResponsivePhone = false;
+      const breakpoints = result.breakpoints;
+      if (breakpoints[Breakpoints.HandsetPortrait]) {
+        this.hideForResponsivePhone = true;
+        this.hideForResponsive = true;
+        this.displayedColumns = [ 'img', 'nome', 'punti', 'giocate', 'differenza' ];
+      }
+      // else if (breakpoints[Breakpoints.HandsetLandscape]) {
+      //   this.hideForResponsivePhone = true;
+      //   this.hideForResponsive = false;
+      //   this.displayedColumns = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'differenza' ];
+      // }
+      // else if (breakpoints[Breakpoints.TabletLandscape]) {
+      //   this.hideForResponsive = false;
+      //   this.hideForResponsivePhone = false;
+      //   this.displayedColumns = [ 'img', 'nome', 'vittorie', 'pareggi', 'sconfitte', 'punti', 'giocate', 'meteFatti'!, 'puntiSubiti','puntiFatti','differenza' ];
       // }
     });
-
-   
-
   }
 
+  getPath(name: String): String {
+    return "../../../assets/" + name + ".jpg";
+  }
 
-  
-
-
-
-
-
+ 
 
   scrollleft() {
-
     const slidesContainer = document.getElementById("slides-container");
-const slide = document.querySelector(".slide");
-const prevButton = document.getElementById("slide-arrow-prev");
-const nextButton = document.getElementById("slide-arrow-next");
-
-if (slide != null && slidesContainer != null) {
-  const slideWidth = slide.clientWidth;
-  slidesContainer.scrollLeft -= slideWidth;
-}
-
-}
-
-  
-
-  scrollright() {
-
-    const slidesContainer = document.getElementById("slides-container");
-const slide = document.querySelector(".slide");
-const prevButton = document.getElementById("slide-arrow-prev");
-const nextButton = document.getElementById("slide-arrow-next");
-
-if (slide != null && slidesContainer != null) {
-  const slideWidth = slide.clientWidth;
-  slidesContainer.scrollLeft += slideWidth;
-
-    
+    const slide = document.querySelector(".slide");
+    const prevButton = document.getElementById("slide-arrow-prev");
+    const nextButton = document.getElementById("slide-arrow-next");
+    if (slide != null && slidesContainer != null) {
+      const slideWidth = slide.clientWidth;
+      slidesContainer.scrollLeft -= slideWidth;
+    }
   }
 
-}
+  scrollright() {
+    const slidesContainer = document.getElementById("slides-container");
+    const slide = document.querySelector(".slide");
+    const prevButton = document.getElementById("slide-arrow-prev");
+    const nextButton = document.getElementById("slide-arrow-next");
+    if (slide != null && slidesContainer != null) {
+      const slideWidth = slide.clientWidth;
+      slidesContainer.scrollLeft += slideWidth;
+      }
+  }
+
+  // isActive(number: number): boolean {
+  //   const convert = number.toString();
+  //   console.log('CONVERT:', convert);
+  //   return this.activeButton === convert;
+  // }
+
+  selectSeason(id: number): void {
+    const getSessionSeasonId = sessionStorage.getItem('seasonId');  
+    if(getSessionSeasonId){
+      this.activeSeasonId = parseInt(getSessionSeasonId, 10)
+
+      if(this.activeSeasonId === id) {
+        const segments = this.router.url.split('/');
+const currentPage = segments[1]; // ← 'classifica'
+this.router.navigate([currentPage, id]);
+       //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+     //       this.router.navigate(['classifica', id]);
+       //     this.router.navigate([id], { relativeTo: this.route });
+     //     });
+      } 
+      else {
+        this.activeSeasonId = id;
+        sessionStorage.setItem('seasonId', id.toString());
+     //   this.router.navigate(['classifica', id]);
+     this.router.navigate([id], { relativeTo: this.route });
+      }
+    }
+    else{
+      this.activeSeasonId = id;
+      sessionStorage.setItem('seasonId', id.toString());
+    //  this.router.navigate(['classifica', id]);
+    this.router.navigate([id], { relativeTo: this.route });
+    }
+  }
+
+
+  isActiveSeason(id: number): boolean {
+    return this.activeSeasonId === id; 
+  }
+
 
 }
 

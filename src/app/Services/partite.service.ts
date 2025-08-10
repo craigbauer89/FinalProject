@@ -35,6 +35,14 @@ export class PartiteService {
     return this.http.get<Partite[]>(this.partiteUrl);
   }
 
+  public findAllByYear(year: number): Observable<Partite[]> {
+    return this.http.get<Partite[]>(this.partiteUrl + '/' + 'by-year' + '/' + year);
+  }
+
+  public findAllBySquadra(squadra_id: number): Observable<Partite[]> {
+    return this.http.get<Partite[]>(this.partiteUrl + '/' + 'by-squadra' + '/' + squadra_id);
+  }
+
   public addPartita(partita: Partite) {
     return this.http.post<Partite>(this.partiteUrl, partita);
   }
