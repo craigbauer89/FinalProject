@@ -16,6 +16,11 @@
       }}
     </li>
   </ul>
+  
+  <p>Stadium</p>
+  <p>{{ squadre.stadium.name }}</p>
+   <img mat-card-sm-image src="{{getPath(squadre.stadium.picture)}}">
+
   <p>Fixtures</p>
   <table mat-table style="margin-top: 1.5%;"  [dataSource]="fixturesDataSource"  class="mat-elevation-z8">
     <ng-container  *ngIf="!hideForResponsivePhone"matColumnDef="date">

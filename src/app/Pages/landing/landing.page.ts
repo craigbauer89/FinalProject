@@ -2,8 +2,10 @@ import { Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { News } from 'src/app/Interfaces/news';
 import { Partite } from 'src/app/Interfaces/partite';
 import { Squadre } from 'src/app/Interfaces/squadre';
+import { NewsService } from 'src/app/Services/news.service';
 import { PartiteService } from 'src/app/Services/partite.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 import { ApiService } from 'src/app/api.service';
@@ -24,7 +26,7 @@ export class LandingPage implements OnInit {
   hideForResponsivePhone = false;
   currentId = 0;
   partite: Partite[] = [];
-
+  news: News[] = [];
   squadre: Squadre[] = [];
 
 displayedColumns: string[] = [ 'img', 'nome', 'punti', 'differenza' ];
@@ -41,10 +43,15 @@ displayedColumns: string[] = [ 'img', 'nome', 'punti', 'differenza' ];
 
   competitions: any;
 
-  constructor(private apiService: ApiService, private squadraServiceService: SquadraServiceService,private partiteService: PartiteService) { }
+  constructor(private newsService: NewsService, private apiService: ApiService, private squadraServiceService: SquadraServiceService,private partiteService: PartiteService) { }
  
   
   ngOnInit()  {
+
+this.newsService.findAll().subscribe(data =>  {
+      this.news = data;
+  
+    });
 
     this.squadraServiceService.findAll().subscribe(data => {
       this.squadre = data;
