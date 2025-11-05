@@ -5,6 +5,12 @@
     <li><a  href="#" routerLink="/registerJersey" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Jersey</a></li>
     <li><a  href="#" routerLink="/registerSeason" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Season</a></li>
     <li><a  href="#" routerLink="/registerChampionship" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Championship</a></li>
+    <li><a  href="#" routerLink="/registerPlayer" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Player</a></li>
+    <li><a  href="#" routerLink="/registerStadium" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Stadium</a></li>
+    <li><a  href="#" routerLink="/registerChannel" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Channel</a></li>
+    <li><a  href="#" routerLink="/registerNews" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> News</a></li>
+    <li><a  href="#" routerLink="/registerLoadIds" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> LoadID</a></li>
+
     
   <h1>Register Squadra</h1>
   
@@ -21,12 +27,16 @@
         <input matInput type="text" formControlName="allenatore" class="form-control" placeholder="Allenatore" required>
         <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['allenatore'].dirty && SquadreRegisterFormGroup.hasError('required', 'allenatore')">*Il allenatore e obbligatoria!</span>
       </mat-form-field>
-          <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill">
         <mat-label style="color: white">Sito</mat-label>
         <input matInput type="text" formControlName="sito" class="form-control" placeholder="Sito" required>
         <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['sito'].dirty && SquadreRegisterFormGroup.hasError('required', 'sito')">*Il sito e obbligatoria!</span>
       </mat-form-field>
-     
+      <mat-form-field appearance="fill">
+        <mat-label  style="color: white">Telefono</mat-label>
+        <input matInput type="text" formControlName="telefono" class="form-control" placeholder=" Telefono" required>
+        <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['telefono'].dirty && SquadreRegisterFormGroup.hasError('required', 'telefono')">*Il Telefono e obbligatorio!</span>
+    </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label  style="color: white">Jersey</mat-label>
     <!-- <mat-select [dataSource]="dataSource"> -->
@@ -36,6 +46,15 @@
     <mat-option *ngFor="let p of jersey" [value]="p">
     {{ p.color }}
   </mat-option>
+</mat-select>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label  style="color: white">Stadium</mat-label>
+      <mat-select formControlName="stadium" class="form-control">
+          <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['stadium'].dirty && SquadreRegisterFormGroup.hasError('required', 'stadium')">*Il Stadium e obbligatorio!</span>
+  <mat-option *ngFor="let p of stadium" [value]="p">
+  {{ p.name }}
+</mat-option>
 </mat-select>
 </mat-form-field>
 

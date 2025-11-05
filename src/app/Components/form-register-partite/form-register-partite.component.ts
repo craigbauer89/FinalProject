@@ -13,6 +13,8 @@ import { ChampionshipService } from 'src/app/Services/championship.service';
 import { Championship } from 'src/app/Interfaces/championship';
 import { Classifica } from 'src/app/Interfaces/classifica';
 import { ClassificaService } from 'src/app/Services/classifica.service';
+import { Channel } from 'src/app/Interfaces/channel';
+import { ChannelService } from 'src/app/Services/channel.service';
 
 
 @Component({
@@ -37,6 +39,7 @@ export class FormRegisterPartiteComponent implements OnInit {
     activeChampionshipId:any;
   activeButtonChampionshipId:any;
   classificas: Classifica[] = [];
+  channels: Channel[] = [];
   
 
   partite: Partite[] = [];
@@ -51,10 +54,14 @@ export class FormRegisterPartiteComponent implements OnInit {
     puntisquadra2: this.form.control<number>(0, { validators: [Validators.required], nonNullable: true }),
     meteSquadra1: this.form.control<number>(0, { validators: [Validators.required], nonNullable: true }),
     meteSquadra2: this.form.control<number>(0, { validators: [Validators.required], nonNullable: true }),
-    girone_id: this.form.control<number>(0, { validators: [Validators.required], nonNullable: true }),
+    tickets: this.form.control<string>('', { validators: [Validators.required], nonNullable: true }),
+    classifica_id: this.form.control<number>(0, { validators: [Validators.required], nonNullable: true }),
+    channel: [null as Channel | null, Validators.required],
+    played: this.form.control<boolean>(false, { validators: [Validators.required], nonNullable: true }),
+
   });
 
-  constructor(private classificaService: ClassificaService,private championshipService: ChampionshipService,private seasonService: SeasonService,private authService: AuthService,private route: ActivatedRoute,private Partitaservice: PartiteService, private SquadreServiceservice: SquadraServiceService,private router: Router,
+  constructor(private channelService: ChannelService, private classificaService: ClassificaService,private championshipService: ChampionshipService,private seasonService: SeasonService,private authService: AuthService,private route: ActivatedRoute,private Partitaservice: PartiteService, private SquadreServiceservice: SquadraServiceService,private router: Router,
     private form: FormBuilder, public userService: UserService) { 
 
       // this.squadra = new Squadre();
@@ -68,6 +75,11 @@ export class FormRegisterPartiteComponent implements OnInit {
 
       this.seasonService.findAll().subscribe(data => {
         this.seasons = data;
+       // this.dataSourceSeason = this.seasons ;
+      });
+
+      this.channelService.findAll().subscribe(data => {
+        this.channels = data;
        // this.dataSourceSeason = this.seasons ;
       });
 
@@ -97,6 +109,13 @@ export class FormRegisterPartiteComponent implements OnInit {
 
    const formValue = this.PartiteRegisterFormGroup.value;
 
+   var formDate = new Date();
+      const today = new Date();
+      if (formValue.date !== undefined) {
+        formDate = new Date(formValue.date);
+      }
+      
+  
   const partita: Partite = {
     date: formValue.date ?? new Date(),  // fallback to avoid undefined
     squadra1_id: formValue.squadra1!,
@@ -105,16 +124,21 @@ export class FormRegisterPartiteComponent implements OnInit {
     puntisquadra2: formValue.puntisquadra2!,
     meteSquadra1: formValue.meteSquadra1!,
     meteSquadra2: formValue.meteSquadra2!,
-    girone_id: (formValue.girone_id!),
+    classifica_id: (formValue.classifica_id!),
+    tickets: formValue.tickets!,
+    channel: formValue.channel!,
+    played: formDate > today ? false : true,
     
   };
-
+  console.log("Partita issssss",partita);
   this.Partitaservice.addPartita(partita).subscribe(
+
       resp => {
+       
         // console.log(resp);
         window.alert("Partita aggiunta");
         this.error = undefined;
-        this.router.navigate(['/partite'])
+       // this.router.navigate(['/partite'])
       },
       err  => {
         console.log(this.PartiteRegisterFormGroup.value);

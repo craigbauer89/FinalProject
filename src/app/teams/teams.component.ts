@@ -10,7 +10,7 @@ import { PartiteService } from 'src/app/Services/partite.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 
 import { Partite } from '../Interfaces/partite';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Season } from '../Interfaces/season';
 import { SeasonService } from '../Services/season.service';
 import { ChampionshipService } from '../Services/championship.service';
@@ -59,11 +59,21 @@ export class TeamsComponent implements OnInit {
   season: Season | undefined;
   seasons: Season[] = [];
   dataSourceSeason = this.seasons;
+  teamsId: number = 1;
+  inputNumero: number | undefined;
 
 
-  constructor(private squadreService2: TeamsService, private classificaService: ClassificaService,private championshipService: ChampionshipService,private seasonService: SeasonService,private router: Router,private squadreService: SquadraServiceService, private partiteService: PartiteService,private teamsService: TeamsService, private responsive: BreakpointObserver, private jerseyService: JerseyService) { }
+  constructor(private route: ActivatedRoute,private squadreService2: TeamsService, private classificaService: ClassificaService,private championshipService: ChampionshipService,private seasonService: SeasonService,private router: Router,private squadreService: SquadraServiceService, private partiteService: PartiteService,private teamsService: TeamsService, private responsive: BreakpointObserver, private jerseyService: JerseyService) { }
 
   ngOnInit(): void {
+
+       
+      this.route.params.subscribe(params => {
+        this.teamsId = parseInt(params['id'], 10);
+        console.log('Team ID:', this.teamsId);
+      });
+    
+   
 
     const stored = sessionStorage.getItem('seasonIdTeams');
     if (stored) {
@@ -80,7 +90,7 @@ export class TeamsComponent implements OnInit {
       
     });
 
-    this.teamsService.findById(1).subscribe(data => {
+    this.teamsService.findById(this.teamsId).subscribe(data => {
         this.squadre = data;
         this.team = data.nome;
         console.log('Fetched squadre:', this.squadre);
@@ -88,10 +98,10 @@ export class TeamsComponent implements OnInit {
        
         const oggi = new Date();
         const setDate = new Date("2022-11-13");
-        const newdate2 = new Date(data[1].date);
+        //const newdate2 = new Date(data[this.teamsId].date);
         console.log('NEWDATE:', oggi);//Tue Aug 05 2025 10:22:48 GMT+0200 (Central European Summer Time)
-        console.log('NEWDATE2:', data[1].date); //"2022-12-18"
-        console.log('NEWDATE3:', newdate2); //Sun Dec 18 2022 01:00:00 GMT+0100 (Central European Standard Time)
+      //  console.log('NEWDATE2:', data[this.teamsId].date); //"2022-12-18"
+     //   console.log('NEWDATE3:', newdate2); //Sun Dec 18 2022 01:00:00 GMT+0100 (Central European Standard Time)
         console.log('NEWDATE4:', setDate); //Sun Dec 18 2022 01:00:00 GMT+0100 (Central European Standard Time)
 
         this.squadraPartite = data.filter((partita: Partite) => {
@@ -170,7 +180,7 @@ getPath(name: String): String {
     this.seasonService.findById(id).subscribe(data => {
       const year = data.year
 
-      this.classificaService.findAllbySquadra(1, year).subscribe(data2 => {
+      this.classificaService.findAllbySquadra(this.teamsId, year).subscribe(data2 => {
         this.classifiche = data2;
       
         if (data2 && data2.length > 0) {
@@ -207,6 +217,19 @@ getPath(name: String): String {
     //   sessionStorage.setItem('seasonIdTeams', id.toString());
     //   this.router.navigate(['/teams', id]);
     // }
+  }
+
+  submitForm() {
+
+
+ if (this.inputNumero !== undefined) {
+  this.teamsId = this.inputNumero;
+  
+    } else {
+      console.error('inputNumero è undefined');
+    }
+    this.ngOnInit()
+
   }
 
 

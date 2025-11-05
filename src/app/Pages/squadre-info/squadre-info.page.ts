@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { JerseyService } from 'src/app/Services/jersey.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 import { ErrorHandler } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   templateUrl: './squadre-info.page.html',
@@ -115,7 +116,7 @@ cat1 = "https://www.w3schools.com";
   
     });
 
-  constructor(public sanitizer:DomSanitizer,private authService: AuthService,private squadraServiceService: SquadraServiceService, private _form: FormBuilder,private responsive: BreakpointObserver,private jerseyService: JerseyService) { }
+  constructor(private route: ActivatedRoute,private router: Router,public sanitizer:DomSanitizer,private authService: AuthService,private squadraServiceService: SquadraServiceService, private _form: FormBuilder,private responsive: BreakpointObserver,private jerseyService: JerseyService) { }
 
   ngOnInit(): void {
 
@@ -163,13 +164,13 @@ getSite(name: String): String {
 
 geturl(latitude: number, longitude: number) {
   
-  return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.bing.com/maps/embed?h=160&w=265&cp=" + latitude + "~" + longitude + "&lvl=12&typ=d&sty=r&src=SHELL&FORM=MBEDV8");
+//  return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.bing.com/maps/embed?h=160&w=265&cp=" + latitude + "~" + longitude + "&lvl=12&typ=d&sty=r&src=SHELL&FORM=MBEDV8");
   
   }
 geturl1() {
 
 
-  return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.bing.com/maps/embed?h=130&w=370&cp=" + this.latitude + "~" + this.longitude + "&lvl=14&typ=d&sty=r&src=SHELL&FORM=MBEDV8");
+//  return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.bing.com/maps/embed?h=130&w=370&cp=" + this.latitude + "~" + this.longitude + "&lvl=14&typ=d&sty=r&src=SHELL&FORM=MBEDV8");
   
 
 }
@@ -277,5 +278,7 @@ isAdmin() {
   return isAdmin;
   
 }
+
+
 
 }

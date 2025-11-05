@@ -2,7 +2,7 @@
 
 export interface Jersey {
 
-id:any;
+id:number;
 color: String;
 
 

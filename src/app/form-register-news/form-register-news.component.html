@@ -1,0 +1,46 @@
+<body>
+    <li><a  href="#" routerLink="/registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Squadre</a></li>
+      <li><a  href="#" routerLink="/registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Partite</a></li>
+      <li><a  href="#" routerLink="/registerClassifica" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Classifica</a></li>
+      <li><a  href="#" routerLink="/registerJersey" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Jersey</a></li>
+      <li><a  href="#" routerLink="/registerSeason" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Season</a></li>
+      <li><a  href="#" routerLink="/registerChampionship" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Championship</a></li>
+      <li><a  href="#" routerLink="/registerPlayer" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Player</a></li>
+      <li><a  href="#" routerLink="/registerStadium" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Stadium</a></li>
+      <li><a  href="#" routerLink="/registerChannel" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Channel</a></li>
+      <li><a  href="#" routerLink="/registerNews" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> News</a></li>
+      <li><a  href="#" routerLink="/registerLoadIds" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> LoadID</a></li>
+
+      
+    <h1>Register News</h1>
+    <p>News</p>
+    <form [formGroup]="NewsRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="onSubmit()">
+      <div class="main">
+          <h2>Inserisci News</h2>
+          <mat-form-field appearance="fill">
+              <mat-label  style="color: white">Title</mat-label>
+              <input matInput type="text" formControlName="title" class="form-control" placeholder=" Title" required>
+              <span class="text-danger" *ngIf="NewsRegisterFormGroup.controls['title'].dirty && NewsRegisterFormGroup.hasError('required', 'title')">*Il Nome e obbligatorio!</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+              <mat-label  style="color: white">Content</mat-label>
+              <input matInput type="text" formControlName="content" class="form-control" placeholder=" Content" required>
+              <span class="text-danger" *ngIf="NewsRegisterFormGroup.controls['content'].dirty && NewsRegisterFormGroup.hasError('required', 'content')">*Il Content e obbligatorio!</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+              <mat-label  style="color: white">Picture</mat-label>
+              <!-- <mat-select [dataSource]="dataSource"> -->
+              <mat-select formControlName="picture" class="form-control">
+                  <span class="text-danger" *ngIf="NewsRegisterFormGroup.controls['picture'].dirty && NewsRegisterFormGroup.hasError('required', 'picture')">*Il Picture e obbligatorio!</span>
+                  <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
+                  <mat-option *ngFor="let p of picture" [value]="p">{{ p.name }}</mat-option>
+              </mat-select>
+          </mat-form-field>
+          <button mat-button [disabled]="!NewsRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="error">
+          {{error}}
+      </div>
+  </form>
+
+</body>

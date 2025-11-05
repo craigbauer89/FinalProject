@@ -30,20 +30,22 @@ private newsUrl: string;
   //   return this.http.post(this.Server + '/squadre', obj);
   // }
 
-  public findById(id: number): Observable<News[]> {
-    return this.http.get<News[]>(this.newsUrl + '/' + id);
+  public findById(id: number): Observable<News> {
+    return this.http.get<News>(this.newsUrl + '/' + id);
   }
 
   public findAll(): Observable<News[]> {
     return this.http.get<News[]>(this.newsUrl);
   }
 
-  public addNews(channel: News) {
-    return this.http.post<News>(this.newsUrl, channel);
+  public addNews(news: News) {
+    const picture_id = news.picture.id;
+    return this.http.post<News>(this.newsUrl+ '/'+ picture_id, news);
   }
 
   modifyNews(id:number,news:any){
-    return this.http.put<News>(this.newsUrl + '/'+ id,news);
+    const picture_id = news.picture.id;
+    return this.http.put<News>(this.newsUrl + '/'+ id + '/'+ picture_id, news);
   }
 
   cancellaNews(id:number): Observable<any>{

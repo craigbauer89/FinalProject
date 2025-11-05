@@ -51,7 +51,14 @@ import { StandingDetails3Component } from './Components/standing-details3/standi
 import localeIt from '@angular/common/locales/it';
 import { PartiteDetailsComponent } from './Components/partite-details/partite-details.component';
 import { PartiteDetails2Component } from './Components/partite-details2/partite-details2.component';
-import { PartiteDetails3Component } from './Components/partite-details3/partite-details3.component'; // Import the Italian locale
+import { PartiteDetails3Component } from './Components/partite-details3/partite-details3.component';
+import { PlayersComponent } from './Pages/players/players.component';
+import { FormRegisterPlayerComponent } from './form-register-player/form-register-player.component';
+import { FormRegisterChannelComponent } from './form-register-channel/form-register-channel.component';
+import { FormRegisterNewsComponent } from './form-register-news/form-register-news.component';
+import { FormRegisterStadiumComponent } from './form-register-stadium/form-register-stadium.component';
+import { StadiumComponent } from './Pages/stadium/stadium.component';
+import { FormRegisterLaodIdComponent } from './form-register-laod-id/form-register-laod-id.component'; // Import the Italian locale
 
 registerLocaleData(localeIt, 'it');  // Register the Italian locale
 
@@ -81,6 +88,13 @@ registerLocaleData(localeIt, 'it');  // Register the Italian locale
     PartiteDetailsComponent,
     PartiteDetails2Component,
     PartiteDetails3Component,
+    PlayersComponent,
+    FormRegisterPlayerComponent,
+    FormRegisterChannelComponent,
+    FormRegisterNewsComponent,
+    FormRegisterStadiumComponent,
+    StadiumComponent,
+    FormRegisterLaodIdComponent,
     // FilterPipe,
    
   ],

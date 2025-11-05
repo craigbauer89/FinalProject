@@ -37,11 +37,15 @@ private playerUrl: string;
   }
 
   public addPlayer(player: Player) {
-    return this.http.post<Stadium>(this.playerUrl, player);
+    const picture_id = player.picture.id;
+    const squadra_id = player.squadre.id;
+    return this.http.post<Stadium>(this.playerUrl+ '/'+ picture_id+ '/'+ squadra_id, player);
   }
 
   modifyPlayer(id:number,player:any){
-    return this.http.put<Stadium>(this.playerUrl + '/'+ id,player);
+    const picture_id = player.picture.id;
+    const squadra_id = player.squadre.id;
+    return this.http.put<Stadium>(this.playerUrl + '/'+ id + '/'+ picture_id+ '/'+ squadra_id,player);
   }
 
   cancellaPlayer(id:number): Observable<any>{

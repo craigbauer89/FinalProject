@@ -1,3 +1,4 @@
+import { Picture } from "./picture";
 import { Squadre } from "./squadre";
 
 export interface Stadium {
@@ -11,5 +12,6 @@ export interface Stadium {
     latitude: number;
     longitude: number;
     squadre: Squadre ;
+    picture: Picture;
     
     }

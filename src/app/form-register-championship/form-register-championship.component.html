@@ -5,7 +5,12 @@
     <li><a  href="#" routerLink="/registerJersey" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Jersey</a></li>
     <li><a  href="#" routerLink="/registerSeason" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Season</a></li>
     <li><a  href="#" routerLink="/registerChampionship" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Championship</a></li>
-    <h1>Register Championship</h1>
+    <li><a  href="#" routerLink="/registerPlayer" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Player</a></li>
+    <li><a  href="#" routerLink="/registerStadium" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Stadium</a></li>
+    <li><a  href="#" routerLink="/registerChannel" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Channel</a></li>
+    <li><a  href="#" routerLink="/registerNews" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> News</a></li> <h1>Register Championship</h1>
+    <li><a  href="#" routerLink="/registerLoadIds" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> LoadID</a></li>
+
     <form [formGroup]="ChampionshipRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="onSubmit()">
         <div>
             <h2>Inserisci Championship</h2>
@@ -39,6 +44,45 @@
                     </mat-select>
                 </mat-form-field> -->
             <button mat-button [disabled]="!ChampionshipRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="error">
+            {{error}}
+        </div>
+    </form>
+
+    <h2>Select Season</h2>
+    <div class="buttons">
+       
+        <button 
+        class="slide" 
+        *ngFor="let season of seasonsModify"
+        [ngClass]="{'active-slide': isActiveSeasonModify(season.id)}"
+        (click)="selectSeasonModify(season.id)">
+        {{ season.year }}
+        </button>
+    </div>
+
+    <h2>Select Championship</h2>
+    <div class="buttons">
+       
+        <button 
+        class="slide" 
+        *ngFor="let championship of championshipsModify"
+        [ngClass]="{'active-slide': isActiveChampionshipModify(championship.id)}"
+        (click)="selectChampionshipModify(championship.id)">
+        {{ championship.name }}
+        </button>
+    </div>
+
+    <form [formGroup]="ChampionshipModifyFormGroup" class="register" #f2="ngForm" (ngSubmit)="onSubmitModify()">
+        <div>
+            <h2>Inserisci Championship</h2>
+                <mat-form-field appearance="fill">
+                    <mat-label  style="color: white">Name</mat-label>
+                    <input matInput type="text" formControlName="name" class="form-control" placeholder=" Name" required>
+                    <span class="text-danger" *ngIf="ChampionshipModifyFormGroup.controls['name'].dirty && ChampionshipModifyFormGroup.hasError('required', 'name')">*Il Nome e obbligatorio!</span>
+                </mat-form-field>
+            <button mat-button [disabled]="!ChampionshipModifyFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
         </div>
         <div class="alert alert-danger" role="alert" *ngIf="error">
             {{error}}

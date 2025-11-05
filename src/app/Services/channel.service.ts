@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Partite } from '../Interfaces/partite';
 import { Squadre } from '../Interfaces/squadre';
 import { News } from '../Interfaces/news';
-import { Channel } from 'diagnostics_channel';
+import { Channel } from '../Interfaces/channel';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +27,8 @@ private channelUrl: string;
 
 
 
-  public findById(id: number): Observable<Channel[]> {
-    return this.http.get<Channel[]>(this.channelUrl + '/' + id);
+  public findById(id: number): Observable<Channel> {
+    return this.http.get<Channel>(this.channelUrl + '/' + id);
   }
 
   public findAll(): Observable<Channel[]> {

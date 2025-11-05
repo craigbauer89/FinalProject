@@ -1,0 +1,150 @@
+<body>
+    <div class="search-hero">
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Cerca Una Giocatore....">
+    </div>
+    <div class="box">
+      <mat-card *ngFor="let item of players | filter:searchText | paginate: {itemsPerPage: tableSize,currentPage: page,totalItems: count};" class="example-card" >
+        <mat-card-title-group>
+          <mat-card-title>{{item.name}}</mat-card-title>
+          <img mat-card-sm-image src="{{getPath(item.picture)}}">
+        </mat-card-title-group>
+        <mat-card-subtitle>
+          <div class="icon-link">
+            <mat-icon>person</mat-icon>
+            <a href="{{ getSite(item.sito) }}" target="_blank">{{ item.punti }}</a>
+          </div>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <div class="icon-link">
+            <mat-icon>mail</mat-icon>
+            <a [href]="'mailto:' + item.allenatore">{{ item.tries }}</a>
+          </div>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <div class="icon-link">
+          <mat-icon>location_on</mat-icon>
+          {{ item.gialli }}
+          </div>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <div class="icon-link">
+          <mat-icon>location_on</mat-icon>
+          {{ item.rossi }}
+          </div>
+        </mat-card-subtitle>
+        <!-- <mat-card-content>
+          <iframe [src]="geturl(item.latitude, item.longitude)"></iframe>
+        </mat-card-content> -->
+        <mat-card-actions [ngClass]="isAdmin()" >
+          <!-- <button mat-button (click)="modifyClient(item.id)">Modify</button>
+          <button mat-button (click)="checkremove(item.id)">Remove</button> -->
+          <button  color="success" mat-raised-button (click)="modifySquadra(item.id)">Modifica</button>
+          <button [ngClass]="isAdmin()" color="warn" mat-raised-button (click)="cancella(item.id)">Cancella</button>
+          <!-- <button mat-button (click)="removeClient(item.id)">Remove</button> -->
+        </mat-card-actions>
+      </mat-card>
+      <section>
+          <!-- {{error}} -->
+      </section>
+    </div>
+    
+            <div *ngIf="modifybox === true">
+  
+              <div >
+                  <h1>Mofifche Player</h1>
+                  <form [formGroup]="PlayerModifyFormGroup" class="register" #f="ngForm" (ngSubmit)="modify()">
+                      
+                      <div class="modify">
+
+                    <mat-form-field appearance="fill">
+                      <mat-label>Name</mat-label>
+                      <input matInput [ngModel]= "playerData.name" type="text" formControlName="name" class="form-control" placeholder=" Name" required>
+                      <span class="text-danger" *ngIf="PlayerModifyFormGroup.controls['name'].dirty && PlayerModifyFormGroup.hasError('required', 'name')">*Il Nome e obbligatorio!</span>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                    <mat-label>Tries</mat-label>
+                    <input matInput [ngModel]= "playerData.tries"type="number" formControlName="tries" class="form-control" placeholder="Tries" required>
+                    <span class="text-danger" *ngIf="PlayerModifyFormGroup.controls['tries'].dirty && PlayerModifyFormGroup.hasError('required', 'tries')">*I tries sono obbligatori!</span>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Punti</mat-label>
+                    <input matInput [ngModel]= "playerData.punti"type="number" formControlName="punti" class="form-control" placeholder="Punti" required>
+                    <span class="text-danger" *ngIf="PlayerModifyFormGroup.controls['punti'].dirty && PlayerModifyFormGroup.hasError('required', 'punti')">*I tries sono obbligatori!</span>
+                  </mat-form-field>
+                      <mat-form-field appearance="fill">
+                    <mat-label>Gialli</mat-label>
+                    <input matInput [ngModel]= "playerData.gialli"type="number" formControlName="gialli" class="form-control" placeholder="Gialli" required>
+                    <span class="text-danger" *ngIf="PlayerModifyFormGroup.controls['gialli'].dirty && PlayerModifyFormGroup.hasError('required', 'gialli')">*I Gialli sono obbligatori!</span>
+                  </mat-form-field>
+                      <mat-form-field appearance="fill">
+                    <mat-label>Rossi</mat-label>
+                    <input matInput [ngModel]= "playerData.rossi" type="number" formControlName="rossi" class="form-control" placeholder="Rossi" required>
+                    <span class="text-danger" *ngIf="PlayerModifyFormGroup.controls['rossi'].dirty && PlayerModifyFormGroup.hasError('required', 'rossi')">*I Rossi sono obbligatori!</span>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                    <mat-label  style="color: white">Picture</mat-label>
+                    <!-- <mat-select [dataSource]="dataSource"> -->
+                        <mat-select formControlName="picture" class="form-control">
+                            <span class="text-danger" *ngIf="PlayerModifyFormGroup.controls['picture'].dirty && PlayerModifyFormGroup.hasError('required', 'picture')">*Il Picture e obbligatorio!</span>
+                  <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
+                    <mat-option *ngFor="let p of picture" [value]="p">
+                    {{ p.name }}
+                  </mat-option>
+                </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label  style="color: white">Squadra</mat-label>
+                  <!-- <mat-select [dataSource]="dataSource"> -->
+                      <mat-select formControlName="squadre" class="form-control">
+                          <span class="text-danger" *ngIf="PlayerModifyFormGroup.controls['squadre'].dirty && PlayerModifyFormGroup.hasError('required', 'squadre')">*Il Squadre e obbligatorio!</span>
+                <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
+                  <mat-option *ngFor="let p of squadre" [value]="p">
+                  {{ p.nome }}
+                </mat-option>
+              </mat-select>
+              </mat-form-field>
+               
+                    <div class="buttons">
+                    <button mat-button  [disabled]="!PlayerModifyFormGroup.valid" type="submit">Submit</button>
+                 
+                    <button mat-button class="enter" (click)="close()">Close</button>
+                  </div>
+                  </div>
+                  <div class="alert alert-danger" role="alert" *ngIf="error">
+                    {{error}}
+                  </div>
+                  </form>
+                  
+              </div>
+        </div>
+    
+          <div *ngIf="areYouSure === true">
+  
+              <div class="modify">
+                  <h2>Sei sicuro?</h2>
+                  <div class="buttons">
+                    <button mat-button   (click)="cancellaPlayer()" >Remove</button>
+                 <br>
+                    <button mat-button class="enter" (click)="close()" >Close</button>
+                  </div>
+                  
+              </div>
+          </div>
+  
+          <!-- <mat-paginator [length]="100"
+                [pageSize]="6"
+                [pageSizeOptions]="[3,6]"
+                aria-label="Select page">
+  </mat-paginator> -->
+  <div class="paginate">
+  <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="onTableDataChange($event)"
+      >
+      </pagination-controls>
+    </div>
+    </body>
+    
+    
+  

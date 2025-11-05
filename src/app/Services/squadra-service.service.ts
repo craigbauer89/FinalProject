@@ -42,7 +42,9 @@ export class SquadraServiceService {
   }
 
   public signclient(squadra: Squadre) {
-    return this.http.post<Squadre>(this.squadreUrl, squadra);
+    const jersey_id = squadra.jersey.id;
+    const stadium_id = squadra.stadium.id;
+    return this.http.post<Squadre>(this.squadreUrl+ '/'+ jersey_id + '/'+  stadium_id , squadra);
   }
 
   modifySquadra(id:number, squandra:any){

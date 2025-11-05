@@ -1,8 +1,22 @@
 <body>
-    <div class="box row row-cols-3">
-            <h1>Classifica</h1>
-           
-          </div>
+  <div class="box row row-cols-3">
+      <h1>Classifica</h1> 
+  </div>
+  <div class="slider-wrapper" class="tables">
+    <!-- <button class="slide-arrow" id="slide-arrow-prev" (click)="scrollleft()">
+      &#8249;
+    </button> -->
+    <div class="slides-container" id="slides-container">
+    <button class="slide" (click)="giocatori()">Giocatori </button>
+    <button class="slide" (click)="squadres()">Squadre </button>
+   
+  
+  </div>
+  
+    <!-- <button class="slide-arrow" id="slide-arrow-next" (click)="scrollright()">
+      &#8250;
+    </button> -->
+  </div>
           <div class="slider-wrapper" class="tables">
             <!-- <button class="slide-arrow" id="slide-arrow-prev" (click)="scrollleft()">
               &#8249;
@@ -14,11 +28,12 @@
            
           
           </div>
+          
             <!-- <button class="slide-arrow" id="slide-arrow-next" (click)="scrollright()">
               &#8250;
             </button> -->
           </div>
-          <table *ngIf="showGialli === true" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="meteSubiti" matSortDirection="desc">  <!--- -->
+          <table *ngIf="showGialli === true && showSquadra ===true" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="meteSubiti" matSortDirection="desc">  <!--- -->
 
                   <ng-container matColumnDef="numero">
                     <th mat-header-cell *matHeaderCellDef >  </th>
@@ -37,7 +52,7 @@
               <td class="left" mat-cell *matCellDef="let element"> {{element.nome}} </td>
             </ng-container>
 
-              <ng-container matColumnDef="meteSubiti">
+              <ng-container matColumnDef="gialli">
                 <th class="center"mat-header-cell *matHeaderCellDef > Gialli </th>
                 <td mat-cell *matCellDef="let element"> {{element.meteSubiti}} </td>
               </ng-container>
@@ -46,7 +61,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
 
-          <table *ngIf="showPunti === true"mat-table [dataSource]="dataSource1" class="mat-elevation-z8" matSort matSortActive="puntiFatti" matSortDirection="desc">  <!--- -->
+          <table *ngIf="showPunti === true && showSquadra ===true"  mat-table [dataSource]="dataSource1" class="mat-elevation-z8" matSort matSortActive="puntiFatti" matSortDirection="desc">  <!--- -->
 
             <ng-container matColumnDef="numero">
               <th mat-header-cell *matHeaderCellDef >  </th>
@@ -74,7 +89,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
     </table>
     
-    <table *ngIf="showMete === true" mat-table [dataSource]="dataSource2" class="mat-elevation-z8" matSort matSortActive="meteFatti" matSortDirection="desc">  <!--- -->
+    <table *ngIf="showMete === true && showSquadra ===true"  mat-table [dataSource]="dataSource2" class="mat-elevation-z8" matSort matSortActive="meteFatti" matSortDirection="desc">  <!--- -->
 
         <ng-container matColumnDef="numero">
           <th mat-header-cell *matHeaderCellDef >  </th>
@@ -103,6 +118,92 @@
 </table>
 
 
+
+
+
+<table *ngIf="showGialli === true && showPlayer ===true"  mat-table [dataSource]="dataSourcePl" class="mat-elevation-z8" matSort matSortActive="meteSubiti" matSortDirection="desc">  <!--- -->
+
+  <ng-container matColumnDef="numero">
+    <th mat-header-cell *matHeaderCellDef >  </th>
+    <td  class="left" mat-cell *matCellDef="let element;let indexOfelement=index;"> {{indexOfelement + 1}}</td>
+    
+  </ng-container>
+
+  <ng-container matColumnDef="img">
+    <th mat-header-cell *matHeaderCellDef >  </th>
+    <td  class="left" mat-cell *matCellDef="let element"> <img [src]="getPath(element.picture)"> </td>
+    
+  </ng-container>
+
+<ng-container matColumnDef="nome">
+<th style="width:55%" class="left"mat-header-cell *matHeaderCellDef> Player </th>
+<td class="left" mat-cell *matCellDef="let element"> {{element.name}} </td>
+</ng-container>
+
+<ng-container matColumnDef="gialli">
+<th class="center"mat-header-cell *matHeaderCellDef > Gialli </th>
+<td mat-cell *matCellDef="let element"> {{element.gialli}} </td>
+</ng-container>
+
+<tr mat-header-row *matHeaderRowDef="displayedColumnsPl"></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumnsPl;"></tr>
+</table>
+
+<table *ngIf="showPunti === true  && showPlayer ===true" mat-table [dataSource]="dataSource1Pl" class="mat-elevation-z8" matSort matSortActive="puntiFatti" matSortDirection="desc">  <!--- -->
+
+<ng-container matColumnDef="numero">
+<th mat-header-cell *matHeaderCellDef >  </th>
+<td  class="left" mat-cell *matCellDef="let element;let indexOfelement=index;"> {{indexOfelement + 1}}</td>
+
+</ng-container>
+
+<ng-container matColumnDef="img">
+<th mat-header-cell *matHeaderCellDef >  </th>
+<td  class="left" mat-cell *matCellDef="let element"> <img [src]="getPath(element.picture)"> </td>
+
+</ng-container>
+
+<ng-container matColumnDef="nome">
+<th style="width:55%" class="left"mat-header-cell *matHeaderCellDef> Player </th>
+<td class="left" mat-cell *matCellDef="let element"> {{element.name}} </td>
+</ng-container>
+
+<ng-container matColumnDef="puntiFatti">
+<th class="center"mat-header-cell *matHeaderCellDef > Punti  </th>
+<td mat-cell *matCellDef="let element"> {{element.punti}} </td>
+</ng-container>
+
+<tr mat-header-row *matHeaderRowDef="displayedColumns1Pl"></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumns1Pl;"></tr>
+</table>
+
+<table *ngIf="showMete === true  && showPlayer ===true" mat-table [dataSource]="dataSource2Pl" class="mat-elevation-z8" matSort matSortActive="meteFatti" matSortDirection="desc">  <!--- -->
+
+<ng-container matColumnDef="numero">
+<th mat-header-cell *matHeaderCellDef >  </th>
+<td  class="left" mat-cell *matCellDef="let element;let indexOfelement=index;"> {{indexOfelement + 1}}</td>
+
+</ng-container>
+
+<ng-container matColumnDef="img">
+<th mat-header-cell *matHeaderCellDef >  </th>
+<td  class="left" mat-cell *matCellDef="let element"> <img [src]="getPath(element.picture)"> </td>
+
+</ng-container>
+
+<ng-container matColumnDef="nome">
+<th style="width:55%" class="left"mat-header-cell *matHeaderCellDef> Player </th>
+<td class="left" mat-cell *matCellDef="let element"> {{element.name}} </td>
+</ng-container>
+
+<ng-container matColumnDef="meteFatti">
+<th class="center"mat-header-cell *matHeaderCellDef > Mete  </th>
+<td mat-cell *matCellDef="let element"> {{element.tries}} </td>
+</ng-container>
+
+<tr mat-header-row *matHeaderRowDef="displayedColumns2Pl"></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumns2Pl;"></tr>
+</table>
 
           
   </body>

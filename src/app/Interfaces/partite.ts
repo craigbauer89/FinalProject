@@ -1,3 +1,4 @@
+import { Channel } from "./channel";
 import { Classifica } from "./classifica";
 import { Squadre } from "./squadre";
 
@@ -12,7 +13,11 @@ puntisquadra1: number;
 puntisquadra2: number;
 meteSquadra1: number;
 meteSquadra2: number;
-girone_id:number;
+classifica_id:number;
+tickets: string; 
+channel: Channel;
+played: Boolean;
+
 
 
 }

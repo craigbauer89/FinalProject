@@ -1,6 +1,7 @@
 import { Classifica } from "./classifica";
 import { Jersey } from "./jersey";
 import { Partite } from "./partite";
+import { Stadium } from "./stadium";
 
 export interface Squadre {
 
@@ -26,6 +27,7 @@ girone: number;
 classifica: Classifica;
 homegames: Partite [];
 awaygames: Partite [];
+stadium: Stadium;
 
 
 }

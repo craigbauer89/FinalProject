@@ -10,10 +10,12 @@ import { Season } from 'src/app/Interfaces/season';
 import { Squadre } from 'src/app/Interfaces/squadre';
 import { AuthService } from 'src/app/Services/auth.service';
 import { ChampionshipService } from 'src/app/Services/championship.service';
+import { ChannelService } from 'src/app/Services/channel.service';
 import { ClassificaService } from 'src/app/Services/classifica.service';
 import { PartiteService } from 'src/app/Services/partite.service';
 import { SeasonService } from 'src/app/Services/season.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
+import { Channel } from 'src/app/Interfaces/channel';
 
 @Component({
   selector: 'app-partite-details2',
@@ -35,6 +37,7 @@ export class PartiteDetails2Component implements OnInit {
   championship!: Championship;
   season: Season | undefined;
   activeSeasonId:any;
+  partitaGet: Partite | undefined;
   partite_2: Partite[] = [];
   partite: Partite[] = [];
   partite_3: Date [] = [];
@@ -56,8 +59,11 @@ export class PartiteDetails2Component implements OnInit {
   areYouSure = false;
   modifybox = false;
   error = undefined;
+  channels: Channel[] = [];
 
-  partitaData:any ={
+  
+  partitaData:any =
+  {
     id: '',
     date: '',
     squadra1: '',
@@ -66,7 +72,7 @@ export class PartiteDetails2Component implements OnInit {
     puntisquadra2: '',
     meteSquadra1: '',
     meteSquadra2: '',
-    girone: '',
+    classifica_id: '',
   }
 
   hideForResponsive = false;
@@ -83,6 +89,8 @@ export class PartiteDetails2Component implements OnInit {
   dataSource_new = new MatTableDataSource(this.partite_2) ;
   
   squadre: Squadre[] = [];
+
+  squadrelist: Squadre[] = [];
   
   PartiteRegisterFormGroup = this._form.group({
     date: ['', Validators.required],
@@ -92,13 +100,25 @@ export class PartiteDetails2Component implements OnInit {
     puntisquadra2: ['', Validators.required],
     meteSquadra1: ['', Validators.required],
     meteSquadra2: ['', Validators.required],
-    girone: ['', Validators.required],
+    classifica_id: ['', Validators.required],
+    tickets: ['', Validators.required],
+    channel: ['', Validators.required],
+   // played: ['', Validators.required],
   });
   
 
-  constructor(private seasonService: SeasonService, private championshipService: ChampionshipService,private classificaService: ClassificaService,private partiteService: PartiteService, private SquadreServiceservice: SquadraServiceService, private _form: FormBuilder, private router: Router, private authService: AuthService, private responsive: BreakpointObserver, private route: ActivatedRoute) { }
+  constructor(private channelService: ChannelService,private seasonService: SeasonService, private championshipService: ChampionshipService,private classificaService: ClassificaService,private partiteService: PartiteService, private SquadreServiceservice: SquadraServiceService, private _form: FormBuilder, private router: Router, private authService: AuthService, private responsive: BreakpointObserver, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    this.channelService.findAll().subscribe(data => {
+      this.channels = data;
+     // this.dataSourceSeason = this.seasons ;
+    });
+
+
+    this.SquadreServiceservice.findAll().subscribe(data => {
+      this.squadrelist = data; });
 
     this.route.params.subscribe(params => {
       console.log('Params at :date route:', params);  // Should log { date: '2025-06-19' }
@@ -160,13 +180,40 @@ export class PartiteDetails2Component implements OnInit {
   }
 
   modify() {
-    this.partiteService.modifyPartita(this.currentId, this.form.value)
-    .subscribe(data => console.log(data));
-    this.modifybox = false;
-    window.alert("Partita Modifichato")
-    this.partiteService.findAll().subscribe(data => {
-      this.partitaData = data;
-    });
+
+
+    var formDate = new Date();
+    const today = new Date();
+    if (this.form.value.date !== undefined) {
+      formDate = new Date(this.form.value.date);
+    }
+    
+
+      console.log(this.currentId)
+      console.log(this.form.value)
+      this.partiteService.modifyPartita(this.currentId,{
+        date: this.form.value.date,
+        classifica_id: this.form.value.classifica_id,
+        puntisquadra1: this.form.value.puntisquadra1,
+        puntisquadra2: this.form.value.puntisquadra2,
+        meteSquadra1: this.form.value.meteSquadra1,
+        meteSquadra2: this.form.value.meteSquadra2,
+        squadra1_id: this.form.value.squadra1.id,
+        squadra2_id: this.form.value.squadra2.id,
+        tickets: this.form.value.tickets,
+        channel: this.form.value.channel,
+        played: formDate > today ? false : true, // if date gets changes need to undo the changes!!
+
+      })
+      .subscribe(data => console.log(data));
+      this.modifybox = false;
+      window.alert("Partita Modifichato")
+      this.partiteService.findAll().subscribe(data => {
+        this.partitaData = data;
+      });
+
+
+   
   }
 
   cancella(id:number) {

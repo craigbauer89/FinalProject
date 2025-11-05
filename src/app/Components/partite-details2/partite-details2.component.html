@@ -1,34 +1,30 @@
 <div class="slider-wrapper calender">
-    <div class="slide-arrow3" >
-      <button id="slide-arrow-prev3" (click)="scrollleft3()">&#8249;</button>
-    </div>
-    <div class="slides-container3" id="slides-container3">
-      <button 
-        class="slide3" 
-        *ngFor="let championship of championships"
-        [ngClass]="{'active-slide': isActiveChampionship(championship.id)}"
-        (click)="selectChampionship(championship.id)">
-        {{ championship.name }}
-      </button>
+  <div class="slide-arrow3" >
+    <button id="slide-arrow-prev3" (click)="scrollleft3()">&#8249;</button>
   </div>
-    <div class="slide-arrow3" >
-      <button id="slide-arrow-next3" (click)="scrollright3()">&#8250;</button>
-    </div>
+  <div class="slides-container3" id="slides-container3">
+    <button 
+      class="slide3" 
+      *ngFor="let championship of championships"
+      [ngClass]="{'active-slide': isActiveChampionship(championship.id)}"
+      (click)="selectChampionship(championship.id)">
+      {{ championship.name }}
+    </button>
   </div>
-
-  <div *ngIf="partite_2.length > 0" class="filtered-matches">
-    <!-- <h3>Matches on {{ activeDate | date: 'EEE d/MM' : 'it' }}:</h3>-->
-    <div *ngFor="let classificaName of groupedPartite | keyvalue">
-   <!--    <h4>{{ classificaName.key }}</h4> -->
- 
+  <div class="slide-arrow3" >
+    <button id="slide-arrow-next3" (click)="scrollright3()">&#8250;</button>
+  </div>
+</div>
+<div *ngIf="partite_2.length > 0" class="filtered-matches">
+  <!-- <h3>Matches on {{ activeDate | date: 'EEE d/MM' : 'it' }}:</h3>-->
+  <div *ngFor="let classificaName of groupedPartite | keyvalue">
+    <!--    <h4>{{ classificaName.key }}</h4> -->
     <table mat-table [dataSource]="classificaName.value" class="mat-elevation-z8" style="margin-top: 1.5%;">
-    
       <ng-container matColumnDef="groupHeader">
         <th mat-header-cell *matHeaderCellDef [attr.colspan]="displayedColumns.length" class="group-header">
           {{ classificaName.key }}
         </th>
       </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="['groupHeader']; sticky: false"></tr>
       <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="img1">
         <th style="width:3%" mat-header-cell *matHeaderCellDef> </th>
@@ -36,65 +32,141 @@
           <img [src]="getPath(partita.squadra1.jersey.color)">
         </td>
       </ng-container>
-  
       <ng-container matColumnDef="squadra1.nome">
         <th style="width:25%" mat-header-cell *matHeaderCellDef></th>
         <td class="center" mat-cell *matCellDef="let partita"> {{ partita.squadra1.nome }} </td>
       </ng-container>
-  
       <ng-container matColumnDef="puntisquadra1">
         <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
         <td class="right" style="font-weight: bolder" mat-cell *matCellDef="let partita"> {{ partita.puntisquadra1 }} </td>
       </ng-container>
-  
       <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
         <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
         <td class="left" mat-cell *matCellDef="let partita"> ({{ partita.meteSquadra1 }}) </td>
       </ng-container>
-  
       <ng-container matColumnDef="seperator">
         <th style="width:1%" mat-header-cell *matHeaderCellDef> </th>
         <td class="center" mat-cell *matCellDef="let partita"> : </td>
       </ng-container>
-  
       <ng-container matColumnDef="puntisquadra2">
         <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
         <td class="right" style="font-weight: bolder" mat-cell *matCellDef="let partita"> {{ partita.puntisquadra2 }} </td>
       </ng-container>
-  
       <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
         <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
         <td class="left" mat-cell *matCellDef="let partita"> ({{ partita.meteSquadra2 }}) </td>
       </ng-container>
-  
       <ng-container matColumnDef="squadra2.nome">
         <th style="width:25%" mat-header-cell *matHeaderCellDef> </th>
         <td class="center" mat-cell *matCellDef="let partita"> {{ partita.squadra2.nome }} </td>
       </ng-container>
-  
       <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="img2">
         <th style="width:3%" mat-header-cell *matHeaderCellDef> </th>
         <td class="center" mat-cell *matCellDef="let partita">
           <img [src]="getPath(partita.squadra2.jersey.color)">
         </td>
       </ng-container>
-  
       <ng-container matColumnDef="modifica">
         <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell [ngClass]="isAdmin()" *matCellDef="let partita">
           <button (click)="modifyPartita(partita.id)" color="success">Modifica</button>
         </td>
       </ng-container>
-  
       <ng-container matColumnDef="cancellare">
         <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell [ngClass]="isAdmin()" *matCellDef="let partita">
           <button (click)="cancella(partita.id)" color="cancel">Cancella</button>
         </td>
       </ng-container>
-  
-  
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
 </div>
+
+<div *ngIf="modifybox === true">
+  <div>
+    <h1>Mofifche Partita</h1>
+    <form [formGroup]="PartiteRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="modify()">
+      <div class="modify">
+        <mat-form-field appearance="fill">
+          <mat-select [(ngModel)]="partitaData.squadra1" [placeholder]="partitaData.squadra1.nome" formControlName="squadra1" class="form-control">
+              <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['squadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'squadra1')">*Il Squadra e obbligatorio!</span>
+              <mat-option *ngFor="let p of squadrelist" [value]="p">{{ p.nome }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Date</mat-label>
+          <input [ngModel]= "partitaData.date"matInput type="date" formControlName="date" class="form-control" placeholder=" Date" required>
+          <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['date'].dirty && PartiteRegisterFormGroup.hasError('required', 'date')">*Il Score e obbligatorio!</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Girone</mat-label>
+          <input [ngModel]= "partitaData.classifica_id" [placeholder]="partitaData.classifica_id" matInput type="text" formControlName="classifica_id" class="form-control" placeholder=" Girone" required>
+          <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['classifica_id'].dirty && PartiteRegisterFormGroup.hasError('required', 'classifica_id')">*Il Girone e obbligatorio!</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Score</mat-label>
+          <input matInput [ngModel]= "partitaData.puntisquadra1"type="number" formControlName="puntisquadra1" class="form-control" placeholder=" Score" required>
+          <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['puntisquadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'puntisquadra1')">*Il Score e obbligatorio!</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Mete</mat-label>
+          <input matInput [ngModel]= "partitaData.meteSquadra1"type="number" formControlName="meteSquadra1" class="form-control" placeholder=" Mete" required>
+          <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['meteSquadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'meteSquadra1')">*Le Mete e obbligatorio!</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+        <mat-select [(ngModel)]="partitaData.squadra2" [placeholder]="partitaData.squadra2.nome" formControlName="squadra2" class="form-control">
+          <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['squadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'squadra2')">*Il Squadra e obbligatorio!</span>
+          <mat-option *ngFor="let p of squadrelist" [value]="p">{{ p.nome }}</mat-option>
+        </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Score</mat-label>
+          <input matInput [ngModel]= "partitaData.puntisquadra2"type="number" formControlName="puntisquadra2" class="form-control" placeholder=" Score" required>
+          <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['puntisquadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'puntisquadra2')">*Il Score e obbligatorio!</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Mete</mat-label>
+          <input matInput [ngModel]= "partitaData.meteSquadra2"type="number" formControlName="meteSquadra2" class="form-control" placeholder=" Mete" required>
+          <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['meteSquadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'meteSquadra2')">*Le Mete e obbligatorio!</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label style="color: white">Tickets</mat-label>
+          <input matInput [ngModel]= "partitaData.tickets"type="text" formControlName="tickets" class="form-control" placeholder=" Tickets" required>
+          <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['tickets'].dirty && PartiteRegisterFormGroup.hasError('required', 'tickets')">*Tickets e obbligatorio!</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+     
+          <!-- <mat-select [dataSource]="dataSource"> -->
+              <mat-select [ngModel]= "partitaData.channel"formControlName="channel" class="form-control"[placeholder]="partitaData.channel.name">
+                  <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['channel'].dirty && PartiteRegisterFormGroup.hasError('required', 'channel')">*Il Channel e obbligatorio!</span>
+        <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
+          <mat-option *ngFor="let p of channels" [value]="p">
+          {{ p.name }}
+        </mat-option>
+      </mat-select>
+      </mat-form-field>
+      <!-- <mat-form-field appearance="fill">
+        <mat-label  style="color: white">Played?</mat-label>
+        <mat-select formControlName="played" required>
+          <mat-option [value]="true">Sì</mat-option>
+          <mat-option [value]="false">No</mat-option>
+        </mat-select>
+    </mat-form-field> -->
+        <button mat-button  [disabled]="!PartiteRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
+        <button mat-button class="enter" (click)="close()" style="width : 10em; height: 3em;" >Close</button>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="error">{{error}}</div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="areYouSure === true">
+  <div class="modify">
+      <h2>Sei sicuro?</h2>
+      <button mat-button   (click)="cancellaPartita()" style="width : 10em; height: 3em;">Cancella</button>
+      <br>
+      <button mat-button class="enter" (click)="close()" style="width : 10em; height: 3em;" >Close</button>
+  </div>
+</div>
+

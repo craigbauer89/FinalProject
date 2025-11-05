@@ -4,31 +4,33 @@
   </div>
   <div class="box">
     <mat-card *ngFor="let item of squadre | filter:searchText | paginate: {itemsPerPage: tableSize,currentPage: page,totalItems: count};" class="example-card" >
+    <div [routerLink]="['/teams', item.id]" class="clickable-area">
       <mat-card-title-group>
-        <mat-card-title>{{item.nome}}</mat-card-title>
-        <img mat-card-sm-image src="{{getPath(item.jersey.color)}}">
-      </mat-card-title-group>
-      <mat-card-subtitle>
-        <div class="icon-link">
-          <mat-icon>language</mat-icon>
-          <a href="{{ getSite(item.sito) }}" target="_blank">{{ item.sito }}</a>
-        </div>
-      </mat-card-subtitle>
-      <mat-card-subtitle>
-        <div class="icon-link">
-          <mat-icon>mail</mat-icon>
-          <a [href]="'mailto:' + item.allenatore">{{ item.allenatore }}</a>
-        </div>
-      </mat-card-subtitle>
-      <mat-card-subtitle>
-        <div class="icon-link">
-        <mat-icon>location_on</mat-icon>
-        {{ item.indirizzo }}
-        </div>
-      </mat-card-subtitle>
-      <mat-card-content>
-        <iframe [src]="geturl(item.latitude, item.longitude)"></iframe>
-      </mat-card-content>
+          <mat-card-title>{{item.nome}}</mat-card-title>
+          <img mat-card-sm-image src="{{getPath(item.jersey.color)}}">
+        </mat-card-title-group>
+        <mat-card-subtitle>
+          <div class="icon-link">
+            <mat-icon>language</mat-icon>
+            <a href="{{ getSite(item.sito) }}" target="_blank">{{ item.sito }}</a>
+          </div>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <div class="icon-link">
+            <mat-icon>mail</mat-icon>
+            <a [href]="'mailto:' + item.allenatore">{{ item.allenatore }}</a>
+          </div>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <div class="icon-link">
+          <mat-icon>location_on</mat-icon>
+          {{ item.indirizzo }}
+          </div>
+        </mat-card-subtitle>
+        <mat-card-content>
+          <iframe [src]="geturl(item.latitude, item.longitude)"></iframe>
+        </mat-card-content>
+      </div>
       <mat-card-actions [ngClass]="isAdmin()" >
         <!-- <button mat-button (click)="modifyClient(item.id)">Modify</button>
         <button mat-button (click)="checkremove(item.id)">Remove</button> -->

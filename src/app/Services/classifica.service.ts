@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Classifica } from '../Interfaces/classifica';
 import { Observable } from 'rxjs';
+import { Squadre } from '../Interfaces/squadre';
 
 @Injectable({
   providedIn: 'root'
@@ -44,8 +45,7 @@ private Server = 'http://localhost:8080';
       {});
   }
 
-  public  modifyClassifica(id:number, classifica:any){
-    const championship_id = classifica.championship.id;
+  public  modifyClassifica(id:number, classifica:Classifica,championship_id:number){
       return this.http.put<Classifica>(this.classificaUrl + '/'+ id + '/'+ championship_id , classifica);
   }
 	
@@ -54,6 +54,7 @@ private Server = 'http://localhost:8080';
   }
   
   cancellaClassificaSquadra(classifica_id:number, squadra_id:number): Observable<any>{
+   // const squadra_id = squadra.id;
     return this.http.delete(this.classificaUrl + '/'+ classifica_id + '/'+ squadra_id);
   }
 	

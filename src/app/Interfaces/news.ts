@@ -1,9 +1,10 @@
+import { Picture } from "./picture";
 
 export interface News {
 
-    id:any;
+    id: number;   
     title: string;
     content: string;
-    picture: string;
+    picture: Picture;
     
     }

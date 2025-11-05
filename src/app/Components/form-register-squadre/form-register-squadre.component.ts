@@ -5,9 +5,11 @@ import { Squadre } from 'src/app/Interfaces/squadre';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import { Jersey } from 'src/app/Interfaces/jersey';
+import { stadiumService } from 'src/app/Services/stadium.service';
 import { JerseyService } from 'src/app/Services/jersey.service';
 import { UserService } from 'src/app/Services/user.service';
 import { AuthService } from 'src/app/Services/auth.service';
+import { Stadium } from 'src/app/Interfaces/stadium';
 
 @Component({
   selector: 'app-form-register-squadre',
@@ -29,6 +31,7 @@ export class FormRegisterSquadreComponent implements OnInit {
   jersey: Jersey[] = [];
   squadre: Squadre[] = [];
   dataSource = this.jersey ;
+  stadium: Stadium[] = [];
   
 
   SquadreRegisterFormGroup = this._form.group({
@@ -36,15 +39,17 @@ export class FormRegisterSquadreComponent implements OnInit {
     allenatore: ['', Validators.required],
     sito: ['', Validators.required],
     indirizzo: ['', Validators.required],
-    jersey: ['', Validators.required],
+    telefono: ['', Validators.required],
     latitude: ['', Validators.required],
     longitude: ['', Validators.required],
+    jersey: [null as Jersey | null, Validators.required],
+    stadium: [null as Stadium | null, Validators.required],
     // location: ['', Validators.required],
     
 
   });
 
-  constructor(private route: ActivatedRoute, private SquadreServiceservice: SquadraServiceService,private router: Router,
+  constructor(private stadiumService: stadiumService, private route: ActivatedRoute, private SquadreServiceservice: SquadraServiceService,private router: Router,
     private _form: FormBuilder, private responsive: BreakpointObserver, private jerseyService: JerseyService, public userService: UserService) { 
 
       // this.squadra = new Squadre();
@@ -55,6 +60,12 @@ export class FormRegisterSquadreComponent implements OnInit {
     this.jerseyService.findAll().subscribe(data => {
       this.jersey = data;
       this.dataSource = this.jersey ;
+
+    });
+
+    this.stadiumService.findAll().subscribe(data => {
+      this.stadium = data;
+   
 
     });
 
@@ -84,7 +95,7 @@ export class FormRegisterSquadreComponent implements OnInit {
         console.log(resp);
         window.alert("Squadra aggiunta");
         this.error = undefined;
-        this.router.navigate(['/squadre'])
+      //  this.router.navigate(['/squadre'])
       },
       err  => {
         console.log(err.error);

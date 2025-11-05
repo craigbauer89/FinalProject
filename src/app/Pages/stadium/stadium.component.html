@@ -1,0 +1,127 @@
+<body>
+    <div class="search-hero">
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Cerca Una Squadra....">
+    </div>
+    <div class="box">
+      <mat-card *ngFor="let item of stadi | filter:searchText | paginate: {itemsPerPage: tableSize,currentPage: page,totalItems: count};" class="example-card" >
+        <mat-card-title-group>
+          <mat-card-title>{{item.name}}</mat-card-title>
+          <!-- <img mat-card-sm-image src="{{getPath(item.picture.name)}}"> -->
+        </mat-card-title-group>
+        <mat-card-subtitle>
+          <div class="icon-link">
+            <mat-icon>language</mat-icon>
+            <a href="{{ getSite(item.sito) }}" target="_blank">{{ item.sito }}</a>
+          </div>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <div class="icon-link">
+            <mat-icon>mail</mat-icon>
+            <a [href]="'mailto:' + item.allenatore">{{ item.allenatore }}</a>
+          </div>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <div class="icon-link">
+          <mat-icon>location_on</mat-icon>
+          {{ item.indirizzo }}
+          </div>
+        </mat-card-subtitle>
+        <mat-card-content>
+      <!-- <iframe [src]="geturl(item.latitude, item.longitude)"></iframe> -->
+        </mat-card-content>
+        <mat-card-actions [ngClass]="isAdmin()" >
+          <button  color="success" mat-raised-button (click)="modifyStadium(item.id)">Modifica</button>
+          <button [ngClass]="isAdmin()" color="warn" mat-raised-button (click)="cancella(item.id)">Cancella</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div *ngIf="modifybox === true">
+        <div >
+            <h1>Mofifche Stadio</h1>
+            <form [formGroup]="SquadreRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="modify()">
+                <div class="modify">
+                <mat-form-field appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input matInput [ngModel]= "pictureData.name" type="text" formControlName="name" class="form-control" placeholder=" Nome" required>
+                    <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['name'].dirty && SquadreRegisterFormGroup.hasError('required', 'name')">*Il Nome e obbligatorio!</span>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Allenatore</mat-label>
+                    <input matInput [ngModel]= "pictureData.allenatore"type="text" formControlName="allenatore" class="form-control" placeholder="Allenatore" required>
+                    <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['allenatore'].dirty && SquadreRegisterFormGroup.hasError('required', 'allenatore')">*Il allenatore e obbligatoria!</span>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Sito</mat-label>
+                    <input matInput [ngModel]= "pictureData.sito"type="text" formControlName="sito" class="form-control" placeholder="Sito" required>
+                    <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['sito'].dirty && SquadreRegisterFormGroup.hasError('required', 'sito')">*Il sito e obbligatoria!</span>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Indirizzo</mat-label>
+                    <input matInput [ngModel]= "pictureData.indirizzo" type="text" formControlName="indirizzo" class="form-control" placeholder="Indirizzo" required>
+                    <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['indirizzo'].dirty && SquadreRegisterFormGroup.hasError('required', 'indirizzo')">*Il indirizzo e obbligatoria!</span>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label  style="color: white">Telefono</mat-label>
+                    <input matInput [ngModel]= "pictureData.telefono" type="text" formControlName="telefono" class="form-control" placeholder=" Telefono" required>
+                    <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['telefono'].dirty && SquadreRegisterFormGroup.hasError('required', 'telefono')">*Il Telefono e obbligatorio!</span>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label  style="color: white">Picture</mat-label>
+                    <mat-select formControlName="picture" class="form-control">
+                        <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['picture'].dirty && SquadreRegisterFormGroup.hasError('required', 'picture')">*Il Picture e obbligatorio!</span>
+                        <mat-option *ngFor="let p of picture" [value]="p">
+                            {{ p.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Latitude</mat-label>
+                    <input matInput [ngModel]= "pictureData.latitude"type="text" formControlName="latitude" class="form-control" placeholder="latitude" required>
+                    <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['latitude'].dirty && SquadreRegisterFormGroup.hasError('required', 'latitude')">*Il indirizzo e obbligatoria!</span>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Longitude</mat-label>
+                    <input matInput [ngModel]= "pictureData.longitude"type="text" formControlName="longitude" class="form-control" placeholder="Longitude" required>
+                    <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['longitude'].dirty && SquadreRegisterFormGroup.hasError('required', 'longitude')">*Il indirizzo e obbligatoria!</span>
+                </mat-form-field>
+                <!-- <mat-form-field appearance="fill">
+                    <mat-label  style="color: white">Squadra</mat-label>
+                        <mat-select formControlName="squadre" class="form-control">
+                            <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['squadre'].dirty && SquadreRegisterFormGroup.hasError('required', 'squadre')">*Il Squadre e obbligatorio!</span>
+                    <mat-option *ngFor="let p of squadre" [value]="p">
+                    {{ p.nome }}
+                  </mat-option>
+                </mat-select>
+                </mat-form-field> -->
+                <div class="buttons">
+                    <button mat-button  [disabled]="!SquadreRegisterFormGroup.valid" type="submit">Submit</button>
+                    <button mat-button class="enter" (click)="close()">Close</button>
+                </div>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="error">
+            {{error}}
+            </div>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="areYouSure === true">
+        <div class="modify">
+            <h2>Sei sicuro?</h2>
+            <div class="buttons">
+                <button mat-button   (click)="cancellaStadium()" >Remove</button>
+                <br>
+                <button mat-button class="enter" (click)="close()" >Close</button>
+            </div>
+        </div>
+    </div>
+    <div class="paginate">
+        <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
+    </div>
+</body>
+    
+    
+  

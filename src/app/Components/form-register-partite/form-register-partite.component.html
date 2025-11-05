@@ -6,6 +6,11 @@
   <li><a  href="#" routerLink="/registerJersey" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Jersey</a></li>
   <li><a  href="#" routerLink="/registerSeason" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Season</a></li>
   <li><a  href="#" routerLink="/registerChampionship" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Championship</a></li>
+  <li><a  href="#" routerLink="/registerPlayer" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Player</a></li>
+  <li><a  href="#" routerLink="/registerStadium" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Stadium</a></li>
+  <li><a  href="#" routerLink="/registerChannel" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Channel</a></li>
+  <li><a  href="#" routerLink="/registerNews" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> News</a></li>
+  <li><a  href="#" routerLink="/registerLoadIds" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> LoadID</a></li>
 
     <h1>Register Partite</h1>
     <h2>Select Season</h2>
@@ -91,19 +96,42 @@
     <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['meteSquadra2'].dirty && PartiteRegisterFormGroup.hasError('required', 'meteSquadra2')">*Le Mete e obbligatorio!</span>
   </mat-form-field>
   <mat-form-field appearance="fill">
-    <mat-label style="color: white">Girone</mat-label>
-    <input matInput type="number" formControlName="girone" class="form-control" placeholder=" Girone" required>
-    <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['girone_id'].dirty && PartiteRegisterFormGroup.hasError('required', 'girone_id')">*Le Mete e obbligatorio!</span>
+    <mat-label style="color: white">Tickets</mat-label>
+    <input matInput type="text" formControlName="tickets" class="form-control" placeholder=" Tickets" required>
+    <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['tickets'].dirty && PartiteRegisterFormGroup.hasError('required', 'tickets')">*Tickets e obbligatorio!</span>
   </mat-form-field>
   <mat-form-field appearance="fill">
+    <mat-label  style="color: white">Channel</mat-label>
+    <!-- <mat-select [dataSource]="dataSource"> -->
+        <mat-select formControlName="channel" class="form-control">
+            <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['channel'].dirty && PartiteRegisterFormGroup.hasError('required', 'channel')">*Il Channel e obbligatorio!</span>
+  <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
+    <mat-option *ngFor="let p of channels" [value]="p">
+    {{ p.name }}
+  </mat-option>
+</mat-select>
+</mat-form-field>
+  <!-- <mat-form-field appearance="fill">
     <mat-label style="color: white">Girone</mat-label>
-    <mat-select formControlName="girone" class="form-control" placeholder=" Girone" required>
-      <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['girone_id'].dirty && PartiteRegisterFormGroup.hasError('required', 'girone_id')">*Le Mete e obbligatorio!</span>
+    <input matInput type="number" formControlName="girone" class="form-control" placeholder=" Girone" required>
+    <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['girone'].dirty && PartiteRegisterFormGroup.hasError('required', 'girone')">*Le Mete e obbligatorio!</span>
+  </mat-form-field> -->
+  <mat-form-field appearance="fill">
+    <mat-label style="color: white">Girone</mat-label>
+    <mat-select formControlName="classifica_id" class="form-control" placeholder=" Girone" required>
+      <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['classifica_id'].dirty && PartiteRegisterFormGroup.hasError('required', 'classifica_id')">*Le Mete e obbligatorio!</span>
       <mat-option *ngFor="let p of classificas" [value]="p.id">
       {{ p.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <!-- <mat-form-field appearance="fill">
+    <mat-label  style="color: white">Played?</mat-label>
+    <mat-select formControlName="played" required>
+      <mat-option [value]="true">Sì</mat-option>
+      <mat-option [value]="false">No</mat-option>
+    </mat-select>
+</mat-form-field> -->
       <!-- <mat-form-field appearance="fill">
         <mat-label>Location</mat-label>
         <input matInput type="text" formControlName="location" class="form-control" placeholder="Location" required>

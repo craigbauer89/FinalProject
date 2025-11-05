@@ -36,11 +36,14 @@ private stadiumUrl: string;
   }
 
   public addstadium(stadium: Stadium) {
-    return this.http.post<Stadium>(this.stadiumUrl, stadium);
+    const picture_id = stadium.picture.id;
+   
+    return this.http.post<Stadium>(this.stadiumUrl+ '/'+ picture_id, stadium);
   }
 
-  modifystadium(id:number,stadium:any){
-    return this.http.put<Stadium>(this.stadiumUrl + '/'+ id,stadium);
+  modifystadium(id:number,stadium:Stadium){
+    const picture_id = stadium.picture.id;
+    return this.http.put<Stadium>(this.stadiumUrl + '/'+ id + '/'+ picture_id, stadium);
   }
 
   cancellastadium(id:number): Observable<any>{

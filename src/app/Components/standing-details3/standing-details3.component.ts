@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Championship } from 'src/app/Interfaces/championship';
 import { Classifica } from 'src/app/Interfaces/classifica';
+import { Pariticpation } from 'src/app/Interfaces/participation';
 import { Season } from 'src/app/Interfaces/season';
 import { Squadre } from 'src/app/Interfaces/squadre';
 import { ChampionshipService } from 'src/app/Services/championship.service';
@@ -12,6 +13,8 @@ import { ClassificaService } from 'src/app/Services/classifica.service';
 import { SeasonService } from 'src/app/Services/season.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 import { TeamsService } from 'src/app/Services/teams.service';
+import { ParticipationService } from 'src/app/Services/participation.service';
+
 
 @Component({
   selector: 'app-standing-details3',
@@ -30,6 +33,7 @@ export class StandingDetails3Component implements OnInit {
       leagueid!: number;
       groupid!: number;
       squadre!: Squadre[];
+      participazioni!: Pariticpation[];
 
       activeSeasonId:any;
        seasonChampionships: Championship[] = [];
@@ -42,11 +46,14 @@ export class StandingDetails3Component implements OnInit {
         hideForResponsive = false;
         hideForResponsivePhone = false;
         gironeSquadre: Squadre[] = [];
+        gironeParticipation: Pariticpation[] = [];
         displayedColumns: string[] = [ 'img', 'nome', 'giocate', 'vittorie', 'pareggi', 'sconfitte',  'meteFatti'!, 'puntiFatti', 'puntiSubiti','differenza' ,'punti' ];
         dataSource = new MatTableDataSource(this.gironeSquadre) ;
+        dataSource2 = new MatTableDataSource(this.gironeParticipation) ;
+
         activeButton: string | null = null;
 
-  constructor(private squadraServiceService: SquadraServiceService,private responsive: BreakpointObserver,private squadreService: TeamsService, private router: Router,private championshipService: ChampionshipService, private seasonService: SeasonService, private route: ActivatedRoute) { }
+  constructor(private participationService: ParticipationService, private squadraServiceService: SquadraServiceService,private responsive: BreakpointObserver,private squadreService: TeamsService, private router: Router,private championshipService: ChampionshipService, private seasonService: SeasonService, private route: ActivatedRoute) { }
   ngOnInit(): void {
     // Get all championships
    
@@ -70,7 +77,20 @@ export class StandingDetails3Component implements OnInit {
           this.dataSource = new MatTableDataSource<Squadre>(this.gironeSquadre);
 
       });
+
+      this.participationService.findAllByClassifcaId(this.groupid).subscribe(data => {
+        this.participazioni = data;
+        this.gironeParticipation = this.participazioni
+    
+   
+      
+        this.dataSource2 = new MatTableDataSource<Pariticpation>(this.gironeParticipation);
+
     });
+
+    });
+
+    
 
    
 

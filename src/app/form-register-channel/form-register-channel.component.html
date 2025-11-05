@@ -1,0 +1,134 @@
+<body>
+    <li><a  href="#" routerLink="/registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Squadre</a></li>
+      <li><a  href="#" routerLink="/registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Partite</a></li>
+      <li><a  href="#" routerLink="/registerClassifica" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Classifica</a></li>
+      <li><a  href="#" routerLink="/registerJersey" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Jersey</a></li>
+      <li><a  href="#" routerLink="/registerSeason" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Season</a></li>
+      <li><a  href="#" routerLink="/registerChampionship" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Championship</a></li>
+      <li><a  href="#" routerLink="/registerPlayer" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Player</a></li>
+      <li><a  href="#" routerLink="/registerStadium" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Stadium</a></li>
+      <li><a  href="#" routerLink="/registerChannel" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Channel</a></li>
+      <li><a  href="#" routerLink="/registerNews" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> News</a></li>
+      <li><a  href="#" routerLink="/registerLoadIds" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> LoadID</a></li>
+
+      
+    <h1>Register Channel</h1>
+    <p>Channel</p>
+    <!-- <h2>Sceglie Channel</h2>
+    <div class="buttons">
+       
+        <button 
+        class="slide" 
+        *ngFor="let channel of channels"
+        [ngClass]="{'active-slide': isActiveChannel(channel.id)}"
+        (click)="selectChannel(channel.id)">
+        {{ channel.name }}
+        </button>
+    </div> -->
+    <div class="search-hero">
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Cerca Una Giocatore....">
+    </div>
+    <div class="box">
+      <mat-card *ngFor="let item of channels | filter:searchText | paginate: {itemsPerPage: tableSize,currentPage: page,totalItems: count};" class="example-card" >
+        <mat-card-subtitle>
+          <div class="icon-link">
+            <mat-icon>person</mat-icon>
+            {{ item.name }}
+          </div>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <div class="icon-link">
+            <mat-icon>mail</mat-icon>
+            {{ item.country }}
+          </div>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <div class="icon-link">
+          <mat-icon>location_on</mat-icon>
+          {{ item.free }}
+          </div>
+        </mat-card-subtitle>
+        <mat-card-actions [ngClass]="isAdmin()" >
+            <button color="success" mat-raised-button (click)="modifyChannel(item.id)">Modifica</button>
+            <button [ngClass]="isAdmin()" color="warn" mat-raised-button (click)="cancella(item.id)">Cancella</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <form [formGroup]="ChannelRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="onSubmit()">
+      <div class="main">
+      
+          <h2>Inserisci Channel</h2>
+          <mat-form-field appearance="fill">
+              <mat-label  style="color: white">Name</mat-label>
+              <input matInput type="text" formControlName="name" class="form-control" placeholder=" Name" required>
+              <span class="text-danger" *ngIf="ChannelRegisterFormGroup.controls['name'].dirty && ChannelRegisterFormGroup.hasError('required', 'name')">*Il Nome e obbligatorio!</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+              <mat-label  style="color: white">Country</mat-label>
+              <input matInput type="text" formControlName="country" class="form-control" placeholder=" Country" required>
+              <span class="text-danger" *ngIf="ChannelRegisterFormGroup.controls['country'].dirty && ChannelRegisterFormGroup.hasError('required', 'country')">*Il Country e obbligatorio!</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+              <mat-label  style="color: white">Free?</mat-label>
+              <mat-select formControlName="free" required>
+                <mat-option [value]="true">Sì</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+          </mat-form-field>
+          <button mat-button [disabled]="!ChannelRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="error">
+          {{error}}
+      </div>
+  </form>
+
+  <div *ngIf="modifybox === true">
+    <div>
+      <h1>Mofifche Player</h1>
+      <form [formGroup]="ChannelModifyFormGroup" class="register" #f2="ngForm" (ngSubmit)="modify()">      
+      <div class="modify">
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput [ngModel]= "channelData.name" type="text" formControlName="name" class="form-control" placeholder=" Name" required>
+            <span class="text-danger" *ngIf="ChannelModifyFormGroup.controls['name'].dirty && ChannelModifyFormGroup.hasError('required', 'name')">*Il Nome e obbligatorio!</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Country</mat-label>
+          <input matInput [ngModel]= "channelData.country"type="text" formControlName="country" class="form-control" placeholder="Country" required>
+          <span class="text-danger" *ngIf="ChannelModifyFormGroup.controls['country'].dirty && ChannelModifyFormGroup.hasError('required', 'country')">*I tries sono obbligatori!</span>
+        </mat-form-field>
+        <!-- <mat-form-field appearance="fill">
+          <mat-label>Free</mat-label>
+          <input matInput [ngModel]= "channelData.free"type="number" formControlName="free" class="form-control" placeholder="Free" required>
+          <span class="text-danger" *ngIf="ChannelModifyFormGroup.controls['free'].dirty && ChannelModifyFormGroup.hasError('required', 'free')">*I tries sono obbligatori!</span>   
+        </mat-form-field> -->
+        <mat-form-field appearance="fill">
+          <mat-label  style="color: white">Free?</mat-label>
+          <mat-select formControlName="free" required>
+            <mat-option [value]="true">Sì</mat-option>
+            <mat-option [value]="false">No</mat-option>
+          </mat-select>
+      </mat-form-field>
+        <div class="buttons">
+            <button mat-button  [disabled]="!ChannelModifyFormGroup.valid" type="submit">Submit</button>
+            <button mat-button class="enter" (click)="close()">Close</button>
+        </div>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="error">
+        {{error}}
+      </div>
+    </form>
+  </div>
+</div>
+
+  <div *ngIf="areYouSure === true">
+    <div class="modify">
+        <h2>Sei sicuro?</h2>
+        <div class="buttons">
+          <button mat-button   (click)="cancellaChannel()" >Remove</button>
+          <br>
+          <button mat-button class="enter" (click)="close()" >Close</button>
+        </div>
+    </div>
+  </div>
+</body>

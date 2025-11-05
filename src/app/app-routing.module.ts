@@ -24,6 +24,13 @@ import { StandingDetails3Component } from './Components/standing-details3/standi
 import { PartiteDetailsComponent } from './Components/partite-details/partite-details.component';
 import { PartiteDetails2Component } from './Components/partite-details2/partite-details2.component';
 import { PartiteDetails3Component } from './Components/partite-details3/partite-details3.component';
+import { PlayersComponent } from './Pages/players/players.component';
+import { FormRegisterChannelComponent } from './form-register-channel/form-register-channel.component';
+import { FormRegisterPlayerComponent } from './form-register-player/form-register-player.component';
+import { FormRegisterNewsComponent } from './form-register-news/form-register-news.component';
+import { FormRegisterStadiumComponent } from './form-register-stadium/form-register-stadium.component';
+import { StadiumComponent } from './Pages/stadium/stadium.component';
+import { FormRegisterLaodIdComponent } from './form-register-laod-id/form-register-laod-id.component';
 
 const routes: Routes = [
 
@@ -101,6 +108,18 @@ const routes: Routes = [
   },
 
   {
+    path: 'playersinfo',
+    component: PlayersComponent,
+    canActivate:[UserGuard] //, data:{roles:['ROLE_USER','ROLE_ADMIN']}
+  },
+
+  {
+    path: 'stadiumInfo',
+    component: StadiumComponent,
+    canActivate:[UserGuard] //, data:{roles:['ROLE_USER','ROLE_ADMIN']}
+  },
+
+  {
     path: 'statistiche',
     component: StatistichePage,
     canActivate:[UserGuard] //, data:{roles:['ROLE_USER','ROLE_ADMIN']}
@@ -137,13 +156,41 @@ const routes: Routes = [
   },
 
   {
+    path: 'registerPlayer',
+    component: FormRegisterPlayerComponent,
+    canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}
+  },
+  {
+    path: 'registerNews',
+    component: FormRegisterNewsComponent,
+    canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}
+  },
+  {
+    path: 'registerLoadIds',
+    component: FormRegisterLaodIdComponent,
+    canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}
+  },
+  {
+    path: 'registerChannel',
+    component: FormRegisterChannelComponent,
+    canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}
+  },
+  {
+    path: 'registerStadium',
+    component: FormRegisterStadiumComponent,
+    canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}
+  },
+
+  {
     path: 'registerSeason',
     component: FormRegisterSeasonComponent,
     canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}
   },
 
+
+  
   {
-    path: 'teams',
+    path: 'teams/:id',
     component: TeamsComponent,
     canActivate:[UserGuard],
     children: [
