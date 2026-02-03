@@ -1,5 +1,7 @@
 mat-toolbar {
     background-color:rgb(32, 114, 229);
+    z-index: 1000;
+    padding-top: 2%;
 }
 
 
@@ -25,10 +27,9 @@ li {
 
 // The logo and dropdown icon (label)
 .logo {
-    position: fixed;
-    right: 2.5%;
-    top: .75%;
-    z-index: 0;
+     position: absolute;
+  top: 10px;
+  right: 10px;
     width: 60px;
     height: 50px;
     background-color: white;
@@ -66,10 +67,13 @@ input#menuButton:checked ~ .dropdown {
 }
 
 
+
+
 @media only screen and (min-width:800px) {
 
     mat-toolbar {
         font-size: 1rem;
+       
     }
     
     #menuMobile {
@@ -82,7 +86,6 @@ input#menuButton:checked ~ .dropdown {
   
     .desktop1{
         display: inline-block;
-        height:75px;
         width: 80%; 
     }
 

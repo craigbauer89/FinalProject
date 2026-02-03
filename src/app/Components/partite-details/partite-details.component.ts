@@ -22,60 +22,67 @@ import { SquadraServiceService } from 'src/app/Services/squadra-service.service'
 export class PartiteDetailsComponent implements OnInit {
 
   activeDate:any;
-  squadreforName: Squadre | undefined;
   partita: Partite | undefined;
-  classifiche: Classifica[]| undefined;
-  championships: Championship[]| undefined;
-  seasons: Season[]| undefined;
-  currentYear = new Date().getFullYear(); 
-  partitaYear = new Date().getFullYear(); 
-  activeChampionshipId:any;
+ // seasons: Season[]| undefined;
   seasonid!: number;
-  championship!: Championship;
+  currentYear = new Date().getFullYear(); 
   season: Season | undefined;
-  activeSeasonId:any;
-  partite_2: Partite[] = [];
   partite: Partite[] = [];
-  partite_3: Date [] = [];
-  private alreadyNavigated = false;
+  partite_Dates: Date [] = [];
+
+ // squadreforName: Squadre | undefined;
+ // classifiche: Classifica[]| undefined;
+ // championships: Championship[]| undefined;
+ // partitaYear = new Date().getFullYear(); 
+ // activeChampionshipId:any;
+ // championship!: Championship;
+ // activeSeasonId:any;
+ // partite: Partite[] = [];
+ // private alreadyNavigated = false;
 
   constructor(private seasonService: SeasonService, private championshipService: ChampionshipService,private classificaService: ClassificaService,private partiteService: PartiteService, private SquadreServiceservice: SquadraServiceService, private _form: FormBuilder, private router: Router, private authService: AuthService, private responsive: BreakpointObserver, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
-    this.seasonService.findAll().subscribe(data => {
-      this.seasons = data;
-    });
+    // this.seasonService.findAll().subscribe(data => {
+    //   this.seasons = data;
+    // });
 
     this.route.params.subscribe(params => {
       this.seasonid = parseInt(params['season'], 10);
       console.log('Season ID:', this.seasonid);
-  
+    
       this.seasonService.findById(this.seasonid).subscribe({
         next: data => {
-          this.currentYear = parseInt(data.year, 10);
-          console.log('Current year :', this.currentYear);
+          console.log('Startdate:', data.startDate);
+          console.log('Enddate:', data.endDate);
+          //todo: 
+          //this.currentYear = data.startDate?.getFullYear();
+          //this.currentYear = parseInt(data.year, 10);
+        //  console.log('Calling findAllByYear with Current year', this.currentYear);
   
-          console.log('Calling findAllByYear with:', this.currentYear);
-  
-          this.partiteService.findAllByYear(this.currentYear).subscribe({
-            next: data => {
+          // this.partiteService.findAllByYear(this.currentYear).subscribe({
+          //   next: data => {
+            this.partiteService.findAllBySeason(data.startDate,data.endDate).subscribe({
+              next: data => { 
               console.log('Dati ricevuti da findAllByYear:', data); // 👈 questo DEVE apparire
               const uniqueDates = Array.from(
                 new Set(data.map(partita => partita.date))
               ).map(date => new Date(date));
   
-              this.partite_3 = uniqueDates;
-              console.log('PARTITE LIST:', this.partite_3);
-              this.selectDate(this.partite_3[0]);
+              this.partite_Dates = uniqueDates;
+              console.log('PARTITE LIST:', this.partite_Dates);
+              this.selectDate(this.partite_Dates[0]);
+
+             
             },
             error: err => {
               console.error('Errore durante findAllByYear:', err);
-              if (err.status) {
-                console.error('Status:', err.status);
-                console.error('Message:', err.message);
-                console.error('URL:', err.url);
-              }
+              // if (err.status) {
+              //   console.error('Status:', err.status);
+              //   console.error('Message:', err.message);
+              //   console.error('URL:', err.url);
+              // }
             },
             complete: () => {
               console.log('Completata la richiesta findAllByYear');
@@ -93,42 +100,43 @@ export class PartiteDetailsComponent implements OnInit {
   
   selectDate(date: Date): void {
     this.activeDate = date; 
-    console.log('currentyear again:', this.currentYear);
-    this.partiteService.findAll().subscribe(data => {
-      console.log('partite data:', data);
-      this.partite_2 = data.filter(partita => {
-        const partitaDate = new Date(partita.date);
-        const isSameDate = partitaDate.toDateString() === new Date(this.activeDate).toDateString();
-        const isSameYear = partitaDate.getFullYear() === this.currentYear;
+    this.router.navigate(['calendario', this.seasonid, date.toISOString().substring(0, 10)]);
+    // this.partiteService.findAll().subscribe(data => {
+    //   console.log('partite data:', data);
+    //   this.partite = data.filter(partita => {
+    //     const partitaDate = new Date(partita.date);
+    //     const isSameDate = partitaDate.toDateString() === new Date(this.activeDate).toDateString();
+    //     const isSameYear = partitaDate.getFullYear() === this.currentYear;
       
-        return isSameDate && isSameYear;
-      });
-      console.log('Filtered partite for current year:', this.partite_2);
-    });
+    //     return isSameDate && isSameYear;
+    //   });
+    //   console.log('Filtered partite for current year:', this.partite);
+     
+   // });
   
-    let seasonYear = this.activeDate.getFullYear().toString();; 
-    let champSeasonId: number | undefined;
+    // let seasonYear = this.activeDate.getFullYear().toString();; 
+    // let champSeasonId: number | undefined;
   
-    if(this.seasons) {
-      console.log("WE GOT HERE")
-      for (let season of this.seasons){
+    // if(this.seasons) {
+    //   console.log("WE GOT HERE")
+    //   for (let season of this.seasons){
     
-        if (season.year === seasonYear.toString()) {
-          champSeasonId = season.id;
-        }
-      }
+    //     if (season.year === seasonYear.toString()) {
+    //       champSeasonId = season.id;
+    //     }
+    //   }
   
-    }
+    // }
   
-    if (champSeasonId === undefined) {
-      throw new Error(`No season found for year ${seasonYear}`);
-    }
+    // if (champSeasonId === undefined) {
+    //   throw new Error(`No season found for year ${seasonYear}`);
+    // }
   
-    if (champSeasonId) {
-      this.router.navigate(['calendario', champSeasonId, date.toISOString().substring(0, 10)]);
-    } else {
-      console.warn('Season ID is undefined');
-    }
+    // if (champSeasonId) {
+    //   this.router.navigate(['calendario', this.seasonid, date.toISOString().substring(0, 10)]);
+    // } else {
+    //   console.warn('Season ID is undefined');
+    // }
   
   }
 

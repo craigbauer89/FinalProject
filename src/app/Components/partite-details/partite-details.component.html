@@ -5,7 +5,7 @@
     <div class="slides-container2" id="slides-container2">
       <button 
         class="slide2" 
-        *ngFor="let date of partite_3"
+        *ngFor="let date of partite_Dates"
         [ngClass]="{'active-slide': isActiveDate(date)}"
         (click)="selectDate(date)">
         {{ date | date: 'EEE d/MM' : 'it' }}

@@ -15,6 +15,8 @@ import { Classifica } from 'src/app/Interfaces/classifica';
 import { ClassificaService } from 'src/app/Services/classifica.service';
 import { Channel } from 'src/app/Interfaces/channel';
 import { ChannelService } from 'src/app/Services/channel.service';
+import { stadiumService } from 'src/app/Services/stadium.service';
+import { Stadium } from 'src/app/Interfaces/stadium';
 
 
 @Component({
@@ -40,6 +42,7 @@ export class FormRegisterPartiteComponent implements OnInit {
   activeButtonChampionshipId:any;
   classificas: Classifica[] = [];
   channels: Channel[] = [];
+   stadium: Stadium[] = [];
   
 
   partite: Partite[] = [];
@@ -55,13 +58,14 @@ export class FormRegisterPartiteComponent implements OnInit {
     meteSquadra1: this.form.control<number>(0, { validators: [Validators.required], nonNullable: true }),
     meteSquadra2: this.form.control<number>(0, { validators: [Validators.required], nonNullable: true }),
     tickets: this.form.control<string>('', { validators: [Validators.required], nonNullable: true }),
+    time: this.form.control<string>('', { validators: [Validators.required], nonNullable: true }),
     classifica_id: this.form.control<number>(0, { validators: [Validators.required], nonNullable: true }),
     channel: [null as Channel | null, Validators.required],
     played: this.form.control<boolean>(false, { validators: [Validators.required], nonNullable: true }),
-
+    stadium: [null as Stadium | null, Validators.required],
   });
 
-  constructor(private channelService: ChannelService, private classificaService: ClassificaService,private championshipService: ChampionshipService,private seasonService: SeasonService,private authService: AuthService,private route: ActivatedRoute,private Partitaservice: PartiteService, private SquadreServiceservice: SquadraServiceService,private router: Router,
+  constructor(private stadiumService: stadiumService,private channelService: ChannelService, private classificaService: ClassificaService,private championshipService: ChampionshipService,private seasonService: SeasonService,private authService: AuthService,private route: ActivatedRoute,private Partitaservice: PartiteService, private SquadreServiceservice: SquadraServiceService,private router: Router,
     private form: FormBuilder, public userService: UserService) { 
 
       // this.squadra = new Squadre();
@@ -72,6 +76,12 @@ export class FormRegisterPartiteComponent implements OnInit {
     }
 
     ngOnInit()  {
+
+      this.stadiumService.findAll().subscribe(data => {
+        this.stadium = data;
+     
+  
+      });
 
       this.seasonService.findAll().subscribe(data => {
         this.seasons = data;
@@ -126,8 +136,10 @@ export class FormRegisterPartiteComponent implements OnInit {
     meteSquadra2: formValue.meteSquadra2!,
     classifica_id: (formValue.classifica_id!),
     tickets: formValue.tickets!,
+    time: formValue.time!,
     channel: formValue.channel!,
     played: formDate > today ? false : true,
+    stadium: formValue.stadium!,
     
   };
   console.log("Partita issssss",partita);
@@ -140,11 +152,17 @@ export class FormRegisterPartiteComponent implements OnInit {
         this.error = undefined;
        // this.router.navigate(['/partite'])
       },
-      err  => {
-        console.log(this.PartiteRegisterFormGroup.value);
-        console.log(err.error);
-        window.alert("Errore");
-        this.error = err.error;
+      err => {
+        console.error("Errore backend:", err);
+      
+        // Estrae il messaggio dal backend (può essere in err.error.message)
+        const errorMessage = err.error?.message || err.error || "Errore sconosciuto";
+      
+        // Mostra l’errore sullo schermo
+        window.alert(errorMessage);
+      
+        // Salva l’errore in una variabile per mostrarlo anche nel template
+        this.error = errorMessage;
       }
     )
 

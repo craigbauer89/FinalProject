@@ -35,7 +35,7 @@ export class FormRegisterChannelComponent implements OnInit {
       searchText: any;
       page: number = 1;
   count: number = 0;
-  tableSize: number = 9;
+  tableSize: number = 3;
   tableSizes: any = [3, 6, 9, 12];
 
       channelData:any ={
@@ -178,6 +178,17 @@ getSite(name: String): String {
   return  name;
   
   
+  }
+
+
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.ngOnInit();
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.ngOnInit();
   }
 
 }

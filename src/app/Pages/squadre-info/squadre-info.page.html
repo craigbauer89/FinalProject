@@ -72,6 +72,11 @@
                     <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['nome'].dirty && SquadreRegisterFormGroup.hasError('required', 'nome')">*Il Nome e obbligatorio!</span>
                   </mat-form-field>
                   <mat-form-field appearance="fill">
+                    <mat-label>Short Name</mat-label>
+                    <input matInput [ngModel]= "squadraData.shortName" type="text" formControlName="shortName" class="form-control" placeholder=" Short Name" required>
+                    <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['shortName'].dirty && SquadreRegisterFormGroup.hasError('required', 'shortName')">*Il Nome e obbligatorio!</span>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
                   <mat-label>Allenatore</mat-label>
                   <input matInput [ngModel]= "squadraData.allenatore"type="text" formControlName="allenatore" class="form-control" placeholder="Allenatore" required>
                   <span class="text-danger" *ngIf="SquadreRegisterFormGroup.controls['allenatore'].dirty && SquadreRegisterFormGroup.hasError('required', 'allenatore')">*Il allenatore e obbligatoria!</span>

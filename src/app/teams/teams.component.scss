@@ -1,12 +1,52 @@
+body {
+background-color: rgb(202, 198, 198);
+padding-top: 5%;
+height: auto;
+}
 
+.nameAndForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  margin: 0 auto 1.5rem;
+  padding: 0 0.75rem;
+}
 
+.saudraNome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  img {
+    width: 28px;       /* ⬅ FIX: smaller jersey */
+    height: 28px;
+    object-fit: contain;
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+}
+
+.form {
+  width: 100%;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+}
 
 .calender {
-  width: 95%;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
-  padding-top: 100px;
-  border-bottom: 1px solid black;
+
+  width: 90%;
+  margin: 2% 5%;
+
   display: flex;
   flex-direction: row;
   color: grey;
@@ -16,14 +56,13 @@
 }
 
 .slides-container {
-  height: 100%;
-  width: 80%;
+ width: 100%;
+
   display: flex;
   overflow:hidden;
   scroll-behavior: smooth;
   list-style: none;
-  margin: 0;
-  padding: 0;
+
 
 }
 
@@ -32,7 +71,7 @@
   padding: 0;
   cursor: pointer;
   transition: opacity 100ms;
-  height: 100%;
+  
 }
 
 .slide-arrow button{
@@ -43,7 +82,7 @@
  font-size: 1.5rem;
  color: grey;
  font-weight: bold;
- height: 100%;
+ 
 }
 
 .slide-arrow button:hover{
@@ -64,7 +103,7 @@
   
 
 .calender .slides-container  .slide{
- width: 25%;
+
  border: none;
  background-color: rgb(235, 233, 233);
  font-size: .7rem;
@@ -120,13 +159,16 @@
 // }
 
 li {
-  padding: 0.5rem 1rem;
-  margin: 0.5rem;
+ // padding: 0.5rem 1rem;
+ // margin: 0.5rem;
+  padding: 0.1rem .2rem;
+  margin: 0.1rem;
+  height: 1.2rem;
   border-radius: 4px;
   font-weight: bold;
   color: white;
   display: inline-block;
-  width: fit-content;
+  width: .5rem;
 
   &.win {
     background-color: #28a745; // verde
@@ -152,14 +194,7 @@ li {
 // }
 
 
-body {
-    background-image: url(../../assets/baseball-field-g9820c46dc_1920.jpg);
-    background-repeat: repeat;
-    // filter: grayscale(100%);
-    background-position: 1% 10%;
-    height: 4000px;
-   
-}
+
 
 
 // .modify {
@@ -364,16 +399,308 @@ body {
     height: 25px;
     background-color: rgba(0,0,0,0);
     border-radius: 200px;
-    border: 1px solid black;
+  //  border: 1px solid black;
   }
 
 
+.team-name .full {
+  display: none;
+}
+
+.bottons div.active {
+  background-color: rgb(182, 172, 172);
+  color: white;
+  border-radius: 4px;
+}
+  
+  .bottons {
+  width: 95%;
+  margin: 2.5%;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  background-color: rgb(69, 67, 67);
+
+}
+
+.calenderbox{
+border-right: solid .1px #ede8e8;
+}
+
+.calenderbox,
+.risultsbox {
+ 
+  height: 100%;
+  width: 50%;
+  display: flex;              /* ⬅ abilita flex */
+  justify-content: center;    /* ⬅ centro orizzontale */
+  align-items: center;        /* ⬅ centro verticale */
+  text-align: center;
+
+  font-family: "Segoe UI", sans-serif;
+  color: rgba(255, 255, 255, 0.777);
+}
+
+
+.matches {
+   background-color: rgba(30, 30, 50, 0.9);
+width: 90%;
+margin: 1% 5%;
+  color: white;
+  border-radius: 12px;
+  padding: 1%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+
+
+}
+
+
+.team-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   
+  justify-content: center;
+
+}
+
+.team-name {
+  text-align: center;    
+}
+
+
+
+.calendario, .results {
+
+  width: 95%;
+  
+
+  table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 95%;
+    margin: 1% 2.5%;
+   
+
+    td.mat-cell {
+      font-size: .6rem;
+      background-color: white;
+      color:black;
+      border-bottom: 5px solid rgba(50, 50, 80, 0.9);
+
+      &.center {
+        text-align: center;
+      
+      }
+
+      &.right {
+        text-align: right;
+   
+      }
+
+      &.left {
+        text-align: left;
+        font-size: .7rem;
+      }
+
+    }
+
+    th.mat-header-cell {
+
+      vertical-align: middle;
+
+      &.center {
+        text-align: center;
+      }
+
+    }
+    
+    tr.mat-row:hover {
+      background-color: rgba(77, 73, 73, 0.1);
+    }
+  }
+}
+
+.calendario  {
+
+  td.mat-cell {
+    border-bottom: 1px solid rgba(211, 211, 217, 0.9)  !important;;
+  }
+
+  tr.fullRow td.mat-cell {
+    border-bottom: 5px solid rgba(50, 50, 80, 0.9)  !important;;
+  }
+
+}
+
+.score {
+  font-size: 1rem;   /* più grande */
+  font-weight: bold;   /* opzionale */
+}
+
+.extra-row-content.compact {
+  line-height: 1.1;   
+  font-size: .75rem;
+}
+
+.full-width-row {
+  text-align: center;
+  width: 100%;
+}
+
+.extra-row-content {
+  font-size: .5rem;
+  color: #7c7878;
+}
+
+.hidden-headers th.mat-header-cell {
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  line-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.results, .calendario {
+  background-color: rgba(30, 30, 50, 0.9);
+  border-radius: 12px;
+  padding: 2%;
+
+  td img {
+    border: none;
+    height: 30px;
+    width: 30px;
+    object-fit: contain;
+  }
+
+  tr.mat-row:hover {
+    background-color: rgba(255,255,255,0.1);
+  }
+}
+
+
+.tableNews {
+  background-color: rgba(58, 60, 58, 0.9);
+  border-radius: 12px;
+  padding: 1%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  width: 90%;
+  margin: 1% 5%;
+
+  .tablepart{
+
+    width: 100%;
+
+  }
+
+  table {
+      width: 90%;
+  margin: 1% 5%;
+    border-collapse: collapse;
+
+    th.mat-header-cell,
+  td.mat-cell {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .left {
+    text-align: left!important;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+    td.mat-cell {
+      padding: 8px;
+      vertical-align: middle;
+      background-color: white;
+      color:black;
+      border-bottom: 5px solid rgba(50, 50, 80, 0.9);
+      font-size: .75rem;
+
+
+      &.center {
+        text-align: center;
+      }
+
+  
+      img.club-logo {
+        height: 30px;
+        width: auto;
+        object-fit: contain;
+      }
+    }
+
+    th.mat-header-cell {
+      background-color: rgb(56, 54, 54);
+      vertical-align: middle;
+
+      &.center {
+        text-align: center;
+      }
+
+    }
+    
+
+    tr.mat-row:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+  }
+}
+
+@media (min-width: 700px) {
+  .team-name .short {
+    display: none;
+  }
+  .team-name .full {
+    display: inline;
+  }
+}
+
+@media (min-width: 750px) {
+
+   .team-name .short {
+    display: inline;
+  }
+  .team-name .full {
+    display: none;
+  }
+
+  body {
+ width: 50%;
+ margin-right: 25%;
+ margin-left: 25%;
+}
+
+
+}
+
+   @media (min-width: 1200px) {
+
+   .team-name .short {
+    display: none;
+  }
+  .team-name .full {
+    display: inline;
+  }
+    
+    }
+  
 
 @media only screen and (min-width:650px) {
 
 
 body {
-  height: 2200px;
+ width: 70%;
+ margin-right: 15%;
+ margin-left: 15%;
 }
 
 }
@@ -381,18 +708,31 @@ body {
 @media only screen and (min-width:1100px) {
 
 
-
-  body {
-    height: 1800px;
-  }
+body {
+ width: 50%;
+ margin-right: 25%;
+ margin-left: 25%;
+}
 
 }
 
 @media only screen and (min-width:1445px) {
 
 
-  body {
-    height: 1400px;
+
+
+  
+}
+
+@media (min-width: 768px) {
+  .nameAndForm {
+    flex-direction: row;
+    max-width: 900px;
+  }
+
+  .saudraNome,
+  .form {
+    width: 50%;
   }
 
 }

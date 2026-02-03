@@ -36,6 +36,7 @@ export class FormRegisterSquadreComponent implements OnInit {
 
   SquadreRegisterFormGroup = this._form.group({
     nome: ['', Validators.required],
+    shortName: ['', Validators.required],
     allenatore: ['', Validators.required],
     sito: ['', Validators.required],
     indirizzo: ['', Validators.required],

@@ -5,10 +5,10 @@
         <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="calendario">Calendario</a></li>
         <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="classifica">Classifica</a></li>
         <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadreinfo">Squadre</a></li>
-        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="playersinfo">Players</a></li>
-        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="stadiumInfo">Stadium</a></li>
-        <!-- <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="teams">Teams</a></li> -->
-        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="statistiche">Statistiche</a></li>
+        <!-- <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="playersinfo" *ngIf="userService.roleMatch(['ROLE_ADMIN'])">Players</a></li>
+        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="stadiumInfo" *ngIf="userService.roleMatch(['ROLE_ADMIN'])">Stadium</a></li> -->
+        <!-- <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="teams">Teams</a></li> 
+        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="statistiche" *ngIf="userService.roleMatch(['ROLE_ADMIN'])">Statistiche</a></li>-->
         <li><a  href="#" routerLink="registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Admin</a></li>
    <!--       <li><a  href="#" routerLink="registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Partite</a></li>-->
         <li *ngIf="!isLoggedIn() "><a   href="#" routerLink="login"  >Login</a></li>
@@ -24,11 +24,11 @@
         <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="main"(click)="closeMenu()">Home</a></li>
         <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="calendario"(click)="closeMenu()">Calendario</a></li>
         <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="classifica"(click)="closeMenu()">Classifica</a></li>
-        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadreinfo"(click)="closeMenu()">Squadre</a></li>
-        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="playersinfo">Players</a></li>
-        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="stadiumInfo">Stadium</a></li>
+        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="squadreinfo"  (click)="closeMenu()">Squadre</a></li>
+        <!-- <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="playersinfo" *ngIf="userService.roleMatch(['ROLE_ADMIN'])" (click)="closeMenu()">Players</a></li>
+        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="stadiumInfo" *ngIf="userService.roleMatch(['ROLE_ADMIN'])" (click)="closeMenu()">Stadium</a></li>
 
-        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="statistiche"(click)="closeMenu()">Statistiche</a></li>
+        <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="statistiche" *ngIf="userService.roleMatch(['ROLE_ADMIN'])" (click)="closeMenu()">Statistiche</a></li> -->
         <!-- <li *ngIf= "isLoggedIn() "><a  href="#" routerLink="teams">Teams</a></li> -->
         <li><a  href="#" routerLink="registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"(click)="closeMenu()"><mat-icon>add_circle</mat-icon> Admin</a></li>
      <!--   <li><a  href="#" routerLink="registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"(click)="closeMenu()"><mat-icon>add_circle</mat-icon> Partite</a></li>-->

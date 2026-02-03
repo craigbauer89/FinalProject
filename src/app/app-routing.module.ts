@@ -110,13 +110,13 @@ const routes: Routes = [
   {
     path: 'playersinfo',
     component: PlayersComponent,
-    canActivate:[UserGuard] //, data:{roles:['ROLE_USER','ROLE_ADMIN']}
+    canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}
   },
 
   {
     path: 'stadiumInfo',
     component: StadiumComponent,
-    canActivate:[UserGuard] //, data:{roles:['ROLE_USER','ROLE_ADMIN']}
+    canActivate:[AuthGuard], data:{roles:['ROLE_ADMIN']}
   },
 
   {

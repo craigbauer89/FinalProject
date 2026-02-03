@@ -105,6 +105,7 @@ cat1 = "https://www.w3schools.com";
 
   SquadreRegisterFormGroup = this._form.group({
     nome: ['', Validators.required],
+    shortName: ['', Validators.required],
     allenatore: ['', Validators.required],
     sito: ['', Validators.required],
     indirizzo: ['', Validators.required],
@@ -227,6 +228,7 @@ modifySquadra(id:number) {
  modify() {
 
   this.squadraData.nome = this.form.value.nome;
+   this.squadraData.shortName = this.form.value.shortName;
   this.squadraData.allenatore = this.form.value.allenatore;
   this.squadraData.sito = this.form.value.sito;
   this.squadraData.jersey = this.form.value.jersey;

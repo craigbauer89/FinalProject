@@ -1,19 +1,19 @@
 
 
-.group-header {
-  background-color:rgb(12, 105, 244);
-  font-weight: bold;
-  font-size: 1rem;
-  text-align: left;
-  padding: 8px;
-  color: white;
-}
+// .group-header {
+//   background-color:rgb(12, 105, 244);
+//   font-weight: bold;
+//   font-size: 1rem;
+//   text-align: left;
+//   padding: 8px;
+//   color: white;
+// }
 
 .calender {
   width: 95%;
   margin-left: 2.5%;
   margin-right: 2.5%;
-  padding-top: 100px;
+  padding-top: 1%;
   border-bottom: 1px solid black;
   display: flex;
   flex-direction: row;
@@ -21,6 +21,7 @@
   background-color: rgb(235, 233, 233);
   height: 50px;
   background-color: transparent;
+  
 }
 
 .slides-container {
@@ -41,6 +42,7 @@
   cursor: pointer;
   transition: opacity 100ms;
   height: 100%;
+  
 }
 
 .slide-arrow button{
@@ -48,7 +50,7 @@
  margin: 0;
  border: none;
  background-color: rgb(235, 233, 233);
- font-size: 1.5rem;
+ font-size: 1rem;
  color: grey;
  font-weight: bold;
  height: 100%;
@@ -71,26 +73,34 @@
 }
   
 
-.calender .slides-container  .slide{
- width: 25%;
- border: none;
- background-color: rgb(235, 233, 233);
- font-size: .7rem;
- color: grey;
- flex: 1 0 25%;
- font-weight: bold;
- border-bottom: 3px solid transparent;
+.calender .slides-container .slide {
+  width: 25%;
+  border: none;
+  background-color: rgb(235, 233, 233);
+  font-size: .55rem;
+  color: grey;
+  flex: 1 0 25%;
+  font-weight: bold;
+  border-bottom: 3px solid transparent;
+
+  display: flex;            /* <— fehlt bei dir */
+  justify-content: center;  /* horizontal zentrieren */
+  align-items: center;       /* vertikal zentrieren */
 }
+
 
 .slider-wrapper {
   overflow: hidden;
 }
 
+
+
 .active-slide {
-  /* Your styles for the active-slide class */
-  border-bottom: 4px solid black !important;
-  color: black !important;
-  font-size: .8rem !important;
+    border-bottom: 4px solid black !important;
+    color: black !important;
+    font-size: .6rem !important;
+    /* padding anpassen, um vertikale Zentrierung zu behalten */
+    padding: 0 0;  /* oder line-height: normal; */
 }
 
 
@@ -102,54 +112,8 @@
 .calender  .slides-container button:active{
     border-bottom: 3px solid grey;
  
+// }}
 }
-
-:target {
-  color: red;
-}
-
-.left{
-  text-align: left;
-}
-
-.center{
-  text-align: center;
-  }
-
-.bold{
-  font-weight:900;
-}
-
-table {
-    background-color:  rgba(208, 227, 244, 0.95);
-    width: 95%;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    text-align: center;
-    border-radius: 5px;
-}
-
-h1 {
-  color: transparent;
-}
-
-th {
-  background-color:rgb(12, 105, 244);
-  width: 80px;
-  font-size: .8rem;
-  color: white;
-  text-align: center;
-}
-
-td{
-  text-align: center;
-  color: black;
-  font-size: .7rem;
-
-
-}
-
-
 
 body {
   background-image: url(../../../assets/rugby-g1d8010854_1920.jpg);
@@ -176,7 +140,7 @@ img {
 
 @media only screen and (min-width:500px) {
 
-  .calender , table{
+  .calender {
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;

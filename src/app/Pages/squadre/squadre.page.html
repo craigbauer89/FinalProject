@@ -1,5 +1,18 @@
 <body>
-  <div class="slider-wrapper calender">
+<h1>Classfica</h1>
+    <div class="season-box">
+      <select
+        class="season-select"
+        [value]="selectedSeasonId"
+        (change)="onSeasonChange($event)">
+        <option *ngFor="let season of seasons" [value]="season.id">
+          {{ season.year }}
+        </option>
+      </select>
+    </div>
+
+
+  <!-- <div class="slider-wrapper calender">
     <div class="slide-arrow" >
       <button id="slide-arrow-prev" (click)="scrollleft()">&#8249;</button>
     </div>
@@ -15,7 +28,7 @@
     <div class="slide-arrow" >
       <button id="slide-arrow-next" (click)="scrollright()">&#8250;</button>
     </div>
-  </div>
+  </div> -->
   <router-outlet></router-outlet>
   <!-- <div class="slider-wrapper calender">
     <div class="slide-arrow" >

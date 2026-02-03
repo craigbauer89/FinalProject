@@ -1,5 +1,16 @@
 
-<div class="slider-wrapper calender">
+    <div class="championship-box">
+            <select
+        class="championship-select"
+        [value]="selectedChampionshipId"
+        (change)="onChampionshipChange($event)">
+        <option *ngFor="let championship of championships" [value]="championship.id">
+          {{ championship.name  }}
+        </option>
+      </select>
+    </div>
+
+<!-- <div class="slider-wrapper calender">
     <div class="slide-arrow2" >
       <button id="slide-arrow-prev2" (click)="scrollleft2()">&#8249;</button>
     </div>
@@ -15,6 +26,6 @@
     <div class="slide-arrow2" >
       <button id="slide-arrow-next2" (click)="scrollright2()">&#8250;</button>
     </div>
-  </div>
+  </div> -->
 
   <router-outlet></router-outlet>

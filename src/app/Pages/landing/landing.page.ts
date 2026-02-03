@@ -26,6 +26,7 @@ import { ApiService } from 'src/app/api.service';
 
 export class LandingPage implements OnInit {
 
+
   @ViewChild('f') form!: NgForm;
   sort!: MatSort;
   element: any;
@@ -39,8 +40,12 @@ export class LandingPage implements OnInit {
   displayedColumns: string[] = [ 'img', 'nome', 'punti', 'differenza' ];
   dataSource = new MatTableDataSource(this.squadre) ;
   fixturesDataSource = new MatTableDataSource(this.squadraFixtures) ;
-  displayedColumns2: string[] = ['img1', 'puntisquadra1', 'dash',  'puntisquadra2', 'img2' ];
-  displayedColumns3: string[] = ['img1',  'dash', 'img2','tickets','channel','stadium' ];
+  //displayedColumns2: string[] = ['date','img1', 'puntisquadra1', 'dash',  'puntisquadra2', 'img2' ];
+  displayedColumns2: string[] = ['img1', 'dash', 'img2' ];
+  //displayedColumns3: string[] = ['date','img1',  'dash', 'img2','stadium','tickets','channel' ];
+  displayedColumns3: string[] = ['img1',  'dash', 'img2' ];
+
+
   dataSource2: Partite[] = [];
   standingsData: any; 
   teamData: any = null;
@@ -49,6 +54,8 @@ export class LandingPage implements OnInit {
   inputNumero: number | undefined;
   classificaId: number = 241;
   areYouSure = false;
+  calendariobox = true;
+  resultsbox = false;
   modifybox = false;
   error = undefined;
   picture: Picture [] = [];
@@ -242,5 +249,25 @@ const setDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     this.ngOnInit();
   
   }
+
+  fixUrl(url: string): string {
+    if (!url) return '#'; // evita errori
+    if (!/^https?:\/\//i.test(url)) {
+      return 'https://' + url;  // aggiunge https se manca
+    }
+    return url;
+  }
+
+  clickCalender(){
+
+    this.calendariobox = true;
+    this.resultsbox = false;
+  }
+
+   clickResults(){
+    this.resultsbox = true;
+    this.calendariobox = false;
+  }
+  
 
 }

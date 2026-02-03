@@ -16,6 +16,8 @@ import { PartiteService } from 'src/app/Services/partite.service';
 import { SeasonService } from 'src/app/Services/season.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
 import { Channel } from 'src/app/Interfaces/channel';
+import { Stadium } from 'src/app/Interfaces/stadium';
+import { stadiumService } from 'src/app/Services/stadium.service';
 
 @Component({
   selector: 'app-partite-details2',
@@ -25,6 +27,7 @@ import { Channel } from 'src/app/Interfaces/channel';
 export class PartiteDetails2Component implements OnInit {
 
   activeDate:any;
+  classifica_id: number = 0;
   squadreforName: Squadre | undefined;
   partita: Partite | undefined;
   classifiche: Classifica[]| undefined;
@@ -59,7 +62,7 @@ export class PartiteDetails2Component implements OnInit {
   areYouSure = false;
   modifybox = false;
   error = undefined;
-  channels: Channel[] = [];
+
 
   
   partitaData:any =
@@ -72,12 +75,15 @@ export class PartiteDetails2Component implements OnInit {
     puntisquadra2: '',
     meteSquadra1: '',
     meteSquadra2: '',
-    classifica_id: '',
+    channel: '',
+    stadium: '',
   }
 
   hideForResponsive = false;
   hideForResponsivePhone = false;
-  displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'seperator', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
+  displayedColumns: string[] = [ 'img1', 'dash','img2' ];
+   // displayedColumns: string[] = [ 'img1', 'squadra1.nome', 'puntisquadra1','metesquadra1', 'seperator', 'puntisquadra2', 'metesquadra2', 'squadra2.nome', 'img2', 'modifica', 'cancellare' ];
+
   dataSource = new MatTableDataSource(this.dataPartite) ;
   dataSource1 = new MatTableDataSource(this.dataPartite2) ;
   dataSource2 = new MatTableDataSource(this.dataPartite2) ;
@@ -91,6 +97,8 @@ export class PartiteDetails2Component implements OnInit {
   squadre: Squadre[] = [];
 
   squadrelist: Squadre[] = [];
+  channels: Channel[] = [];
+  stadiums: Stadium[] = [];
   
   PartiteRegisterFormGroup = this._form.group({
     date: ['', Validators.required],
@@ -100,25 +108,30 @@ export class PartiteDetails2Component implements OnInit {
     puntisquadra2: ['', Validators.required],
     meteSquadra1: ['', Validators.required],
     meteSquadra2: ['', Validators.required],
-    classifica_id: ['', Validators.required],
+    stadium: ['', Validators.required],
+   // classifica_id: ['', Validators.required],
     tickets: ['', Validators.required],
+    time: ['', Validators.required],
     channel: ['', Validators.required],
    // played: ['', Validators.required],
   });
   
 
-  constructor(private channelService: ChannelService,private seasonService: SeasonService, private championshipService: ChampionshipService,private classificaService: ClassificaService,private partiteService: PartiteService, private SquadreServiceservice: SquadraServiceService, private _form: FormBuilder, private router: Router, private authService: AuthService, private responsive: BreakpointObserver, private route: ActivatedRoute) { }
+  constructor(private stadiumService: stadiumService, private channelService: ChannelService,private seasonService: SeasonService, private championshipService: ChampionshipService,private classificaService: ClassificaService,private partiteService: PartiteService, private SquadreServiceservice: SquadraServiceService, private _form: FormBuilder, private router: Router, private authService: AuthService, private responsive: BreakpointObserver, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
-    this.channelService.findAll().subscribe(data => {
-      this.channels = data;
-     // this.dataSourceSeason = this.seasons ;
+    this.stadiumService.findAll().subscribe(data => {
+      this.stadiums = data;
     });
 
+    this.channelService.findAll().subscribe(data => {
+      this.channels = data;
+    });
 
     this.SquadreServiceservice.findAll().subscribe(data => {
-      this.squadrelist = data; });
+      this.squadrelist = data; 
+    });
 
     this.route.params.subscribe(params => {
       console.log('Params at :date route:', params);  // Should log { date: '2025-06-19' }
@@ -172,28 +185,33 @@ export class PartiteDetails2Component implements OnInit {
   }
 
   modifyPartita(id:number) {
+    this.areYouSure = false;
     this.modifybox = true;
     this.currentId = id;
-    this.partiteService.findById(this.currentId).subscribe(data => 
-    this.partitaData = data
-    );
+    this.partiteService.findById(this.currentId).subscribe(data => {
+      this.partitaData = data;
+      console.log(data);
+    });
+    
   }
 
   modify() {
 
+    
 
     var formDate = new Date();
     const today = new Date();
     if (this.form.value.date !== undefined) {
       formDate = new Date(this.form.value.date);
     }
-    
+
+    this.partiteService.findById(this.currentId).subscribe(data => {
+      this.classifica_id = data.classifica_id;
 
       console.log(this.currentId)
-      console.log(this.form.value)
       this.partiteService.modifyPartita(this.currentId,{
         date: this.form.value.date,
-        classifica_id: this.form.value.classifica_id,
+        classifica_id: this.classifica_id,
         puntisquadra1: this.form.value.puntisquadra1,
         puntisquadra2: this.form.value.puntisquadra2,
         meteSquadra1: this.form.value.meteSquadra1,
@@ -201,29 +219,33 @@ export class PartiteDetails2Component implements OnInit {
         squadra1_id: this.form.value.squadra1.id,
         squadra2_id: this.form.value.squadra2.id,
         tickets: this.form.value.tickets,
+        time: this.form.value.time,
         channel: this.form.value.channel,
+        stadium: this.form.value.stadium,
         played: formDate > today ? false : true, // if date gets changes need to undo the changes!!
-
-      })
-      .subscribe(data => console.log(data));
+      }).subscribe(data => console.log("this is data:", data));
+  
       this.modifybox = false;
       window.alert("Partita Modifichato")
       this.partiteService.findAll().subscribe(data => {
         this.partitaData = data;
       });
 
+    });
 
-   
+
   }
 
   cancella(id:number) {
-  this.currentId = id;
-  this.areYouSure = true;
+    this.currentId = id;
+    this.areYouSure = true;
+    this.modifybox = false;
   }
 
 
   cancellaPartita() {
-    this.partiteService.cancellaPartita(this.currentId).subscribe(data => {console.log('deleted response', data);
+    this.partiteService.cancellaPartita(this.currentId).subscribe(data => 
+      {console.log('deleted response', data);
     window.alert("Cancellato")
     this.areYouSure = false;
     this.ngOnInit()
@@ -231,19 +253,19 @@ export class PartiteDetails2Component implements OnInit {
   }
 
   isAdmin() {
-  let isAdmin = null;
-  let roles: any[] = this.authService.getRoles();
-  for (let role in roles) {
-    if (((roles[role].roleName)) === 'ROLE_USER'){
-      isAdmin = 'hidden-row';
+    let isAdmin = null;
+    let roles: any[] = this.authService.getRoles();
+    for (let role in roles) {
+      if (((roles[role].roleName)) === 'ROLE_USER'){
+        isAdmin = 'hidden-row';
+      }
     }
-  }
-  return isAdmin;
+    return isAdmin;
   }
 
   close() {
-  this.modifybox = false;
-  this.areYouSure = false;
+    this.modifybox = false;
+    this.areYouSure = false;
   }
 
   getPath(name: String): String {

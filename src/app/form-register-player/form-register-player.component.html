@@ -1,5 +1,6 @@
 <body>
-    <li><a  href="#" routerLink="/registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Squadre</a></li>
+    <aside class ="adminlist">
+      <li><a  href="#" routerLink="/registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Squadre</a></li>
       <li><a  href="#" routerLink="/registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Partite</a></li>
       <li><a  href="#" routerLink="/registerClassifica" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Classifica</a></li>
       <li><a  href="#" routerLink="/registerJersey" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Jersey</a></li>
@@ -10,10 +11,7 @@
       <li><a  href="#" routerLink="/registerChannel" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Channel</a></li>
       <li><a  href="#" routerLink="/registerNews" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> News</a></li>
       <li><a  href="#" routerLink="/registerLoadIds" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> LoadID</a></li>
-
-      
-    <h1>Register Player</h1>
-    <p>Player</p>
+    </aside>
     <form [formGroup]="PlayerRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="onSubmit()">
       <div class="main">
           <h2>Inserisci Player</h2>
@@ -56,9 +54,7 @@
           </mat-form-field>
           <button mat-button [disabled]="!PlayerRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
       </div>
-      <div class="alert alert-danger" role="alert" *ngIf="error">
-          {{error}}
-      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="error">{{error}}</div>
   </form>
 </body>
 

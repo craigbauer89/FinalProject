@@ -1,3 +1,6 @@
+.team-name .full {
+  display: none;
+}
 
 
 .calender {
@@ -124,7 +127,7 @@
   }
   
   th {
-    background-color:rgb(12, 105, 244);
+    background-color:rgb(60, 61, 63);
     width: 80px;
     font-size: .8rem;
     color: white;
@@ -155,18 +158,98 @@
     td {color: white;}
   }
   
-  img {
-      width: 25px;
-      height: 20px;
-      background-color: rgba(0,0,0,0);
-      border-radius: 200px;
-      border: 1px solid black;
+  // img {
+  //     width: 25px;
+  //     height: 20px;
+  //     background-color: rgba(0,0,0,0);
+  //     border-radius: 200px;
+  //     border: 1px solid black;
+  // }
+
+  .matches {
+       width: 95%;
+    margin: 2.5%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+  background-color: rgba(50, 50, 80, 0.9);
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+
+.tableNews {
+
+   width: 95%;
+    margin: 2.5%;
+ padding-top: 1%;
+    padding-bottom: 1%;
+  background-color: rgba(40, 60, 40, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+
+  table {
+  width: 95%;
+    margin: 2.5%;
+    border-collapse: collapse;
+     
+
+    td.mat-cell {
+      padding: 8px;
+      vertical-align: middle;
+      background-color: white;
+      color:black;
+      border-bottom: 5px solid rgba(50, 50, 80, 0.9);
+       font-size: .6rem;
+
+
+      &.center {
+        text-align: center;
+      }
+
+  
+      img.club-logo {
+        height: 20px;
+        width: auto;
+        object-fit: contain;
+      }
+    }
+
+    th.mat-header-cell {
+
+      vertical-align: middle;
+
+      &.center {
+        text-align: center;
+      }
+
+    }
+
+    th.mat-header-cell,
+td.mat-cell {
+  padding: 8px !important;
+}
+    
+
+    tr.mat-row:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
   }
+}
+
+@media (min-width: 700px) {
+  .team-name .short {
+    display: none;
+  }
+  .team-name .full {
+    display: inline;
+  }
+}
   
   
-  @media only screen and (min-width:500px) {
+  @media only screen and (min-width:600px) {
   
-    .calender , table{
+    .calender , table, .matches, .tablenews{
       width: 80%;
       margin-left: 10%;
       margin-right: 10%;

@@ -12,6 +12,7 @@ import { SeasonService } from 'src/app/Services/season.service';
 })
 export class StandingDetailsComponent implements OnInit {
 
+  selectedChampionshipId!: number;
   seasonid!: number;
   season!: Season;
   championship!: Championship;
@@ -130,4 +131,16 @@ export class StandingDetailsComponent implements OnInit {
     return this.activeButtonChampionshipId === id;
     
   }
+
+
+onChampionshipChange(event: Event) {
+  const value = (event.target as HTMLSelectElement).value;
+  this.selectedChampionshipId = +value; // converte in number
+
+  this.selectChampionship(this.selectedChampionshipId);
+
+}
+
+
+
 }

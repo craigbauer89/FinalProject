@@ -7,6 +7,7 @@ export interface Squadre {
 
 id:number;
 nome: string;
+shortName: string;
 allenatore: string;
 sito: string;
 indirizzo: string;

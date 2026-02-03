@@ -1,206 +1,143 @@
 <body>
-    <li><a  href="#" routerLink="/registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Squadre</a></li>
-    <li><a  href="#" routerLink="/registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Partite</a></li>
-    <li><a  href="#" routerLink="/registerClassifica" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Classifica</a></li>
-    <li><a  href="#" routerLink="/registerJersey" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Jersey</a></li>
-    <li><a  href="#" routerLink="/registerSeason" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Season</a></li>
-    <li><a  href="#" routerLink="/registerChampionship" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Championship</a></li>
-    <li><a  href="#" routerLink="/registerPlayer" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Player</a></li>
-    <li><a  href="#" routerLink="/registerStadium" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Stadium</a></li>
-    <li><a  href="#" routerLink="/registerChannel" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Channel</a></li>
-    <li><a  href="#" routerLink="/registerNews" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> News</a></li><h1>Register Classifica</h1>
-    <li><a  href="#" routerLink="/registerLoadIds" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> LoadID</a></li>
-
+    <aside class ="adminlist">
+        <li><a  href="#" routerLink="/registersquadre" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Squadre</a></li>
+        <li><a  href="#" routerLink="/registerpartite" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Partite</a></li>
+        <li><a  href="#" routerLink="/registerClassifica" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Classifica</a></li>
+        <li><a  href="#" routerLink="/registerJersey" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Jersey</a></li>
+        <li><a  href="#" routerLink="/registerSeason" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Season</a></li>
+        <li><a  href="#" routerLink="/registerChampionship" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Championship</a></li>
+        <li><a  href="#" routerLink="/registerPlayer" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Player</a></li>
+        <li><a  href="#" routerLink="/registerStadium" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Stadium</a></li>
+        <li><a  href="#" routerLink="/registerChannel" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> Channel</a></li>
+        <li><a  href="#" routerLink="/registerNews" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> News</a></li>
+        <li><a  href="#" routerLink="/registerLoadIds" *ngIf="userService.roleMatch(['ROLE_ADMIN'])"><mat-icon>add_circle</mat-icon> LoadID</a></li>
+    </aside>
+    <div class="select">
+        <h2>Inserisci Season della nuovo Classifica</h2>
+        <div class="buttons">
+        <button class="slide" *ngFor="let season of seasons"[ngClass]="{'active-slide': isActiveSeason(season.id)}"(click)="selectSeason(season.id)">{{ season.year }}</button>
+        </div>
+    </div>
     <form [formGroup]="ClassificaRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="onSubmit()">
         <div class="main">
-            <h2>Inserisci Season</h2>
-            <div class="buttons">
-               
-                <button 
-                class="slide" 
-                *ngFor="let season of seasons"
-                [ngClass]="{'active-slide': isActiveSeason(season.id)}"
-                (click)="selectSeason(season.id)">
-                {{ season.year }}
-                </button>
-            </div>
             <h2>Inserisci Classifica</h2>
-                <mat-form-field appearance="fill">
-                    <mat-label  style="color: white">Name</mat-label>
-                    <input matInput type="text" formControlName="name" class="form-control" placeholder=" Name" required>
-                    <span class="text-danger" *ngIf="ClassificaRegisterFormGroup.controls['name'].dirty && ClassificaRegisterFormGroup.hasError('required', 'name')">*Il Nome e obbligatorio!</span>
-                </mat-form-field>
-                <!-- <mat-form-field appearance="fill">
-                    <mat-label  style="color: white">Id</mat-label>
-                    <input matInput type="number" formControlName="id" class="form-control" placeholder=" id" required>
-                    <span class="text-danger" *ngIf="ChampionshipRegisterFormGroup.controls['id'].dirty && ChampionshipRegisterFormGroup.hasError('required', 'id')">*Il Id e obbligatorio!</span>
-                </mat-form-field> -->
-                <mat-form-field appearance="fill">
-                    <mat-label style="color: white">Championship</mat-label>
+            <mat-form-field appearance="fill">
+                <mat-label  style="color: white">Name</mat-label>
+                <input matInput type="text" formControlName="name" class="form-control" placeholder=" Name" required>
+                <span class="text-danger" *ngIf="ClassificaRegisterFormGroup.controls['name'].dirty && ClassificaRegisterFormGroup.hasError('required', 'name')">*Il Nome e obbligatorio!</span>
+            </mat-form-field>
+            <!-- <mat-form-field appearance="fill">
+                <mat-label  style="color: white">Id</mat-label>
+                <input matInput type="number" formControlName="id" class="form-control" placeholder=" id" required>
+                <span class="text-danger" *ngIf="ChampionshipRegisterFormGroup.controls['id'].dirty && ChampionshipRegisterFormGroup.hasError('required', 'id')">*Il Id e obbligatorio!</span>
+            </mat-form-field> -->
+            <mat-form-field appearance="fill">
+                <mat-label style="color: white">Championship</mat-label>
                 <mat-select formControlName="championship" class="form-control">
                     <span class="text-danger" *ngIf="ClassificaRegisterFormGroup.controls['championship'].dirty && ClassificaRegisterFormGroup.hasError('required', 'championship')">*Il championship e obbligatorio!</span>
-              <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
-                <mat-option *ngFor="let p of championships" [value]="p">
-                {{ p.name }}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
-                <!-- <mat-form-field appearance="fill">
-                    <mat-label style="color: white">Champsionship</mat-label>
-                    <mat-select formControlName="championships" class="form-control"placeholder=" Champsionship">
-                        <span class="text-danger" *ngIf="ChampionshipRegisterFormGroup.controls['championships'].dirty && ChampionshipRegisterFormGroup.hasError('required', 'championships')">*Il Championship e obbligatorio!</span>
-                        <mat-option *ngFor="let p of championships" [value]="p">
-                            {{ p.name }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field> -->
+                    <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
+                    <mat-option *ngFor="let p of championships" [value]="p">{{ p.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <mat-form-field appearance="fill">
+                <mat-label style="color: white">Champsionship</mat-label>
+                <mat-select formControlName="championships" class="form-control"placeholder=" Champsionship">
+                    <span class="text-danger" *ngIf="ChampionshipRegisterFormGroup.controls['championships'].dirty && ChampionshipRegisterFormGroup.hasError('required', 'championships')">*Il Championship e obbligatorio!</span>
+                    <mat-option *ngFor="let p of championships" [value]="p">
+                        {{ p.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field> -->
             <button mat-button [disabled]="!ClassificaRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
         </div>
-        <div class="alert alert-danger" role="alert" *ngIf="error">
-            {{error}}
-        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="error">{{error}}</div>
     </form>
-
-    <h2>Select Season</h2>
-    <div class="buttons">
-       
-        <button 
-        class="slide" 
-        *ngFor="let season of seasonsModify"
-        [ngClass]="{'active-slide': isActiveSeasonModify(season.id)}"
-        (click)="selectSeasonModify(season.id)">
-        {{ season.year }}
-        </button>
+    <div class="select">
+        <h2>Select Season per la clasiffica modificata</h2>
+        <div class="buttons">
+            <button class="slide" *ngFor="let season of seasonsModify"[ngClass]="{'active-slide': isActiveSeasonModify(season.id)}"(click)="selectSeasonModify(season.id)">{{ season.year }}</button>
+        </div>
     </div>
-
-    <h2>Select Championship</h2>
-    <div class="buttons">
-       
-        <button 
-        class="slide" 
-        *ngFor="let championship of championshipsModify"
-        [ngClass]="{'active-slide': isActiveChampionshipModify(championship.id)}"
-        (click)="selectChampionshipModify(championship.id)">
-        {{ championship.name }}
-        </button>
+    <div class="select">
+        <h2>Select Championship per la clasiffica modificata</h2>
+        <div class="buttons">
+            <button class="slide" *ngFor="let championship of championshipsModify"[ngClass]="{'active-slide': isActiveChampionshipModify(championship.id)}"(click)="selectChampionshipModify(championship.id)">{{ championship.name }}</button>
+        </div>
     </div>
-    
-    <h2>Select Classifica</h2>
-    <div class="buttons">
-        <button 
-        class="slide" 
-        *ngFor="let classifica of classificas"
-        [ngClass]="{'active-slide': isActiveClassifica(classifica.id)}"
-        (click)="selectClassifica(classifica.id)">
-        {{ classifica.name }}
-        </button>
+    <div class="select">
+        <h2>Select Classifica da modificare</h2>
+        <div class="buttons">
+            <button class="slide" *ngFor="let classifica of classificas"[ngClass]="{'active-slide': isActiveClassifica(classifica.id)}"(click)="selectClassifica(classifica.id)">{{ classifica.name }}</button>
+        </div>
     </div>
-
     <form [formGroup]="ClassificaModifyFormGroup" class="register" #f2="ngForm" (ngSubmit)="onSubmitModify()">
-       
- 
         <div class="main">
-
-          
             <h2>Modifica Classifica</h2>
-                <mat-form-field appearance="fill">
-                    <mat-label  style="color: white">Name</mat-label>
-                    <input matInput type="text" formControlName="name" class="form-control" placeholder=" Name" required>
-                    <span class="text-danger" *ngIf="ClassificaRegisterFormGroup.controls['name'].dirty && ClassificaRegisterFormGroup.hasError('required', 'name')">*Il Nome e obbligatorio!</span>
-                </mat-form-field>
-                <!-- <mat-form-field appearance="fill">
-                    <mat-label style="color: white">Championship</mat-label>
+            <mat-form-field appearance="fill">
+                <mat-label  style="color: white">Name</mat-label>
+                <input matInput type="text" formControlName="name" class="form-control" placeholder=" Name" required>
+                <span class="text-danger" *ngIf="ClassificaRegisterFormGroup.controls['name'].dirty && ClassificaRegisterFormGroup.hasError('required', 'name')">*Il Nome e obbligatorio!</span>
+            </mat-form-field>
+            <!-- <mat-form-field appearance="fill">
+                <mat-label style="color: white">Championship</mat-label>
                 <mat-select formControlName="championship" class="form-control">
                     <span class="text-danger" *ngIf="ClassificaRegisterFormGroup.controls['championship'].dirty && ClassificaRegisterFormGroup.hasError('required', 'championship')">*Il championship e obbligatorio!</span>
-                <mat-option *ngFor="let p of championships" [value]="p">
-                {{ p.name }}
-              </mat-option>
-            </mat-select>
-        </mat-form-field> -->
+                    <mat-option *ngFor="let p of championships" [value]="p">{{ p.name }}</mat-option>
+                </mat-select>
+            </mat-form-field> -->
             <button mat-button [disabled]="!ClassificaModifyFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
         </div>
-        <div class="alert alert-danger" role="alert" *ngIf="error">
-            {{error}}
-        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="error">{{error}}</div>
     </form>
-
-    <h2>Select Season</h2>
-    <div class="buttons">
-       
-        <button 
-        class="slide" 
-        *ngFor="let season of seasonsSquadra"
-        [ngClass]="{'active-slide': isActiveSeasonSquadra(season.id)}"
-        (click)="selectSeasonSquadra(season.id)">
-        {{ season.year }}
-        </button>
+    <div class="select">
+        <h2>Select Season per inserire squadra</h2>
+        <div class="buttons">
+        <button class="slide"  *ngFor="let season of seasonsSquadra"[ngClass]="{'active-slide': isActiveSeasonSquadra(season.id)}"(click)="selectSeasonSquadra(season.id)">{{ season.year }}</button>
+        </div>
     </div>
-
-    <h2>Select Championship</h2>
-    <div class="buttons">
-       
-        <button 
-        class="slide" 
-        *ngFor="let championship of championshipsSquadra"
-        [ngClass]="{'active-slide': isActiveChampionshipSquadra(championship.id)}"
-        (click)="selectChampionshipSquadra(championship.id)">
-        {{ championship.name }}
-        </button>
+    <div class="select">
+        <h2>Select Championship per inserire squadra </h2>
+        <div class="buttons">
+            <button class="slide" *ngFor="let championship of championshipsSquadra"[ngClass]="{'active-slide': isActiveChampionshipSquadra(championship.id)}"(click)="selectChampionshipSquadra(championship.id)">{{ championship.name }}</button>
+        </div>
     </div>
-
-    <h2>Select Classifica</h2>
-    <div class="buttons">
-        <button 
-        class="slide" 
-        *ngFor="let classifica of classificasSquadra"
-        [ngClass]="{'active-slide': isActiveClassificaSquadra(classifica.id)}"
-        (click)="selectClassificaSquadra(classifica.id)">
-        {{ classifica.name }}
-        </button>
+    <div class="select">
+        <h2>Select Classifica per inserire squadra</h2>
+        <div class="buttons">
+            <button class="slide" *ngFor="let classifica of classificasSquadra"[ngClass]="{'active-slide': isActiveClassificaSquadra(classifica.id)}"(click)="selectClassificaSquadra(classifica.id)">{{ classifica.name }}</button>
+        </div>
     </div>
-
     <form [formGroup]="ClassificaSquadraFormGroup" class="register" #f3="ngForm" (ngSubmit)="onSubmitSquadra()">
         <div class="main">
             <h2>Inserisci Squadra per una Classifica</h2>
             <mat-form-field appearance="fill">
                 <mat-label  style="color: white">Squadra</mat-label>
                 <!-- <mat-select [dataSource]="dataSource"> -->
-                    <mat-select formControlName="squadra" class="form-control">
-                        <span class="text-danger" *ngIf="ClassificaSquadraFormGroup.controls['squadra'].dirty && ClassificaSquadraFormGroup.hasError('required', 'squadra')">*Il Squadra e obbligatorio!</span>
-              <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
-                <mat-option *ngFor="let p of squadre" [value]="p.id">
-                {{ p.nome }}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
+                <mat-select formControlName="squadra" class="form-control">
+                    <span class="text-danger" *ngIf="ClassificaSquadraFormGroup.controls['squadra'].dirty && ClassificaSquadraFormGroup.hasError('required', 'squadra')">*Il Squadra e obbligatorio!</span>
+                    <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
+                    <mat-option *ngFor="let p of squadre" [value]="p.id">{{ p.nome }}</mat-option>
+                </mat-select>
+            </mat-form-field>
             <button mat-button [disabled]="!ClassificaSquadraFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
         </div>
-        <div class="alert alert-danger" role="alert" *ngIf="error">
-            {{error}}
-        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="error">{{error}}</div>
     </form>
-
     <form [formGroup]="ClassificaCancellaSquadraFormGroup" class="register" #f4="ngForm" (ngSubmit)="onSubmitRemoveSquadra()">
         <div class="main">
             <h2>Cancella Squadra per una Classifica</h2>
             <mat-form-field appearance="fill">
                 <mat-label  style="color: white">Squadra</mat-label>
                 <!-- <mat-select [dataSource]="dataSource"> -->
-                    <mat-select formControlName="squadra" class="form-control">
-                        <span class="text-danger" *ngIf="ClassificaCancellaSquadraFormGroup.controls['squadra'].dirty && ClassificaCancellaSquadraFormGroup.hasError('required', 'squadra')">*Il Squadra e obbligatorio!</span>
-              <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
-                <mat-option *ngFor="let p of squadreclassifica" [value]="p.id">
-                {{ p.nome }}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
+                <mat-select formControlName="squadra" class="form-control">
+                    <span class="text-danger" *ngIf="ClassificaCancellaSquadraFormGroup.controls['squadra'].dirty && ClassificaCancellaSquadraFormGroup.hasError('required', 'squadra')">*Il Squadra e obbligatorio!</span>
+                    <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
+                    <mat-option *ngFor="let p of squadreclassifica" [value]="p.id">{{ p.nome }}</mat-option></mat-select>
+            </mat-form-field>
             <button mat-button [disabled]="!ClassificaCancellaSquadraFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
         </div>
-        <div class="alert alert-danger" role="alert" *ngIf="error">
-            {{error}}
-        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="error">{{error}}</div>
     </form>
-
 </body>
   
   

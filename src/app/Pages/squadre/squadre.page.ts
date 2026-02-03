@@ -9,6 +9,7 @@ import { Squadre } from 'src/app/Interfaces/squadre';
 import { ChampionshipService } from 'src/app/Services/championship.service';
 import { SeasonService } from 'src/app/Services/season.service';
 import { SquadraServiceService } from 'src/app/Services/squadra-service.service';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { SquadraServiceService } from 'src/app/Services/squadra-service.service'
 
 export class SquadrePage implements OnInit {
 
+    selectedSeasonId!: number;
   season: Season | undefined;
   seasons: Season[] = [];
   league: Championship | undefined;
@@ -171,6 +173,18 @@ this.router.navigate([currentPage, id]);
   isActiveSeason(id: number): boolean {
     return this.activeSeasonId === id; 
   }
+
+
+
+
+onSeasonChange(event: Event) {
+  const value = (event.target as HTMLSelectElement).value;
+  this.selectedSeasonId = +value; // converte in number
+
+  this.selectSeason(this.selectedSeasonId);
+}
+
+
 
 
 }

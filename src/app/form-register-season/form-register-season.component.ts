@@ -31,13 +31,24 @@ export class FormRegisterSeasonComponent implements OnInit {
   championships: Championship[] = [];
   dataSource = this.championships;
 
+  seasonData:any ={
+    id: '',
+year: '',
+startDate: '',
+endDate: '',
+  }
+
   SeasonRegisterFormGroup = this._form.group({
-  year: ['', Validators.required],
+    year: ['', Validators.required],
+    startDate: ['', Validators.required],
+    endDate: ['', Validators.required],
   // championships: ['', Validators.required],
   });
 
   SeasonModifyFormGroup = this._form2.group({
     year: ['', Validators.required],
+    startDate: ['', Validators.required],
+    endDate: ['', Validators.required],
     // championships: ['', Validators.required],
     });
 
@@ -85,6 +96,7 @@ export class FormRegisterSeasonComponent implements OnInit {
     this.seasonid = id; 
     this.seasonService.findById(id).subscribe(data => {
       this.season = data;
+      this.seasonData = data;
       console.log(id);
 
     });

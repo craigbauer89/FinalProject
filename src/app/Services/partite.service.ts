@@ -39,6 +39,10 @@ export class PartiteService {
     return this.http.get<Partite[]>(this.partiteUrl + '/' + 'by-year' + '/' + year);
   }
 
+  public findAllBySeason(start: Date, end: Date): Observable<Partite[]> {
+    return this.http.get<Partite[]>(this.partiteUrl + '/' + 'by-season' + '/' + start + '/' + end);
+  }
+
   public findAllBySquadra(squadra_id: number): Observable<Partite[]> {
     return this.http.get<Partite[]>(this.partiteUrl + '/' + 'by-squadra' + '/' + squadra_id);
   }
@@ -47,9 +51,18 @@ export class PartiteService {
     return this.http.get<Partite[]>(this.partiteUrl + '/' + 'by-classifica' + '/' + classific_id);
   }
 
+  public findAllChampionshipFixtures(Championship_id: number): Observable<Partite[]> {
+    return this.http.get<Partite[]>(this.partiteUrl + '/' + 'by-fixtures' + '/' + Championship_id);
+  }
+
+  public findAllChampionshipResults(Championship_id: number): Observable<Partite[]> {
+    return this.http.get<Partite[]>(this.partiteUrl + '/' + 'by-results' + '/' + Championship_id);
+  }
+
   public addPartita(partita: Partite) {
     const channel_id = partita.channel.id;
-    return this.http.post<Partite>(this.partiteUrl + '/' + channel_id, partita);
+    const stadium_id = partita.stadium.id;
+    return this.http.post<Partite>(this.partiteUrl + '/' + channel_id  + '/'+  stadium_id, partita);
   }
 
   modifySquadra(id:number, squandra:any){
@@ -57,7 +70,9 @@ export class PartiteService {
   }
 
   modifyPartita(id:number, partita:any){
-    return this.http.put<Partite>(this.partiteUrl + '/'+ id, partita);
+    const channel_id = partita.channel.id;
+    const stadium_id = partita.stadium.id;
+    return this.http.put<Partite>(this.partiteUrl + '/'+ id+ '/' + channel_id  + '/'+  stadium_id, partita);
   }
 
   cancellaPartita(id:number): Observable<any>{

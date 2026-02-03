@@ -15,95 +15,94 @@
     <button id="slide-arrow-next3" (click)="scrollright3()">&#8250;</button>
   </div>
 </div>
-<div *ngIf="partite_2.length > 0" class="filtered-matches">
-  <!-- <h3>Matches on {{ activeDate | date: 'EEE d/MM' : 'it' }}:</h3>-->
-  <div *ngFor="let classificaName of groupedPartite | keyvalue">
-    <!--    <h4>{{ classificaName.key }}</h4> -->
-    <table mat-table [dataSource]="classificaName.value" class="mat-elevation-z8" style="margin-top: 1.5%;">
-      <ng-container matColumnDef="groupHeader">
-        <th mat-header-cell *matHeaderCellDef [attr.colspan]="displayedColumns.length" class="group-header">
-          {{ classificaName.key }}
-        </th>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="['groupHeader']; sticky: false"></tr>
-      <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="img1">
-        <th style="width:3%" mat-header-cell *matHeaderCellDef> </th>
-        <td class="center" mat-cell *matCellDef="let partita">
-          <img [src]="getPath(partita.squadra1.jersey.color)">
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="squadra1.nome">
-        <th style="width:25%" mat-header-cell *matHeaderCellDef></th>
-        <td class="center" mat-cell *matCellDef="let partita"> {{ partita.squadra1.nome }} </td>
-      </ng-container>
-      <ng-container matColumnDef="puntisquadra1">
-        <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
-        <td class="right" style="font-weight: bolder" mat-cell *matCellDef="let partita"> {{ partita.puntisquadra1 }} </td>
-      </ng-container>
-      <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra1">
-        <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
-        <td class="left" mat-cell *matCellDef="let partita"> ({{ partita.meteSquadra1 }}) </td>
-      </ng-container>
-      <ng-container matColumnDef="seperator">
-        <th style="width:1%" mat-header-cell *matHeaderCellDef> </th>
-        <td class="center" mat-cell *matCellDef="let partita"> : </td>
-      </ng-container>
-      <ng-container matColumnDef="puntisquadra2">
-        <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
-        <td class="right" style="font-weight: bolder" mat-cell *matCellDef="let partita"> {{ partita.puntisquadra2 }} </td>
-      </ng-container>
-      <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="metesquadra2">
-        <th style="width:6%" mat-header-cell *matHeaderCellDef> </th>
-        <td class="left" mat-cell *matCellDef="let partita"> ({{ partita.meteSquadra2 }}) </td>
-      </ng-container>
-      <ng-container matColumnDef="squadra2.nome">
-        <th style="width:25%" mat-header-cell *matHeaderCellDef> </th>
-        <td class="center" mat-cell *matCellDef="let partita"> {{ partita.squadra2.nome }} </td>
-      </ng-container>
-      <ng-container *ngIf="!hideForResponsivePhone" matColumnDef="img2">
-        <th style="width:3%" mat-header-cell *matHeaderCellDef> </th>
-        <td class="center" mat-cell *matCellDef="let partita">
-          <img [src]="getPath(partita.squadra2.jersey.color)">
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="modifica">
-        <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell [ngClass]="isAdmin()" *matCellDef="let partita">
-          <button (click)="modifyPartita(partita.id)" color="success">Modifica</button>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="cancellare">
-        <th [ngClass]="isAdmin()" mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell [ngClass]="isAdmin()" *matCellDef="let partita">
-          <button (click)="cancella(partita.id)" color="cancel">Cancella</button>
-        </td>
-      </ng-container>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+<div class="matches">
+  <div *ngIf="partite_2.length > 0" class="filtered-matches"   class="calendario">
+    <div *ngFor="let classificaName of groupedPartite | keyvalue">
+<table mat-table [dataSource]="classificaName.value" class="mat-elevation-z8 my-table" style="margin-top: 1.5%;">
+  
+  <!-- Group Header -->
+  <ng-container matColumnDef="groupHeader">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="displayedColumns.length" class="group-header">
+      {{ classificaName.key }}
+    </th>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="['groupHeader']; sticky: false"></tr>
+
+  <!-- Team 1 -->
+  <ng-container matColumnDef="img1">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <div class="team-cell">
+        <img [src]="getPath(element.squadra1.jersey.color)" alt="jersey" class="jersey-img">
+          <div class="team-name">
+           <span class="short" *ngIf="true">{{ element.squadra1.shortName }}</span>
+          <span class="full">{{ element.squadra1.nome }}</span>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <!-- Match Info -->
+  <ng-container matColumnDef="dash">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <div class="team-cell">
+        <div class="team-name">{{ element.date | date:'dd/MM' }}</div>
+        <div class="score">{{element.puntisquadra1}} - {{element.puntisquadra2}}</div>
+        <div>{{ element.classifica.championship.name }}</div>
+              <div class="action-buttons" [ngClass]="isAdmin()">
+        <button mat-raised-button color="green" (click)="modifyPartita(element.id)">
+          Modifica
+        </button>
+        <button mat-raised-button color="warn" (click)="cancella(element.id)">
+          Cancella
+        </button>
+      </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <!-- Team 2 -->
+  <ng-container matColumnDef="img2">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <div class="team-cell">
+        <img [src]="getPath(element.squadra2.jersey.color)" alt="jersey" class="jersey-img">
+        <div class="team-name">
+           <span class="short" *ngIf="true">{{ element.squadra2.shortName }}</span>
+          <span class="full">{{ element.squadra2.nome }}</span>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+    </div>
   </div>
 </div>
-
 <div *ngIf="modifybox === true">
   <div>
     <h1>Mofifche Partita</h1>
     <form [formGroup]="PartiteRegisterFormGroup" class="register" #f="ngForm" (ngSubmit)="modify()">
       <div class="modify">
         <mat-form-field appearance="fill">
-          <mat-select [(ngModel)]="partitaData.squadra1" [placeholder]="partitaData.squadra1.nome" formControlName="squadra1" class="form-control">
-              <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['squadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'squadra1')">*Il Squadra e obbligatorio!</span>
-              <mat-option *ngFor="let p of squadrelist" [value]="p">{{ p.nome }}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
           <mat-label>Date</mat-label>
           <input [ngModel]= "partitaData.date"matInput type="date" formControlName="date" class="form-control" placeholder=" Date" required>
           <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['date'].dirty && PartiteRegisterFormGroup.hasError('required', 'date')">*Il Score e obbligatorio!</span>
         </mat-form-field>
         <mat-form-field appearance="fill">
+          <mat-select [(ngModel)]="partitaData.squadra1" [placeholder]="partitaData.squadra1.nome" formControlName="squadra1"   class="form-control">
+              <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['squadra1'].dirty && PartiteRegisterFormGroup.hasError('required', 'squadra1')">*Il Squadra e obbligatorio!</span>
+              <mat-option *ngFor="let p of squadrelist" [value]="p">{{ p.nome }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <!-- <mat-form-field appearance="fill">
           <mat-label>Girone</mat-label>
           <input [ngModel]= "partitaData.classifica_id" [placeholder]="partitaData.classifica_id" matInput type="text" formControlName="classifica_id" class="form-control" placeholder=" Girone" required>
           <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['classifica_id'].dirty && PartiteRegisterFormGroup.hasError('required', 'classifica_id')">*Il Girone e obbligatorio!</span>
-        </mat-form-field>
+        </mat-form-field> -->
         <mat-form-field appearance="fill">
           <mat-label>Score</mat-label>
           <input matInput [ngModel]= "partitaData.puntisquadra1"type="number" formControlName="puntisquadra1" class="form-control" placeholder=" Score" required>
@@ -136,23 +135,32 @@
           <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['tickets'].dirty && PartiteRegisterFormGroup.hasError('required', 'tickets')">*Tickets e obbligatorio!</span>
         </mat-form-field>
         <mat-form-field appearance="fill">
-     
+          <mat-label style="color: white">Time</mat-label>
+          <input matInput [ngModel]= "partitaData.time"type="text" formControlName="time" class="form-control" placeholder=" Time" required>
+          <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['time'].dirty && PartiteRegisterFormGroup.hasError('required', 'time')">*Time e obbligatorio!</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
           <!-- <mat-select [dataSource]="dataSource"> -->
-              <mat-select [ngModel]= "partitaData.channel"formControlName="channel" class="form-control"[placeholder]="partitaData.channel.name">
-                  <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['channel'].dirty && PartiteRegisterFormGroup.hasError('required', 'channel')">*Il Channel e obbligatorio!</span>
-        <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
-          <mat-option *ngFor="let p of channels" [value]="p">
-          {{ p.name }}
-        </mat-option>
-      </mat-select>
-      </mat-form-field>
-      <!-- <mat-form-field appearance="fill">
+          <mat-select [ngModel]= "partitaData.channel"formControlName="channel" class="form-control"[placeholder]="partitaData.channel?.name|| 'Channel'">
+            <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['channel'].dirty && PartiteRegisterFormGroup.hasError('required', 'channel')">*Il Channel e obbligatorio!</span>
+            <!-- <mat-option *ngFor="let p of squadre" [dataSource]="p"> -->
+            <mat-option *ngFor="let p of channels" [value]="p">{{ p.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-select [(ngModel)]="partitaData.stadium"formControlName="stadium"class="form-control"[placeholder]="partitaData.stadium?.name || 'Stadio'">
+            <mat-option *ngFor="let p of stadiums" [value]="p">{{ p.name }}</mat-option>
+          </mat-select>
+          <span class="text-danger" *ngIf="PartiteRegisterFormGroup.controls['stadium'].dirty && PartiteRegisterFormGroup.hasError('required', 'stadium')">*Lo stadio è obbligatorio!
+          </span>
+        </mat-form-field>
+        <!-- <mat-form-field appearance="fill">
         <mat-label  style="color: white">Played?</mat-label>
         <mat-select formControlName="played" required>
           <mat-option [value]="true">Sì</mat-option>
           <mat-option [value]="false">No</mat-option>
         </mat-select>
-    </mat-form-field> -->
+        </mat-form-field> -->
         <button mat-button  [disabled]="!PartiteRegisterFormGroup.valid" type="submit" style="width : 10em; height: 3em;">Submit</button>
         <button mat-button class="enter" (click)="close()" style="width : 10em; height: 3em;" >Close</button>
       </div>

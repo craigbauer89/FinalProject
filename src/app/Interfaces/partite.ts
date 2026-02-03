@@ -1,6 +1,7 @@
 import { Channel } from "./channel";
 import { Classifica } from "./classifica";
 import { Squadre } from "./squadre";
+import { Stadium } from "./stadium";
 
 export interface Partite {
 
@@ -15,9 +16,10 @@ meteSquadra1: number;
 meteSquadra2: number;
 classifica_id:number;
 tickets: string; 
+time: string; 
 channel: Channel;
 played: Boolean;
-
+stadium: Stadium;
 
 
 }
